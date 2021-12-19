@@ -2,6 +2,6 @@
   <div>
     <link type="text/css" rel="stylesheet" href="/whid-orange.css" />
     <NavBar></NavBar>
-    <nuxt />
+    <nuxt keep-alive />
   </div>
 </template>
