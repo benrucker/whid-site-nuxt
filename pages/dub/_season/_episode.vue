@@ -1,7 +1,7 @@
 <template>
   <div>
-    <NuxtLink to="/dub">Back to Gallery</NuxtLink>
-    <div class="container mt-5" id="playerApp" v-cloak>
+    <div class="container mt-5" id="playerApp" v-if="$fetchState.pending"></div>
+    <div class="container mt-5" id="playerApp" v-else>
       <div class="text-center ratio ratio-16x9">
         <video
           playsinline
@@ -33,13 +33,29 @@
 export default {
   layout: "dub-layout",
   async asyncData({ params, redirect }) {
-    this.season = params.season;
-    this.episode = params.episode;
+    let season = params.season;
+    let episode = params.episode;
 
     return {
       season: season,
       episode: episode,
     };
+  },
+  async fetch() {
+    this.time = this.$nuxt.context.query.t;
+    this.catalog = await this.$nuxt.$content("catalog").fetch();
+    try {
+      this.epData = getVideoDataFromID(this.catalog, this.season, this.episode);
+
+      this.thumbnailURL = constructThumbnailURL(this.season, this.episode);
+      this.videoURL = constructVideoURL(this.season, this.episode);
+      this.title = this.epData["title"];
+      this.releaseDate = constructDate(this.epData);
+      this.parts = this.epData["parts"];
+    } catch (err) {
+      if (err instanceof VideoIDError) goToGallery();
+      else throw err;
+    }
   },
   data() {
     return {
@@ -48,36 +64,25 @@ export default {
       videoURL: "",
       thumbnailURL: "",
       parts: [],
-      season: "",
-      episode: "",
+      catalog: null,
+      epData: null,
+      time: 0,
     };
   },
   async mounted() {
-    await initCatalog();
-    try {
-      await this.setupPage();
-    } catch (err) {
-      if (err instanceof VideoIDError) goToGallery();
-      else throw err;
-    }
+    await this.setupPage();
+  },
+  watch: {
+    catalog: function () {
+      document.title = "Watching " + this.title;
+      setTimeout(() => {
+        this.$refs.video.volume = 0.4;
+        this.goToTime(this.time);
+      }, 1000);
+    },
   },
   methods: {
-    async setupPage() {
-      let [season, id] = getSeasonAndEpisodeFromURL();
-      let ep = getVideoDataFromID(season, id);
-
-      this.thumbnailURL = constructThumbnailURL(ep);
-      this.videoURL = constructVideoURL(ep);
-      this.title = ep["title"];
-      this.releaseDate = constructDate(ep);
-      this.parts = ep["parts"];
-
-      document.title = "Watching " + this.title;
-      this.$refs.video.volume = 0.4;
-
-      let time = getTimestampFromURL();
-      if (time) this.goToTime(time);
-    },
+    async setupPage() {},
     goToPart(partIndex) {
       this.goToTime(
         convertTimestampToSeconds(this.parts[partIndex]["timestamp"])
@@ -88,4 +93,65 @@ export default {
     },
   },
 };
+
+class VideoIDError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "VideoIDError";
+  }
+}
+
+function getTimestampFromURL() {
+  let time = getParamFromURL("t");
+  if (time != null && time < 0) throw new VideoIDError("Invalid timestamp");
+  return time;
+}
+
+function getParamFromURL(key) {
+  let params = getParamsFromURL();
+  let param = params.get(key);
+  return param;
+}
+
+function getParamsFromURL() {
+  let uri = window.location.search.substring(1);
+  let params = new URLSearchParams(uri);
+  return params;
+}
+
+function getVideoDataFromID(catalog, season, id) {
+  const episodes = getEpisodesFromSeason(catalog, season);
+  let episode = getEpisodeFromList(episodes, id);
+  return episode;
+}
+
+function getEpisodesFromSeason(catalog, season) {
+  return catalog["seasons"][season]["episodes"];
+}
+
+function getEpisodeFromList(episodes, epid) {
+  for (const episode of episodes) {
+    if (episode["id"] === epid) {
+      return episode;
+    }
+  }
+  throw new VideoIDError("Video ID not found in catalog");
+}
+
+function constructVideoURL(season, episode) {
+  return "/dub/videos/" + season + "/" + episode + ".mp4";
+}
+
+function constructThumbnailURL(season, episode) {
+  return "/dub/thumbnails/" + season + "/" + episode + ".png";
+}
+
+function constructDate(ep) {
+  return ep["releaseDate"];
+}
+
+function convertTimestampToSeconds(timestamp) {
+  let [min, sec] = timestamp.split(":").map((x) => Number(x));
+  return min * 60 + sec;
+}
 </script>
