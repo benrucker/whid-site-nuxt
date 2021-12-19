@@ -1,8 +1,8 @@
 <template>
-  <a
+  <NuxtLink
     class="card mb-4 mx-auto text-reset text-decoration-none"
     style="max-width: 1050px"
-    :href="videoLink"
+    :to="videoLink"
   >
     <div class="row g-0">
       <div class="col-lg-6">
@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-  </a>
+  </NuxtLink>
 </template>
 
 <script>
