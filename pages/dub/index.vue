@@ -84,6 +84,48 @@
 </template>
 
 <script>
+export default {
+  layout: "dub-layout",
+  data() {
+    return {
+      catalog: null,
+      activeSeason: "s1",
+      seasons: {},
+      showAlert: false,
+      featured: null,
+      featuredDesc: "",
+    };
+  },
+  async fetch() {
+    this.catalog = await this.$nuxt.$content("catalog").fetch();
+    addSeasonToEpisodes(this.catalog);
+    this.seasons = getSeasons(this.catalog);
+    this.showAlert = this.$nuxt.context.query.error;
+    [this.featured, this.featuredDesc] = getFeaturedVideo(this.catalog);
+  },
+  async mounted() {},
+  methods: {
+    title(episode) {
+      return episode["title"];
+    },
+    date(episode) {
+      return constructDate(episode);
+    },
+    thumbnail(episode) {
+      return constructThumbnailURL(episode);
+    },
+    video(episode) {
+      return constructWatchURL(episode);
+    },
+    thumbnailFeatured() {
+      return constructThumbnailURL(this.featured);
+    },
+    watchFeatured() {
+      return constructWatchURL(this.featured);
+    },
+  },
+};
+
 class VideoIDError extends Error {
   constructor(message) {
     super(message);
@@ -140,95 +182,18 @@ function getEpisodeFromList(episodes, epid) {
 }
 
 function constructWatchURL(ep) {
-  return "watch.php?s=" + ep["season"] + "&e=" + ep["id"];
+  return "/dub/" + ep["season"] + "/" + ep["id"] + '';
 }
 
 function constructVideoURL(ep) {
-  return "videos/" + ep["season"] + "/" + ep["id"] + ".mp4";
+  return "/dub/videos/" + ep["season"] + "/" + ep["id"] + ".mp4";
 }
 
 function constructThumbnailURL(ep) {
-  return "thumbnails/" + ep["season"] + "/" + ep["id"] + ".png";
+  return "/dub/thumbnails/" + ep["season"] + "/" + ep["id"] + ".png";
 }
 
 function constructDate(ep) {
   return ep["releaseDate"];
 }
-
-function goToGallery() {
-  window.location.replace("../dub/?error=true");
-}
-
-function getErrorFromURL() {
-  return Boolean(getParamFromURL("error"));
-}
-
-function getSeasonAndEpisodeFromURL() {
-  let season = getParamFromURL("s");
-  let ep = getParamFromURL("e");
-  if (season === null || ep === null) {
-    throw new VideoIDError("No ID supplied in URL");
-  }
-  return [season, ep];
-}
-
-function getTimestampFromURL() {
-  let time = getParamFromURL("t");
-  if (time != null && time < 0) throw new VideoIDError("Invalid timestamp");
-  return time;
-}
-
-function getParamFromURL(key) {
-  let params = getParamsFromURL();
-  let param = params.get(key);
-  return param;
-}
-
-function getParamsFromURL() {
-  let uri = window.location.search.substring(1);
-  let params = new URLSearchParams(uri);
-  return params;
-}
-
-export default {
-  layout: "dub-layout",
-  data() {
-    return {
-      catalog: null,
-      activeSeason: "s1",
-      seasons: {},
-      showAlert: false,
-      featured: null,
-      featuredDesc: "",
-    };
-  },
-  async fetch() {
-    this.catalog = await this.$nuxt.$content("catalog").fetch();
-    addSeasonToEpisodes(this.catalog);
-    this.seasons = getSeasons(this.catalog);
-    // this.showAlert = getErrorFromURL();
-    [this.featured, this.featuredDesc] = getFeaturedVideo(this.catalog);
-  },
-  async mounted() {},
-  methods: {
-    title(episode) {
-      return episode["title"];
-    },
-    date(episode) {
-      return constructDate(episode);
-    },
-    thumbnail(episode) {
-      return constructThumbnailURL(episode);
-    },
-    video(episode) {
-      return constructWatchURL(episode);
-    },
-    thumbnailFeatured() {
-      return constructThumbnailURL(this.featured);
-    },
-    watchFeatured() {
-      return constructWatchURL(this.featured);
-    },
-  },
-};
 </script>
