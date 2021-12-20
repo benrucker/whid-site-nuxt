@@ -1,7 +1,7 @@
 <template>
   <div>
     <img
-      src="images/ethan.png"
+      src="/dub/images/ethan.png"
       class="mx-auto mt-5 pt-5"
       width="100"
     />
