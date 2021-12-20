@@ -56,6 +56,7 @@ export default {
       if (err instanceof VideoIDError) goToGallery();
       else throw err;
     }
+    this.loaded = true;
   },
   data() {
     return {
@@ -67,19 +68,30 @@ export default {
       catalog: null,
       epData: null,
       time: 0,
+      loaded: false,
     };
   },
   async mounted() {
     await this.setupPage();
   },
   watch: {
-    catalog: function () {
+    loaded: async function() {
       document.title = "Watching " + this.title;
-      setTimeout(() => {
-        this.$refs.video.volume = 0.4;
-        this.goToTime(this.time);
-      }, 1000);
-    },
+      let changeVol = () => {
+          try {
+            this.$refs.video.volume = 0.4;
+            this.goToTime(this.time);
+            return true;
+          } catch {
+            return false;
+          }
+      };
+      let interval = () => setTimeout(() => {
+        if (changeVol()) return;
+        else setTimeout(interval, 50);
+      }, 50);
+      interval();
+    }
   },
   methods: {
     async setupPage() {},
