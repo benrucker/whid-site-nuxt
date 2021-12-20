@@ -14,13 +14,19 @@
             <a href="/" class="btn btn-text-primary me-2" type="button">Home</a>
           </li>
           <li class="nav-item">
-            <a href="/dub/" class="btn btn-text-primary me-2" type="button"
-              >whidubbed</a
+            <NuxtLink
+              to="/dub"
+              class="btn btn-text-primary me-2"
+              type="button"
+              >whidubbed</NuxtLink
             >
           </li>
           <li class="nav-item">
-            <a href="/whbd/" class="btn btn-text-primary me-2" type="button"
-              >Anniversary</a
+            <NuxtLink
+              to="/whbd"
+              class="btn btn-text-primary me-2"
+              type="button"
+              >Anniversary</NuxtLink
             >
           </li>
         </ul>
