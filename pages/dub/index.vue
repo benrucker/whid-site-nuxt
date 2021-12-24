@@ -65,7 +65,7 @@
               <VideoCard
                 class="col-md-6 col-lg-3 my-3 mt-1"
                 v-for="episode in seasons[activeSeason]['episodes']"
-                v-bind:key="episode['title']"
+                :key="episode['title']"
                 :videoLink="video(episode)"
                 :thumbnailLink="thumbnail(episode)"
                 :title="title(episode)"

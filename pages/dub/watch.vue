@@ -8,7 +8,7 @@ export default {
                     query: { error: true },
                 });
 
-            let url = `/dub/watch/${route.query.s}/${route.query.e}`
+            let url = `/dub/${route.query.s}/${route.query.e}`
             if (route.query.t) query = `?t=${route.query.t}`
             redirect(url);
         }
