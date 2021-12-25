@@ -1,21 +1,26 @@
 <template>
   <div class="text-center">
-    <h1>you seem to have been most active in {{ month }}</h1>
-    <div class="ratio ratio-16x9">
-      <WhydEchartLine
-        :title="'Messages by Month'"
-        :color="'#fff'"
-        :bgColor="'#4c60f3'"
-        ref="monthsChart"
-      />
+    <div class="container">
+      <h1>you seem to have been most active in <b>{{ month }}</b></h1>
+      <div class="ratio ratio-16x9">
+        <WhydEchartLine
+          :title="'Messages by Month'"
+          :color="'#fff'"
+          :bgColor="'#4c60f3'"
+          ref="monthsChart"
+        />
+      </div>
+      <h3 class="text-dark py-5">you must not have had a lot else going on...</h3>
     </div>
-    <h2 class="text-muted">you must not have had a lot else going on...</h2>
-
-    <h2 class="">
-      btw, in {{ month }}, the word you used the most was <b>{{ word }}</b
-      >.<br />
-      maybe that explains what was going on?
-    </h2>
+    <img src="/whyd/2021/lightblue-angle.svg" />
+    <div class="bg lightblue">
+      <h2 class="p-0 m-0">
+        btw, in {{ month }}, the word you used the most was <b>{{ word }}</b
+        >.<br />
+        maybe that explains what was going on?
+      </h2>
+    </div>
+    <img src="/whyd/2021/lightblue-angle2.svg" />
   </div>
 </template>
 
@@ -70,3 +75,7 @@ export default {
   },
 };
 </script>
+
+<style>
+
+</style>

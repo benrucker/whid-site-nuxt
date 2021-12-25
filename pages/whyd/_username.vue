@@ -63,7 +63,7 @@
       </div>
     </div>
 
-    <!-- add squigglyboi -->
+    <img src="/whyd/2021/white-blocky.svg" class="bg gray" />
 
     <div class="bg white py-5">
       <div class="container text-dark">
@@ -98,8 +98,10 @@
 
     <!-- add squigglyboi -->
 
+    <img src="/whyd/2021/white-blocky-end.svg" class="bg blue" />
+
     <div class="bg blue py-5">
-      <div class="container">
+      <div class="py-5">
         <WhydMonths :id="id" :urlPrefix="urlPrefix" ref="months" />
       </div>
     </div>
@@ -136,7 +138,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .bg.yellow {
   background-color: #f3df4c;
 }
@@ -155,5 +157,9 @@ export default {
 
 .bg.blue {
   background-color: #4c60f3;
+}
+
+.bg.lightblue {
+  background-color: #7988F6;
 }
 </style>
