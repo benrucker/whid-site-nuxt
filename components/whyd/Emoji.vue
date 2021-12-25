@@ -1,8 +1,10 @@
 <template>
-  <div>
-    <img class="emoji" v-if="processedEmoji" :src="processedEmoji" />
-    <span v-else>{{ emoji }}</span>
-  </div>
+  <img
+    v-if="processedEmoji"
+    :class="'emoji ' + big ? 'big' : ''"
+    :src="processedEmoji"
+  />
+  <span v-else>{{ emoji }}</span>
 </template>
 
 <script>
@@ -16,6 +18,10 @@ export default {
       type: String,
       default: "",
     },
+    big: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -24,8 +30,11 @@ export default {
   },
   async mounted() {
     if (this.emoji.startsWith(":")) {
-      this.processedEmoji = `/whyd/2021/emojis/${this.emoji.replaceAll(':', '')}`;
-      if (this.emoji.includes('shred') || this.emoji.includes('hoedown')) {
+      this.processedEmoji = `/whyd/2021/emojis/${this.emoji.replaceAll(
+        ":",
+        ""
+      )}`;
+      if (this.emoji.includes("shred") || this.emoji.includes("hoedown")) {
         this.processedEmoji += ".gif";
       } else {
         this.processedEmoji += ".png";
@@ -37,6 +46,10 @@ export default {
 
 <style>
 img.emoji {
-    height: 4rem;
+  height: 1em;
+}
+
+.big {
+  height: 4rem;
 }
 </style>

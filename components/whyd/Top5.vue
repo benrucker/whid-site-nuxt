@@ -10,7 +10,7 @@
         i + 1
       }}</span>
       <span :class="'col-6 close name fadein-' + (i + 10)"
-        ><WhydEmoji v-if="emojis" :urlPrefix="urlPrefix" :emoji="name" />
+        ><WhydEmoji v-if="emojis" :urlPrefix="urlPrefix" :emoji="name" :big='true' />
         <span v-else>{{ name }}</span></span
       >
       <span :class="'col-4 close count text-center fadein-' + i">{{

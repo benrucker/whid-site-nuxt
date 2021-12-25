@@ -84,7 +84,7 @@
         </div>
         <div class="row py-5">
           <div class="col">
-            <h1 class="pt-5">you :you: contributed this much of the pie</h1>
+            <h1 class="pt-5">you <WhydEmoji :urlPrefix="urlPrefix" :emoji="':you:'" /> contributed this much of the pie</h1>
           </div>
           <div class="ratio ratio-4x3 col">
             <WhydPersonMessagePieChart ref="pieChart" />
