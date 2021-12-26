@@ -84,7 +84,11 @@
         </div>
         <div class="row py-5">
           <div class="col">
-            <h1 class="pt-5">you <WhydEmoji :urlPrefix="urlPrefix" :emoji="':you:'" /> contributed this much of the pie</h1>
+            <h1 class="pt-5">
+              you
+              <WhydEmoji :urlPrefix="urlPrefix" :emoji="':you:'" /> contributed
+              this much of the pie
+            </h1>
           </div>
           <div class="ratio ratio-4x3 col">
             <WhydPersonMessagePieChart ref="pieChart" />
@@ -96,13 +100,29 @@
       </div>
     </div>
 
-    <!-- add squigglyboi -->
-
     <img src="/whyd/2021/white-blocky-end.svg" class="bg blue" />
 
-    <div class="bg blue py-5">
-      <div class="py-5">
-        <WhydMonths :id="id" :urlPrefix="urlPrefix" ref="months" />
+    <div class="bg blue pt-5">
+      <div class="pt-5">
+        <WhydMonths
+          :id="id"
+          :urlPrefix="urlPrefix"
+          nextBg="yellow"
+          ref="months"
+        />
+      </div>
+    </div>
+
+    <div class="bg yellow py-5">
+      <div class="container">
+        <h1>you exhibited some other... <i>strange</i>... patterns:</h1>
+
+        <WhydDiagnoseTimeOfDay :urlPrefix='urlPrefix' :id='id' ref='timeOfDay' />
+        <WhydDiagnoseFavoriteChannel :urlPrefix='urlPrefix' :id='id' ref='favoriteChannel' />
+        <WhydDiagnoseTrailblazer :urlPrefix='urlPrefix' :id='id' ref='trailblazer' />
+        <WhydDiagnoseTeammate :urlPrefix='urlPrefix' :id='id' ref='teammate' />
+        <WhydDiagnoseAstrologicalSign :urlPrefix='urlPrefix' :id='id' ref='astrologicalSign' />
+        <WhydDiagnoseDecisiveness :urlPrefix='urlPrefix' :id='id' ref='decisiveness' />
       </div>
     </div>
   </div>
@@ -160,6 +180,6 @@ export default {
 }
 
 .bg.lightblue {
-  background-color: #7988F6;
+  background-color: #7988f6;
 }
 </style>
