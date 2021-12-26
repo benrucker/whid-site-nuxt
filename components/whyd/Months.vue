@@ -3,7 +3,7 @@
     <div class="container">
       <h1>you seem to have been most active in <b>{{ month }}</b></h1>
       <div class="ratio ratio-16x9">
-        <WhydEchartLine
+        <WhydEchartLineAndHist
           :title="'Messages by Month'"
           :color="'#fff'"
           :bgColor="'#4c60f3'"
@@ -14,13 +14,13 @@
     </div>
     <img src="/whyd/2021/lightblue-angle.svg" />
     <div class="bg lightblue">
-      <h2 class="p-0 m-0">
+      <h3 class="p-0 m-0">
         btw, in {{ month }}, the word you used the most was <b>{{ word }}</b
         >.<br />
         maybe that explains what was going on?
-      </h2>
+      </h3>
     </div>
-    <img src="/whyd/2021/lightblue-angle2.svg" />
+    <img src="/whyd/2021/lightblue-angle2.svg" :class="'bg ' + nextBg" />
   </div>
 </template>
 
@@ -32,6 +32,10 @@ export default {
       default: "",
     },
     id: {
+      type: String,
+      default: "",
+    },
+    nextBg: {
       type: String,
       default: "",
     },
