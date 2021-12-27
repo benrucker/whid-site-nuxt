@@ -107,22 +107,22 @@
         <WhydMonths
           :id="id"
           :urlPrefix="urlPrefix"
-          nextBg="yellow"
+          nextBg="lightlightblue"
           ref="months"
         />
       </div>
     </div>
 
-    <div class="bg yellow py-5">
+    <div class="bg lightlightblue py-5 text-dark">
       <div class="container">
-        <h1>you exhibited some other... <i>strange</i>... patterns:</h1>
+        <h1>you exhibited some other strange patterns:</h1>
 
-        <WhydDiagnoseTimeOfDay :urlPrefix='urlPrefix' :id='id' ref='timeOfDay' />
-        <WhydDiagnoseFavoriteChannel :urlPrefix='urlPrefix' :id='id' ref='favoriteChannel' />
-        <WhydDiagnoseTrailblazer :urlPrefix='urlPrefix' :id='id' ref='trailblazer' />
-        <WhydDiagnoseTeammate :urlPrefix='urlPrefix' :id='id' ref='teammate' />
-        <WhydDiagnoseAstrologicalSign :urlPrefix='urlPrefix' :id='id' ref='astrologicalSign' />
-        <WhydDiagnoseDecisiveness :urlPrefix='urlPrefix' :id='id' ref='decisiveness' />
+        <WhydDiagnoseTimeOfDay ref='timeOfDay' class='pt-5' />
+        <WhydDiagnoseFavoriteChannel ref='favoriteChannel' class='pt-5' />
+        <WhydDiagnoseTrailblazer ref='trailblazer' class='pt-5' />
+        <WhydDiagnoseTeammate ref='teammate' class='pt-5' />
+        <WhydDiagnoseAstrologicalSign ref='astrologicalSign' class='pt-5' />
+        <WhydDiagnoseDecisiveness ref='decisiveness' class='pt-5' />
       </div>
     </div>
   </div>
@@ -153,6 +153,13 @@ export default {
     this.msgPercentile = this.$refs.pieChart.userPercentile;
     await this.$refs.channelBarChart.init(this.urlPrefix);
     await this.$refs.months.init(this.id, this.urlPrefix);
+
+    await this.$refs.timeOfDay.init(this.id, this.urlPrefix);
+    await this.$refs.favoriteChannel.init(this.id, this.urlPrefix);
+    await this.$refs.trailblazer.init(this.id, this.urlPrefix);
+    await this.$refs.teammate.init(this.id, this.urlPrefix);
+    await this.$refs.astrologicalSign.init(this.id, this.urlPrefix);
+    await this.$refs.decisiveness.init(this.id, this.urlPrefix);
   },
   methods: {},
 };
@@ -180,6 +187,11 @@ export default {
 }
 
 .bg.lightblue {
-  background-color: #7988f6;
+  background-color: #8D99F7;
+}
+
+.bg.lightlightblue {
+  /* background-color: #A0AAF8; */
+  background-color: #C6CCFB;
 }
 </style>
