@@ -4,7 +4,7 @@
     :title="'Messages'"
     :bgColor="'#f3df4c'"
     :color="'#4c60f3'"
-    :textColor="'#000'"
+    :textColor="'#303030'"
   />
 </template>
 

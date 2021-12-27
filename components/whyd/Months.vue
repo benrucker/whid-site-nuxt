@@ -10,7 +10,7 @@
           ref="monthsChart"
         />
       </div>
-      <h3 class="text-dark py-5">you must not have had a lot else going on...</h3>
+      <h4 class="text-dark py-5"><i>you must not have had a lot else going on...</i></h4>
     </div>
     <img src="/whyd/2021/lightblue-angle.svg" />
     <div class="bg lightblue">
