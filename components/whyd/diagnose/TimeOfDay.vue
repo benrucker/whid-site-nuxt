@@ -1,6 +1,7 @@
 <template>
-  <div class="container d-flex flex-column w-50">
+  <div class="container d-flex flex-column w-50 pt-5">
     <h4>you're {{ title }}</h4>
+    <p>many of your messages were sent {{ preposition }}, {{ timeRange }}</p>
     <div class="timeOfDayChart ratio ratio-16x9 w-75 align-self-center">
       <WhydEchartHist
         :title="'Messages'"
@@ -21,11 +22,27 @@ let titleMap = {
   overnight: "nocturnal (or Kian)",
 };
 
+let prepositioned = {
+  morning: "in the morning",
+  afternoon: "in the afternoon",
+  evening: "in the evening",
+  overnight: "overnight",
+};
+
+let timeMap = {
+    morning: "6am - 12pm",
+    afternoon: "12pm - 6pm",
+    evening: "6pm - 12am",
+    overnight: "12am - 6am",
+}
+
 export default {
   props: {},
   data() {
     return {
       title: "",
+      preposition: "",
+      timeRange: "",
     };
   },
   async mounted() {},
@@ -35,6 +52,8 @@ export default {
         (res) => res.json()
       );
       this.title = titleMap[data.maxTime];
+      this.preposition = prepositioned[data.maxTime];
+      this.timeRange = timeMap[data.maxTime];
       let labels = ["Overnight", "Morning", "Afternoon", "Evening"];
       let timeCounts = [
         data.overnight,
