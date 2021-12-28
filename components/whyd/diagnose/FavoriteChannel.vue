@@ -1,6 +1,7 @@
 <template>
-  <div class="container d-flex flex-column w-50">
+  <div class="container d-flex flex-column w-50 pt-5">
     <h4>{{ title }}</h4>
+    <p>your favorite channel was #{{ favorite }}</p>
     <div class="channelChart ratio ratio-4x3 w-100 align-self-center">
       <WhydEchartDonut
         :title="'Messages'"
@@ -39,6 +40,7 @@ export default {
   data() {
     return {
       title: "",
+      favorite: "",
     };
   },
   async mounted() {},
