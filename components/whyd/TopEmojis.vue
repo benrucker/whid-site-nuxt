@@ -38,7 +38,6 @@ export default {
     sorted.sort((a, b) => b[1] - a[1]);
 
     this.users = sorted.slice(0, 5).map((x) => x[0].replace(/\(|\)|,|\'/g, ""));
-    console.log('emojis', this.users);
     this.counts = sorted.slice(0, 5).map((x) => x[1].toLocaleString());
   },
   methods: {},

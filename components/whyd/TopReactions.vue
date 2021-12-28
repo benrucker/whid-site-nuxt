@@ -29,7 +29,6 @@ export default {
       (res) => res.json()
     );
     this.users = Object.keys(data).slice(0, 5);
-    console.log('reacts', this.users);
     this.counts = Object.values(data)
       .slice(0, 5)
       .map((x) => x.toLocaleString());

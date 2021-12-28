@@ -43,8 +43,6 @@ export default {
 
       let colors = ["#f3df4c", "#4c60f3"];
 
-      console.log(totalMessages, editedMessages, uneditedMessages, editRatio);
-
       this.$refs.pie.init(
         [
           { name: "Unedited", value: uneditedMessages },
