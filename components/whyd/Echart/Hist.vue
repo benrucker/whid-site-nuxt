@@ -34,6 +34,10 @@ export default {
     bgColor: "",
     color: "",
     textColor: "",
+    right: false,
+    showTitle: false,
+    formatter: false,
+    xAxisLabel: '',
   },
   components: {
     VChart,
@@ -54,8 +58,17 @@ export default {
     };
   },
   methods: {
-    init(xAxis, data) {
+    init(xAxis, data, colorsIn) {
       this.option = {
+        title: {
+          text: this.title,
+          textStyle: {
+            color: this.textColor,
+            fontWeight: "normal",
+          },
+          show: this.showTitle,
+          left: 'center',
+        },
         grid: {
           left: "3%",
           right: "4%",
@@ -67,7 +80,7 @@ export default {
           axisPointer: {
             type: "shadow",
           },
-          formatter: this.title + ' {b}: {c}'
+          formatter: this.formatter ? this.formatter : (params) => `${params[0].name} ${this.title}: ${params[0].value.toLocaleString()}`,
         },
         xAxis: [
           {
@@ -79,6 +92,27 @@ export default {
                 color: "#fff",
               },
             },
+            axisLabel: {
+              align: this.right ? 'left': 'center',
+            },
+            axisLine: {
+              lineStyle: {
+                color: this.textColor,
+              },
+            },
+            axisTick: {
+              lineStyle: {
+                color: this.textColor,
+              },
+            },
+            boundaryGap: ['20%', '20%'],
+            name: this.xAxisLabel,
+            nameLocation: 'middle',
+            nameTextStyle: {
+              color: this.textColor,
+              fontWeight: "normal",
+              fontSize: 12,
+            }
           },
         ],
         yAxis: [
@@ -95,16 +129,16 @@ export default {
             data: data,
             barWidth: "99.3%",
             itemStyle: {
-              color: this.color,
               opacity: 0.5,
             },
             axisLabel: {
               interval: 0,
               rotate: 0,
-            }
+            },
+            colorBy: 'data',
           },
         ],
-        color: [this.color],
+        color: this.color,
         backgroundColor: this.bgColor,
         textStyle: {
           color: this.textColor,

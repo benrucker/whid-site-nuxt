@@ -83,7 +83,7 @@ export default {
             type: "pie",
             data: data,
             stillShowZeroSum: false,
-            radius: ["5%", "50%"],
+            radius: ["20%", "50%"],
             center: ["50%", "50%"],
             colorBy: "data",
             color: colors,
