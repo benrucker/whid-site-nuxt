@@ -1,7 +1,12 @@
 <template>
-  <span :class="'wrapper ' + (spoiler ? 'spoiler' : '') + (big ? ' big' : ' notbig')" ref="spoilerBg">
+  <span
+    v-if="processedEmoji"
+    :class="
+      'wrapper ' + (spoiler ? 'spoiler' : '') + (big ? ' big' : ' notbig')
+    "
+    ref="spoilerBg"
+  >
     <img
-      v-if="processedEmoji"
       :class="
         'emoji ' + (big ? 'big' : 'notbig') + (spoiler ? ' spoilerEmoji' : '')
       "
@@ -9,8 +14,8 @@
       v-on:click="removeSpoiler"
       ref="emoji"
     />
-    <span v-else>{{ emoji }}</span>
   </span>
+  <span v-else>{{ emoji }}</span>
 </template>
 
 <script>
@@ -35,22 +40,30 @@ export default {
   },
   data() {
     return {
-      processedEmoji: this.emoji,
+      // processedEmoji: this.emoji,
     };
   },
-  async mounted() {
-    if (this.emoji.startsWith(":")) {
-      this.processedEmoji = `/whyd/2021/emojis/${this.emoji.replaceAll(
-        ":",
-        ""
-      )}`;
-      if (this.emoji.includes("shred") || this.emoji.includes("hoedown")) {
-        this.processedEmoji += ".gif";
+  computed: {
+    processedEmoji: function () {
+      if (this.emoji.startsWith(":")) {
+        let output = `/whyd/2021/emojis/${this.emoji.replaceAll(":", "")}`;
+        let animated = [":shred:", ":hoedown:"];
+        let svgs = [":eyes:", ":lion:", ":microbe:", ":pushpin:", ":warning:"];
+
+        if (animated.includes(this.emoji)) {
+          output += ".gif";
+        } else if (svgs.includes(this.emoji)) {
+          output += ".svg";
+        } else {
+          output += ".png";
+        }
+        return output;
       } else {
-        this.processedEmoji += ".png";
+        return false;
       }
-    }
+    },
   },
+  async mounted() {},
   methods: {
     removeSpoiler() {
       this.$refs.emoji.classList.remove("spoilerEmoji");
@@ -76,6 +89,7 @@ export default {
 
 .spoilerEmoji {
   opacity: 0;
+  cursor: pointer;
 }
 
 .spoiler {
