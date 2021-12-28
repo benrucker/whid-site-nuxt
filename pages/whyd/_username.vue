@@ -132,6 +132,60 @@
     <div class="bg yellow text-dark">
       <WhydLoveSquare :id="id" :urlPrefix="urlPrefix" ref="loveSquare" />
     </div>
+
+    <img src="/whyd/2021/yellow-saw.svg" class="bg black" />
+
+    <div class="bg black">
+      <div class="container">
+        <WhydFavoriteWord ref="favoriteWord" />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <WhydFavoriteEmoji ref="favoriteEmoji" />
+        <br />
+        <br />
+        <br />
+      </div>
+    </div>
+
+    <div class="gradBlackToBlue"></div>
+
+    <div class="bg blue pb-5">
+      <div class="container">
+        <WhydFirstMessage
+          :id="id"
+          :urlPrefix="urlPrefix"
+          ref="firstMsg"
+          class="pb-5"
+        />
+        <WhydSpecialAccolades
+          :id="id"
+          :urlPrefix="urlPrefix"
+          ref="specialAccolades"
+          class="pt-5"
+        />
+      </div>
+      <br />
+      <br />
+      <br />
+    </div>
+
+    <div class="bg lightblue">
+      <WhydGoodMorning :id="id" :urlPrefix="urlPrefix" ref="goodMorning" />
+    </div>
+
+    <div class="">
+      <img src="/whyd/2021/multicolor.svg" class="bg white" />
+    </div>
+
+    <div>
+      <WhydEndCard :id="id" :urlPrefix="urlPrefix" ref="endCard" />
+    </div>
   </div>
 </template>
 
@@ -169,6 +223,14 @@ export default {
     await this.$refs.astrologicalSign.init(this.id, this.urlPrefix);
 
     await this.$refs.loveSquare.init(this.id, this.urlPrefix);
+
+    await this.$refs.favoriteEmoji.init(this.id, this.urlPrefix);
+    await this.$refs.favoriteWord.init(this.id, this.urlPrefix);
+
+    await this.$refs.firstMsg.init(this.id, this.urlPrefix);
+    await this.$refs.specialAccolades.init(this.id, this.urlPrefix);
+
+    await this.$refs.goodMorning.init(this.id, this.urlPrefix);
   },
   methods: {},
 };
@@ -202,5 +264,10 @@ export default {
 .bg.lightlightblue {
   /* background-color: #A0AAF8; */
   background-color: #c6ccfb;
+}
+
+.gradBlackToBlue {
+  background: linear-gradient(to bottom, #000000 0%, #4c60f3 100%);
+  height: 100vh;
 }
 </style>
