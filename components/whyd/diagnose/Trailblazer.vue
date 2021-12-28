@@ -33,13 +33,15 @@ export default {
     async init(id, urlPrefix) {
       let data = await fetch(`${urlPrefix}/user/${id}/trailblazing.json`)
         .then((res) => {
+          if (res.status === 404) {
+            this.exists = false;
+            return false;
+          }
           this.exists = true;
           return res.json();
         })
-        .catch(() => {
-          this.exists = false;
-          return {};
-        });
+      if (!data) return false;
+
       this.count = data['count'];
       let rank = data['rank'];
 
