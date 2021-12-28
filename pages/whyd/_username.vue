@@ -117,13 +117,20 @@
       <div class="container">
         <h1>you exhibited some other strange patterns:</h1>
 
-        <WhydDiagnoseTimeOfDay ref='timeOfDay' />
-        <WhydDiagnoseFavoriteChannel ref='favoriteChannel' />
-        <WhydDiagnoseTrailblazer ref='trailblazer' />
-        <WhydDiagnoseTeammate ref='teammate' />
-        <WhydDiagnoseDecisiveness ref='decisiveness' />
-        <WhydDiagnoseAstrologicalSign ref='astrologicalSign' />
+        <WhydDiagnoseTimeOfDay ref="timeOfDay" />
+        <WhydDiagnoseFavoriteChannel ref="favoriteChannel" />
+        <WhydDiagnoseTrailblazer ref="trailblazer" />
+        <WhydDiagnoseTeammate ref="teammate" />
+        <WhydDiagnoseDecisiveness ref="decisiveness" />
+        <WhydDiagnoseAstrologicalSign ref="astrologicalSign" />
       </div>
+    </div>
+
+    <img src="/whyd/2021/lightblue-angle.svg" class="bg lightlightblue" />
+    <img src="/whyd/2021/lightblue-angle2.svg" class="bg yellow pb-5" />
+
+    <div class="bg yellow text-dark">
+      <WhydLoveSquare :id="id" :urlPrefix="urlPrefix" ref="loveSquare" />
     </div>
   </div>
 </template>
@@ -160,6 +167,8 @@ export default {
     await this.$refs.teammate.init(this.id, this.urlPrefix);
     await this.$refs.decisiveness.init(this.id, this.urlPrefix);
     await this.$refs.astrologicalSign.init(this.id, this.urlPrefix);
+
+    await this.$refs.loveSquare.init(this.id, this.urlPrefix);
   },
   methods: {},
 };
@@ -187,11 +196,11 @@ export default {
 }
 
 .bg.lightblue {
-  background-color: #8D99F7;
+  background-color: #8d99f7;
 }
 
 .bg.lightlightblue {
   /* background-color: #A0AAF8; */
-  background-color: #C6CCFB;
+  background-color: #c6ccfb;
 }
 </style>
