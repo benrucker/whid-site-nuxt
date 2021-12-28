@@ -12,14 +12,14 @@
     <div class="row py-5">
       <h3 class="col-6"></h3>
       <h3 class="col-6">
-        ...on the other hand, @{{ repliedToYou }} replied to <i>you</i> more
-        than anyone else with {{ repliedToYouCount }}...
+        ...on the other hand, @{{ repliedToYou }} replied to you more
+        than anyone else did with {{ repliedToYouCount }}...
       </h3>
     </div>
     <div class="row py-5">
       <h3 class="col-6">
-        ...on the other other hand, replies don't tell you the whole story. you
-        were most likely to send a messages if @{{ messagedAfter }} had sent the
+        ...on the <i>other</i> other hand, replies don't tell you the whole story.<br />you
+        were most likely to send a message if @{{ messagedAfter }} had sent the
         previous one.
       </h3>
     </div>
