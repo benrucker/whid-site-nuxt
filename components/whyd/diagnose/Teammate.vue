@@ -1,7 +1,7 @@
 <template>
   <div v-if="exists" class="container d-flex flex-column w-50 pt-5">
     <h4>you're a good teammate</h4>
-    <p>you sent {{ count.toLocaleString() }} messages less than a minute after someone else</p>
+    <p>you continued the conversation {{ count.toLocaleString() }} times by responding in less than a minute</p>
     <div class="timeOfDayChart ratio ratio-16x9 w-100 align-self-center">
       <WhydEchartHist
         :title="''"

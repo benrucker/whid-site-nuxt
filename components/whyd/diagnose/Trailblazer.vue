@@ -1,7 +1,7 @@
 <template>
   <div v-if="exists" class="container d-flex flex-column w-50 pt-5">
     <h4>you're a trailblazer</h4>
-    <p>you sent {{ count.toLocaleString() }} messages after 5 hours of inactivity in a channel</p>
+    <p>you started a conversation {{ count.toLocaleString() }} times after 5 hours of inactivity in a channel</p>
     <div class="timeOfDayChart ratio ratio-16x9 w-100 align-self-center">
       <WhydEchartHist
         :title="'Number of people who sent messages after\n5 hours of channel inactivity'"
