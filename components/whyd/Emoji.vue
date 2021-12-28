@@ -1,10 +1,16 @@
 <template>
-  <img
-    v-if="processedEmoji"
-    :class="'emoji ' + big ? 'big' : ''"
-    :src="processedEmoji"
-  />
-  <span v-else>{{ emoji }}</span>
+  <span :class="'wrapper ' + (spoiler ? 'spoiler' : '') + (big ? ' big' : ' notbig')" ref="spoilerBg">
+    <img
+      v-if="processedEmoji"
+      :class="
+        'emoji ' + (big ? 'big' : 'notbig') + (spoiler ? ' spoilerEmoji' : '')
+      "
+      :src="processedEmoji"
+      v-on:click="removeSpoiler"
+      ref="emoji"
+    />
+    <span v-else>{{ emoji }}</span>
+  </span>
 </template>
 
 <script>
@@ -19,6 +25,10 @@ export default {
       default: "",
     },
     big: {
+      type: Boolean,
+      default: false,
+    },
+    spoiler: {
       type: Boolean,
       default: false,
     },
@@ -41,15 +51,36 @@ export default {
       }
     }
   },
+  methods: {
+    removeSpoiler() {
+      this.$refs.emoji.classList.remove("spoilerEmoji");
+      this.$refs.spoilerBg.classList.remove("spoiler");
+    },
+  },
 };
 </script>
 
 <style>
-img.emoji {
+.big {
+  height: 4rem;
+}
+
+.notbig {
   height: 1em;
 }
 
-.big {
-  height: 4rem;
+.wrapper {
+  display: inline-flex;
+  vertical-align: bottom;
+}
+
+.spoilerEmoji {
+  opacity: 0;
+}
+
+.spoiler {
+  background: #202225;
+  /* height: fit-content; */
+  border-radius: 4px;
 }
 </style>
