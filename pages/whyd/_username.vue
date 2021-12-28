@@ -117,12 +117,12 @@
       <div class="container">
         <h1>you exhibited some other strange patterns:</h1>
 
-        <WhydDiagnoseTimeOfDay ref='timeOfDay' class='pt-5' />
-        <WhydDiagnoseFavoriteChannel ref='favoriteChannel' class='pt-5' />
-        <WhydDiagnoseTrailblazer ref='trailblazer' class='pt-5' />
-        <WhydDiagnoseTeammate ref='teammate' class='pt-5' />
-        <WhydDiagnoseAstrologicalSign ref='astrologicalSign' class='pt-5' />
-        <WhydDiagnoseDecisiveness ref='decisiveness' class='pt-5' />
+        <WhydDiagnoseTimeOfDay ref='timeOfDay' />
+        <WhydDiagnoseFavoriteChannel ref='favoriteChannel' />
+        <WhydDiagnoseTrailblazer ref='trailblazer' />
+        <WhydDiagnoseTeammate ref='teammate' />
+        <WhydDiagnoseDecisiveness ref='decisiveness' />
+        <WhydDiagnoseAstrologicalSign ref='astrologicalSign' />
       </div>
     </div>
   </div>
@@ -158,8 +158,8 @@ export default {
     await this.$refs.favoriteChannel.init(this.id, this.urlPrefix);
     await this.$refs.trailblazer.init(this.id, this.urlPrefix);
     await this.$refs.teammate.init(this.id, this.urlPrefix);
-    await this.$refs.astrologicalSign.init(this.id, this.urlPrefix);
     await this.$refs.decisiveness.init(this.id, this.urlPrefix);
+    await this.$refs.astrologicalSign.init(this.id, this.urlPrefix);
   },
   methods: {},
 };
