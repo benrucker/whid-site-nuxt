@@ -1,9 +1,53 @@
 <template>
   <div>
-    <div class="container">
-      <h1>Who are you?</h1>
-      <NuxtLink to="/whyd/bebenebenebeb"
-        >bebenebenebeb</NuxtLink>
+    <div class="container text-center pt-5">
+      <img src="/whyd/2021/you.png" class="w-25 pb-4" />
+      <h1 class="pb-3"><b><i>what have you done 2021</i></b></h1>
+      <label for="nameInput" class="form-label"></label>
+      <div class="input-group input-group-lg">
+        <input
+          v-model="name"
+          class="form-control"
+          list="namelist"
+          id="nameInput"
+          placeholder="Enter your name..."
+        />
+        <datalist id="namelist">
+          <option v-for="name in Object.keys(names)" :key="name">
+            {{ name }}
+          </option>
+        </datalist>
+        <button
+          class="btn btn-secondary"
+          type="button"
+          v-on:click="inputButtonPressed"
+          :disabled="buttonDisabled"
+        >
+          <i>whyd</i>
+        </button>
+      </div>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      names: {},
+      name: "",
+    };
+  },
+  async mounted() {
+    this.names = await fetch("/whyd/2021/data/nameToName.json").then((res) =>
+      res.json()
+    );
+    console.log(this.names);
+  },
+  methods: {
+    inputButtonPressed() {
+      this.$router.push(`/whyd/${this.names[this.name]}`);
+    }
+  }
+};
+</script>
