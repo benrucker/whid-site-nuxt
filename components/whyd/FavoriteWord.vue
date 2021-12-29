@@ -29,6 +29,7 @@ export default {
         `${urlPrefix}/user/${id}/mostUsedWordsNoStop.json`
       ).then((res) => res.json());
       let sorted = Object.values(data).sort((a, b) => b[1] - a[1]);
+      if (!sorted) return;
       this.word = sorted[0][0];
       this.count = sorted[0][1];
     },
