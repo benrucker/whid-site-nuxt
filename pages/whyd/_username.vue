@@ -153,7 +153,11 @@
       </div>
     </div>
 
-    <div class="gradBlackToBlue"></div>
+    <div
+      class="gradBlackToBlue d-flex align-items-center justify-content-center"
+    >
+      <WhydGoodMorning :id="id" :urlPrefix="urlPrefix" ref="goodMorning" />
+    </div>
 
     <div class="bg blue pb-5">
       <div class="container">
@@ -176,22 +180,38 @@
     </div>
 
     <div class="bg lightblue">
-      <WhydGoodMorning :id="id" :urlPrefix="urlPrefix" ref="goodMorning" />
+      <!-- <WhydGoodMorning :id="id" :urlPrefix="urlPrefix" ref="goodMorning" /> -->
     </div>
 
     <div class="">
       <img src="/whyd/2021/multicolor.svg" class="bg white" />
     </div>
 
-    <div class="bg white text-dark">
-      <div class="container">
+    <div class="bg white text-dark py-5">
+      <div class="container py-5">
         <h4>well,<br /><br />that's about it.</h4>
         <br />
         <br />
         <br />
-        <h5>this'll get refined later, promise.</h5>
+        <h5>there was supposed to be a final little section here</h5>
+        <h5>
+          with like a cool card that you could screenshot and post on Discord.
+        </h5>
+        <br />
+        <h5>but i ran out of time.</h5>
         <br />
         <br />
+        <br />
+        <br />
+        <br />
+        <h5 class="ps-5 text-muted">
+          maybe i'll make it later
+          <WhydEmoji
+            :urlPrefix="urlPrefix"
+            :emoji="':benheh:'"
+            :spoiler="true"
+          />
+        </h5>
       </div>
     </div>
     <img src="/whyd/2021/construction.png" class="w-100 bg-white" />
