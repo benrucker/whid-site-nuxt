@@ -34,7 +34,7 @@
 
     <div class="bg gray">
       <div class="container">
-        <h2>weren't those numbers cool?</h2>
+        <h2>weren't those bars and words and numbers cool?</h2>
         <br />
         <h3>here are some more!</h3>
         <br />
@@ -183,9 +183,18 @@
       <img src="/whyd/2021/multicolor.svg" class="bg white" />
     </div>
 
-    <div>
-      <WhydEndCard :id="id" :urlPrefix="urlPrefix" ref="endCard" />
+    <div class="bg white text-dark">
+      <div class="container">
+        <h4>well,<br /><br />that's about it.</h4>
+        <br />
+        <br />
+        <br />
+        <h5>this'll get refined later, promise.</h5>
+        <br />
+        <br />
+      </div>
     </div>
+    <img src="/whyd/2021/construction.png" class="w-100 bg-white" />
   </div>
 </template>
 
