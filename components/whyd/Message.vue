@@ -1,8 +1,11 @@
 <template>
   <div class="message">
-    <div class="content">{{ content }}</div>
+    <div class="content text-break">{{ content }}</div>
     <div class="attachment" v-for="attachment in attachments" :key="attachment.id">
-      <img :src="attachment.url" />
+      <video controls v-if="attachment.url.endsWith('.mp4')" >
+      <source :src="attachment.url" />
+      </video>
+      <img v-else :src="attachment.url" />
     </div>
   </div>
 </template>
