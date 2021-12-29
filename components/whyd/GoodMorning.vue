@@ -2,8 +2,15 @@
   <div class="gm">
     <div class="container d-flex justify-content-center py-3">
       <div class="gmbox d-flex align-items-center text-dark">
-        <WhydEmoji class="pe-3" emoji=":myson:" :urlPrefix="urlPrefix" :big="true" />
-        <h4>You said good morning {{ count }} {{ count == 1 ? 'time' : 'times' }}!</h4>
+        <WhydEmoji
+          class="pe-3"
+          emoji=":myson:"
+          :urlPrefix="urlPrefix"
+          :big="true"
+        />
+        <h4>
+          You said good morning {{ count }} {{ count == 1 ? "time" : "times" }}!
+        </h4>
       </div>
     </div>
   </div>
@@ -36,14 +43,14 @@ export default {
 
 <style scoped>
 .gm {
-  box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.2); */
 }
 
-.gmbox { 
-    box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.2);
-    background: #c6ccfb;
-    border-radius: 10px;
-    padding: 1em;
-    transform: translateY(-65px);
+.gmbox {
+  box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.2);
+  background: #c6ccfb;
+  border-radius: 10px;
+  padding: 1em;
+  /* transform: translateY(-65px); */
 }
 </style>
