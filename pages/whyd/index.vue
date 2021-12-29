@@ -21,7 +21,6 @@
           class="btn btn-secondary"
           type="button"
           v-on:click="inputButtonPressed"
-          :disabled="buttonDisabled"
         >
           <i>whyd</i>
         </button>
@@ -46,7 +45,8 @@ export default {
   },
   methods: {
     inputButtonPressed() {
-      this.$router.push(`/whyd/${this.names[this.name]}`);
+      if (Object.keys(this.names).includes(this.name))
+        this.$router.push(`/whyd/${this.names[this.name]}`);
     }
   }
 };
