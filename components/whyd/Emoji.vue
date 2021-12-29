@@ -47,7 +47,7 @@ export default {
     processedEmoji: function () {
       if (this.emoji.startsWith(":")) {
         let output = `/whyd/2021/emojis/${this.emoji.replaceAll(":", "")}`;
-        let animated = [":shred:", ":hoedown:"];
+        let animated = [":shred:", ":hoedown:", ":trueshred:"];
         let svgs = [":eyes:", ":lion:", ":microbe:", ":pushpin:", ":warning:"];
 
         if (animated.includes(this.emoji)) {
