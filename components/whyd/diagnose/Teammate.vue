@@ -49,6 +49,8 @@ export default {
           return res.json();
         }
       );
+      if (!this.exists) return;
+
       this.count = data["count"];
       let rank = data["rank"];
 
