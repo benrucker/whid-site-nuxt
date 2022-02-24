@@ -4,8 +4,7 @@
       <h3>and speaking of firsts: this year, you did something special!</h3>
       <div v-for="(stuff, channel) in channelAccolades" :key="channel">
         <h4 class="ps-5 pt-3">
-          you sent the first message in <b>#{{ channel }}</b
-          >:
+          you sent the first message in <b>#{{ channel }}</b>:
         </h4>
         <div class="pt-3 d-flex justify-content-center">
           <WhydMessage
@@ -17,7 +16,7 @@
         <div v-if="stuff.firstEver" class="pb-5 pt-2 text-center">
           ^ this was the first message in the whole server!
         </div>
-        <div v-else class="pb-5"></div>
+        <div v-else class="pb-5" />
       </div>
     </div>
   </div>
@@ -28,35 +27,35 @@ export default {
   props: {
     urlPrefix: {
       type: String,
-      default: "",
+      default: ''
     },
     id: {
       type: String,
-      default: "",
-    },
+      default: ''
+    }
   },
-  data() {
+  data () {
     return {
-      channelAccolades: [],
-    };
+      channelAccolades: []
+    }
   },
   computed: {},
-  async mounted() {},
+  async mounted () {},
   methods: {
-    async init(id, urlPrefix) {
-      let firstInChannels = await fetch(
+    async init (id, urlPrefix) {
+      const firstInChannels = await fetch(
         `${urlPrefix}/user/${id}/firstMessageInChannels.json`
       ).then((res) => {
-        if (res.status === 404) return false;
-        return res.json();
-      });
-      console.log(firstInChannels);
+        if (res.status === 404) { return false }
+        return res.json()
+      })
+      console.log(firstInChannels)
       if (firstInChannels) {
-        this.channelAccolades = firstInChannels;
-      } else this.channelAccolades = false;
-    },
-  },
-};
+        this.channelAccolades = firstInChannels
+      } else { this.channelAccolades = false }
+    }
+  }
+}
 </script>
 
 <style scoped>

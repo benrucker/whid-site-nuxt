@@ -1,19 +1,19 @@
 <template>
-  <v-chart class="chart" :option="option" ref="chart" />
+  <v-chart ref="chart" class="chart" :option="option" />
 </template>
 
 <script>
-import { use } from "echarts/core";
-import { CanvasRenderer } from "echarts/renderers";
-import { LineChart } from "echarts/charts";
+import { use } from 'echarts/core'
+import { CanvasRenderer } from 'echarts/renderers'
+import { LineChart } from 'echarts/charts'
 import {
   TitleComponent,
   TooltipComponent,
   LegendComponent,
   ToolboxComponent,
-  GridComponent,
-} from "echarts/components";
-import VChart, { THEME_KEY } from "vue-echarts";
+  GridComponent
+} from 'echarts/components'
+import VChart, { THEME_KEY } from 'vue-echarts'
 
 use([
   CanvasRenderer,
@@ -22,133 +22,133 @@ use([
   TooltipComponent,
   LegendComponent,
   ToolboxComponent,
-  GridComponent,
-]);
+  GridComponent
+])
 
 export default {
-  name: "HelloWorld",
+  name: 'HelloWorld',
+  components: {
+    VChart
+  },
+  provide: {
+    [THEME_KEY]: 'dark'
+  },
   props: {
     data: [],
     xAxis: [],
-    title: "",
-    bgColor: "",
-    color: "",
-    textColor: "",
+    title: '',
+    bgColor: '',
+    color: '',
+    textColor: '',
     right: false,
     showTitle: false,
     formatter: false,
-    xAxisLabel: '',
+    xAxisLabel: ''
   },
-  components: {
-    VChart,
-  },
-  provide: {
-    [THEME_KEY]: "dark",
-  },
-  mounted() {
-    window.onresize = () => {
-      this.$refs.chart.resize();
-    };
-  },
-  data() {
+  data () {
     return {
       option: {},
       lines: [],
-      labels: [],
-    };
+      labels: []
+    }
+  },
+  mounted () {
+    window.onresize = () => {
+      this.$refs.chart.resize()
+    }
   },
   methods: {
-    init(xAxis, data, colorsIn) {
+    init (xAxis, data, colorsIn) {
       this.option = {
         title: {
           text: this.title,
           textStyle: {
             color: this.textColor,
-            fontWeight: "normal",
+            fontWeight: 'normal'
           },
           show: this.showTitle,
-          left: 'center',
+          left: 'center'
         },
         grid: {
-          left: "3%",
-          right: "4%",
-          bottom: "3%",
-          containLabel: true,
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
         },
         tooltip: {
-          trigger: "axis",
+          trigger: 'axis',
           axisPointer: {
-            type: "shadow",
+            type: 'shadow'
           },
-          formatter: this.formatter ? this.formatter : (params) => `${params[0].name} ${this.title}: ${params[0].value.toLocaleString()}`,
+          formatter: this.formatter ? this.formatter : params => `${params[0].name} ${this.title}: ${params[0].value.toLocaleString()}`
         },
         xAxis: [
           {
-            type: "category",
+            type: 'category',
             data: xAxis,
             splitLine: {
               show: false,
               lineStyle: {
-                color: "#fff",
-              },
+                color: '#fff'
+              }
             },
             axisLabel: {
-              align: this.right ? 'left': 'center',
+              align: this.right ? 'left' : 'center'
             },
             axisLine: {
               lineStyle: {
-                color: this.textColor,
-              },
+                color: this.textColor
+              }
             },
             axisTick: {
               lineStyle: {
-                color: this.textColor,
-              },
+                color: this.textColor
+              }
             },
             boundaryGap: ['20%', '20%'],
             name: this.xAxisLabel,
             nameLocation: 'middle',
             nameTextStyle: {
               color: this.textColor,
-              fontWeight: "normal",
-              fontSize: 12,
+              fontWeight: 'normal',
+              fontSize: 12
             }
-          },
+          }
         ],
         yAxis: [
           {
-            type: "value",
+            type: 'value',
             splitLine: {
-              show: false,
-            },
-          },
+              show: false
+            }
+          }
         ],
         series: [
           {
-            type: "bar",
-            data: data,
-            barWidth: "99.3%",
+            type: 'bar',
+            data,
+            barWidth: '99.3%',
             itemStyle: {
-              opacity: 0.5,
+              opacity: 0.5
             },
             axisLabel: {
               interval: 0,
-              rotate: 0,
+              rotate: 0
             },
-            colorBy: 'data',
-          },
+            colorBy: 'data'
+          }
         ],
         color: this.color,
         backgroundColor: this.bgColor,
         textStyle: {
           color: this.textColor,
           fontSize: 36,
-          fontWeight: "bold",
-        },
-      };
-    },
-  },
-};
+          fontWeight: 'bold'
+        }
+      }
+    }
+  }
+}
 </script>
 
 <style scoped>

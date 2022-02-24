@@ -1,19 +1,19 @@
 <template>
-  <v-chart class="chart" :option="option" ref="chart" />
+  <v-chart ref="chart" class="chart" :option="option" />
 </template>
 
 <script>
-import { use } from "echarts/core";
-import { CanvasRenderer } from "echarts/renderers";
-import { LineChart } from "echarts/charts";
+import { use } from 'echarts/core'
+import { CanvasRenderer } from 'echarts/renderers'
+import { LineChart } from 'echarts/charts'
 import {
   TitleComponent,
   TooltipComponent,
   LegendComponent,
   ToolboxComponent,
-  GridComponent,
-} from "echarts/components";
-import VChart, { THEME_KEY } from "vue-echarts";
+  GridComponent
+} from 'echarts/components'
+import VChart, { THEME_KEY } from 'vue-echarts'
 
 use([
   CanvasRenderer,
@@ -22,111 +22,111 @@ use([
   TooltipComponent,
   LegendComponent,
   ToolboxComponent,
-  GridComponent,
-]);
+  GridComponent
+])
 
 export default {
-  name: "HelloWorld",
+  name: 'HelloWorld',
+  components: {
+    VChart
+  },
+  provide: {
+    [THEME_KEY]: 'dark'
+  },
   props: {
     data: [],
     xAxis: [],
-    title: "",
-    bgColor: "",
-    color: "",
-    textColor: "",
+    title: '',
+    bgColor: '',
+    color: '',
+    textColor: ''
   },
-  components: {
-    VChart,
-  },
-  provide: {
-    [THEME_KEY]: "dark",
-  },
-  mounted() {
-    window.onresize = () => {
-      this.$refs.chart.resize();
-    };
-  },
-  data() {
+  data () {
     return {
       option: {},
       lines: [],
-      labels: [],
-    };
+      labels: []
+    }
+  },
+  mounted () {
+    window.onresize = () => {
+      this.$refs.chart.resize()
+    }
   },
   methods: {
-    init(xAxis, data) {
+    init (xAxis, data) {
       this.option = {
         grid: {
-          left: "3%",
-          right: "4%",
-          bottom: "3%",
-          containLabel: true,
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
         },
         tooltip: {
-          trigger: "axis",
+          trigger: 'axis',
           axisPointer: {
-            type: "shadow",
+            type: 'shadow'
           },
           formatter: '{b}: {c}'
         },
         xAxis: [
           {
-            type: "category",
+            type: 'category',
             data: xAxis,
             splitLine: {
               show: false,
               lineStyle: {
-                color: "#fff",
-              },
-            },
-          },
+                color: '#fff'
+              }
+            }
+          }
         ],
         yAxis: [
           {
-            type: "value",
+            type: 'value',
             splitLine: {
-              show: false,
-            },
-          },
+              show: false
+            }
+          }
         ],
         series: [
           {
             name: this.title,
-            type: "line",
-            data: data,
+            type: 'line',
+            data,
             smooth: true,
             lineStyle: {
-              width: 4,
+              width: 4
             },
             itemStyle: {
               borderWidth: 5,
-              borderColor: this.color,
-            },
-          },
-          {
-            type: "bar",
-            data: data,
-            barWidth: "99.3%",
-            itemStyle: {
-              color: this.color,
-              opacity: 0.5,
-            },
-            tooltip: {
-              show: false,
+              borderColor: this.color
             }
           },
+          {
+            type: 'bar',
+            data,
+            barWidth: '99.3%',
+            itemStyle: {
+              color: this.color,
+              opacity: 0.5
+            },
+            tooltip: {
+              show: false
+            }
+          }
         ],
         color: [this.color],
         backgroundColor: this.bgColor,
         textStyle: {
           color: this.textColor,
           fontSize: 36,
-          fontWeight: "bold",
-        },
-      };
-    },
-  },
-};
+          fontWeight: 'bold'
+        }
+      }
+    }
+  }
+}
 </script>
 
 <style scoped>

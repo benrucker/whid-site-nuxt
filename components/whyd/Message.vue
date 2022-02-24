@@ -1,15 +1,17 @@
 <template>
   <div class="message">
-    <div class="content text-break">{{ content }}</div>
+    <div class="content text-break">
+      {{ content }}
+    </div>
     <div
-      class="attachment"
       v-for="attachment in attachments"
       :key="attachment.id"
+      class="attachment"
     >
-      <video controls v-if="attachment.url.endsWith('.mp4')">
-        <source :src="attachment.url" />
+      <video v-if="attachment.url.endsWith('.mp4')" controls>
+        <source :src="attachment.url">
       </video>
-      <img v-else :src="attachment.url" />
+      <img v-else :src="attachment.url">
     </div>
   </div>
 </template>
@@ -17,13 +19,13 @@
 <script>
 export default {
   props: {
-    content: "",
+    content: '',
     attachments: [{
-      id: "",
-      url: "",
-    }],
-  },
-};
+      id: '',
+      url: ''
+    }]
+  }
+}
 </script>
 
 <style scoped>

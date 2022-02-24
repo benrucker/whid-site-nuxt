@@ -2,7 +2,7 @@
   <div>
     <h1>
       also, your favorite emoji was
-      <WhydEmoji :emoji="emoji" :big="false" :urlPrefix="urlPrefix" />.<br />you
+      <WhydEmoji :emoji="emoji" :big="false" :url-prefix="urlPrefix" />.<br>you
       sent that bad boy a total of <b>{{ count }}</b> {{ count == 1 ? "time" : "times" }}.
     </h1>
   </div>
@@ -13,28 +13,28 @@ export default {
   props: {
     urlPrefix: {
       type: String,
-      default: "",
+      default: ''
     },
     id: {
       type: String,
-      default: "",
-    },
+      default: ''
+    }
   },
-  data() {
+  data () {
     return {
-      emoji: "",
-      count: "",
-    };
+      emoji: '',
+      count: ''
+    }
   },
-  async mounted() {},
+  async mounted () {},
   methods: {
-    async init(id, urlPrefix) {
-      let data = await fetch(`${urlPrefix}/user/${id}/favEmoji.json`).then(
-        (res) => res.json()
-      );
-      this.count = data.countOfMostSentEmoji;
-      this.emoji = data.mostSentEmoji;
-    },
-  },
-};
+    async init (id, urlPrefix) {
+      const data = await fetch(`${urlPrefix}/user/${id}/favEmoji.json`).then(
+        res => res.json()
+      )
+      this.count = data.countOfMostSentEmoji
+      this.emoji = data.mostSentEmoji
+    }
+  }
+}
 </script>

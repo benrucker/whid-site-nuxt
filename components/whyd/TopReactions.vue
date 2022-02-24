@@ -4,7 +4,7 @@
       :names="users"
       :counts="counts"
       :emojis="true"
-      :urlPrefix="urlPrefix"
+      :url-prefix="urlPrefix"
       :unit="'Reactions'"
     />
   </div>
@@ -15,24 +15,24 @@ export default {
   props: {
     urlPrefix: {
       type: String,
-      default: "",
-    },
+      default: ''
+    }
   },
-  data() {
+  data () {
     return {
       users: [],
-      counts: [],
-    };
+      counts: []
+    }
   },
-  async mounted() {
-    let data = await fetch(`${this.urlPrefix}/serverReactions.json`).then(
-      (res) => res.json()
-    );
-    this.users = Object.keys(data).slice(0, 5);
+  async mounted () {
+    const data = await fetch(`${this.urlPrefix}/serverReactions.json`).then(
+      res => res.json()
+    )
+    this.users = Object.keys(data).slice(0, 5)
     this.counts = Object.values(data)
       .slice(0, 5)
-      .map((x) => x.toLocaleString());
+      .map(x => x.toLocaleString())
   },
-  methods: {},
-};
+  methods: {}
+}
 </script>

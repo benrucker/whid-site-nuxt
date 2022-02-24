@@ -5,7 +5,7 @@
         <WhydEmoji
           class="pe-3"
           emoji=":myson:"
-          :urlPrefix="urlPrefix"
+          :url-prefix="urlPrefix"
           :big="true"
         />
         <h4>
@@ -19,26 +19,26 @@
 <script>
 export default {
   props: {
-    urlPrefix: "",
+    urlPrefix: ''
   },
-  data() {
+  data () {
     return {
-      count: 0,
-    };
+      count: 0
+    }
   },
-  async mounted() {},
+  async mounted () {},
   methods: {
-    async init(id, urlPrefix) {
+    async init (id, urlPrefix) {
       this.count = await fetch(`${urlPrefix}/user/${id}/goodMorning.json`).then(
         (res) => {
-          if (res.status === 404) return 0;
-          return res.json();
+          if (res.status === 404) { return 0 }
+          return res.json()
         }
-      );
-      if (this.count) this.count = this.count["0"];
-    },
-  },
-};
+      )
+      if (this.count) { this.count = this.count['0'] }
+    }
+  }
+}
 </script>
 
 <style scoped>

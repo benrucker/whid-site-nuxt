@@ -2,27 +2,27 @@
   <WhydEchartBar
     ref="yearBarChart"
     :title="'Messages'"
-    :bgColor="'#f3df4c'"
+    :bg-color="'#f3df4c'"
     :color="'#4c60f3'"
-    :textColor="'#303030'"
+    :text-color="'#303030'"
   />
 </template>
 
 <script>
 export default {
-  data() {
+  data () {
     return {
-    };
+    }
   },
   methods: {
-    async init(urlPrefix) {
-      let yearCounts = await fetch(`${urlPrefix}/msgPerYear.json`).then((res) =>
+    async init (urlPrefix) {
+      const yearCounts = await fetch(`${urlPrefix}/msgPerYear.json`).then(res =>
         res.json()
-      );
-      let years = ['2016', '2017', '2018', '2019', '2020', '2021'];
-      let msgCounts = Object.values(yearCounts);
-      this.$refs.yearBarChart.init(years, msgCounts);
-    },
-  },
-};
+      )
+      const years = ['2016', '2017', '2018', '2019', '2020', '2021']
+      const msgCounts = Object.values(yearCounts)
+      this.$refs.yearBarChart.init(years, msgCounts)
+    }
+  }
+}
 </script>

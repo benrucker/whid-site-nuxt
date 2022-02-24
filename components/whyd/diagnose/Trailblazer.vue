@@ -4,15 +4,15 @@
     <p>you started a conversation {{ count.toLocaleString() }} times after 5 hours of inactivity in a channel</p>
     <div class="timeOfDayChart ratio ratio-16x9 w-100 align-self-center">
       <WhydEchartHist
+        ref="hist"
         :title="'Number of people who sent messages after\n5 hours of channel inactivity'"
         :color="'#ffffff'"
-        :bgColor="'#C6CCFB'"
-        :textColor="'#303030'"
+        :bg-color="'#C6CCFB'"
+        :text-color="'#303030'"
         :right="false"
-        :showTitle="false"
+        :show-title="false"
         :formatter="(params) => `${params[0].value} ${params[0].value == 1 ? 'person' : 'people'} sent ${params[0].name} trailblazing messages`"
-        :xAxisLabel="''"
-        ref="hist"
+        :x-axis-label="''"
       />
     </div>
   </div>
@@ -21,46 +21,46 @@
 <script>
 export default {
   props: {},
-  data() {
+  data () {
     return {
-      title: "",
+      title: '',
       exists: false,
-      count: 0,
-    };
+      count: 0
+    }
   },
-  async mounted() {},
+  async mounted () {},
   methods: {
-    async init(id, urlPrefix) {
-      let data = await fetch(`${urlPrefix}/user/${id}/trailblazing.json`)
+    async init (id, urlPrefix) {
+      const data = await fetch(`${urlPrefix}/user/${id}/trailblazing.json`)
         .then((res) => {
           if (res.status === 404) {
-            this.exists = false;
-            return false;
+            this.exists = false
+            return false
           }
-          this.exists = true;
-          return res.json();
+          this.exists = true
+          return res.json()
         })
-      if (!data) return false;
+      if (!data) { return false }
 
-      this.count = data['count'];
-      let rank = data['rank'];
+      this.count = data.count
+      const rank = data.rank
 
-      let serverData = await fetch(`${urlPrefix}/trailblazeTimes.json`).then(
-        (res) => res.json()
-      );
+      const serverData = await fetch(`${urlPrefix}/trailblazeTimes.json`).then(
+        res => res.json()
+      )
 
-      let labels = Object.keys(serverData).map(key => {
-        let high = key.split(', ')[1].split('.')[0];
-        let low = key.split(', ')[0].split('.')[0].split('(')[1];
-        low = low.startsWith('-') ? 0 : low;
-        return `${low}-${high}`;
-      });
-      let counts = Object.values(serverData);
+      const labels = Object.keys(serverData).map((key) => {
+        const high = key.split(', ')[1].split('.')[0]
+        let low = key.split(', ')[0].split('.')[0].split('(')[1]
+        low = low.startsWith('-') ? 0 : low
+        return `${low}-${high}`
+      })
+      const counts = Object.values(serverData)
 
-      this.$refs.hist.init(labels, counts);
-    },
-  },
-};
+      this.$refs.hist.init(labels, counts)
+    }
+  }
+}
 </script>
 
 <style scoped>

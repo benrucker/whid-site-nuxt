@@ -4,11 +4,11 @@
     <p>{{ percentage }}% of your messages were edited</p>
     <div class="timeOfDayChart ratio ratio-16x9 w-100 align-self-center">
       <WhydEchartPie
+        ref="pie"
         :title="''"
         :colors="[]"
-        :bgColor="'#C6CCFB'"
-        :textColor="'#303030'"
-        ref="pie"
+        :bg-color="'#C6CCFB'"
+        :text-color="'#303030'"
       />
     </div>
   </div>
@@ -17,42 +17,42 @@
 <script>
 export default {
   props: {},
-  data() {
+  data () {
     return {
-      title: "",
+      title: '',
       count: 0,
-      percentage: 0,
-    };
+      percentage: 0
+    }
   },
-  async mounted() {},
+  async mounted () {},
   methods: {
-    async init(id, urlPrefix) {
-      let data = await fetch(
+    async init (id, urlPrefix) {
+      const data = await fetch(
         `${urlPrefix}/user/${id}/editProportion.json`
-      ).then((res) => res.json());
-      let totalMessages = data.total;
-      let editedMessages = data.edited;
-      let editRatio = data.editRatio;
-      let uneditedMessages = totalMessages - editedMessages;
+      ).then(res => res.json())
+      const totalMessages = data.total
+      const editedMessages = data.edited
+      const editRatio = data.editRatio
+      const uneditedMessages = totalMessages - editedMessages
 
-      this.percentage = (editRatio * 100).toFixed(2);
+      this.percentage = (editRatio * 100).toFixed(2)
       this.title =
         editRatio > 0.03
           ? "you're a bit more indecisive than everyone else"
-          : "you say what you mean, and mean what you say";
+          : 'you say what you mean, and mean what you say'
 
-      let colors = ["#f3df4c", "#4c60f3"];
+      const colors = ['#f3df4c', '#4c60f3']
 
       this.$refs.pie.init(
         [
-          { name: "Unedited", value: uneditedMessages },
-          { name: "Edited", value: editedMessages },
+          { name: 'Unedited', value: uneditedMessages },
+          { name: 'Edited', value: editedMessages }
         ],
         colors
-      );
-    },
-  },
-};
+      )
+    }
+  }
+}
 </script>
 
 <style scoped>

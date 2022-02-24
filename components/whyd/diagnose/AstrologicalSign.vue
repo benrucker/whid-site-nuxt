@@ -4,11 +4,11 @@
     <p>better check your horoscope</p>
     <div class="astroChart ratio ratio-4x3 w-75 align-self-center">
       <WhydEchartBarPolar
+        ref="astroChart"
         :title="'Messages'"
         :color="'#fff'"
-        :bgColor="'#C6CCFB'"
-        :textColor="'#303030'"
-        ref="astroChart"
+        :bg-color="'#C6CCFB'"
+        :text-color="'#303030'"
       />
     </div>
   </div>
@@ -17,29 +17,29 @@
 <script>
 export default {
   props: {},
-  data() {
+  data () {
     return {
-      title: "",
-      preposition: "",
-      timeRange: "",
-    };
+      title: '',
+      preposition: '',
+      timeRange: ''
+    }
   },
-  async mounted() {},
+  async mounted () {},
   methods: {
-    async init(id, urlPrefix) {
-      let data = await fetch(`${urlPrefix}/user/${id}/sign.json`).then(
-        (res) => res.json()
-      );
-      this.title = `${/^[AEIOU]/.test(data.maxSign) ? "an" : "a"} ${data.maxSign}`;
-      delete data.maxSign;
+    async init (id, urlPrefix) {
+      const data = await fetch(`${urlPrefix}/user/${id}/sign.json`).then(
+        res => res.json()
+      )
+      this.title = `${/^[AEIOU]/.test(data.maxSign) ? 'an' : 'a'} ${data.maxSign}`
+      delete data.maxSign
 
-      let signs = Object.keys(data);
-      let counts = Object.values(data);
+      const signs = Object.keys(data)
+      const counts = Object.values(data)
 
-      this.$refs.astroChart.init(signs, counts);
-    },
-  },
-};
+      this.$refs.astroChart.init(signs, counts)
+    }
+  }
+}
 </script>
 
 <style scoped>

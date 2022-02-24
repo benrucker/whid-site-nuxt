@@ -1,9 +1,9 @@
 <template>
   <div>
     <div
-      class="row close align-items-center"
-      v-for="(user, i) in this.users"
+      v-for="(user, i) in users"
       :key="user.name"
+      class="row close align-items-center"
     >
       <span :class="'col-2 rank text-center fade fadein-' + (i + 5)">{{ i + 1 }}</span>
       <span :class="'col-6 name fade fadein-' + (i + 10)">{{ user }}</span>
@@ -11,12 +11,12 @@
         counts[i]
       }}</span>
     </div>
-    <br />
-    <br />
-    <br />
+    <br>
+    <br>
+    <br>
     <div class="row">
-        <span class="col-8"></span>
-        <span class="col-4 unit text-muted text-center fade fadein-15">messages sent</span>
+      <span class="col-8" />
+      <span class="col-4 unit text-muted text-center fade fadein-15">messages sent</span>
     </div>
   </div>
 </template>
@@ -26,27 +26,27 @@ export default {
   props: {
     urlPrefix: {
       type: String,
-      default: "",
-    },
+      default: ''
+    }
   },
-  data() {
+  data () {
     return {
-      users: [],
-    };
+      users: []
+    }
   },
-  async mounted() {
-    let data = await fetch(`${this.urlPrefix}/mostMessages.json`).then((res) =>
+  async mounted () {
+    const data = await fetch(`${this.urlPrefix}/mostMessages.json`).then(res =>
       res.json()
-    );
-    this.users = Object.values(data.name).slice(0, 5);
+    )
+    this.users = Object.values(data.name).slice(0, 5)
     this.counts = Object.values(data.totalMessages)
       .slice(0, 5)
-      .map((x) => x.toLocaleString());
+      .map(x => x.toLocaleString())
   },
   methods: {
-    async init(urlPrefix) {},
-  },
-};
+    async init (urlPrefix) {}
+  }
+}
 </script>
 
 <style scoped>

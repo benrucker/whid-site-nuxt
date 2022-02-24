@@ -4,68 +4,68 @@
     <p>many of your messages were sent {{ preposition }}, {{ timeRange }}</p>
     <div class="timeOfDayChart ratio ratio-16x9 w-75 align-self-center">
       <WhydEchartHist
+        ref="hist"
         :title="'Messages'"
         :color="'#fff'"
-        :bgColor="'#C6CCFB'"
-        :textColor="'#303030'"
-        ref="hist"
+        :bg-color="'#C6CCFB'"
+        :text-color="'#303030'"
       />
     </div>
   </div>
 </template>
 
 <script>
-let titleMap = {
-  morning: "crazy",
-  afternoon: "productive in the afternoon",
-  evening: "a night owl",
-  overnight: "nocturnal (or Kian)",
-};
+const titleMap = {
+  morning: 'crazy',
+  afternoon: 'productive in the afternoon',
+  evening: 'a night owl',
+  overnight: 'nocturnal (or Kian)'
+}
 
-let prepositioned = {
-  morning: "in the morning",
-  afternoon: "in the afternoon",
-  evening: "in the evening",
-  overnight: "overnight",
-};
+const prepositioned = {
+  morning: 'in the morning',
+  afternoon: 'in the afternoon',
+  evening: 'in the evening',
+  overnight: 'overnight'
+}
 
-let timeMap = {
-    morning: "6am - 12pm",
-    afternoon: "12pm - 6pm",
-    evening: "6pm - 12am",
-    overnight: "12am - 6am",
+const timeMap = {
+  morning: '6am - 12pm',
+  afternoon: '12pm - 6pm',
+  evening: '6pm - 12am',
+  overnight: '12am - 6am'
 }
 
 export default {
   props: {},
-  data() {
+  data () {
     return {
-      title: "",
-      preposition: "",
-      timeRange: "",
-    };
+      title: '',
+      preposition: '',
+      timeRange: ''
+    }
   },
-  async mounted() {},
+  async mounted () {},
   methods: {
-    async init(id, urlPrefix) {
-      let data = await fetch(`${urlPrefix}/user/${id}/timeOfDay.json`).then(
-        (res) => res.json()
-      );
-      this.title = titleMap[data.maxTime];
-      this.preposition = prepositioned[data.maxTime];
-      this.timeRange = timeMap[data.maxTime];
-      let labels = ["Overnight", "Morning", "Afternoon", "Evening"];
-      let timeCounts = [
+    async init (id, urlPrefix) {
+      const data = await fetch(`${urlPrefix}/user/${id}/timeOfDay.json`).then(
+        res => res.json()
+      )
+      this.title = titleMap[data.maxTime]
+      this.preposition = prepositioned[data.maxTime]
+      this.timeRange = timeMap[data.maxTime]
+      const labels = ['Overnight', 'Morning', 'Afternoon', 'Evening']
+      const timeCounts = [
         data.overnight,
         data.morning,
         data.afternoon,
-        data.evening,
-      ];
+        data.evening
+      ]
 
-      this.$refs.hist.init(labels, timeCounts);
-    },
-  },
-};
+      this.$refs.hist.init(labels, timeCounts)
+    }
+  }
+}
 </script>
 
 <style scoped>

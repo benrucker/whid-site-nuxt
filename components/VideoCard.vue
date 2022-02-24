@@ -2,13 +2,13 @@
   <a :href="videoLink" class="text-reset text-decoration-none">
     <div class="card">
       <div class="ratio ratio-16x9">
-        <img :src="thumbnailLink" class="card-img-top" :alt="title" />
+        <img :src="thumbnailLink" class="card-img-top" :alt="title">
       </div>
-      <div class="card-body" id="gallery-card">
+      <div id="gallery-card" class="card-body">
         <h5 class="card-title text-truncate pb-1 mb-0">
           {{ title }}
         </h5>
-        <h6 class="card-subtitle" v-if="releaseDate">
+        <h6 v-if="releaseDate" class="card-subtitle">
           <small class="text-muted"> Released {{ releaseDate }}</small>
         </h6>
       </div>
@@ -22,7 +22,7 @@ export default {
     videoLink: String,
     thumbnailLink: String,
     title: String,
-    releaseDate: String,
-  },
-};
+    releaseDate: String
+  }
+}
 </script>
