@@ -39,7 +39,8 @@ export default {
       });
       console.log(firstMsg);
       this.content = firstMsg.content;
-      this.attachements = firstMsg.attachments;
+      this.attachments = firstMsg.attachments;
+      console.log(this.attachments)
     },
   },
 };
