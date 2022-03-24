@@ -1,5 +1,5 @@
 {
-  "name": "nuxttest",
+  "name": "whid-site",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -37,7 +37,7 @@
     "eslint": "^7.29.0",
     "eslint-plugin-nuxt": "^2.0.0",
     "eslint-plugin-vue": "^7.12.1",
-    "typescript": "^4.5.3",
+    "typescript": "^4.6.3",
     "jest": "^27.0.5",
     "ts-jest": "^27.0.3",
     "vue-jest": "^3.0.4"
