@@ -1,4 +1,4 @@
-# nuxttest
+# whid-site-nuxt
 
 ## Build Setup
 
