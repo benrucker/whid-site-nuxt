@@ -29,13 +29,13 @@
             </NuxtLink>
           </li>
           <li class="nav-item">
-            <NuxtLink
-              to="/whbd"
+            <a
+              href="/whbd"
               class="btn btn-text-primary me-2"
               type="button"
             >
               Anniversary
-            </NuxtLink>
+            </a>
           </li>
           <li class="nav-item">
             <NuxtLink
