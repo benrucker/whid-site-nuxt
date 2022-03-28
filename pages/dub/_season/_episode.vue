@@ -109,9 +109,11 @@ export default {
       const changeVol = () => {
         try {
           this.$refs.video.volume = 0.4;
-          this.goToTime(this.time);
+          if (this.time)
+            this.goToTime(this.time);
           return true;
-        } catch {
+        } catch (err) {
+          console.log(err);
           return false;
         }
       };
