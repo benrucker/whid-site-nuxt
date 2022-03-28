@@ -106,7 +106,7 @@ export default {
   watch: {
     async loaded() {
       document.title = "Watching " + this.title;
-      const changeVol = () => {
+      const setInitialState = () => {
         try {
           this.$refs.video.volume = 0.4;
           if (this.time)
@@ -119,7 +119,7 @@ export default {
       };
       const interval = () =>
         setTimeout(() => {
-          if (changeVol()) {
+          if (setInitialState()) {
           } else {
             setTimeout(interval, 50);
           }
