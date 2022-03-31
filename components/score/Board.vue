@@ -51,6 +51,26 @@ export default {
   async fetch () {
     this.scores = await this.getData()
   },
+  head () {
+    return {
+      title: 'Social Credit Score',
+      meta: [
+        ['og:site_name', 'whid.live'],
+        ['og:url', 'https://whid.live/score'],
+        ['og:title', 'Social Credit Score'],
+        ['og:image', 'https://whid.live/camera.png'],
+        ['og:image:width', '1280'],
+        ['og:image:height', '720'],
+        ['og:description', 'Check your credit score! See how you compare to your best friends 😏\n' + this.scores[0].name + ' is on top with ' + this.scores[0].score + ' this week!']
+      ].map(([name, content]) => {
+        return {
+          hid: name,
+          property: name,
+          content
+        }
+      })
+    }
+  },
   computed: {
     sortedScores () {
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
