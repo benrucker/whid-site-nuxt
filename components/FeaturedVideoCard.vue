@@ -11,7 +11,7 @@
             :src="thumbnailLink"
             alt="..."
             style="max-width: inherit"
-          />
+          >
         </div>
       </div>
       <div class="col-lg-6">
@@ -32,7 +32,7 @@ export default {
     thumbnailLink: String,
     title: String,
     releaseDate: String,
-    description: String,
-  },
-};
+    description: String
+  }
+}
 </script>

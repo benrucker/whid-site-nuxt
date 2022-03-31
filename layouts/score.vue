@@ -1,5 +1,3 @@
-<template></template>
-
 <style>
 .a {
   color: #0645ad;
@@ -14,8 +12,9 @@
   background-color: antiquewhite;
   font-family: "Times New Roman", Times, serif;
   padding-left: 5%;
-  width: 80%;
+  width: 120%;
   color: black;
+  overflow: scroll;
 }
 
 #navbar {

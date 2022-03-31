@@ -1,32 +1,32 @@
 <template>
   <div class="container justify-content-center d-flex">
-      <br />
-      <br />
-      <br />
-      <component class="mt-5 fakepage" @changeWindow="changeWindow" :is="window"></component>
+    <br>
+    <br>
+    <br>
+    <component :is="window" class="mt-5 fakepage" @changeWindow="changeWindow" />
   </div>
 </template>
 
 <script>
-import ScoreBoard from '@/components/score/Board.vue';
-import ScorePerson from '@/components/score/Person.vue';
+import ScoreBoard from '@/components/score/Board.vue'
+import ScorePerson from '@/components/score/Person.vue'
 
 export default {
-    data() {
-        return {
-            window: "scoreBoard"
-        }
-    },
-    methods: {
-        changeWindow(window) {
-            this.window = window;
-        }
-    },
-    components: {
-        ScoreBoard,
-        ScorePerson
+  components: {
+    ScoreBoard,
+    ScorePerson
+  },
+  data () {
+    return {
+      window: 'scoreBoard'
     }
-};
+  },
+  methods: {
+    changeWindow (window) {
+      this.window = window
+    }
+  }
+}
 </script>
 
 <style>

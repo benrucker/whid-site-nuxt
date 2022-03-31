@@ -1,21 +1,23 @@
 <template>
-  <div class="fake-webpage w-75" id="body">
+  <div id="body" class="fake-webpage w-75">
     <div id="navbar">
       <div id="links">
         <span class="a link" href="scoreboard.html">Scoreboard</span>
-        <span class="a" href="score.html" v-on:click="changeWindow"
-          >Your Score</span
-        >
+        <span
+          class="a"
+          href="score.html"
+          @click="changeWindow"
+        >Your Score</span>
       </div>
       <div id="logo">
         your logo here:
-        <img src="/score/whid.png" alt="google logo" />
+        <img src="/score/whid.png" alt="google logo">
       </div>
     </div>
 
-    <hr />
-    <br />
-    <br />
+    <hr>
+    <br>
+    <br>
 
     <div id="body">
       <table id="scoreboard">
@@ -27,7 +29,9 @@
           </tr>
           <tr v-for="(score, index) in sortedScores" :key="index">
             <td>{{ index + 1 }}</td>
-            <td class="namecol text-start">{{ score.name }}</td>
+            <td class="namecol text-start">
+              {{ score.name }}
+            </td>
             <td>{{ score.score }}</td>
           </tr>
         </tbody>
@@ -38,49 +42,43 @@
 
 <script>
 export default {
-  data() {
-    return {
-      scores: [],
-    };
-  },
   layout: 'score',
-  computed: {
-    sortedScores() {
-      return this.scores.sort((a, b) => b.score - a.score);
-    },
+  data () {
+    return {
+      scores: []
+    }
   },
-  async fetch() {
-    this.scores = await this.getData();
+  async fetch () {
+    this.scores = await this.getData()
+  },
+  computed: {
+    sortedScores () {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      return this.scores.sort((a, b) => b.score - a.score)
+    }
   },
   methods: {
-    changeWindow() {
-      this.$emit("changeWindow", "scorePerson");
+    changeWindow () {
+      this.$emit('changeWindow', 'scorePerson')
     },
-    async getData() {
-      return fetch("https://api.whid.live/scores/named/latest")
-        .then((response) => {
-          console.log(response);
-          if (response.ok) {
-            return response.json();
-          } else console.log(response);
-        })
-        .then((data) => {
-          console.log(data);
-          data.sort((a, b) => b.score - a.score);
-          return data.map((d) => {
-            return {
-              name: d.name,
-              score: d.score,
-            };
-          });
-        });
-    },
-  },
-};
+    async getData () {
+      const response = await fetch('https://api.whid.live/scores/named/latest')
+      console.log(response)
+      const data = response.ok ? await response.json() : []
+      console.log(data)
+      data.sort((a, b) => b.score - a.score)
+      return data.map((d) => {
+        return {
+          name: d.name,
+          score: d.score
+        }
+      })
+    }
+  }
+}
 </script>
 
 <style scoped>
-
 table#scoreboard,
 table#scoreboard td,
 table#scoreboard th {
@@ -88,7 +86,7 @@ table#scoreboard th {
 }
 
 table#scoreboard {
-  width: 80%;
+  width: 60%;
   border-collapse: collapse;
 }
 
