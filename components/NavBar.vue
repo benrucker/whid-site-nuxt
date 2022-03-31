@@ -46,6 +46,15 @@
               what have you done
             </NuxtLink>
           </li>
+          <li class="nav-item">
+            <NuxtLink
+              to="/score"
+              class=""
+              type=""
+            >
+              <img src="/camera.png" height="40" class="me-2">
+            </NuxtLink>
+          </li>
         </ul>
       </div>
     </div>
