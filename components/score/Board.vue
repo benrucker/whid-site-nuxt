@@ -61,7 +61,7 @@ export default {
         ['og:image', 'https://whid.live/camera.png'],
         ['og:image:width', '1280'],
         ['og:image:height', '720'],
-        ['og:description', 'Check your credit score! See how you compare to your best friends 😏\n' + this.scores[0].name + ' is on top with ' + this.scores[0].score + ' this week!']
+        ['og:description', 'Check your credit score! See how you compare to your best friends 😏\n' + this.scores[0]?.name + ' is on top with ' + this.scores[0]?.score + ' this week!']
       ].map(([name, content]) => {
         return {
           hid: name,
