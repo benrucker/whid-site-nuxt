@@ -89,11 +89,6 @@ export default {
       if (this.scores.length === 0) {
         this.usernameError = true
       } else {
-        this.scores[1] = this.scores[0]
-        this.scores[0] = {
-          date: new Date(2022, 3, 15),
-          score: '0'
-        }
         this.usernameError = false
       }
       console.log(this.scores)
@@ -117,6 +112,9 @@ export default {
 }
 
 function showGraph (data) {
+  // clear content of #scoreline
+  document.getElementById('scoreline').innerHTML = ''
+
   console.log('showgraph called on', data)
 
   data.forEach((d) => {
@@ -278,7 +276,7 @@ class Line {
 
 <style scoped>
 #scoreline {
-  width: 100%;
+  width: fit-content;
 }
 
 table#history,
