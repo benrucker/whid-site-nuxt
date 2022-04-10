@@ -66,13 +66,9 @@ export default {
   },
   computed: {
     sortedScores () {
-      try {
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        return this.scores.sort((a, b) => b.date - a.date)
-      } catch (e) {
-        console.log(e)
-        return []
-      }
+      return this.scores.sort((a, b) => {
+        return new Date(b.date) - new Date(a.date)
+      })
     }
   },
   watch: {
