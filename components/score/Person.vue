@@ -87,7 +87,6 @@ export default {
       } else {
         this.usernameError = false
       }
-      console.log(this.scores)
     },
     async getData (username) {
       const response = await fetch(
@@ -110,8 +109,6 @@ export default {
 function showGraph (data) {
   // clear content of #scoreline
   document.getElementById('scoreline').innerHTML = ''
-
-  console.log('showgraph called on', data)
 
   data.forEach((d) => {
     d.score = parseInt(d.score)
