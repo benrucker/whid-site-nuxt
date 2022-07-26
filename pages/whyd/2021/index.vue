@@ -47,7 +47,9 @@ export default {
   },
   methods: {
     inputButtonPressed () {
-      if (Object.keys(this.names).includes(this.name)) { this.$router.push(`/whyd/${this.names[this.name]}`) }
+      if (Object.keys(this.names).includes(this.name)) {
+        this.$router.push(`/whyd/${this.names[this.name]}`)
+      }
     }
   }
 }

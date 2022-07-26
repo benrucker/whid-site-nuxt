@@ -144,10 +144,6 @@ function addSeasonToEpisodes (catalog) {
   }
 }
 
-function getSeasonByID (seasonID) {
-  return getSeasons()[seasonID]
-}
-
 function getSeasons (catalog) {
   return catalog.seasons
 }
@@ -187,10 +183,6 @@ function getEpisodeFromList (episodes, epid) {
 
 function constructWatchURL (ep) {
   return '/dub/' + ep.season + '/' + ep.id + ''
-}
-
-function constructVideoURL (ep) {
-  return '/dub/videos/' + ep.season + '/' + ep.id + '.mp4'
 }
 
 function constructThumbnailURL (ep) {

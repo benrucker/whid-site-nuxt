@@ -12,7 +12,7 @@ async function initCatalog () {
   await loadCatalog()
   for (const seasonID in catalog.seasons) {
     const season = catalog.seasons[seasonID]
-    season.episodes.map(x => x.season = seasonID)
+    season.episodes.apply(function (x) { x.season = seasonID })
   }
 }
 
@@ -22,10 +22,6 @@ async function loadCatalog () {
     catalog = await response.json()
   }
   await request()
-}
-
-function getSeasonByID (seasonID) {
-  return getSeasons()[seasonID]
 }
 
 function getSeasons () { // called outside of file
@@ -116,4 +112,4 @@ function getParamsFromURL () {
   return params
 }
 
-export default { initCatalog, getSeasonByID, getSeasons, getFeaturedVideo, getVideoDataFromID, constructWatchURL, constructVideoURL, constructThumbnailURL, constructDate, goToGallery, getErrorFromURL, getSeasonAndEpisodeFromURL, getTimestampFromURL, getParamFromURL, getParamsFromURL }
+export default { initCatalog, getSeasons, getFeaturedVideo, getVideoDataFromID, constructWatchURL, constructVideoURL, constructThumbnailURL, constructDate, goToGallery, getErrorFromURL, getSeasonAndEpisodeFromURL, getTimestampFromURL, getParamFromURL, getParamsFromURL }

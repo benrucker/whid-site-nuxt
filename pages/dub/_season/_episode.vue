@@ -37,6 +37,7 @@
 <script>
 export default {
   layout: 'dub-layout',
+  // eslint-disable-next-line require-await, @typescript-eslint/no-unused-vars
   async asyncData ({ params, redirect }) {
     const season = params.season
     const episode = params.episode
@@ -83,7 +84,7 @@ export default {
     return {
       title: 'Watching ' + this.title,
       meta: [
-        ['theme-color', get_major_color()],
+        ['theme-color', getMajorColor()],
         ['og:site_name', 'whid.live'],
         ['og:url', this.videoURL],
         ['og:title', this.title],
@@ -107,6 +108,7 @@ export default {
     }
   },
   watch: {
+    // eslint-disable-next-line require-await
     async loaded () {
       document.title = 'Watching ' + this.title
       const setInitialState = () => {
@@ -122,6 +124,7 @@ export default {
       const interval = () =>
         setTimeout(() => {
           if (setInitialState()) {
+            // pass
           } else {
             setTimeout(interval, 50)
           }
@@ -148,26 +151,6 @@ class VideoIDError extends Error {
     super(message)
     this.name = 'VideoIDError'
   }
-}
-
-function getTimestampFromURL () {
-  const time = getParamFromURL('t')
-  if (time != null && time < 0) {
-    throw new VideoIDError('Invalid timestamp')
-  }
-  return time
-}
-
-function getParamFromURL (key) {
-  const params = getParamsFromURL()
-  const param = params.get(key)
-  return param
-}
-
-function getParamsFromURL () {
-  const uri = window.location.search.substring(1)
-  const params = new URLSearchParams(uri)
-  return params
 }
 
 function getVideoDataFromID (catalog, season, id) {
@@ -206,7 +189,7 @@ function convertTimestampToSeconds (timestamp) {
   return min * 60 + sec
 }
 
-function get_major_color () {
+function getMajorColor () {
   const cols = ['#ffd294', '#a3eff7', '#fcaecf', '#bda6ff']
   return cols[getRandomInt(cols.length)]
 }
