@@ -1,15 +1,16 @@
 <template>
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark py-2">
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark py-2">
     <div class="container">
       <NuxtLink class="navbar-brand" to="/">
         <img src="/logo-l.svg" height="40" class="me-2">
         what have i done
       </NuxtLink>
+
       <div
         id="navbarSupportedContent"
-        class="collapse navbar-collapse d-flex justify-content-sm-end"
+        class="collapse navbar-collapse d-flex justify-content-md-end"
       >
-        <ul class="navbar-nav mb-2 mb-sm-0">
+        <ul class="navbar-nav my-1">
           <li class="nav-item">
             <NuxtLink
               to="/"
