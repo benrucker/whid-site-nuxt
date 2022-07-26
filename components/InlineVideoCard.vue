@@ -34,12 +34,30 @@
 <script>
 export default {
   props: {
-    videoLink: String,
-    videoPlayerLink: String,
-    thumbnailLink: String,
-    title: String,
-    releaseDate: String,
-    description: String,
-  },
-};
+    videoLink: {
+      type: String,
+      default: ''
+    },
+    videoPlayerLink: {
+      type: String,
+      default: ''
+    },
+    thumbnailLink: {
+      type: String,
+      default: ''
+    },
+    title: {
+      type: String,
+      default: ''
+    },
+    releaseDate: {
+      type: String,
+      default: ''
+    },
+    description: {
+      type: String,
+      default: ''
+    }
+  }
+}
 </script>

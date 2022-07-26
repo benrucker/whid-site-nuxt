@@ -19,10 +19,22 @@
 <script>
 export default {
   props: {
-    videoLink: String,
-    thumbnailLink: String,
-    title: String,
-    releaseDate: String
+    videoLink: {
+      type: String,
+      default: ''
+    },
+    thumbnailLink: {
+      type: String,
+      default: ''
+    },
+    title: {
+      type: String,
+      default: ''
+    },
+    releaseDate: {
+      type: String,
+      default: ''
+    }
   }
 }
 </script>
