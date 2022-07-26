@@ -11,8 +11,10 @@
           align-items-center
         "
       >
-        <h1 class="fw-bolder px-2">Hi!</h1>
-        <img src="/miniwyatt.png" alt="hi!" class="px-2" />
+        <h1 class="fw-bolder px-2">
+          Hi!
+        </h1>
+        <img src="/miniwyatt.png" alt="hi!" class="px-2">
       </div>
 
       <div class="welcome mt-5 mb-2 text-center">
@@ -22,7 +24,9 @@
       <div class="description mt-5 text-center fs-5">
         We are a group of friends who make stupid videos.
       </div>
-      <div class="description mt-5 text-end fs-5">...like, really stupid.</div>
+      <div class="description mt-5 text-end fs-5">
+        ...like, really stupid.
+      </div>
     </div>
 
     <div class="featured mt-5 container">
@@ -35,6 +39,10 @@
         description="Click here to see them all!"
       />
     </div>
+
+    <br>
+    <br>
+    <br>
   </div>
 </template>
 
