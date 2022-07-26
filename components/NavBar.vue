@@ -43,7 +43,8 @@
               class="btn btn-text-primary me-2"
               type="button"
             >
-              what have you done
+              <span id="short-whyd">whyd</span>
+              <span id="long-whyd">what have you done</span>
             </NuxtLink>
           </li>
           <li class="nav-item">
@@ -60,3 +61,13 @@
     </div>
   </nav>
 </template>
+
+<style scoped>
+#short-whyd { display: none; }
+
+@media (max-width: 992px) {
+    #short-whyd { display: inline-block; }
+    #long-whyd { display: none; }
+}
+
+</style>
