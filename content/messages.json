@@ -1,0 +1,81 @@
+{
+    "messages": [
+        {
+            "content": "here's a cool graph of the number of times you said 'penis'",
+            "side": "left",
+            "author": "JermaBot"
+        },
+        {
+            "content": "",
+            "side": "left",
+            "author": "JermaBot",
+            "function": "testFunctionText"
+        },
+        {
+            "content": "",
+            "side": "left",
+            "author": "JermaBot",
+            "function": "testFunctionImage"
+        },
+        {
+            "content": "oh hey wusup",
+            "side": "right",
+            "author": "Shigure"
+        },
+        {
+            "content": "nm just flying to DC rq",
+            "side": "left",
+            "author": "JermaBot"
+        },
+        {
+            "content": "that's cool",
+            "side": "right",
+            "author": "Shigure"
+        },
+        {
+            "content": "yeah",
+            "side": "left",
+            "author": "JermaBot"
+        },
+        {
+            "content": "hey, uh, do you happen to know who I am?",
+            "side": "right",
+            "author": "Shigure"
+        },
+        {
+            "content": "...no?",
+            "side": "left",
+            "author": "JermaBot"
+        },
+        {
+            "content": "me neither",
+            "side": "right",
+            "author": "Shigure"
+        },
+        {
+            "content": "shit",
+            "side": "left",
+            "author": "JermaBot"
+        },
+        {
+            "content": "what?",
+            "side": "right",
+            "author": "Shigure"
+        },
+        {
+            "content": "same here",
+            "side": "left",
+            "author": "JermaBot"
+        },
+        {
+            "content": "oh shit",
+            "side": "right",
+            "author": "Shigure"
+        },
+        {
+            "content": "oh shit",
+            "side": "left",
+            "author": "JermaBot"
+        }
+    ]
+}
