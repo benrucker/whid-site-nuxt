@@ -6,7 +6,7 @@
       </span>
       <div class="content">
         <span>
-          {{ msg.content }}
+          <component :is="'Whyd2022' + (msg.type || 'Text')" :content="msg.content" />
         </span>
       </div>
     </div>
@@ -50,8 +50,7 @@ export default {
         const messageInfo = this.messages.shift()
 
         if (messageInfo.function) {
-          [messageInfo.content, messageInfo.attachment] =
-            this.runFunc(messageInfo.function)
+          messageInfo.content = this.runFunc(messageInfo.function)
         }
 
         this.displayed.push(messageInfo)
@@ -65,12 +64,19 @@ export default {
       }
     },
     runFunc (name) {
-      switch (name) {
-        case 'testFunctionText':
-          return ['text!', null]
-        case 'testFunctionImage':
-          return ['this will be an image eventually', null]
+      const func = this[name]
+      if (typeof func !== 'function') {
+        return `Function ${name} not found`
       }
+      return func()
+    },
+    testFunctionText () {
+      return 'text!'
+    },
+    testFunctionImage () {
+      return (
+        '<img src="/whyd/2021/construction.png" class="w-100 bg-white">'
+      )
     }
   }
 }
