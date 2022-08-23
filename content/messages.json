@@ -1,6 +1,7 @@
 {
     "messages": [
         {
+            "type": "Text",
             "content": "here's a cool graph of the number of times you said 'penis'",
             "side": "left",
             "author": "JermaBot"
@@ -12,10 +13,10 @@
             "function": "testFunctionText"
         },
         {
+            "type": "TestGraph",
             "content": "",
             "side": "left",
-            "author": "JermaBot",
-            "function": "testFunctionImage"
+            "author": "JermaBot"
         },
         {
             "content": "oh hey wusup",
