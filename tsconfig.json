@@ -8,6 +8,7 @@
       "ESNext.AsyncIterable",
       "DOM"
     ],
+    "jsx": "preserve",
     "esModuleInterop": true,
     "allowJs": true,
     "sourceMap": true,
@@ -28,6 +29,9 @@
       "@nuxt/types",
       "@types/node"
     ]
+  },
+  "vueCompilerOptions": {
+    "target": 2,
   },
   "exclude": [
     "node_modules",
