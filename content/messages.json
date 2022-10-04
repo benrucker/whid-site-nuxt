@@ -2,7 +2,7 @@
     "messages": [
         {
             "type": "Text",
-            "content": "here's a cool graph of the number of times you said 'penis'",
+            "content": "here's a cool graph of the number of messages we sent each year",
             "side": "left",
             "author": "JermaBot"
         },
@@ -13,7 +13,7 @@
             "function": "testFunctionText"
         },
         {
-            "type": "TestGraph",
+            "type": "MessagesPerYearBarChart",
             "content": "",
             "side": "left",
             "author": "JermaBot"
