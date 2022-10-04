@@ -5,9 +5,7 @@
         {{ msg.author }}
       </span>
       <div class="content">
-        <span>
-          <component :is="'Whyd2022' + (msg.type || 'Text')" :content="msg.content" />
-        </span>
+        <component :is="'Whyd2022' + (msg.type || 'Text')" :content="msg.content" />
       </div>
     </div>
     <div v-if="showTyping" :class="'message typing ' + messages[0].side + ' text-muted'">
