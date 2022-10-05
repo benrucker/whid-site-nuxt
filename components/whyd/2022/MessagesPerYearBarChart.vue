@@ -12,14 +12,14 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       years: [],
       msgCounts: []
     }
   },
-  async fetch () {
-    const yearCounts = await fetch('2021/data/msgPerYear.json').then(res =>
+  async fetch() {
+    const yearCounts = await fetch('2021/data/msgPerYear.json').then((res) =>
       res.json()
     )
     this.years = ['2016', '2017', '2018', '2019', '2020', '2021']

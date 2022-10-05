@@ -1,6 +1,8 @@
 <template>
   <span>
-    <span v-for="data in parsedContent" :key="data.text" :class="data.style">{{ data.text }}</span>
+    <span v-for="data in parsedContent" :key="data.text" :class="data.style">{{
+      data.text
+    }}</span>
   </span>
 </template>
 
@@ -12,13 +14,13 @@ export default {
       default: ''
     }
   },
-  data () {
+  data() {
     return {
       parsedContent: []
     }
   },
-  mounted () {
-    this.parsedContent = this.content.split(/(\{+.+?}+)/g).map(v => {
+  mounted() {
+    this.parsedContent = this.content.split(/(\{+.+?}+)/g).map((v) => {
       if (v.startsWith('{{') && v.endsWith('}}')) {
         return parseValue(v)
       } else if (v.startsWith('{') && v.endsWith('}')) {
@@ -27,7 +29,7 @@ export default {
         return { text: v }
       }
     })
-  },
+  }
 }
 
 function parseStyling(data) {
@@ -39,7 +41,7 @@ function parseStyling(data) {
 function parseValue(valueName) {
   // TODO - parse value
   const noCurlies = valueName.slice(2, -2)
-  return { text: `$${noCurlies}`, style: "number" }
+  return { text: `$${noCurlies}`, style: 'number' }
 }
 </script>
 
