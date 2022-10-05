@@ -1,8 +1,33 @@
 {
     "messages": [
         {
-            "type": "Text",
-            "content": "here's a cool graph of the number of messages we sent each year",
+            "content": "Hey! Welcome to {**_what have you done 2022_**}!",
+            "side": "left",
+            "author": "JermaBot"
+        },
+        {
+            "content": "Another fulfilling year of spending time with your friends, huh?",
+            "side": "left",
+            "author": "JermaBot"
+        },
+        {
+            "content": "The other bots and I have certainly witnessed some incredible things!",
+            "side": "left",
+            "author": "JermaBot"
+        },
+        {
+            "content": "Why don't we take a look at some of those incredible things you've done?",
+            "side": "left",
+            "author": "JermaBot"
+        },
+        {
+            "content": "Let's get down to the brass tacks here: you all {_really_} love sending messages.",
+            "side": "left",
+            "author": "JermaBot"
+        },
+        {
+            "type": "MessagesPerYearBarChart",
+            "content": "",
             "side": "left",
             "author": "JermaBot"
         },
@@ -13,70 +38,74 @@
             "function": "testFunctionText"
         },
         {
-            "type": "MessagesPerYearBarChart",
-            "content": "",
+            "content": "I count a grand total of {{messageCountThisYear}} in 2022 alone! Wowza! Compliments the bar chart quite well if I do say so myself.",
             "side": "left",
             "author": "JermaBot"
         },
         {
-            "content": "oh hey wusup",
+            "content": "Looks like YOU also had a piece of that message pie! A whopping {{userWordCountThisYear}} words making up a total of {{userMessageCountThisYear}} messages!",
+            "side": "left",
+            "author": "JermaBot"
+        },
+        {
+            "content": "Adding this to the message-cakemix, you contributed about {{userMessagePercentageThisYear}}% of all messages sent this year!",
+            "side": "left",
+            "author": "JermaBot"
+        },
+        {
+            "content": "Speaking of cake... happy birthday!!",
+            "side": "left",
+            "author": "JermaBot"
+        },
+        {
+            "content": "...",
+            "side": "left",
+            "author": "JermaBot"
+        },
+        {
+            "content": "I hope your birthday was all you'd wished for this year.",
+            "side": "left",
+            "author": "JermaBot"
+        },
+        {
+            "content": "Specifically, you made note of wishing for {{userWish}}. Traditionally, you're not supposed to tell anybody what you wish for, but here's to hoping it came true!",
+            "side": "left",
+            "author": "JermaBot"
+        },
+        {
+            "content": "How about I quickly roll up some leaderboard stats for you? Check these out:",
+            "side": "left",
+            "author": "JermaBot"
+        },
+        {
+            "type": "MessagesLeaderboard",
+            "side": "left",
+            "author": "JermaBot"
+        },
+        {
+            "type": "EmojiLeaderboard",
+            "side": "left",
+            "author": "JermaBot"
+        },
+        {
+            "content": "Well, it was pretty straightforward this year, huh?",
+            "side": "left",
+            "author": "JermaBot"
+        },
+        {
+            "content": "Not quite the rollercoaster of polish from last year, but I'm proud of what I managed to scrape together!",
+            "side": "left",
+            "author": "JermaBot"
+        },
+        {
+            "content": "That's it for",
+            "side": "left",
+            "author": "JermaBot"
+        },
+        {
+            "content": "Did I hear {_roles_}??",
             "side": "right",
             "author": "Shigure"
-        },
-        {
-            "content": "nm just flying to DC rq",
-            "side": "left",
-            "author": "JermaBot"
-        },
-        {
-            "content": "that's cool",
-            "side": "right",
-            "author": "Shigure"
-        },
-        {
-            "content": "yeah",
-            "side": "left",
-            "author": "JermaBot"
-        },
-        {
-            "content": "hey, uh, do you happen to know who I am?",
-            "side": "right",
-            "author": "Shigure"
-        },
-        {
-            "content": "...no?",
-            "side": "left",
-            "author": "JermaBot"
-        },
-        {
-            "content": "me neither",
-            "side": "right",
-            "author": "Shigure"
-        },
-        {
-            "content": "shit",
-            "side": "left",
-            "author": "JermaBot"
-        },
-        {
-            "content": "what?",
-            "side": "right",
-            "author": "Shigure"
-        },
-        {
-            "content": "same here",
-            "side": "left",
-            "author": "JermaBot"
-        },
-        {
-            "content": "oh shit",
-            "side": "right",
-            "author": "Shigure"
-        },
-        {
-            "content": "oh shit",
-            "side": "left",
-            "author": "JermaBot"
         }
     ]
 }
