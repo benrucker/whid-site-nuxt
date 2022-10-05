@@ -101,9 +101,6 @@ export default {
 
 <style>
 #conversation {
-    /* border-width: 2px;
-    border-color: red; */
-    /* border-style: solid; */
     min-height: 2em;
 }
 
@@ -118,6 +115,7 @@ export default {
 
 .message.right {
     justify-content: end;
+    flex-direction: row-reverse;
 }
 
 .message.left {
@@ -132,7 +130,7 @@ export default {
 }
 
 .message .content {
-    position: absolute;
+    position: relative;
     top: inherit;
     left: inherit;
     padding-left: 0.25em;
@@ -140,8 +138,8 @@ export default {
     padding-top: 0.25em;
     padding-bottom: 0.25em;
 
-    margin-left: 4em;
-    margin-right: 4em;
+    margin-left: 2em;
+    margin-right: 2em;
 }
 
 .message .content span {
