@@ -3,16 +3,16 @@
 </template>
 
 <script>
-import { use } from 'echarts/core'
-import { CanvasRenderer } from 'echarts/renderers'
 import { BarChart } from 'echarts/charts'
 import {
-  TitleComponent,
-  TooltipComponent,
+  GridComponent,
   LegendComponent,
+  TitleComponent,
   ToolboxComponent,
-  GridComponent
+  TooltipComponent
 } from 'echarts/components'
+import { use } from 'echarts/core'
+import { CanvasRenderer } from 'echarts/renderers'
 import VChart, { THEME_KEY } from 'vue-echarts'
 
 use([
@@ -47,14 +47,14 @@ export default {
     color: { type: String, default: '' },
     textColor: { type: String, default: '' }
   },
-  data () {
+  data() {
     return {
       option: {},
       lines: [],
       labels: []
     }
   },
-  mounted () {
+  mounted() {
     window.onresize = () => {
       this.$refs.chart.resize()
     }
@@ -80,7 +80,7 @@ export default {
             type: 'category',
             data: this.xAxis,
             axisTick: {
-            // alignWithLabel: true,
+              // alignWithLabel: true,
             }
           }
         ],
@@ -99,10 +99,10 @@ export default {
             itemStyle: {
               borderRadius: [5, 5, 0, 0]
             },
-            animationDelay (idx) {
+            animationDelay(idx) {
               return idx * 150
             },
-            animationDuration () {
+            animationDuration() {
               return 400
             }
           }
@@ -118,7 +118,6 @@ export default {
     }, 500)
   }
 }
-
 </script>
 
 <style scoped>
