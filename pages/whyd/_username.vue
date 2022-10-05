@@ -5,10 +5,16 @@
         {{ msg.author }}
       </span>
       <div class="content">
-        <component :is="'Whyd2022' + (msg.type || 'Text')" :content="msg.content" />
+        <component
+          :is="'Whyd2022' + (msg.type || 'Text')"
+          :content="msg.content"
+        />
       </div>
     </div>
-    <div v-if="showTyping" :class="'message typing ' + messages[0].side + ' text-muted'">
+    <div
+      v-if="showTyping"
+      :class="'message typing ' + messages[0].side + ' text-muted'"
+    >
       <div class="content">
         <div class="typingDots">
           <div class="t1" />
@@ -20,18 +26,18 @@
     <div v-if="showHint" class="hint text-center text-muted">
       Click to continue!
     </div>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
   </div>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       messages: [],
       displayed: [],
@@ -39,14 +45,15 @@ export default {
       showTyping: true
     }
   },
-  async fetch () {
+  async fetch() {
     this.messages = (await this.$nuxt.$content('messages').fetch()).messages
-    this.messages.forEach((v, i) => { v.id = i })
+    this.messages.forEach((v, i) => {
+      v.id = i
+    })
   },
-  async mounted () {
-  },
+  async mounted() {},
   methods: {
-    advance () {
+    advance() {
       this.showHint = false
       this.showTyping = false
 
@@ -63,24 +70,26 @@ export default {
       }
 
       if (this.messages.length > 0) {
-        setTimeout(() => { this.showHint = true }, 100)
-        setTimeout(() => { this.showTyping = true }, 100)
+        setTimeout(() => {
+          this.showHint = true
+        }, 100)
+        setTimeout(() => {
+          this.showTyping = true
+        }, 100)
       }
     },
-    runFunc (name) {
+    runFunc(name) {
       const func = this[name]
       if (typeof func !== 'function') {
         return `Function ${name} not found`
       }
       return func()
     },
-    testFunctionText () {
+    testFunctionText() {
       return 'text!'
     },
-    testFunctionImage () {
-      return (
-        '<img src="/whyd/2021/construction.png" class="w-100 bg-white">'
-      )
+    testFunctionImage() {
+      return '<img src="/whyd/2021/construction.png" class="w-100 bg-white">'
     }
   }
 }
@@ -88,45 +97,51 @@ export default {
 
 <style>
 #conversation {
-    min-height: 2em;
+  min-height: 2em;
 }
 
 .message {
-    width: 100%;
-    display: flex;
-    margin-top: 1em;
-    margin-bottom: 1em;
-    min-height: 2em;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  min-height: 2em;
+  align-items: center;
 }
 
 .message.right {
-    justify-content: end;
-    flex-direction: row-reverse;
+  justify-content: end;
+  flex-direction: row-reverse;
 }
 
 .message.left {
-    justify-content: start;
+  justify-content: start;
 }
 
 .message .author {
-  background: rgb(2,0,36);
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(1,64,102,1) 48%, rgba(0,212,255,1) 100%);  clip-path: circle(20px);
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(1, 64, 102, 1) 48%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  clip-path: circle(20px);
   width: 40px;
   height: 40px;
 }
 
 .message .content {
-    position: relative;
-    top: inherit;
-    left: inherit;
-    padding-left: 0.25em;
-    padding-right: 0.25em;
-    padding-top: 0.25em;
-    padding-bottom: 0.25em;
+  position: relative;
+  top: inherit;
+  left: inherit;
+  padding-left: 0.25em;
+  padding-right: 0.25em;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
 
-    margin-left: 2em;
-    margin-right: 2em;
+  margin-left: 2em;
+  margin-right: 2em;
 }
 
 .message .content span {
@@ -135,15 +150,15 @@ export default {
 }
 
 .message .content::after {
-    position: absolute;
-    z-index: -1;
-    width: calc(100% + 1em);
-    height: 100%;
-    bottom: 0;
+  position: absolute;
+  z-index: -1;
+  width: calc(100% + 1em);
+  height: 100%;
+  bottom: 0;
 
-    animation: expand 0.2s ease-out 0s 1 both;
+  animation: expand 0.2s ease-out 0s 1 both;
 
-    content: "";
+  content: '';
 }
 
 @keyframes expand {
@@ -160,27 +175,27 @@ export default {
 }
 
 .message.right .content::after {
-    background-color: rgb(37, 145, 181);
-    transform: skewX(9deg);
+  background-color: rgb(37, 145, 181);
+  transform: skewX(9deg);
 
-    right: -0.5em;
+  right: -0.5em;
 
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 1em;
-    border-top-right-radius: 1em;
-    border-top-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 1em;
+  border-top-right-radius: 1em;
+  border-top-left-radius: 0;
 }
 
 .message.left .content::after {
-    background-color: gray;
-    transform: skewX(-9deg);
+  background-color: gray;
+  transform: skewX(-9deg);
 
-    left: -0.5em;
+  left: -0.5em;
 
-    border-bottom-right-radius: 1em;
-    border-bottom-left-radius: 0;
-    border-top-right-radius: 0;
-    border-top-left-radius: 1em;
+  border-bottom-right-radius: 1em;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top-left-radius: 1em;
 }
 
 .typing .content::after {
@@ -188,18 +203,18 @@ export default {
 }
 
 .typing .content .typingDots {
-    height: 1em;
-    margin-top: .1em;
-    margin-bottom: .1em;
+  height: 1em;
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
 
-    animation-name: fade;
-    animation-delay: 1s;
-    animation-fill-mode: both;
-    animation-timing-function: ease-in-out;
-    animation-duration: 0.5s;
+  animation-name: fade;
+  animation-delay: 1s;
+  animation-fill-mode: both;
+  animation-timing-function: ease-in-out;
+  animation-duration: 0.5s;
 
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
 }
 
 .typing .t1 {
@@ -247,11 +262,11 @@ export default {
 }
 
 .hint {
-    animation-name: fade;
-    animation-delay: 3s;
-    animation-fill-mode: both;
-    animation-timing-function: ease-in-out;
-    animation-duration: 3s;
+  animation-name: fade;
+  animation-delay: 3s;
+  animation-fill-mode: both;
+  animation-timing-function: ease-in-out;
+  animation-duration: 3s;
 }
 
 @keyframes fade {
