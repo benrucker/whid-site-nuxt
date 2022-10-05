@@ -1,7 +1,7 @@
 {
     "messages": [
         {
-            "content": "Hey! Welcome to {**_what have you done 2022_**}!",
+            "content": "Hey! Welcome to {what have you done 2022 | bold italic}!",
             "side": "left",
             "author": "JermaBot"
         },
@@ -21,7 +21,7 @@
             "author": "JermaBot"
         },
         {
-            "content": "Let's get down to the brass tacks here: you all {_really_} love sending messages.",
+            "content": "Let's get down to the brass tacks here: you all {really | italic} love sending messages.",
             "side": "left",
             "author": "JermaBot"
         },
@@ -103,7 +103,7 @@
             "author": "JermaBot"
         },
         {
-            "content": "Did I hear {_roles_}??",
+            "content": "Did I hear {roles | italic}??",
             "side": "right",
             "author": "Shigure"
         }
