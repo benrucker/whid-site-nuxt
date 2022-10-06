@@ -142,6 +142,8 @@ export default {
 
   margin-left: 2em;
   margin-right: 2em;
+
+  max-width: 80%;
 }
 
 .message .content span {
