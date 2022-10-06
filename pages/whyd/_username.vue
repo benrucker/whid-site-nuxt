@@ -1,9 +1,19 @@
 <template>
   <div id="conversation" class="container" @click="advance">
-    <div v-for="msg in displayed" :key="msg.id" :class="msg.side + ' message'">
-      <span class="author">
+    <div
+      v-for="(msg, index) in displayed"
+      :key="msg.id"
+      :class="msg.side + ' message '"
+    >
+      <span
+        v-if="
+          !displayed[index + 1] || displayed[index + 1].author !== msg.author
+        "
+        class="author"
+      >
         {{ msg.author }}
       </span>
+      <span v-else class="authorPlaceholder" />
       <div class="content">
         <component
           :is="'Whyd2022' + (msg.type || 'Text')"
