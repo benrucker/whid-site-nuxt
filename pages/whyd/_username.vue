@@ -87,9 +87,6 @@ export default {
     },
     testFunctionText() {
       return 'text!'
-    },
-    testFunctionImage() {
-      return '<img src="/whyd/2021/construction.png" class="w-100 bg-white">'
     }
   }
 }
