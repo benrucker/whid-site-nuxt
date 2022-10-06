@@ -1,17 +1,17 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "what have i done",
+    title: 'what have i done',
     htmlAttrs: {
-      lang: "en",
+      lang: 'en'
     },
     meta: [
-      { charset: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { name: "format-detection", content: "telephone=no" },
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'format-detection', content: 'telephone=no' }
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
-    script: [],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    script: []
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -26,23 +26,23 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/typescript
-    "@nuxt/typescript-build",
-    "@nuxtjs/composition-api/module",
+    '@nuxt/typescript-build',
+    '@nuxtjs/composition-api/module'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/bootstrap
     // 'bootstrap-vue/nuxt',
-    "@nuxt/content",
+    '@nuxt/content'
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: [/echarts/, /zrender/],
+    transpile: [/echarts/, /zrender/]
   },
 
   router: {
     // trailingSlash: true,
-  },
-};
+  }
+}
