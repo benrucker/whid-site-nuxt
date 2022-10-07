@@ -5,15 +5,15 @@
       :key="msg.id"
       :class="msg.side + ' message '"
     >
-      <span
+      <img
         v-if="
           !displayed[index + 1] || displayed[index + 1].author !== msg.author
         "
+        :key="index"
+        src="/whyd/2021/emojis/cheeto.png"
         class="author"
-      >
-        {{ msg.author }}
-      </span>
-      <span v-else class="authorPlaceholder" />
+      />
+      <span class="authorPlaceholder" />
       <div class="content">
         <component
           :is="'Whyd2022' + (msg.type || 'Text')"
@@ -126,16 +126,14 @@ export default {
 }
 
 .message .author {
-  background: rgb(2, 0, 36);
-  background: linear-gradient(
-    90deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(1, 64, 102, 1) 48%,
-    rgba(0, 212, 255, 1) 100%
-  );
+  position: absolute;
   clip-path: circle(20px);
   width: 40px;
   height: 40px;
+}
+
+.message .authorPlaceholder {
+  width: 40px;
 }
 
 .message .content {
@@ -176,6 +174,7 @@ export default {
     width: 50%;
     height: 50%;
   }
+
   100% {
     opacity: 1;
     width: (100% + 1em);
@@ -262,9 +261,11 @@ export default {
   0% {
     background-color: rgb(170, 170, 170);
   }
+
   50% {
     background-color: rgb(255, 255, 255);
   }
+
   100% {
     background-color: rgb(170, 170, 170);
   }
@@ -282,6 +283,7 @@ export default {
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
