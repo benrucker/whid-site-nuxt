@@ -1,8 +1,11 @@
 <template>
   <span>
-    <span v-for="data in parsedContent" :key="data.text" :class="data.style">{{
-      data.text
-    }}</span>
+    <span
+      v-for="token in parsedContent"
+      :key="token.text"
+      :class="token.style"
+      >{{ token.text }}</span
+    >
   </span>
 </template>
 
@@ -12,21 +15,29 @@ export default {
     content: {
       type: String,
       default: ''
+    },
+    data: {
+      type: Object,
+      default: () => ({})
     }
   },
   data() {
     return {
-      parsedContent: []
+      parsedContent: [],
+      values: {
+        messageCountThisYear: () => this.data.messageCountThisYear,
+        userWordCountThisYear: () => this.data.userWordCountThisYear
+      }
     }
   },
   mounted() {
-    this.parsedContent = this.content.split(/(\{+.+?}+)/g).map((v) => {
-      if (v.startsWith('{{') && v.endsWith('}}')) {
-        return parseValue(v)
-      } else if (v.startsWith('{') && v.endsWith('}')) {
-        return parseStyling(v)
+    this.parsedContent = this.content.split(/(\{+.+?}+)/g).map((token) => {
+      if (token.startsWith('{{') && token.endsWith('}}')) {
+        return parseValue(token, this.values)
+      } else if (token.startsWith('{') && token.endsWith('}')) {
+        return parseStyling(token)
       } else {
-        return { text: v }
+        return { text: token }
       }
     })
   }
@@ -38,10 +49,14 @@ function parseStyling(data) {
   return { text, style: styles }
 }
 
-function parseValue(valueName) {
-  // TODO - parse value
-  const noCurlies = valueName.slice(2, -2)
-  return { text: `$${noCurlies}`, style: 'number' }
+function parseValue(token, values) {
+  const value = token.slice(2, -2)
+  const style = 'number'
+  if (value in values) {
+    return { text: values[value](), style }
+  } else {
+    return { text: value, style }
+  }
 }
 </script>
 

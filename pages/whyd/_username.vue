@@ -18,6 +18,7 @@
         <component
           :is="'Whyd2022' + (msg.type || 'Text')"
           :content="msg.content"
+          :data="{ messageCountThisYear: 50, userWordCountThisYear: 20 }"
         />
       </div>
     </div>
