@@ -3,7 +3,8 @@
     "vue.volar",
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
-    "mhutchie.git-graph"
+    "mhutchie.git-graph",
+    "firefox-devtools.vscode-firefox-debug"
   ],
   "unwantedRecommendations": ["octref.vetur"]
 }
