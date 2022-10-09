@@ -3,17 +3,18 @@
     <div
       v-for="(msg, index) in displayed"
       :key="msg.id"
-      :class="msg.side + ' message '"
+      :class="msg.side + ' message'"
     >
-      <img
-        v-if="
-          !displayed[index + 1] || displayed[index + 1].author !== msg.author
-        "
-        :key="index"
-        src="/whyd/2021/emojis/cheeto.png"
-        class="author"
-      />
-      <span class="authorPlaceholder" />
+      <span class="authorWrapper">
+        <img
+          v-if="
+            !displayed[index + 1] || displayed[index + 1].author !== msg.author
+          "
+          :key="index"
+          src="/whyd/2021/emojis/cheeto.png"
+          class="author"
+        />
+      </span>
       <div class="content">
         <component
           :is="'Whyd2022' + (msg.type || 'Text')"
@@ -126,15 +127,17 @@ export default {
   justify-content: start;
 }
 
+.message .authorWrapper {
+  position: relative;
+  width: 40px;
+}
+
 .message .author {
   position: absolute;
   clip-path: circle(20px);
   width: 40px;
   height: 40px;
-}
-
-.message .authorPlaceholder {
-  width: 40px;
+  top: -20px;
 }
 
 .message .content {
