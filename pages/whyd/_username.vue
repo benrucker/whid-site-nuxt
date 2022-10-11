@@ -113,6 +113,7 @@ export default {
 <style>
 #conversation {
   min-height: 2em;
+  overflow-y: hidden;
 }
 
 .message {
@@ -144,6 +145,19 @@ export default {
   width: 40px;
   height: 40px;
   top: -20px;
+  animation: slide-in 0.25s ease-in-out both;
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateY(
+      -100%
+    ); /* find out how to make this 100% of the parent element's (message's) height */
+  }
+
+  100% {
+    transform: translateY(0);
+  }
 }
 
 .message .content {
