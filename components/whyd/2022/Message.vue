@@ -1,11 +1,11 @@
 <template>
   <div :class="msg.side + ' message' + (isLastInGroup ? ' message-tail' : ' ')">
-    <span class="authorWrapper">
+    <span class="avatar-wrapper">
       <img
         v-if="isLastInGroup"
         :key="index"
         src="/whyd/2021/emojis/cheeto.png"
-        class="author"
+        class="avatar"
       />
     </span>
     <div class="content">
@@ -81,12 +81,12 @@ export default {
   --avatar-slide-distance: 0px;
 }
 
-.message .authorWrapper {
+.message .avatar-wrapper {
   position: relative;
   width: 40px;
 }
 
-.message .author {
+.message .avatar {
   position: absolute;
   clip-path: circle(20px);
   width: 40px;
