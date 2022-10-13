@@ -7,6 +7,9 @@
       :is-last-in-group="
         !displayed[index + 1] || displayed[index + 1].author !== msg.author
       "
+      :is-first-in-group="
+        !displayed[index - 1] || displayed[index - 1].author !== msg.author
+      "
       :msg="msg"
       :index="index"
     />
