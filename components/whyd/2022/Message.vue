@@ -1,11 +1,11 @@
 <template>
   <div :class="msg.side + ' message' + (isLastInGroup ? ' message-tail' : ' ')">
-    <span class="authorWrapper">
+    <span class="avatar-wrapper">
       <img
         v-if="isLastInGroup"
         :key="index"
         src="/whyd/2021/emojis/cheeto.png"
-        class="author"
+        class="avatar"
       />
     </span>
     <div class="content">
@@ -21,7 +21,7 @@
 <script>
 export default {
   props: {
-    msg: {
+    data: {
       type: Object,
       required: true
     },
@@ -29,9 +29,12 @@ export default {
       type: Number,
       required: true
     },
-
-    data: {
+    msg: {
       type: Object,
+      required: true
+    },
+    isFirstInGroup: {
+      type: Boolean,
       required: true
     },
     isLastInGroup: {
@@ -40,19 +43,35 @@ export default {
     }
   },
   mounted() {
-    this.$nextTick(() => {
-      const prevMessage = this.$el.previousElementSibling
+    if (this.isFirstInGroup) {
+      this.resetInterpolation()
+      this.fadeAvatar()
+    } else {
+      this.interpolateAvatar()
+    }
+  },
+  methods: {
+    interpolateAvatar() {
+      this.$nextTick(() => {
+        const prevMessage = this.$el.previousElementSibling
 
-      if (prevMessage) {
-        const prevHeight = prevMessage.offsetHeight / 2
-        const thisHeight = this.$el.offsetHeight / 2
+        if (prevMessage) {
+          const prevHeight = prevMessage.offsetHeight / 2
+          const thisHeight = this.$el.offsetHeight / 2
 
-        document.documentElement.style.setProperty(
-          '--avatar-slide-distance',
-          `-${prevHeight + thisHeight + 16}px`
-        )
-      }
-    })
+          document.documentElement.style.setProperty(
+            '--avatar-slide-distance',
+            `-${prevHeight + thisHeight + 16}px`
+          )
+        }
+      })
+    },
+    fadeAvatar() {
+      this.$el.classList.add('fade-in')
+    },
+    resetInterpolation() {
+      document.documentElement.style.setProperty('--avatar-slide-distance', '0')
+    }
   }
 }
 </script>
@@ -62,18 +81,31 @@ export default {
   --avatar-slide-distance: 0px;
 }
 
-.message .authorWrapper {
+.message .avatar-wrapper {
   position: relative;
   width: 40px;
 }
 
-.message .author {
+.message .avatar {
   position: absolute;
   clip-path: circle(20px);
   width: 40px;
   height: 40px;
   top: -20px;
   animation: slide-in 0.5s ease-in-out both;
+}
+
+.fade-in {
+  animation: fade-in 0.5s ease-in-out both;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes slide-in {
