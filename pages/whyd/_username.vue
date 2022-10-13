@@ -95,6 +95,22 @@ export default {
           this.showTyping = true
         }, 100)
       }
+
+      const lastMessage = document
+        .getElementsByClassName('message message-tail')
+        .item(0)
+
+      if (lastMessage) {
+        const h =
+          lastMessage.offsetHeight > 32
+            ? lastMessage.offsetHeight / 2
+            : lastMessage.offsetHeight
+
+        document.documentElement.style.setProperty(
+          '--avatar-slide-distance',
+          `calc(-${h}px - 1em)`
+        )
+      }
     },
     runFunc(name) {
       const func = this[name]
@@ -111,6 +127,10 @@ export default {
 </script>
 
 <style>
+:root {
+  --avatar-slide-distance: -105%;
+}
+
 #conversation {
   min-height: 2em;
   overflow-y: hidden;
@@ -145,14 +165,13 @@ export default {
   width: 40px;
   height: 40px;
   top: -20px;
-  animation: slide-in 0.25s ease-in-out both;
+  animation: slide-in 0.5s ease-in-out both;
+  /* animation-delay: 0.25s; */
 }
 
 @keyframes slide-in {
   0% {
-    transform: translateY(
-      -100%
-    ); /* find out how to make this 100% of the parent element's (message's) height */
+    transform: translateY(var(--avatar-slide-distance));
   }
 
   100% {
