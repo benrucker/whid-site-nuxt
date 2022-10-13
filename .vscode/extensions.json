@@ -4,7 +4,8 @@
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
     "mhutchie.git-graph",
-    "firefox-devtools.vscode-firefox-debug"
+    "firefox-devtools.vscode-firefox-debug",
+    "eamodio.gitlens"
   ],
   "unwantedRecommendations": ["octref.vetur"]
 }
