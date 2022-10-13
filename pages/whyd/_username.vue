@@ -3,7 +3,13 @@
     <div
       v-for="(msg, index) in displayed"
       :key="msg.id"
-      :class="msg.side + ' message'"
+      :class="
+        msg.side +
+        ' message' +
+        (!displayed[index + 1] || displayed[index + 1].author !== msg.author
+          ? ' message-tail'
+          : ' ')
+      "
     >
       <span class="authorWrapper">
         <img
@@ -89,6 +95,22 @@ export default {
           this.showTyping = true
         }, 100)
       }
+
+      const lastMessage = document
+        .getElementsByClassName('message message-tail')
+        .item(0)
+
+      if (lastMessage) {
+        const h =
+          lastMessage.offsetHeight > 32
+            ? lastMessage.offsetHeight / 2
+            : lastMessage.offsetHeight
+
+        document.documentElement.style.setProperty(
+          '--avatar-slide-distance',
+          `calc(-${h}px - 1em)`
+        )
+      }
     },
     runFunc(name) {
       const func = this[name]
@@ -105,8 +127,13 @@ export default {
 </script>
 
 <style>
+:root {
+  --avatar-slide-distance: -105%;
+}
+
 #conversation {
   min-height: 2em;
+  overflow-y: hidden;
 }
 
 .message {
@@ -138,6 +165,18 @@ export default {
   width: 40px;
   height: 40px;
   top: -20px;
+  animation: slide-in 0.5s ease-in-out both;
+  /* animation-delay: 0.25s; */
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateY(var(--avatar-slide-distance));
+  }
+
+  100% {
+    transform: translateY(0);
+  }
 }
 
 .message .content {
@@ -164,12 +203,43 @@ export default {
   position: absolute;
   z-index: -1;
   width: calc(100% + 1em);
-  height: 100%;
   bottom: 0;
 
   animation: expand 0.2s ease-out 0s 1 both;
 
   content: '';
+}
+
+.message-tail .content::before {
+  position: absolute;
+  z-index: -1;
+  width: 2em;
+  min-height: 2em;
+  max-height: 2em;
+
+  bottom: -1.2em;
+  border: 1px solid transparent;
+
+  animation: tail-expand 0.2s ease-out 0.1s 1 both;
+
+  content: '';
+}
+
+@keyframes tail-expand {
+  0% {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    width: 2em;
+    height: 2em;
+  }
 }
 
 @keyframes expand {
@@ -201,6 +271,7 @@ export default {
 .message.left .content::after {
   background-color: gray;
   transform: skewX(-9deg);
+  transform-origin: bottom left;
 
   left: -0.5em;
 
@@ -208,6 +279,21 @@ export default {
   border-bottom-left-radius: 0;
   border-top-right-radius: 0;
   border-top-left-radius: 1em;
+}
+
+.message-tail.left .content::before {
+  left: -0.53em;
+  clip-path: polygon(0 0, 100% 0, 0 75%);
+  transform: skewX(-9deg);
+  transform-origin: left;
+  background: grey;
+}
+
+.message-tail.right .content::before {
+  right: -0.69em;
+  clip-path: polygon(0 0, 100% 0, 100% 75%);
+  transform: skewX(9deg);
+  background-color: rgb(37, 145, 181);
 }
 
 .typing .content::after {
