@@ -1,34 +1,15 @@
 <template>
   <div id="conversation" class="container" @click="advance">
-    <div
+    <Whyd2022Message
       v-for="(msg, index) in displayed"
       :key="msg.id"
-      :class="
-        msg.side +
-        ' message' +
-        (!displayed[index + 1] || displayed[index + 1].author !== msg.author
-          ? ' message-tail'
-          : ' ')
+      :data="{ messageCountThisYear: 50, userWordCountThisYear: 20 }"
+      :is-last-in-group="
+        !displayed[index + 1] || displayed[index + 1].author !== msg.author
       "
-    >
-      <span class="authorWrapper">
-        <img
-          v-if="
-            !displayed[index + 1] || displayed[index + 1].author !== msg.author
-          "
-          :key="index"
-          src="/whyd/2021/emojis/cheeto.png"
-          class="author"
-        />
-      </span>
-      <div class="content">
-        <component
-          :is="'Whyd2022' + (msg.type || 'Text')"
-          :content="msg.content"
-          :data="{ messageCountThisYear: 50, userWordCountThisYear: 20 }"
-        />
-      </div>
-    </div>
+      :msg="msg"
+      :index="index"
+    />
     <div
       v-if="showTyping"
       :class="'message typing ' + messages[0].side + ' text-muted'"
@@ -94,22 +75,6 @@ export default {
         setTimeout(() => {
           this.showTyping = true
         }, 100)
-      }
-
-      const lastMessage = document
-        .getElementsByClassName('message message-tail')
-        .item(0)
-
-      if (lastMessage) {
-        const h =
-          lastMessage.offsetHeight > 32
-            ? lastMessage.offsetHeight / 2
-            : lastMessage.offsetHeight
-
-        document.documentElement.style.setProperty(
-          '--avatar-slide-distance',
-          `calc(-${h}px - 1em)`
-        )
       }
     },
     runFunc(name) {
