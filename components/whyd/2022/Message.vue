@@ -40,21 +40,21 @@ export default {
     }
   },
   mounted() {
-    const lastMessage = document
-      .getElementsByClassName('message message-tail')
-      .item(0)
+    this.$nextTick(() => {
+      const prevMessage = this.$el.previousElementSibling
 
-    if (lastMessage) {
-      const h =
-        lastMessage.offsetHeight > 32
-          ? lastMessage.offsetHeight / 2
-          : lastMessage.offsetHeight
+      if (prevMessage) {
+        const prevHeight = prevMessage.offsetHeight / 2
+        const thisHeight = this.$el.offsetHeight / 2
 
-      document.documentElement.style.setProperty(
-        '--avatar-slide-distance',
-        `calc(-${h}px - 1em)`
-      )
-    }
+        console.log(prevHeight, thisHeight)
+
+        document.documentElement.style.setProperty(
+          '--avatar-slide-distance',
+          `-${prevHeight + thisHeight + 16}px`
+        )
+      }
+    })
   }
 }
 </script>

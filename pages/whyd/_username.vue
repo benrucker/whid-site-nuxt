@@ -93,7 +93,7 @@ export default {
 
 <style>
 :root {
-  --avatar-slide-distance: -105%;
+  --avatar-slide-distance: 0px;
 }
 
 #conversation {
@@ -104,8 +104,8 @@ export default {
 .message {
   width: 100%;
   display: flex;
-  margin-top: 1em;
-  margin-bottom: 1em;
+  margin-top: 16px;
+  margin-bottom: 16px;
   min-height: 2em;
   align-items: center;
 }
