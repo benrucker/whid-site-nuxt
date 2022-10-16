@@ -12,7 +12,7 @@
       <component
         :is="'Whyd2022' + (msg.type || 'Text')"
         :content="msg.content"
-        :data="data"
+        :stats="stats"
       />
     </div>
   </div>
@@ -21,7 +21,7 @@
 <script>
 export default {
   props: {
-    data: {
+    stats: {
       type: Object,
       required: true
     },
@@ -122,7 +122,7 @@ export default {
   position: relative;
   top: inherit;
   left: inherit;
-  padding-left: 0.25em;
+  padding-left: 0.5em;
   padding-right: 0.25em;
   padding-top: 0.25em;
   padding-bottom: 0.25em;

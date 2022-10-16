@@ -1,6 +1,5 @@
 <template>
   <Whyd2022EchartBar
-    ref="yearBarChart"
     :bg-color="'transparent'"
     :color="'#4c60f3'"
     :text-color="'#303030'"
