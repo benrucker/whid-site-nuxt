@@ -3,7 +3,19 @@
     <Whyd2022Message
       v-for="(msg, index) in displayed"
       :key="msg.id"
-      :data="{ messageCountThisYear: 50, userWordCountThisYear: 20 }"
+      :stats="{
+        server: {
+          messageCountThisYear: 50,
+          usersRankedByMessageCount: [
+            { name: 'bebenebenebeb', count: 50 },
+            { name: 'fops', count: 40 },
+            { name: 'noss', count: 30 },
+            { name: 'El Jefe', count: 20 },
+            { name: 'JermaBot', count: 10 }
+          ]
+        },
+        user: { userWordCountThisYear: 20 }
+      }"
       :is-last-in-group="
         !displayed[index + 1] || displayed[index + 1].author !== msg.author
       "
