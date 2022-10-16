@@ -62,7 +62,7 @@ export default {
       this.$refs.chart.resize()
       this.option = {
         grid: {
-          left: '3%',
+          left: '6%',
           right: '4%',
           bottom: '3%',
           top: '4%',

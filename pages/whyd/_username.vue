@@ -12,6 +12,13 @@
             { name: 'noss', count: 30 },
             { name: 'El Jefe', count: 20 },
             { name: 'JermaBot', count: 10 }
+          ],
+          mostUsedEmojis: [
+            { emoji: '👍', count: 50 },
+            { emoji: '👎', count: 40 },
+            { emoji: '🤔', count: 30 },
+            { emoji: '🤣', count: 20 },
+            { emoji: '😂', count: 10 }
           ]
         },
         user: { userWordCountThisYear: 20 }
