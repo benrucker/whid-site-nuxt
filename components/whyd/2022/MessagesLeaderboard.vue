@@ -57,7 +57,7 @@ export default {
 #messages {
   cursor: default;
   padding-left: 2.3em;
-  width: 50vw;
+  width: calc(var(--convo-width) - 150px);
   position: relative;
 }
 
@@ -98,7 +98,7 @@ export default {
 
 .chart {
   position: absolute;
-  width: 50vw;
+  width: calc(var(--convo-width) - 150px);
   height: 100%;
   padding-left: 60px;
   padding-top: 0px;
