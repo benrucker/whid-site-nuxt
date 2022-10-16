@@ -109,9 +109,89 @@
       "author": "Shigure"
     },
     {
+      "content": "...uh, no? I said {ROLLERCO- | italic}!",
+      "side": "left",
+      "author": "JermaBot",
+      "function": "next"
+    },
+    {
       "content": "I LOOOOOOOOOOVE ROLES!!",
       "side": "right",
       "author": "Shigure"
+    },
+    {
+      "content": "Did you know we have a slash command to give yourself roles?",
+      "side": "right",
+      "author": "Shigure"
+    },
+    {
+      "content": "...that's great Shigure, but I'm trying to wrap something up over he-",
+      "side": "left",
+      "author": "JermaBot",
+      "function": "next"
+    },
+    {
+      "content": "Gosh I could talk about roles all day!",
+      "side": "right",
+      "author": "Shigure"
+    },
+    {
+      "content": "Did you know that the most popular role in the server is {{mostPopularRole | role}}?! A whole {{mostPopularRoleCount | number}} people have it!",
+      "side": "right",
+      "author": "Shigure"
+    },
+    {
+      "content": "i-",
+      "side": "left",
+      "author": "JermaBot",
+      "function": "next"
+    },
+    {
+      "content": "Oh! OH! Check this out! YOU {{{you}}} have some pretty cool roles too!",
+      "side": "right",
+      "author": "Shigure"
+    },
+    {
+      "content": "...ooooo! I've never seen anyone with the {{userRareRole | role}} role! Let me take a closer look!",
+      "side": "right",
+      "author": "Shigure"
+    },
+    {
+      "content": "Woah! You must be part of some secret club or something! Only {{userPeopleWithRareRole | number}} people have that one! Wear it like a badge of honor!!",
+      "side": "right",
+      "author": "Shigure"
+    },
+    {
+      "content": "Shigure, if we could get back to the point here, I really don't want to waste any more of {{user | mention}}'s ti-.",
+      "side": "left",
+      "author": "JermaBot",
+      "function": "next"
+    },
+    {
+      "content": {
+        "league": "Wooooow! You like League of Legends?! I'm SOOOO sorry 😭",
+        "apex": "No way! You play Apex Legends?! You must have a lot of free time on your hands!",
+        "default": "Wow! You've seriously never played Apex or League before? Congrats on your increased chance of finding a partner!",
+        "both": "...woah! You play both Apex and League? Snide remark!"
+      },
+      "side": "right",
+      "author": "Shigure",
+      "function": "leagueOrApex"
+    },
+    {
+      "content": "Now, I remember somebody claiming that there was some kind of gang war between League of Legends and Apex Legends.",
+      "side": "right",
+      "author": "Shigure"
+    },
+    {
+      "content": "I was curious myself and compile a little somethin'-somethin':",
+      "side": "right",
+      "author": "Shigure"
+    },
+    {
+      "side": "right",
+      "author": "Shigure",
+      "type": "LegendsChart"
     }
   ]
 }

@@ -142,9 +142,48 @@ export default {
 </script>
 
 <style>
+:root {
+  --convo-width: 100vw;
+}
+
 #conversation {
   min-height: 2em;
   overflow-y: hidden;
+  width: var(--convo-width);
+  padding: 0;
+  min-height: 80vh;
+}
+
+@media (min-width: 576px) {
+  #conversation {
+    --convo-width: 660px;
+  }
+}
+@media (min-width: 576px) {
+  #conversation {
+    --convo-width: 660px;
+  }
+}
+@media (min-width: 768px) {
+  #conversation {
+    --convo-width: 660px;
+  }
+}
+@media (min-width: 992px) {
+  #conversation {
+    --convo-width: 660px;
+  }
+}
+@media (min-width: 1200px) {
+  #conversation {
+    --convo-width: 720px;
+  }
+}
+@media (min-width: 1400px) {
+  #conversation {
+    width: 720px;
+    padding: 0;
+  }
 }
 
 .message {
