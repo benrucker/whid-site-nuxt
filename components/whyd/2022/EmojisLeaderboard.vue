@@ -55,10 +55,9 @@ export default {
 
 <style scoped>
 #graph-root {
-  padding-top: 0.3em;
-  padding-bottom: 0.3em;
+  padding: 0.3em;
   cursor: default;
-  width: 50vw;
+  width: calc(var(--convo-width) - 150px);
 }
 
 #messages {
@@ -90,7 +89,7 @@ export default {
 
 .chart {
   position: absolute;
-  width: 50vw;
+  width: calc(var(--convo-width) - 150px);
   height: 100%;
   padding-left: 60px;
   padding-top: 0px;
