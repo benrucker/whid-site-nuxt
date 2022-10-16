@@ -122,7 +122,7 @@ export default {
   position: relative;
   top: inherit;
   left: inherit;
-  padding-left: 0.25em;
+  padding-left: 0.5em;
   padding-right: 0.25em;
   padding-top: 0.25em;
   padding-bottom: 0.25em;

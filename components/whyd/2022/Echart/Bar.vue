@@ -55,9 +55,9 @@ export default {
     }
   },
   mounted() {
-    window.onresize = () => {
+    window.addEventListener('resize', () => {
       this.$refs.chart.resize()
-    }
+    })
     setTimeout(() => {
       this.$refs.chart.resize()
       this.option = {

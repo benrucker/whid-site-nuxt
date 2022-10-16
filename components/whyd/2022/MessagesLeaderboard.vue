@@ -102,7 +102,7 @@ export default {
   height: 100%;
   padding-left: 60px;
   padding-top: 0px;
-  top: 0;
+  top: 2px;
   left: 0;
   z-index: 1;
 }

@@ -55,9 +55,9 @@ export default {
     }
   },
   mounted() {
-    window.onresize = () => {
+    window.addEventListener('resize', () => {
       this.$refs.chart.resize()
-    }
+    })
     setTimeout(() => {
       this.$refs.chart.resize()
       this.option = {
@@ -114,11 +114,11 @@ export default {
               borderRadius: [0, 5, 5, 0]
             },
             z: -1,
-            animationDelay(idx) {
-              return idx * 100
+            animationDelay: (idx) => {
+              return (this.xAxis.length - idx) * 250
             },
             animationDuration() {
-              return 400
+              return 1000
             }
           }
         ],
