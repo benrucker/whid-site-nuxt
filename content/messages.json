@@ -100,7 +100,8 @@
     {
       "content": "That's it for",
       "side": "left",
-      "author": "JermaBot"
+      "author": "JermaBot",
+      "function": "next"
     },
     {
       "content": "Did I hear {roles | italic}??",

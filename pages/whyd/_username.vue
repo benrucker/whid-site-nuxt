@@ -1,5 +1,5 @@
 <template>
-  <div id="conversation" class="container" @click="advance">
+  <div id="conversation" class="container" @click="onClick">
     <Whyd2022Message
       v-for="(msg, index) in displayed"
       :key="msg.id"
@@ -56,7 +56,10 @@ export default {
       messages: [],
       displayed: [],
       showHint: true,
-      showTyping: true
+      showTyping: true,
+      waitingToAutomaticallyAdvance: false,
+      autoAdvanceTimeout: undefined,
+      debugShowAll: true
     }
   },
   async fetch() {
@@ -65,8 +68,28 @@ export default {
       v.id = i
     })
   },
-  async mounted() {},
+  mounted() {
+    setTimeout(() => {
+      if (this.debugShowAll) {
+        let i = this.messages.length
+        while (i > 1) {
+          this.advance()
+          i--
+        }
+      }
+    })
+  },
+  errorCaptured(...args) {
+    console.log(...args, 'hi')
+  },
   methods: {
+    onClick() {
+      if (this.waitingToAutomaticallyAdvance) {
+        clearTimeout(this.autoAdvanceTimeout)
+        this.waitingToAutomaticallyAdvance = false
+      }
+      this.advance()
+    },
     advance() {
       this.showHint = false
       this.showTyping = false
@@ -75,7 +98,10 @@ export default {
         const messageInfo = this.messages.shift()
 
         if (messageInfo.function) {
-          messageInfo.content = this.runFunc(messageInfo.function)
+          messageInfo.content = this.runFunc(
+            messageInfo.function,
+            messageInfo.content
+          )
         }
 
         this.displayed.push(messageInfo)
@@ -92,15 +118,20 @@ export default {
         }, 100)
       }
     },
-    runFunc(name) {
+    runFunc(name, content) {
       const func = this[name]
       if (typeof func !== 'function') {
         return `Function ${name} not found`
       }
-      return func()
+      return func(content)
     },
     testFunctionText() {
       return 'text!'
+    },
+    next(content) {
+      this.waitingToAutomaticallyAdvance = true
+      this.autoAdvaceTimeout = setTimeout(this.advance, 500)
+      return content
     }
   }
 }
