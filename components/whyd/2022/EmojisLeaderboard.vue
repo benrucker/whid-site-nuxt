@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div id="graph-root">
     <div class="title text-center">
-      <h4>Who sent the most messages?</h4>
+      <h4>Most Used Emojis! 🎉</h4>
     </div>
     <div id="messages">
       <Whyd2022EchartBarH
@@ -9,19 +9,19 @@
         :color="'#4c60f3'"
         :text-color="'#303030'"
         :x-axis="counts"
-        :y-axis="users"
+        :y-axis="emojis"
         class="chart"
       />
       <div class="text">
         <div
-          v-for="(user, i) in users"
-          :key="user.name"
+          v-for="(emoji, i) in emojis"
+          :key="emoji"
           class="row close align-items-center"
         >
           <span :class="'col-1 rank text-center fade fadein-' + (i + 5)">{{
             i + 1
           }}</span>
-          <span :class="'col-8 name fade fadein-' + (i + 10)">{{ user }}</span>
+          <span :class="'col-8 name fade fadein-' + (i + 10)">{{ emoji }}</span>
           <span :class="'col-2 count text-center fade fadein-' + i">{{
             counts[i]
           }}</span>
@@ -40,13 +40,13 @@ export default {
   },
   data() {
     return {
-      users: [],
+      emojis: [],
       counts: []
     }
   },
   mounted() {
-    const ranks = this.stats.server.usersRankedByMessageCount
-    this.users = ranks.slice(0, 5).map((x) => x.name)
+    const ranks = this.stats.server.mostUsedEmojis
+    this.emojis = ranks.slice(0, 5).map((x) => x.emoji)
     this.counts = ranks.slice(0, 5).map((x) => x.count.toLocaleString())
   },
   methods: {}
@@ -54,10 +54,15 @@ export default {
 </script>
 
 <style scoped>
-#messages {
+#graph-root {
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
   cursor: default;
-  padding-left: 2.3em;
   width: 50vw;
+}
+
+#messages {
+  padding-left: 2.3em;
   position: relative;
 }
 
@@ -81,19 +86,6 @@ export default {
 
 .unit {
   font-size: 1em;
-}
-
-.fade {
-  animation: 0.5s fadein 0s ease-in-out forwards;
-}
-
-@keyframes fadein {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
 }
 
 .chart {
