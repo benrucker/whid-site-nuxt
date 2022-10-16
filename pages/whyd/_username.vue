@@ -79,9 +79,6 @@ export default {
       }
     })
   },
-  errorCaptured(...args) {
-    console.log(...args, 'hi')
-  },
   methods: {
     onClick() {
       if (this.waitingToAutomaticallyAdvance) {
