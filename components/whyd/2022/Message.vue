@@ -12,7 +12,7 @@
       <component
         :is="'Whyd2022' + (msg.type || 'Text')"
         :content="msg.content"
-        :data="data"
+        :stats="stats"
       />
     </div>
   </div>
@@ -21,7 +21,7 @@
 <script>
 export default {
   props: {
-    data: {
+    stats: {
       type: Object,
       required: true
     },
