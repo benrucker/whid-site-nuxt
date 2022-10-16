@@ -64,46 +64,61 @@ export default {
         grid: {
           left: '3%',
           right: '4%',
-          bottom: '3%',
-          top: '4%',
+          bottom: '0%',
+          top: '0%',
           containLabel: true
         },
         tooltip: {
-          trigger: 'axis',
+          trigger: 'none',
           axisPointer: {
             type: 'shadow'
           },
           backgroundColor: 'rgba(255, 255, 255, 0.7)'
         },
-        xAxis: [
+        yAxis: [
           {
             type: 'category',
-            data: this.xAxis,
+            data: [...this.yAxis].reverse(),
             axisTick: {
-              // alignWithLabel: true,
+              show: false
+            },
+            axisLabel: {
+              show: false,
+              inside: true,
+              verticalAlign: 'top'
             }
           }
         ],
-        yAxis: [
+        xAxis: [
           {
-            type: 'value'
+            type: 'value',
+            axisLabel: {
+              show: false
+            },
+            axisTick: {
+              show: false
+            },
+            splitLine: {
+              show: false
+            }
           }
         ],
         series: [
           {
             name: this.title,
             type: 'bar',
-            data: this.yAxis,
-            barWidth: '70%',
+            data: [...this.xAxis].reverse(),
+            barWidth: '80%',
             roundCap: true,
             itemStyle: {
-              borderRadius: [5, 5, 0, 0]
+              borderRadius: [0, 5, 5, 0]
             },
-            animationDelay(idx) {
-              return idx * 150
+            z: -1,
+            animationDelay: (idx) => {
+              return (this.xAxis.length - idx) * 250
             },
             animationDuration() {
-              return 400
+              return 1000
             }
           }
         ],
@@ -123,6 +138,7 @@ export default {
 <style scoped>
 .chart {
   min-height: 10px;
+  z-index: 0;
 }
 </style>
 
