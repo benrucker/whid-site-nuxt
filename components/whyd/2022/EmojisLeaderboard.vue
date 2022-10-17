@@ -66,7 +66,7 @@ export default {
 }
 
 .text {
-  z-index: 20;
+  z-index: 1;
 }
 
 .rank {

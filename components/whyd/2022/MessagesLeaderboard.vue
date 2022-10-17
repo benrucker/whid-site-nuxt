@@ -62,7 +62,7 @@ export default {
 }
 
 .text {
-  z-index: 20;
+  z-index: 1;
 }
 
 .rank {
@@ -104,6 +104,6 @@ export default {
   padding-top: 0px;
   top: 2px;
   left: 0;
-  z-index: 1;
+  z-index: 0;
 }
 </style>

@@ -32,12 +32,6 @@
       "author": "JermaBot"
     },
     {
-      "content": "",
-      "side": "left",
-      "author": "JermaBot",
-      "function": "testFunctionText"
-    },
-    {
       "content": "I count a grand total of {{messageCountThisYear}} in 2022 alone! Wowza! Compliments the bar chart quite well if I do say so myself.",
       "side": "left",
       "author": "JermaBot"
@@ -54,11 +48,6 @@
     },
     {
       "content": "Speaking of cake... happy birthday!!",
-      "side": "left",
-      "author": "JermaBot"
-    },
-    {
-      "content": "...",
       "side": "left",
       "author": "JermaBot"
     },
@@ -120,7 +109,7 @@
       "author": "Shigure"
     },
     {
-      "content": "Did you know we have a slash command to give yourself roles?",
+      "content": "Did you know we have a slash command to give yourself any public role?",
       "side": "right",
       "author": "Shigure"
     },
@@ -171,7 +160,7 @@
       "content": {
         "league": "Wooooow! You like League of Legends?! I'm SOOOO sorry 😭",
         "apex": "No way! You play Apex Legends?! You must have a lot of free time on your hands!",
-        "default": "Wow! You've seriously never played Apex or League before? Congrats on your increased chance of finding a partner!",
+        "neither": "Wow! You've seriously never played Apex or League before? Congrats on your increased chance of finding a partner!",
         "both": "...woah! You play both Apex and League? Snide remark!"
       },
       "side": "right",
@@ -191,7 +180,55 @@
     {
       "side": "right",
       "author": "Shigure",
-      "type": "LegendsChart"
+      "type": "LeagueVsApexChart"
+    },
+    {
+      "content": "Look, Shigure. There really are great stats, but I don't think trying to split the server between League and Apex is the best idea for our celebratio-",
+      "side": "left",
+      "author": "JermaBot",
+      "function": "next"
+    },
+    {
+      "content": "You're so right!! That was an unfair comparison! Here's League vs {{all | italic}} the other games!",
+      "side": "right",
+      "author": "Shigure"
+    },
+    {
+      "side": "right",
+      "author": "Shigure",
+      "type": "LeagueVsAllChart"
+    },
+    {
+      "content": "...",
+      "side": "left",
+      "author": "JermaBot",
+      "function": "next"
+    },
+    {
+      "content": "Y-Yeah like I said, no need to celebrate the separa-",
+      "side": "left",
+      "author": "JermaBot",
+      "function": "next"
+    },
+    {
+      "content": "OH- OH! {Celebration by Kool & The Gang | bold italic}!! Did you know that there are {ZERO | bold} instances of anybody playing that song on this server?",
+      "side": "right",
+      "author": "Shigure"
+    },
+    {
+      "content": "Wow... that sure is specific, Shigure. If you don't have anything else to add, I think it's time to wrap up.",
+      "side": "left",
+      "author": "JermaBot"
+    },
+    {
+      "content": "FREDBOAT!! You HAVE to show those stats we've been working on!",
+      "side": "right",
+      "author": "Shigure"
+    },
+    {
+      "content": "{Joining whyd2022 | italic}",
+      "side": "right",
+      "author": "FredBoat"
     }
   ]
 }
