@@ -1,5 +1,5 @@
 <template>
-  <div :class="msg.side + ' message' + (isLastInGroup ? ' message-tail' : ' ')">
+  <div :class="msg.side + ' message'">
     <span class="avatar-wrapper">
       <img
         v-if="isLastInGroup"
@@ -9,6 +9,11 @@
       />
     </span>
     <div class="content">
+      <div class="bubble">
+        <transition :key="msg.id" name="tail-exit">
+          <div v-if="isLastInGroup" class="tail" />
+        </transition>
+      </div>
       <component
         :is="'Whyd2022' + (msg.type || 'Text')"
         :content="msg.content"
@@ -122,7 +127,7 @@ export default {
   position: relative;
   top: inherit;
   left: inherit;
-  padding-left: 0.5em;
+  padding-left: 0.22em;
   padding-right: 0.25em;
   padding-top: 0.25em;
   padding-bottom: 0.25em;
@@ -130,88 +135,112 @@ export default {
   margin-left: 2em;
   margin-right: 2em;
 
-  max-width: 80%;
+  max-width: 75%;
+
+  height: fit-content;
 }
 
 .message .content span {
   animation: fade 0.15s ease-in 0.1s 1 both;
 }
 
-.message .content::after {
+.message .content .bubble {
   position: absolute;
   z-index: -1;
-  width: calc(100% + 1em);
   bottom: 0;
-
-  animation: expand 0.2s ease-out 0s 1 both;
-
-  content: '';
+  height: 100%;
+  width: calc(100% + 1.5em);
 }
 
-.message-tail .content::before {
-  position: absolute;
-  z-index: -1;
-  width: 2em;
-  min-height: 2em;
-  max-height: 2em;
-
-  bottom: -1.2em;
-  border: 1px solid transparent;
-
-  animation: tail-expand 0.2s ease-out 0.1s 1 both;
-
-  content: '';
-}
-
-@keyframes tail-expand {
-  0% {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-
-  50% {
-    opacity: 1;
-  }
-
-  100% {
-    width: 2em;
-    height: 2em;
-  }
-}
-
-@keyframes expand {
-  0% {
-    opacity: 0;
-    width: 50%;
-    height: 50%;
-  }
-
-  100% {
-    opacity: 1;
-    width: (100% + 1em);
-    height: 100%;
-  }
-}
-
-.message.right .content::after {
-  background-color: rgb(37, 145, 181);
-  transform: skewX(9deg);
-
-  right: -0.5em;
-
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 1em;
-  border-top-right-radius: 1em;
-  border-top-left-radius: 0;
-}
-
-.message.left .content::after {
-  background-color: gray;
-  transform: skewX(-9deg);
+.message.left .content .bubble {
   transform-origin: bottom left;
+  left: -15px;
+  animation: expand-left 0.2s ease-out 0s 1 both;
+}
 
-  left: -0.5em;
+.message.right .content .bubble {
+  transform-origin: bottom right;
+  right: -15px;
+  animation: expand-right 0.2s ease-out 0s 1 both;
+}
+
+.message .content .bubble::after {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  content: '';
+}
+
+.message.right .content .bubble::after {
+  right: 0;
+
+  transform-origin: bottom right;
+}
+
+.message.left .content .bubble::after {
+  transform-origin: bottom left;
+}
+
+.message .content .bubble .tail {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  top: calc(100% - 1px);
+
+  content: '';
+  transform: translate(0, 0px);
+}
+
+.message.left .content .bubble .tail {
+  clip-path: polygon(0 0, 100% 0, 0 75%);
+  background: grey;
+}
+
+.message.right .content .bubble .tail {
+  right: 0;
+  clip-path: polygon(0 0, 100% 0, 100% 75%);
+  background-color: rgb(37, 145, 181);
+}
+
+.tail-exit-leave-active {
+  animation: slide-up 0.5s;
+}
+
+@keyframes slide-up {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes expand-left {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) skew(-9deg);
+  }
+}
+
+@keyframes expand-right {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) skew(9deg);
+  }
+}
+
+.message.left .content .bubble::after {
+  background-color: gray;
 
   border-bottom-right-radius: 1em;
   border-bottom-left-radius: 0;
@@ -219,18 +248,12 @@ export default {
   border-top-left-radius: 1em;
 }
 
-.message-tail.left .content::before {
-  left: -0.53em;
-  clip-path: polygon(0 0, 100% 0, 0 75%);
-  transform: skewX(-9deg);
-  transform-origin: left;
-  background: grey;
-}
-
-.message-tail.right .content::before {
-  right: -0.69em;
-  clip-path: polygon(0 0, 100% 0, 100% 75%);
-  transform: skewX(9deg);
+.message.right .content .bubble::after {
   background-color: rgb(37, 145, 181);
+
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 1em;
+  border-top-right-radius: 1em;
+  border-top-left-radius: 0;
 }
 </style>
