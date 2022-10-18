@@ -29,7 +29,7 @@ export default {
 
 <style scoped>
 .chart {
-  width: 50vw;
+  width: calc(var(--convo-width) - 160px);
   height: 200px;
   padding: 0px;
 }
