@@ -156,12 +156,7 @@ export default {
 
 @media (min-width: 576px) {
   #conversation {
-    --convo-width: 660px;
-  }
-}
-@media (min-width: 576px) {
-  #conversation {
-    --convo-width: 660px;
+    --convo-width: 540px;
   }
 }
 @media (min-width: 768px) {
