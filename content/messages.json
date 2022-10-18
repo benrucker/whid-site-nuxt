@@ -1,7 +1,7 @@
 {
   "messages": [
     {
-      "content": "Hey! Welcome to {what have you done 2022 | bold italic}!",
+      "content": "Hey! Welcome to {what have you done 2022 | channel bold}!",
       "side": "left",
       "author": "JermaBot"
     },
