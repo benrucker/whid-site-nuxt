@@ -136,7 +136,7 @@
       "function": "next"
     },
     {
-      "content": "Oh! OH! Check this out! YOU {{{you}}} have some pretty cool roles too!",
+      "content": "Oh! OH! Check this out! YOU {:you:} have some pretty cool roles too!",
       "side": "right",
       "author": "Shigure"
     },
@@ -189,7 +189,7 @@
       "function": "next"
     },
     {
-      "content": "You're so right!! That was an unfair comparison! Here's League vs {{all | italic}} the other games!",
+      "content": "You're so right!! That was an unfair comparison! Here's League vs {all | italic} the other games!",
       "side": "right",
       "author": "Shigure"
     },
