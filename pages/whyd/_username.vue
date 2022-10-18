@@ -110,7 +110,7 @@ export default {
 
         this.displayed.push(messageInfo)
 
-        this.$el.scrollIntoView({ smooth: 'auto', block: 'end' })
+        this.$el.scrollIntoView({ behavior: 'smooth', block: 'end' })
       }
 
       if (this.messages.length > 0) {
