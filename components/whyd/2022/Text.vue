@@ -69,12 +69,26 @@ function parseEmoji(data) {
 .bold {
   font-weight: bold;
 }
+
 .italic {
   font-style: oblique;
 }
+
 .number {
   font-family: monospace;
 }
+
+.channel {
+  background-color: hsla(235, 85%, 64.7%, 0.7);
+  border-radius: 5px;
+  color: white;
+  padding: 0 2px;
+}
+
+.channel:hover {
+  background-color: hsl(235, 86%, 65%);
+}
+
 img {
   height: 1em;
 }
