@@ -21,8 +21,8 @@ class Emoji {
     this.emoji = emoji
     this.x = x
     this.y = y
-    this.xvel = 0
-    this.yvel = 0
+    this.xvel = Math.random()
+    this.yvel = Math.random()
     this.diameter = diameter
     this.mass = diameter
   }
@@ -40,11 +40,34 @@ class Emoji {
   move(delta) {
     this.x += this.xvel * delta
     this.y += this.yvel * delta
-    this.xvel *= 0.9
-    this.yvel *= 0.9
+    this.xvel *= 1
+    this.yvel *= 1
   }
 
   clip(minX, maxX, minY, maxY) {
+    this.bounce(minX, maxX, minY, maxY)
+  }
+
+  bounce(minX, maxX, minY, maxY) {
+    // bounce off walls
+    const elasticity = 0.8
+    if (this.x < minX) {
+      this.x = minX
+      this.xvel *= -elasticity
+    } else if (this.x + this.diameter > maxX) {
+      this.x = maxX - this.diameter
+      this.xvel *= -elasticity
+    }
+    if (this.y < minY) {
+      this.y = minY
+      this.yvel *= -elasticity
+    } else if (this.y + this.diameter > maxY) {
+      this.y = maxY - this.diameter
+      this.yvel *= -elasticity
+    }
+  }
+
+  slide(minX, maxX, minY, maxY) {
     if (this.x < minX) {
       this.xvel = 0
       this.x = minX
@@ -63,8 +86,12 @@ class Emoji {
 
   collide(other) {
     // if two emojis are intersecting, push them apart
-    const dx = this.x - other.x
-    const dy = this.y - other.y
+    const thisCenterX = this.x + this.diameter / 2
+    const thisCenterY = this.y + this.diameter / 2
+    const otherCenterX = other.x + other.diameter / 2
+    const otherCenterY = other.y + other.diameter / 2
+    const dx = thisCenterX - otherCenterX
+    const dy = thisCenterY - otherCenterY
     const dist = Math.sqrt(dx * dx + dy * dy)
     if (dist < (this.diameter + other.diameter) / 1.5) {
       const angle = Math.atan2(dy, dx)
@@ -72,10 +99,10 @@ class Emoji {
       const ty = this.y + Math.sin(angle) * this.diameter
       const ox = other.x - Math.cos(angle) * other.diameter
       const oy = other.y - Math.sin(angle) * other.diameter
-      this.xvel = ((tx - ox) / 2) * ((other.mass * other.mass) / 2500)
-      this.yvel = ((ty - oy) / 2) * ((other.mass * other.mass) / 2500)
-      other.xvel = ((ox - tx) / 2) * ((this.mass * this.mass) / 2500)
-      other.yvel = ((oy - ty) / 2) * ((this.mass * this.mass) / 2500)
+      this.xvel = ((tx - ox) / 2) * ((other.mass * other.mass) / 2000)
+      this.yvel = ((ty - oy) / 2) * ((other.mass * other.mass) / 2000)
+      other.xvel = ((ox - tx) / 2) * ((this.mass * this.mass) / 2000)
+      other.yvel = ((oy - ty) / 2) * ((this.mass * this.mass) / 2000)
     }
   }
 
@@ -84,7 +111,7 @@ class Emoji {
 
     if (dist < 3) return
 
-    const mag = ((other.mass * -1) / dist ** 2) * 5
+    const mag = ((other.mass * -1) / dist ** 2) * 0
 
     if (isNaN(mag)) return
 
@@ -167,7 +194,7 @@ export default {
 
       this.interval = setInterval(() => {
         this.render()
-      }, 100)
+      }, 30)
     },
     resizeCanvas() {
       const canvas = this.$refs.canvas
@@ -194,7 +221,7 @@ export default {
           planet.gravitate(other)
         })
 
-        planet.gravitate({ x: width / 2, y: height / 2, mass: 10 })
+        planet.gravitate({ x: width / 2, y: height / 2, mass: 0 })
       })
 
       this.emojiPlanets.forEach((planet) => {
