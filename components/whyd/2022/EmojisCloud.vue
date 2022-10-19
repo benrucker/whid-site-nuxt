@@ -24,7 +24,7 @@ class Emoji {
     this.xvel = Math.random()
     this.yvel = Math.random()
     this.diameter = diameter
-    this.mass = diameter
+    this.mass = diameter * diameter
   }
 
   draw(ctx) {
@@ -45,11 +45,6 @@ class Emoji {
   }
 
   clip(minX, maxX, minY, maxY) {
-    this.bounce(minX, maxX, minY, maxY)
-  }
-
-  bounce(minX, maxX, minY, maxY) {
-    // bounce off walls
     const elasticity = 0.8
     if (this.x < minX) {
       this.x = minX
@@ -67,67 +62,27 @@ class Emoji {
     }
   }
 
-  slide(minX, maxX, minY, maxY) {
-    if (this.x < minX) {
-      this.xvel = 0
-      this.x = minX
-    } else if (this.x + this.diameter > maxX) {
-      this.xvel = 0
-      this.x = maxX - this.diameter
-    }
-    if (this.y < minY) {
-      this.yvel = 0
-      this.y = minY
-    } else if (this.y + this.diameter > maxY) {
-      this.yvel = 0
-      this.y = maxY - this.diameter
-    }
-  }
-
   collide(other) {
-    // if two emojis are intersecting, push them apart
+    // if two emojis are intersecting, bounce them off each other with respect to their current velocities
     const thisCenterX = this.x + this.diameter / 2
     const thisCenterY = this.y + this.diameter / 2
     const otherCenterX = other.x + other.diameter / 2
     const otherCenterY = other.y + other.diameter / 2
     const dx = thisCenterX - otherCenterX
     const dy = thisCenterY - otherCenterY
-    const dist = Math.sqrt(dx * dx + dy * dy)
+    const dist = Math.hypot(dx, dy)
+
     if (dist < (this.diameter + other.diameter) / 1.5) {
       const angle = Math.atan2(dy, dx)
       const tx = this.x + Math.cos(angle) * this.diameter
       const ty = this.y + Math.sin(angle) * this.diameter
       const ox = other.x - Math.cos(angle) * other.diameter
       const oy = other.y - Math.sin(angle) * other.diameter
-      this.xvel = ((tx - ox) / 2) * ((other.mass * other.mass) / 2000)
-      this.yvel = ((ty - oy) / 2) * ((other.mass * other.mass) / 2000)
-      other.xvel = ((ox - tx) / 2) * ((this.mass * this.mass) / 2000)
-      other.yvel = ((oy - ty) / 2) * ((this.mass * this.mass) / 2000)
+      this.xvel = ((tx - ox) / 2) * (other.mass / 2300)
+      this.yvel = ((ty - oy) / 2) * (other.mass / 2300)
+      other.xvel = ((ox - tx) / 2) * (this.mass / 2300)
+      other.yvel = ((oy - ty) / 2) * (this.mass / 2300)
     }
-  }
-
-  gravitate(other) {
-    const [dist, dx, dy] = this.distanceAndComponents(other)
-
-    if (dist < 3) return
-
-    const mag = ((other.mass * -1) / dist ** 2) * 0
-
-    if (isNaN(mag)) return
-
-    if (!isNaN(dx)) this.xvel += dx * mag
-    if (!isNaN(dy)) this.yvel += dy * mag
-  }
-
-  distanceAndComponents(other) {
-    const dx = this.x - other.x
-    const dy = this.y - other.y
-
-    return [Math.hypot(dx, dy), dx, dy]
-  }
-
-  distance(other) {
-    return this.distanceAndComponents(other)[0]
   }
 }
 
@@ -206,27 +161,21 @@ export default {
       canvas.style.width = `${rect.width}px`
       canvas.style.height = `${rect.height}px`
     },
-    render() {
+    async render() {
       const ctx = this.$refs.canvas.getContext('2d')
 
       const width = this.$refs.canvas.width
       const height = this.$refs.canvas.height
 
+      const prevFrame = ctx.getImageData(0, 0, width, height)
       ctx.clearRect(0, 0, width, height)
 
-      this.emojiPlanets.forEach((planet) => {
-        this.emojiPlanets.forEach((other) => {
-          if (planet === other) return
+      ctx.globalAlpha = 0.4
+      ctx.drawImage(await createImageBitmap(prevFrame), 0, 0)
+      ctx.globalAlpha = 1
 
-          planet.gravitate(other)
-        })
-
-        planet.gravitate({ x: width / 2, y: height / 2, mass: 0 })
-      })
-
-      this.emojiPlanets.forEach((planet) => {
-        this.emojiPlanets.forEach((other) => {
-          if (planet === other) return
+      this.emojiPlanets.forEach((planet, index) => {
+        this.emojiPlanets.slice(index + 1).forEach((other) => {
           planet.collide(other)
         })
       })
