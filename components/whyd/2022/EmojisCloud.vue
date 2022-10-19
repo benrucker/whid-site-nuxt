@@ -1,0 +1,230 @@
+<template>
+  <div id="graph-root" ref="root">
+    <div class="title text-center">
+      <h4>Most Used Emojis! 🎉</h4>
+    </div>
+    <canvas :ref="'canvas'"></canvas>
+    <img
+      v-for="emoji in emojis"
+      :id="emoji"
+      :key="emoji"
+      :src="`/whyd/2022/emojis/${emoji}.png`"
+      hidden
+      class="cloud-emoji"
+    />
+  </div>
+</template>
+
+<script>
+class Emoji {
+  constructor(emoji, x, y, diameter) {
+    this.emoji = emoji
+    this.x = x
+    this.y = y
+    this.xvel = 0
+    this.yvel = 0
+    this.diameter = diameter
+    this.mass = diameter
+  }
+
+  draw(ctx) {
+    ctx.drawImage(
+      this.emoji,
+      this.x + Math.random(),
+      this.y + Math.random(),
+      this.diameter + Math.random(),
+      this.diameter + Math.random()
+    )
+  }
+
+  move(delta) {
+    this.x += this.xvel * delta
+    this.y += this.yvel * delta
+    this.xvel *= 0.9
+    this.yvel *= 0.9
+  }
+
+  clip(minX, maxX, minY, maxY) {
+    if (this.x < minX) {
+      this.xvel = 0
+      this.x = minX
+    } else if (this.x + this.diameter > maxX) {
+      this.xvel = 0
+      this.x = maxX - this.diameter
+    }
+    if (this.y < minY) {
+      this.yvel = 0
+      this.y = minY
+    } else if (this.y + this.diameter > maxY) {
+      this.yvel = 0
+      this.y = maxY - this.diameter
+    }
+  }
+
+  collide(other) {
+    // if two emojis are intersecting, push them apart
+    const dx = this.x - other.x
+    const dy = this.y - other.y
+    const dist = Math.sqrt(dx * dx + dy * dy)
+    if (dist < (this.diameter + other.diameter) / 1.5) {
+      const angle = Math.atan2(dy, dx)
+      const tx = this.x + Math.cos(angle) * this.diameter
+      const ty = this.y + Math.sin(angle) * this.diameter
+      const ox = other.x - Math.cos(angle) * other.diameter
+      const oy = other.y - Math.sin(angle) * other.diameter
+      this.xvel = ((tx - ox) / 2) * ((other.mass * other.mass) / 2500)
+      this.yvel = ((ty - oy) / 2) * ((other.mass * other.mass) / 2500)
+      other.xvel = ((ox - tx) / 2) * ((this.mass * this.mass) / 2500)
+      other.yvel = ((oy - ty) / 2) * ((this.mass * this.mass) / 2500)
+    }
+  }
+
+  gravitate(other) {
+    const [dist, dx, dy] = this.distanceAndComponents(other)
+
+    if (dist < 3) return
+
+    const mag = ((other.mass * -1) / dist ** 2) * 5
+
+    if (isNaN(mag)) return
+
+    if (!isNaN(dx)) this.xvel += dx * mag
+    if (!isNaN(dy)) this.yvel += dy * mag
+  }
+
+  distanceAndComponents(other) {
+    const dx = this.x - other.x
+    const dy = this.y - other.y
+
+    return [Math.hypot(dx, dy), dx, dy]
+  }
+
+  distance(other) {
+    return this.distanceAndComponents(other)[0]
+  }
+}
+
+export default {
+  props: {
+    stats: {
+      type: Object,
+      default: () => ({})
+    }
+  },
+  data() {
+    return {
+      ranks: {},
+      emojis: [],
+      emojiPlanets: [],
+      counts: [],
+      maxCount: 0,
+      minCount: 0,
+      minScale: 20,
+      maxScale: 50,
+
+      interval: 0,
+      resizeListener: new AbortController()
+    }
+  },
+  mounted() {
+    this.ranks = this.stats.server.mostUsedEmojis
+    this.emojis = this.ranks.map((x) => x.emoji)
+    this.counts = this.ranks.map((x) => x.count.toLocaleString())
+    this.maxCount = Math.max(...this.ranks.map((x) => x.count))
+    this.minCount = Math.min(...this.ranks.map((x) => x.count))
+    window.addEventListener(
+      'resize',
+      () => {
+        this.resizeCanvas()
+      },
+      { signal: this.resizeListener.signal }
+    )
+
+    this.$nextTick(() => {
+      this.init()
+    })
+  },
+  beforeDestroy() {
+    clearInterval(this.interval)
+    this.resizeListener.abort()
+  },
+  methods: {
+    init() {
+      this.resizeCanvas()
+
+      this.emojiPlanets = this.ranks.map(({ emoji, count }) => {
+        const size =
+          ((count - this.minCount) / (this.maxCount - this.minCount)) *
+            (this.maxScale - this.minScale) +
+          this.minScale
+        return new Emoji(
+          document.getElementById(emoji),
+          Math.random() * (this.$refs.canvas.width - size),
+          Math.random() * (this.$refs.canvas.height - size),
+          size
+        )
+      })
+
+      this.interval = setInterval(() => {
+        this.render()
+      }, 100)
+    },
+    resizeCanvas() {
+      const canvas = this.$refs.canvas
+      const dpr = window.devicePixelRatio
+      const rect = canvas.getBoundingClientRect()
+      canvas.width = rect.width * dpr
+      canvas.height = rect.height * dpr
+      canvas.getContext('2d').scale(dpr, dpr)
+      canvas.style.width = `${rect.width}px`
+      canvas.style.height = `${rect.height}px`
+    },
+    render() {
+      const ctx = this.$refs.canvas.getContext('2d')
+
+      const width = this.$refs.canvas.width
+      const height = this.$refs.canvas.height
+
+      ctx.clearRect(0, 0, width, height)
+
+      this.emojiPlanets.forEach((planet) => {
+        this.emojiPlanets.forEach((other) => {
+          if (planet === other) return
+
+          planet.gravitate(other)
+        })
+
+        planet.gravitate({ x: width / 2, y: height / 2, mass: 10 })
+      })
+
+      this.emojiPlanets.forEach((planet) => {
+        this.emojiPlanets.forEach((other) => {
+          if (planet === other) return
+          planet.collide(other)
+        })
+      })
+
+      this.emojiPlanets.forEach((planet) => {
+        planet.move(0.1)
+        planet.clip(0, width, 0, height)
+        planet.draw(ctx)
+      })
+    }
+  }
+}
+</script>
+
+<style scoped>
+#graph-root {
+  padding: 0.3em;
+  cursor: default;
+  width: calc(var(--convo-width) - 150px);
+}
+
+canvas {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0 40px 0 20px;
+}
+</style>
