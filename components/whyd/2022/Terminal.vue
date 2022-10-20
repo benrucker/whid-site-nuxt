@@ -1,21 +1,31 @@
 <template>
   <div>
-    <div v-if="isShowTerminal" class="outer" @click="focusInput">
+    <div v-show="isShowTerminal" class="outer" @click="focusInput">
       <div class="top">
-        <i
-          class="bi bi-x"
-          style="cursor: pointer"
-          @click="toggleTerminalVisibility"
-        ></i>
         <strong>whydOS</strong>
+        <div class="top-buttons">
+          <!-- <i style="cursor: pointer" @click="toggleButtons">btn</i> -->
+          <i
+            class="bi bi-x"
+            style="cursor: pointer"
+            @click="toggleTerminalVisibility"
+            >x</i
+          >
+        </div>
       </div>
       <div id="textViewport" class="center">
-        <p v-for="line in displayedTerminalLines" :key="line">{{ line }}</p>
+        <p v-for="(line, index) in displayedTerminalLines" :key="index">
+          {{ line }}
+        </p>
         <div id="last" ref="last" class="mb-0">
           >
-          <span v-if="terminalMode === mode.textInput" id="userInputDisplay">{{
-            userInput
-          }}</span
+          <span
+            v-if="
+              terminalMode === mode.textInput ||
+              terminalMode === mode.hybridInput
+            "
+            id="userInputDisplay"
+            >{{ userInput }}</span
           ><a ref="blinkingUnderscore" class="blink">_</a><br />
           <a
             v-if="isShowProceed && terminalMode === mode.clickContinue"
@@ -25,20 +35,33 @@
             Click to continue
           </a>
           <div
-            v-if="terminalMode === mode.buttonInput"
+            v-show="
+              terminalMode === mode.buttonInput ||
+              terminalMode === mode.hybridInput
+            "
             ref="buttonRegion"
             class="button-region"
           >
-            <button
+            <!-- <button
+              v-for="button in displayedButtons"
+              :key="button.value"
               type="button"
               class="option-button"
-              value="1"
+              :value="button.value"
               @click="optionButtonClick($event)"
             >
-              one
+              {{ button.text }}
+            </button> -->
+            <button
+              v-for="button of displayedButtons"
+              :key="button"
+              type="button"
+              class="option-button"
+              :value="button"
+              @click="optionButtonClick($event, button)"
+            >
+              {{ terminalCommands[button].prettyName }}
             </button>
-            <button type="button" class="option-button" value="2">two</button>
-            <button type="button" class="option-button" value="3">three</button>
           </div>
         </div>
       </div>
@@ -47,18 +70,17 @@
         ref="terminalTextInput"
         v-model="userInput"
         type="text"
-        @change="textChanging"
         @keyup.enter="submitTextCommand"
       />
     </div>
-    <div v-show="!isShowTerminal" class="redo">
+    <!-- <div v-show="!isShowTerminal" class="redo">
       <i
         class="bi bi-arrow-clockwise"
         style="cursor: pointer"
         @click="toggleTerminalVisibility"
       >
       </i>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -66,7 +88,8 @@
 const mode = {
   clickContinue: 'clickContinue',
   buttonInput: 'buttonInput',
-  textInput: 'textInput'
+  textInput: 'textInput',
+  hybridInput: 'hybridInput'
 }
 
 export default {
@@ -77,7 +100,6 @@ export default {
       userInput: '',
       isShowProceed: false,
       terminalLinesQueue: [
-        'adding Line...',
         'adding Line2...',
         'adding Line3...',
         'adding Line4...',
@@ -86,29 +108,79 @@ export default {
         'oh found itadding Line5...',
         'adding Line7...'
       ],
-      displayedTerminalLines: ['Welcome to the Terminal!'],
+      // buttonsQueue: [
+      //   // add a bool that represents whether its been tried or not yet.
+      //   { value: '1', text: 'one' },
+      //   { value: '2', text: 'two' },
+      //   { value: '3', text: 'three' },
+      //   { value: '4', text: 'four' },
+      //   { value: '5', text: 'five' },
+      //   { value: '6', text: 'six' },
+      //   { value: '7', text: 'seven' }
+      // ],
+      terminalCommands: {},
+      buttonData: [],
+      displayedTerminalLines: ['C:/whid.live/whyd/22/username.exe'],
       mode,
-      terminalMode: mode.buttonInput // clickContinue, buttonInput, textInput
+      terminalMode: mode.hybridInput // clickContinue, buttonInput, textInput, hybridInput
+    }
+  },
+  async fetch() {
+    this.terminalCommands = await this.$nuxt
+      .$content('terminalCommands')
+      .fetch()
+
+    for (const commandName in this.terminalCommands) {
+      if (typeof this.terminalCommands[commandName] !== 'object') {
+        delete this.terminalCommands[commandName]
+        continue
+      }
+
+      this.terminalCommands[commandName].hasBeenRun = false
+      // this.terminalCommands[commandName].display = true
+    }
+    // this.terminalCommands['4'].display = false
+
+    this.buttonData = (
+      await this.$nuxt.$content('terminalButtonData').fetch()
+    ).buttons
+  },
+  computed: {
+    displayedButtons() {
+      // is this the ground-truth for displaying buttons?
+      // even for buttons that appear in an interaction tree?
+      // i.e. click "Nerd" -> user is presented with "Yes" and "No" buttons -> click to continue mode
+
+      return this.buttonData.filter((name) => {
+        const command = this.terminalCommands[name]
+
+        const unlocked = this.areDependenciesMet(command.dependencies)
+
+        return unlocked && !command.hasBeenRun
+      })
     }
   },
   mounted() {
     if (this.terminalMode === mode.clickContinue) {
       this.isShowProceed = this.terminalLinesQueue.length > 0
-    } else if (this.terminalMode === mode.textInput) {
+    } else if (
+      this.terminalMode === mode.textInput ||
+      this.terminalMode === mode.hybridInput
+    ) {
       this.$nextTick(() => {
         this.focusInput()
       })
     }
 
     this.terminalLinesQueue.reverse()
+    // this.buttonsQueue.reverse()
 
-    this.$nextTick(() => {
-      this.$refs.last.scrollIntoView({ block: 'start' })
-    })
+    this.scrollToBottom()
   },
   methods: {
     toggleTerminalVisibility() {
-      this.isShowTerminal = !this.isShowTerminal
+      // this.isShowTerminal = !this.isShowTerminal
+      alert('The Terminal cannot be closed at this time.')
     },
     addLineFromQueue() {
       const line = this.terminalLinesQueue.pop()
@@ -128,30 +200,69 @@ export default {
       this.displayedTerminalLines.push(line)
     },
     focusInput() {
-      if (this.terminalMode === mode.textInput) {
+      if (
+        this.terminalMode === mode.textInput ||
+        this.terminalMode === mode.hybridInput
+      ) {
         this.$refs.terminalTextInput.focus()
       }
     },
-    textChanging() {
-      // stop the underscore from blinking for a short time.
-      // this.$refs.blinkingUnderscore.classList.remove('blink')
-      // setTimeout(() => {
-      //   this.$refs.blinkingUnderscore.classList.add('blink')
-      // }, 500)
+    scrollToBottom() {
+      this.$nextTick(() => {
+        this.$refs.last.scrollIntoView({ block: 'start' })
+      })
     },
     submitTextCommand() {
+      // NEEDS TO BE UPDATED TO WORK WITH TERMINALCOMMANDS
       this.$refs.terminalTextInput.disabled = true
       this.addTextLine(`> ${this.userInput}`)
       this.userInput = ''
 
-      this.$nextTick(() => {
-        document.getElementById('last')?.scrollIntoView({ block: 'start' })
-      })
+      this.scrollToBottom()
       this.$refs.terminalTextInput.disabled = false
       this.focusInput()
     },
-    optionButtonClick(event) {
-      this.addTextLine(event.target.value)
+    optionButtonClick(_, commandKey) {
+      // set this.executing = true
+
+      // event parameter is discarded
+      const command = this.terminalCommands[commandKey]
+      this.addTextLine(`> ${commandKey}`)
+      this.terminalCommands[commandKey].hasBeenRun = true
+
+      const func = this[command.functionName]
+      if (typeof func === 'function') {
+        func()
+      }
+
+      this.scrollToBottom()
+    },
+    toggleButtons() {
+      if (
+        this.terminalMode === mode.buttonInput ||
+        this.terminalMode === mode.hybridInput
+      ) {
+        this.terminalMode = mode.textInput
+      } else {
+        this.terminalMode = mode.hybridInput
+        this.scrollToBottom()
+      }
+    },
+    areDependenciesMet(dependencies) {
+      if (!dependencies) {
+        return true
+      }
+
+      for (const dependency of dependencies) {
+        if (!this.terminalCommands[dependency].hasBeenRun) {
+          return false
+        }
+      }
+
+      return true
+    },
+    testFunction() {
+      console.log('one')
     }
   }
 }
@@ -180,7 +291,6 @@ export default {
 
 .top {
   display: flex;
-  flex-direction: row-reverse;
   justify-content: space-between;
   background-color: inherit;
   color: var(--background);
@@ -206,10 +316,13 @@ export default {
 .option-button {
   background-color: var(--primary);
   color: var(--background);
+  margin-right: 5px;
 }
 
 .redo {
   color: var(--primary);
+  width: 50px;
+  height: 50px;
 }
 
 .blink {
