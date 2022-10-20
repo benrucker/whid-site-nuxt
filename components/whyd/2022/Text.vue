@@ -1,6 +1,6 @@
 <template>
   <span>
-    <span v-for="token in parsedContent" :key="token.text" :class="token.style"
+    <span v-for="token in parsedContent" :key="token.text" :class="token.styles"
       ><span v-if="token.text != null">{{ token.text }}</span
       ><img v-else :src="token.src"
     /></span>
@@ -14,7 +14,7 @@ export default {
       type: String,
       default: ''
     },
-    data: {
+    stats: {
       type: Object,
       default: () => ({})
     }
@@ -23,8 +23,8 @@ export default {
     return {
       parsedContent: [],
       values: {
-        messageCountThisYear: () => this.data.messageCountThisYear,
-        userWordCountThisYear: () => this.data.userWordCountThisYear
+        messageCountThisYear: () => this.stats.server.messageCountThisYear,
+        userWordCountThisYear: () => this.stats.user.userWordCountThisYear
       }
     }
   },
@@ -32,10 +32,12 @@ export default {
     this.parsedContent = this.content.split(/(\{+.+?}+)/g).map((token) => {
       if (token.startsWith('{{') && token.endsWith('}}')) {
         return parseValue(token, this.values)
-      } else if (token.startsWith('{:') && token.endsWith(':}')) {
-        return parseEmoji(token)
       } else if (token.startsWith('{') && token.endsWith('}')) {
-        return parseStyling(token)
+        if (token.startsWith('{:') && token.endsWith(':}')) {
+          return parseEmoji(token)
+        } else {
+          return parseStyling(token)
+        }
       } else {
         return { text: token }
       }
@@ -45,18 +47,18 @@ export default {
 
 function parseValue(data, values) {
   const nameAndStyle = data.slice(2, -2)
-  const [valueName, style] = nameAndStyle.split(' | ')
+  const [valueName, styles] = nameAndStyle.split(' | ')
   if (valueName in values) {
-    return { text: values[valueName](), style }
+    return { text: values[valueName](), styles }
   } else {
-    return { text: valueName, style }
+    return { text: valueName, styles }
   }
 }
 
 function parseStyling(data) {
   const textAndStyle = data.slice(1, -1)
   const [text, styles] = textAndStyle.split(' | ')
-  return { text, style: styles }
+  return { text, styles }
 }
 
 function parseEmoji(data) {
@@ -76,9 +78,13 @@ function parseEmoji(data) {
 
 .number {
   font-family: monospace;
+  border: 2px;
+  text-shadow: 0px 0px 5px rgb(255, 255, 255);
 }
 
-.channel {
+.channel,
+.role,
+.mention {
   background-color: hsla(235, 85%, 64.7%, 0.7);
   border-radius: 5px;
   color: white;
