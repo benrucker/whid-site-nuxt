@@ -16,76 +16,6 @@
 </template>
 
 <script>
-class Emoji {
-  constructor(emoji, x, y, diameter) {
-    this.emoji = emoji
-    this.x = x
-    this.y = y
-    this.xvel = Math.random()
-    this.yvel = Math.random()
-    this.diameter = diameter
-    this.mass = diameter * diameter
-  }
-
-  draw(ctx) {
-    ctx.drawImage(
-      this.emoji,
-      this.x + Math.random(),
-      this.y + Math.random(),
-      this.diameter + Math.random(),
-      this.diameter + Math.random()
-    )
-  }
-
-  move(delta) {
-    this.x += this.xvel * delta
-    this.y += this.yvel * delta
-    this.xvel *= 1
-    this.yvel *= 1
-  }
-
-  clip(minX, maxX, minY, maxY) {
-    const elasticity = 0.8
-    if (this.x < minX) {
-      this.x = minX
-      this.xvel *= -elasticity
-    } else if (this.x + this.diameter > maxX) {
-      this.x = maxX - this.diameter
-      this.xvel *= -elasticity
-    }
-    if (this.y < minY) {
-      this.y = minY
-      this.yvel *= -elasticity
-    } else if (this.y + this.diameter > maxY) {
-      this.y = maxY - this.diameter
-      this.yvel *= -elasticity
-    }
-  }
-
-  collide(other) {
-    // if two emojis are intersecting, bounce them off each other with respect to their current velocities
-    const thisCenterX = this.x + this.diameter / 2
-    const thisCenterY = this.y + this.diameter / 2
-    const otherCenterX = other.x + other.diameter / 2
-    const otherCenterY = other.y + other.diameter / 2
-    const dx = thisCenterX - otherCenterX
-    const dy = thisCenterY - otherCenterY
-    const dist = Math.hypot(dx, dy)
-
-    if (dist < (this.diameter + other.diameter) / 1.5) {
-      const angle = Math.atan2(dy, dx)
-      const tx = this.x + Math.cos(angle) * this.diameter
-      const ty = this.y + Math.sin(angle) * this.diameter
-      const ox = other.x - Math.cos(angle) * other.diameter
-      const oy = other.y - Math.sin(angle) * other.diameter
-      this.xvel = ((tx - ox) / 2) * (other.mass / 2300)
-      this.yvel = ((ty - oy) / 2) * (other.mass / 2300)
-      other.xvel = ((ox - tx) / 2) * (this.mass / 2300)
-      other.yvel = ((oy - ty) / 2) * (this.mass / 2300)
-    }
-  }
-}
-
 export default {
   props: {
     stats: {
@@ -185,6 +115,75 @@ export default {
         planet.clip(0, width, 0, height)
         planet.draw(ctx)
       })
+    }
+  }
+}
+
+class Emoji {
+  constructor(emoji, x, y, diameter) {
+    this.emoji = emoji
+    this.x = x
+    this.y = y
+    this.xvel = Math.random()
+    this.yvel = Math.random()
+    this.diameter = diameter
+    this.mass = diameter * diameter
+  }
+
+  draw(ctx) {
+    ctx.drawImage(
+      this.emoji,
+      this.x + Math.random(),
+      this.y + Math.random(),
+      this.diameter + Math.random(),
+      this.diameter + Math.random()
+    )
+  }
+
+  move(delta) {
+    this.x += this.xvel * delta
+    this.y += this.yvel * delta
+    this.xvel *= 1
+    this.yvel *= 1
+  }
+
+  clip(minX, maxX, minY, maxY) {
+    const elasticity = 0.8
+    if (this.x < minX) {
+      this.x = minX
+      this.xvel *= -elasticity
+    } else if (this.x + this.diameter > maxX) {
+      this.x = maxX - this.diameter
+      this.xvel *= -elasticity
+    }
+    if (this.y < minY) {
+      this.y = minY
+      this.yvel *= -elasticity
+    } else if (this.y + this.diameter > maxY) {
+      this.y = maxY - this.diameter
+      this.yvel *= -elasticity
+    }
+  }
+
+  collide(other) {
+    const thisCenterX = this.x + this.diameter / 2
+    const thisCenterY = this.y + this.diameter / 2
+    const otherCenterX = other.x + other.diameter / 2
+    const otherCenterY = other.y + other.diameter / 2
+    const dx = thisCenterX - otherCenterX
+    const dy = thisCenterY - otherCenterY
+    const dist = Math.hypot(dx, dy)
+
+    if (dist < (this.diameter + other.diameter) / 1.5) {
+      const angle = Math.atan2(dy, dx)
+      const tx = this.x + Math.cos(angle) * this.diameter
+      const ty = this.y + Math.sin(angle) * this.diameter
+      const ox = other.x - Math.cos(angle) * other.diameter
+      const oy = other.y - Math.sin(angle) * other.diameter
+      this.xvel = ((tx - ox) / 2) * (other.mass / 2300)
+      this.yvel = ((ty - oy) / 2) * (other.mass / 2300)
+      other.xvel = ((ox - tx) / 2) * (this.mass / 2300)
+      other.yvel = ((oy - ty) / 2) * (this.mass / 2300)
     }
   }
 }
