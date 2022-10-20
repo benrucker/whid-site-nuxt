@@ -5,7 +5,7 @@
     class="container"
     @click="onClick"
   >
-    <Whyd2022Message
+    <Whyd2022ChatMessage
       v-for="(msg, index) in displayed"
       :key="msg.id"
       :stats="stats"
