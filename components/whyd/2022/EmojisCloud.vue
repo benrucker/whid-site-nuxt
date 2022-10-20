@@ -3,7 +3,9 @@
     <div class="title text-center">
       <h4>Most Used Emojis! 🎉</h4>
     </div>
-    <canvas :ref="'canvas'"></canvas>
+    <div id="canvas-size" ref="canvasSize">
+      <canvas :ref="'canvas'"></canvas>
+    </div>
     <img
       v-for="emoji in emojis"
       :id="emoji"
@@ -34,7 +36,7 @@ export default {
       minScale: 20,
       maxScale: 50,
 
-      interval: 0,
+      intervals: 0,
       resizeListener: new AbortController()
     }
   },
@@ -57,7 +59,7 @@ export default {
     })
   },
   beforeDestroy() {
-    clearInterval(this.interval)
+    this.intervals.forEach(clearInterval)
     this.resizeListener.abort()
   },
   methods: {
@@ -77,14 +79,22 @@ export default {
         )
       })
 
-      this.interval = setInterval(() => {
-        this.render()
-      }, 30)
+      this.intervals = [
+        setInterval(() => {
+          this.render()
+        }, 30),
+        setInterval(() => {
+          this.emojiPlanets.forEach((planet) => {
+            planet.squish()
+          })
+        }, 500)
+      ]
     },
     resizeCanvas() {
       const canvas = this.$refs.canvas
+      const size = this.$refs.canvasSize
       const dpr = window.devicePixelRatio
-      const rect = canvas.getBoundingClientRect()
+      const rect = size.getBoundingClientRect()
       canvas.width = rect.width * dpr
       canvas.height = rect.height * dpr
       canvas.getContext('2d').scale(dpr, dpr)
@@ -128,16 +138,31 @@ class Emoji {
     this.yvel = Math.random()
     this.diameter = diameter
     this.mass = diameter * diameter
+    this.squishValue1 = 0
+    this.squishValue2 = 0
+    this.squishValue3 = 0
+    this.squishValue4 = 0
+    this.squish()
   }
 
   draw(ctx) {
     ctx.drawImage(
       this.emoji,
-      this.x + Math.random(),
-      this.y + Math.random(),
-      this.diameter + Math.random(),
-      this.diameter + Math.random()
+      this.x + this.squishValue1,
+      this.y + this.squishValue2,
+      this.diameter + this.squishValue3,
+      this.diameter + this.squishValue4
     )
+  }
+
+  squish() {
+    function calc() {
+      return (Math.random() - 0.5) * 4
+    }
+    this.squishValue1 = calc()
+    this.squishValue2 = calc()
+    this.squishValue3 = calc()
+    this.squishValue4 = calc()
   }
 
   move(delta) {
@@ -197,9 +222,17 @@ class Emoji {
 }
 
 canvas {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 10px;
   width: 100%;
   height: 100%;
-  margin: 0 40px 0 20px;
+}
+
+#canvas-size {
+  position: relative;
+  width: 95%;
+  height: 200px;
+  margin-right: 0 20px 0 10px;
 }
 </style>
