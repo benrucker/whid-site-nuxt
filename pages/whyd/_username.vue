@@ -14,11 +14,21 @@
             { name: 'JermaBot', count: 10 }
           ],
           mostUsedEmojis: [
-            { emoji: '👍', count: 50 },
-            { emoji: '👎', count: 40 },
-            { emoji: '🤔', count: 30 },
-            { emoji: '🤣', count: 20 },
-            { emoji: '😂', count: 10 }
+            { emoji: 'ahegao1', count: 50 },
+            { emoji: 'amogus', count: 40 },
+            { emoji: 'benheh', count: 30 },
+            { emoji: 'cheeto', count: 20 },
+            { emoji: 'upvote', count: 10 },
+            { emoji: 'downvote', count: 5 },
+            { emoji: 'ford', count: 5 },
+            { emoji: 'gunright', count: 4 },
+            { emoji: 'johndgemental', count: 3 },
+            { emoji: 'komodohype', count: 2 },
+            { emoji: 'lfg', count: 1 },
+            { emoji: 'myson', count: 1 },
+            { emoji: 'shredward', count: 20 },
+            { emoji: 'troll', count: 1 },
+            { emoji: 'voredoor', count: 1 }
           ]
         },
         user: { userWordCountThisYear: 20 }
