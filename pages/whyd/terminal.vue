@@ -1,13 +1,42 @@
 <template>
-  <Whyd2022Terminal></Whyd2022Terminal>
+  <div
+    id="page"
+    @mouseup="terminalMouseUp"
+    @mousemove="terminalMouseMove($event)"
+  >
+    <Whyd2022Terminal ref="terminal" />
+  </div>
 </template>
 
 <script>
 export default {
-  // data() {},
-  mounted() {},
-  methods: {}
+  layout: 'blank',
+  data() {
+    return {
+      terminalRef: null
+    }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.terminalRef = this.$refs.terminal
+    })
+  },
+  methods: {
+    terminalMouseUp() {
+      this.$refs.terminal.terminalMouseUp()
+    },
+    terminalMouseMove(e) {
+      this.terminalRef.terminalMouseMove(e)
+    }
+  }
 }
 </script>
 
-<style></style>
+<style scoped>
+#page {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+</style>
