@@ -10,7 +10,7 @@
 export default {
   props: {
     msgId: {
-      type: String,
+      type: Number,
       required: true
     },
     isLastInGroup: {

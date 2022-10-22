@@ -2,7 +2,7 @@
   <Whyd2022ChatLeagueVsSomeoneChart
     :league-count="leagueCount"
     :other-count="apexCount"
-    other-name="apex"
+    other-name="everyone else"
     :leaguers="leaguers"
     :apexers="apexers"
   />

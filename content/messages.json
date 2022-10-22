@@ -197,7 +197,8 @@
     {
       "side": "right",
       "author": "Shigure",
-      "type": "LeagueVsAllChart"
+      "type": "LeagueVsAllChart",
+      "hideBubble": true
     },
     {
       "content": "...",
