@@ -139,8 +139,8 @@ export default {
       document.querySelectorAll('.image-div img').forEach((img) => {
         const delay = Math.random() * 3000
         setTimeout(() => {
-          const randX = Math.random() * 10 - 5
-          const randY = Math.random() * 10 - 5
+          const randX = Math.random() * 12 - 6
+          const randY = Math.random() * 12 - 6
           const randZ = Math.random() * 10 - 5
           img.style.setProperty(
             'transform',
