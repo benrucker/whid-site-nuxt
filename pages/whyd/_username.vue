@@ -1,44 +1,16 @@
 <template>
-  <div id="conversation" class="container" @click="onClick">
+  <div
+    v-if="stats != null"
+    id="conversation"
+    class="container"
+    @click="onClick"
+  >
     <Whyd2022Message
       v-for="(msg, index) in displayed"
       :key="msg.id"
-      :stats="{
-        server: {
-          messageCountThisYear: 50,
-          usersRankedByMessageCount: [
-            { name: 'bebenebenebeb', count: 50 },
-            { name: 'fops', count: 40 },
-            { name: 'noss', count: 30 },
-            { name: 'El Jefe', count: 20 },
-            { name: 'JermaBot', count: 10 }
-          ],
-          mostUsedEmojis: [
-            { emoji: 'ahegao1', count: 50 },
-            { emoji: 'amogus', count: 40 },
-            { emoji: 'benheh', count: 30 },
-            { emoji: 'cheeto', count: 20 },
-            { emoji: 'upvote', count: 10 },
-            { emoji: 'downvote', count: 5 },
-            { emoji: 'ford', count: 5 },
-            { emoji: 'gunright', count: 4 },
-            { emoji: 'johndgemental', count: 3 },
-            { emoji: 'komodohype', count: 2 },
-            { emoji: 'lfg', count: 1 },
-            { emoji: 'myson', count: 1 },
-            { emoji: 'shredward', count: 20 },
-            { emoji: 'troll', count: 1 },
-            { emoji: 'voredoor', count: 1 }
-          ]
-        },
-        user: { userWordCountThisYear: 20 }
-      }"
-      :is-last-in-group="
-        !displayed[index + 1] || displayed[index + 1].author !== msg.author
-      "
-      :is-first-in-group="
-        !displayed[index - 1] || displayed[index - 1].author !== msg.author
-      "
+      :stats="stats"
+      :is-last-in-group="displayed[index + 1]?.author !== msg.author"
+      :is-first-in-group="displayed[index - 1]?.author !== msg.author"
       :msg="msg"
       :index="index"
     />
@@ -68,6 +40,11 @@
 
 <script>
 export default {
+  asyncData({ params }) {
+    return {
+      username: params.username
+    }
+  },
   data() {
     return {
       messages: [],
@@ -76,7 +53,8 @@ export default {
       showTyping: true,
       waitingToAutomaticallyAdvance: false,
       autoAdvanceTimeout: undefined,
-      debugShowAll: true
+      debugShowAll: false,
+      stats: null
     }
   },
   async fetch() {
@@ -85,7 +63,17 @@ export default {
       v.id = i
     })
   },
-  mounted() {
+  async mounted() {
+    const server = await fetch('/whyd/2022/data/server.json').then((r) =>
+      r.json()
+    )
+    const namesToIds = server.namesToIds
+    const user = await fetch(
+      `/whyd/2022/data/${namesToIds[this.username]}.json`
+    ).then((r) => r.json())
+
+    this.stats = { server, user }
+
     setTimeout(() => {
       if (this.debugShowAll) {
         let i = this.messages.length

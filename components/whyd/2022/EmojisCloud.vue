@@ -41,7 +41,23 @@ export default {
     }
   },
   mounted() {
-    this.ranks = this.stats.server.mostUsedEmojis
+    this.ranks = [
+      { emoji: 'ahegao1', count: 50 },
+      { emoji: 'amogus', count: 40 },
+      { emoji: 'benheh', count: 30 },
+      { emoji: 'cheeto', count: 20 },
+      { emoji: 'upvote', count: 10 },
+      { emoji: 'downvote', count: 5 },
+      { emoji: 'ford', count: 5 },
+      { emoji: 'gunright', count: 4 },
+      { emoji: 'johndgemental', count: 3 },
+      { emoji: 'komodohype', count: 2 },
+      { emoji: 'lfg', count: 1 },
+      { emoji: 'myson', count: 1 },
+      { emoji: 'shredward', count: 20 },
+      { emoji: 'troll', count: 1 },
+      { emoji: 'voredoor', count: 1 }
+    ]
     this.emojis = this.ranks.map((x) => x.emoji)
     this.counts = this.ranks.map((x) => x.count.toLocaleString())
     this.maxCount = Math.max(...this.ranks.map((x) => x.count))

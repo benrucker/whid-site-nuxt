@@ -1,5 +1,5 @@
 <template>
-  <span>
+  <span class="parsed-text">
     <span v-for="token in parsedContent" :key="token.text" :class="token.styles"
       ><span v-if="token.text != null">{{ token.text }}</span
       ><img v-else :src="token.src"
@@ -23,8 +23,13 @@ export default {
     return {
       parsedContent: [],
       values: {
-        messageCountThisYear: () => this.stats.server.messageCountThisYear,
-        userWordCountThisYear: () => this.stats.user.userWordCountThisYear
+        messageCountThisYear: () => this.stats.server.totalMessages,
+        userWordCountThisYear: () =>
+          this.stats.user['Number of Words Sent Per User'],
+        userMessageCountThisYear: () =>
+          this.stats.user['Number of Messages per User'],
+        userMessagePercentageThisYear: () =>
+          this.stats.user['Percentage of Messages per Users']
       }
     }
   },
@@ -49,9 +54,28 @@ function parseValue(data, values) {
   const nameAndStyle = data.slice(2, -2)
   const [valueName, styles] = nameAndStyle.split(' | ')
   if (valueName in values) {
-    return { text: values[valueName](), styles }
+    return { text: getValue(values, valueName), styles }
   } else {
     return { text: valueName, styles }
+  }
+}
+
+function getValue(values, valueName) {
+  if (valueName in values) {
+    const value = values[valueName]()
+    if (typeof value === 'number') {
+      return value.toLocaleString()
+      // eslint-disable-next-line eqeqeq
+    } else if (Number.parseInt(value) == value) {
+      return Number.parseInt(value).toLocaleString()
+      // eslint-disable-next-line eqeqeq
+    } else if (Number.parseFloat(value) == value) {
+      return Number.parseFloat(value).toLocaleString()
+    } else {
+      return value
+    }
+  } else {
+    return valueName
   }
 }
 
@@ -68,34 +92,34 @@ function parseEmoji(data) {
 </script>
 
 <style>
-.bold {
+.parsed-text .bold {
   font-weight: bold;
 }
 
-.italic {
+.parsed-text .italic {
   font-style: oblique;
 }
 
-.number {
+.parsed-text .number {
   font-family: monospace;
   border: 2px;
   text-shadow: 0px 0px 5px rgb(255, 255, 255);
 }
 
-.channel,
-.role,
-.mention {
+.parsed-text .channel,
+.parsed-text .role,
+.parsed-text .mention {
   background-color: hsla(235, 85%, 64.7%, 0.7);
   border-radius: 5px;
   color: white;
   padding: 0 2px;
 }
 
-.channel:hover {
+.parsed-text .channel:hover {
   background-color: hsl(235, 86%, 65%);
 }
 
-img {
+.parsed-text img {
   height: 1em;
 }
 </style>
