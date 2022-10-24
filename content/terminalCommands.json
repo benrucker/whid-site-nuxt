@@ -1,0 +1,44 @@
+{
+  "peas": {
+    "prettyName": "🥫",
+    "dependencies": ["1"]
+  },
+  "nerd": {
+    "prettyName": "🤓",
+    "dependencies": ["1"]
+  },
+  "test": {
+    "prettyName": "proofOfConcept",
+    "dependencies": ["1"],
+    "functionName": "testFunction"
+  },
+  "9": {
+    "prettyName": "Nine"
+  },
+  "8": {
+    "prettyName": "Eight",
+    "dependencies": ["7"]
+  },
+  "7": {
+    "prettyName": "Seven"
+  },
+  "6": {
+    "prettyName": "Six"
+  },
+  "5": {
+    "prettyName": "Five"
+  },
+  "4": {
+    "prettyName": "Four",
+    "dependencies": ["3"]
+  },
+  "3": {
+    "prettyName": "Three"
+  },
+  "2": {
+    "prettyName": "Two"
+  },
+  "1": {
+    "prettyName": "One"
+  }
+}
