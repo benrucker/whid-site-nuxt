@@ -9,12 +9,8 @@
       v-for="(msg, index) in displayed"
       :key="msg.id"
       :stats="stats"
-      :is-last-in-group="
-        !displayed[index + 1] || displayed[index + 1].author !== msg.author
-      "
-      :is-first-in-group="
-        !displayed[index - 1] || displayed[index - 1].author !== msg.author
-      "
+      :is-last-in-group="displayed[index + 1]?.author !== msg.author"
+      :is-first-in-group="displayed[index - 1]?.author !== msg.author"
       :msg="msg"
       :index="index"
     />
@@ -57,7 +53,7 @@ export default {
       showTyping: true,
       waitingToAutomaticallyAdvance: false,
       autoAdvanceTimeout: undefined,
-      debugShowAll: true,
+      debugShowAll: false,
       stats: null
     }
   },
@@ -66,7 +62,6 @@ export default {
     this.messages.forEach((v, i) => {
       v.id = i
     })
-    // get data from static/whyd/2022/data/*
   },
   async mounted() {
     const server = await fetch('/whyd/2022/data/server.json').then((r) =>
