@@ -192,7 +192,7 @@ export default {
     },
     executeCommandText(lines) {
       // takes a list of processed text lines and puts the terminal in clickContinue mode to read through them
-      this.terminalLinesQueue = lines // overwrite any other terminal lines that may exist
+      this.terminalLinesQueue = lines.reverse() // overwrite any other terminal lines that may exist
       this.terminalMode = mode.clickContinue
       this.isShowProceed = true
       this.continueText() // add this in a nextTick if issues arise?
@@ -213,7 +213,7 @@ export default {
         { content: val1Response, class: '' }
       ]
 
-      this.executeCommandText(testLines.reverse())
+      this.executeCommandText(testLines)
     }
 
     // #endregion
