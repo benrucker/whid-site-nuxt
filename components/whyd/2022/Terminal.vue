@@ -6,8 +6,12 @@
         @clicked="terminalMouseDown"
       />
       <div id="textViewport" class="center" @click="focusInput">
-        <p v-for="(line, index) in displayedTerminalLines" :key="index">
-          {{ line }}
+        <p
+          v-for="(line, index) in displayedTerminalLines"
+          :key="index"
+          :class="line.class"
+        >
+          {{ line.content }}
         </p>
         <Whyd2022TerminalUserInputArea
           ref="inputArea"
@@ -16,14 +20,6 @@
         />
       </div>
     </div>
-    <!-- <div v-show="!isShowTerminal" class="redo">
-      <i
-        class="bi bi-arrow-clockwise"
-        style="cursor: pointer"
-        @click="toggleTerminalVisibility"
-      >
-      </i>
-    </div> -->
   </div>
 </template>
 
@@ -33,7 +29,9 @@ export default {
   data() {
     return {
       isShowTerminal: true,
-      displayedTerminalLines: ['C:/whid.live/whyd/22/username.exe'],
+      displayedTerminalLines: [
+        { content: 'C:/whid.live/whyd/22/username.exe', class: '' }
+      ],
       offsetX: 40,
       offsetY: 40,
       dragging: false
@@ -58,12 +56,10 @@ export default {
       this.$refs.inputArea.focusInput()
     },
     moveTerminal(x, y) {
-      console.log('moving to', x, y)
       const terminal = this.$refs.terminal
       terminal.style.left = x + 'px'
       terminal.style.top = y + 'px'
     },
-
     terminalMouseMove(event) {
       // called externally
       if (this.dragging) {
@@ -73,7 +69,6 @@ export default {
         )
       }
     },
-
     terminalMouseDown(offsetX, offsetY) {
       this.dragging = true
       this.offsetX = offsetX
@@ -82,7 +77,6 @@ export default {
     terminalMouseUp() {
       // called externally
       this.dragging = false
-      console.log('up')
     }
   }
 }
@@ -132,5 +126,13 @@ export default {
   color: var(--primary);
   width: 50px;
   height: 50px;
+}
+
+p.error-text {
+  color: red;
+}
+
+p.italic {
+  font-style: italic;
 }
 </style>

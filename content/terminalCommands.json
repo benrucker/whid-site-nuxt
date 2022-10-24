@@ -3,9 +3,14 @@
     "prettyName": "🥫",
     "dependencies": ["1"]
   },
-  "Nerd": {
+  "nerd": {
     "prettyName": "🤓",
     "dependencies": ["1"]
+  },
+  "test": {
+    "prettyName": "proofOfConcept",
+    "dependencies": ["1"],
+    "functionName": "testFunction"
   },
   "9": {
     "prettyName": "Nine"
@@ -34,7 +39,6 @@
     "prettyName": "Two"
   },
   "1": {
-    "prettyName": "One",
-    "functionName": "testFunction"
+    "prettyName": "One"
   }
 }

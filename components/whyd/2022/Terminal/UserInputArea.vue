@@ -11,7 +11,8 @@
     <a
       v-if="isShowProceed && terminalMode === mode.clickContinue"
       style="cursor: pointer"
-      @click="addLine"
+      class="blink"
+      @click="continueText"
     >
       Click to continue
     </a>
@@ -62,13 +63,7 @@ export default {
       userInput: '',
       isShowProceed: false,
       terminalLinesQueue: [
-        'adding Line2...',
-        'adding Line3...',
-        'adding Line4...',
-        'adding Line6...',
-        'where if is Line5...',
-        'oh found itadding Line5...',
-        'adding Line7...'
+        'This line should never appear. Ff it does, Ethan fucked up probably'
       ]
     }
   },
@@ -111,20 +106,10 @@ export default {
       })
     }
     this.terminalLinesQueue.reverse()
+    console.log(this.methods)
   },
   methods: {
-    // addLineFromQueue() {
-    //   const line = this.terminalLinesQueue.pop()
-    //   if (line) {
-    //     this.displayedTerminalLines.push(line)
-    //   }
-    //   if (this.terminalLinesQueue.length <= 0) {
-    //     this.isShowProceed = false
-    //   }
-    //   this.$nextTick(() => {
-    //     document.getElementById('last')?.scrollIntoView({ block: 'start' })
-    //   })
-    // },
+    // #region Page Control Functions
     focusInput() {
       if (
         this.terminalMode === mode.textInput ||
@@ -136,40 +121,48 @@ export default {
     scrollToBottom() {
       this.$emit('scrollToBottom')
     },
+    // #endregion
+    // #region User Input Control Functions
     submitTextCommand() {
       // NEEDS TO BE UPDATED TO WORK WITH TERMINALCOMMANDS
+      const input = this.userInput
       this.$refs.terminalTextInput.disabled = true
-      // this.addTextLine(`> ${this.userInput}`)
-      this.$emit('addTextLine', `> ${this.userInput}`)
+
+      this.$emit('addTextLine', { content: `> ${input}`, class: '' })
+      this.processCommand(input)
+
       this.userInput = ''
-      this.scrollToBottom()
       this.$refs.terminalTextInput.disabled = false
+      this.scrollToBottom()
       this.focusInput()
     },
     optionButtonClick(_, commandKey) {
-      // set this.executing = true
       // event parameter is discarded
-      const command = this.terminalCommands[commandKey]
-      // this.addTextLine(`> ${commandKey}`)
-      this.$emit('addTextLine', `> ${commandKey}`)
-      this.terminalCommands[commandKey].hasBeenRun = true
-      const func = this[command.functionName]
-      if (typeof func === 'function') {
-        func()
-      }
+      // const command = this.terminalCommands[commandKey]
+      this.$emit('addTextLine', { content: `> ${commandKey}`, class: '' })
+      this.processCommand(commandKey)
       this.scrollToBottom()
     },
-    toggleButtons() {
-      if (
-        this.terminalMode === mode.buttonInput ||
-        this.terminalMode === mode.hybridInput
-      ) {
-        this.terminalMode = mode.textInput
+    processCommand(input) {
+      const processed = input.trim().toLowerCase()
+      console.log(processed)
+      const valid = Object.keys(this.terminalCommands)
+      if (valid.includes(processed)) {
+        this.terminalCommands[input].hasBeenRun = true
+        const command = this.terminalCommands[input]
+        const func = this[command.functionName]
+        if (typeof func === 'function') {
+          func()
+        }
       } else {
-        this.terminalMode = mode.hybridInput
-        this.scrollToBottom()
+        this.$emit('addTextLine', {
+          content: `Error: Command not found '${processed}'`,
+          class: 'error-text'
+        })
       }
     },
+    // #endregion
+    // #region hybridInput Control Functions
     areDependenciesMet(dependencies) {
       if (!dependencies) {
         return true
@@ -181,9 +174,49 @@ export default {
       }
       return true
     },
+    // #endregion
+    // #region clickContinue Control Functions
+    continueText() {
+      const line = this.terminalLinesQueue.pop()
+      this.$emit('addTextLine', line)
+      if (this.terminalLinesQueue.length <= 0) {
+        this.isShowProceed = false
+        this.terminalMode = mode.hybridInput
+        this.$emit('addTextLine', { content: 'End of Command', class: '' })
+        this.$emit('addTextLine', {
+          content: '-----------------------------',
+          class: ''
+        })
+      }
+      this.scrollToBottom()
+    },
+    executeCommandText(lines) {
+      // takes a list of processed text lines and puts the terminal in clickContinue mode to read through them
+      this.terminalLinesQueue = lines // overwrite any other terminal lines that may exist
+      this.terminalMode = mode.clickContinue
+      this.isShowProceed = true
+      this.continueText() // add this in a nextTick if issues arise?
+    },
+    // #endregion
+    // #region Command Specific Functions
     testFunction() {
-      console.log('one')
+      // example command
+      const val1 = 85 // presumably load this from data
+      const val1Response =
+        val1 > 50
+          ? `Don't you think that's a little excessive?`
+          : `You gotta pump those numbers up`
+
+      const testLines = [
+        { content: 'Test line 1', class: '' },
+        { content: `you were a dick to trent ${val1} times`, class: '' },
+        { content: val1Response, class: '' }
+      ]
+
+      this.executeCommandText(testLines.reverse())
     }
+
+    // #endregion
   }
 }
 </script>

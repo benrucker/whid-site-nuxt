@@ -37,7 +37,6 @@ export default {
       this.timesCloseAttempted++
     },
     terminalMouseDown(event) {
-      console.log('doing')
       this.$emit(
         'clicked',
         event.clientX - this.topRef.getBoundingClientRect().left,
