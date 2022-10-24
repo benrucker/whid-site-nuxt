@@ -23,7 +23,7 @@
           }}</span>
           <span :class="'col-8 name fade fadein-' + (i + 10)">{{ user }}</span>
           <span :class="'col-2 count text-center fade fadein-' + i">{{
-            counts[i]
+            counts[i].toLocaleString()
           }}</span>
         </div>
       </div>
@@ -45,9 +45,10 @@ export default {
     }
   },
   mounted() {
-    const ranks = this.stats.server.usersRankedByMessageCount
-    this.users = ranks.slice(0, 5).map((x) => x.name)
-    this.counts = ranks.slice(0, 5).map((x) => x.count.toLocaleString())
+    const ranks = this.stats.server['Rank by Number of Messages per User']
+    const ids = Object.keys(ranks).slice(0, 5)
+    this.users = ids.map((id) => this.stats.server.idsToNames[id])
+    this.counts = ids.map((x) => ranks[x])
   },
   methods: {}
 }
@@ -100,10 +101,11 @@ export default {
   position: absolute;
   width: calc(var(--convo-width) - 150px);
   height: 100%;
-  padding-left: 60px;
+  padding-left: 0;
   padding-top: 0px;
   top: 2px;
   left: 0;
   z-index: 0;
+  transform: skew(-9deg);
 }
 </style>
