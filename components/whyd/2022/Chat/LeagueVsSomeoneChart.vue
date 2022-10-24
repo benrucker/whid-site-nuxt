@@ -44,6 +44,12 @@
 </template>
 
 <script>
+// TODO does the number interpolation take the right amount of time?
+// TODO do any users overlap the side with fewer pings?
+// TODO define a max distance for the roel with more pings to move
+// TODO define the lower-bound for the role with fewer pings
+//        (base it subjectively off the lowest possible value that will pass in here)
+
 export default {
   props: {
     stats: {
@@ -122,7 +128,7 @@ export default {
           const scale = data.pings
 
           const randX = Math.random() * 150 - 75
-          const randY = Math.random() * 280 - 140
+          const randY = Math.random() * 260 - 130
 
           child.style.setProperty(
             'transform',
@@ -279,7 +285,7 @@ export default {
   font-weight: 700;
   color: #fff;
   text-shadow: 0 0 10px #fff;
-  box-shadow: rgba(0, 0, 0, 0.5) 1.5px 2.5px 10px;
+  /* box-shadow: rgba(0, 0, 0, 0.5) 1.5px 2.5px 10px; */
 
   z-index: 2;
 }
