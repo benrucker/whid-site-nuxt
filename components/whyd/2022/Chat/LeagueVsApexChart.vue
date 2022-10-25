@@ -5,7 +5,10 @@
     :other-count="apexCount"
     other-name="apex"
     :leaguers="leaguers"
-    :apexers="apexers"
+    :others="apexers"
+    :min-value="minValue"
+    :max-value="maxValue"
+    :other-color="rightColor"
   />
 </template>
 
@@ -22,7 +25,10 @@ export default {
       leagueCount: 0,
       apexCount: 0,
       leaguers: [],
-      apexers: []
+      apexers: [],
+      minValue: 0,
+      maxValue: 0,
+      rightColor: '#d64d44'
     }
   },
   mounted() {
@@ -53,6 +59,10 @@ export default {
           avatar: '/whyd/2022/emojis/cheeto.png' // TODO this.stats.server.avatars[id]
         }
       })
+
+    const otherCount = this.stats.server['Number of Game Pings'].allOther
+    this.minValue = Math.min(this.leagueCount, otherCount, this.apexCount)
+    this.maxValue = Math.max(this.leagueCount, otherCount, this.apexCount)
   }
 }
 </script>

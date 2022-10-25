@@ -25,7 +25,7 @@
         </div>
         <div id="right" ref="right">
           <div
-            v-for="apexer of apexers"
+            v-for="apexer of others"
             :id="apexer.name"
             :key="apexer.name"
             :class="'image-div'"
@@ -49,6 +49,9 @@
 // TODO define a max distance for the roel with more pings to move
 // TODO define the lower-bound for the role with fewer pings
 //        (base it subjectively off the lowest possible value that will pass in here)
+// TODO make the random distance from the center for avatars inversely proportional with their scale (pyramid effect)
+// TODO edit background colors
+// TODO animation on start?
 
 export default {
   props: {
@@ -72,9 +75,21 @@ export default {
       type: Array,
       default: () => []
     },
-    apexers: {
+    others: {
       type: Array,
       default: () => []
+    },
+    minValue: {
+      type: Number,
+      default: 0
+    },
+    maxValue: {
+      type: Number,
+      default: 0
+    },
+    otherColor: {
+      type: String,
+      default: 'black'
     }
   },
   data() {
@@ -84,10 +99,14 @@ export default {
       perspectiveRef: null,
       intermediateLeagueCount: 0,
       intermediateOtherCount: 0,
-      numberUpper: 0
+      numberUpper: 0,
+      minCount: 0,
+      maxCount: 0
     }
   },
   mounted() {
+    this.$refs.root.style = '--other-color: ' + this.otherColor
+
     setTimeout(() => {
       this.moveElementsIntoPlace()
       // this.moveCenterLine(leagueCount, otherCount)
@@ -95,7 +114,7 @@ export default {
         this.avatarWiggler = setInterval(this.wiggleAvatars, 4000)
       }, 100)
       this.numberUpper = setInterval(this.numberUp, 16)
-    }, 2000)
+    }, 2000) // TODO bring this back to 2000
 
     this.$nextTick(() => {
       this.rootRef = this.$refs.root
@@ -108,37 +127,86 @@ export default {
   },
   methods: {
     moveElementsIntoPlace() {
-      this.transformGraphElements(
-        'translate3d(25px, 0, 160px)',
-        this.$refs.left.children
+      this.minCount = Math.min(
+        ...this.leaguers.map((leaguer) => leaguer.pings),
+        ...this.others.map((other) => other.pings)
       )
+      this.maxCount = Math.max(
+        ...this.leaguers.map((leaguer) => leaguer.pings),
+        ...this.others.map((other) => other.pings)
+      )
+
+      let larger, smaller, proportion
+      if (this.leagueCount > this.otherCount) {
+        larger = this.$refs.left.children
+        smaller = this.$refs.right.children
+
+        proportion =
+          (this.otherCount - this.minValue) / (this.leagueCount - this.minValue)
+      } else {
+        larger = this.$refs.right.children
+        smaller = this.$refs.left.children
+
+        proportion =
+          (this.leagueCount - this.minValue) / (this.otherCount - this.minValue)
+      }
+
+      const maxZDist = 160
+      const minZDist = 80
+
+      const zDistance = (maxZDist - minZDist) * proportion + minZDist
+      const xDistance = -25 * proportion
+
+      this.transformGraphElements(`translate3d(25px, 0, ${maxZDist}px)`, larger)
       this.transformGraphElements(
-        'translate3d(0, 0, 60px)',
-        this.$refs.right.children
+        `translate3d(${xDistance}px, 0, ${zDistance}px)`,
+        smaller
       )
     },
     transformGraphElements(translate, children) {
+      let avatars = []
       for (const child of children) {
         if (child.tagName !== 'DIV') {
           child.style.setProperty('transform', translate)
         } else {
-          const data =
-            this.leaguers.find((leaguer) => leaguer.name === child.id) ||
-            this.apexers.find((apexer) => apexer.name === child.id)
-          const scale = data.pings
-
-          const randX = Math.random() * 150 - 75
-          const randY = Math.random() * 260 - 130
-
-          child.style.setProperty(
-            'transform',
-            `translate3d(${randX}px, ${randY}px, ${scale}px) scale(${
-              1 + scale / 100
-            })`,
-            'important'
-          )
-          child.style.setProperty('opacity', `1`)
+          // child is an avatar
+          avatars.push(child)
         }
+      }
+
+      avatars = avatars.sort((avatar, other) => {
+        const thisPings =
+          this.leaguers.find((leaguer) => leaguer.name === avatar.id) ||
+          this.others.find((apexer) => apexer.name === avatar.id)
+        const otherPings =
+          this.leaguers.find((leaguer) => leaguer.name === other.id) ||
+          this.others.find((apexer) => apexer.name === other.id)
+        return thisPings.pings - otherPings.pings
+      })
+
+      let i = 0
+      for (const avatar of avatars) {
+        const data =
+          this.leaguers.find((leaguer) => leaguer.name === avatar.id) ||
+          this.others.find((apexer) => apexer.name === avatar.id)
+        const scale = data.pings
+        const proportionalScale = (scale + 1 - this.minCount) / this.maxCount
+
+        // choose an X and Y position for the avatar
+        // in a ring around (0, 0), closer to the center the larger the scale
+        const angle = i++ % (2 * Math.PI)
+        const radius = 30 * Math.log(proportionalScale) ?? 1 + 3
+        const x = (radius / 2) * Math.cos(angle)
+        const y = radius * Math.sin(angle)
+
+        console.log(proportionalScale, scale, x, y, radius, angle)
+
+        avatar.style.setProperty(
+          'transform',
+          `translate3d(${x}px, ${y}px, ${scale}px) scale(${1 + scale / 100})`,
+          'important'
+        )
+        avatar.style.setProperty('opacity', `1`)
       }
     },
     wiggleAvatars() {
@@ -227,7 +295,7 @@ export default {
   /* margin: -4px; */
 
   --league-color: #18191c;
-  --apex-color: #d64d44;
+  --other-color: #d64d44;
 
   cursor: default;
 }
@@ -288,6 +356,9 @@ export default {
   /* box-shadow: rgba(0, 0, 0, 0.5) 1.5px 2.5px 10px; */
 
   z-index: 2;
+
+  white-space: pre;
+  text-align: center;
 }
 
 .count {
@@ -358,7 +429,7 @@ canvas {
       var(--league-color),
       rgb(31, 13, 13) var(--center),
       rgb(39, 26, 26) var(--center),
-      var(--apex-color)
+      var(--other-color)
     );
   opacity: 1;
   border-radius: 20px;
