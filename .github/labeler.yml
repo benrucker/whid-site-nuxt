@@ -1,0 +1,12 @@
+whyd22 terminal:
+- components/whyd/2022/Terminal/*
+  components/whyd/2022/Terminal/**/*
+  components/whyd/2022/Terminal.vue
+
+whyd22 chats:
+- components/whyd/2022/Chat/{!*Chart*,!*Leaderboard*}
+ 
+whyd22 chart:
+- components/whyd/2022/Chat/{*Chart*,*Leaderboard*}
+  components/whyd/2022/Echart/*
+  components/whyd/2022/Echart/**/*
