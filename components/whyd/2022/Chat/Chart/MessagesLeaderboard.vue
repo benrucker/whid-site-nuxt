@@ -4,7 +4,7 @@
       <h4>Who sent the most messages?</h4>
     </div>
     <div id="messages">
-      <Whyd2022EchartBarH
+      <Whyd2022ChatChartEchartBarH
         :bg-color="'transparent'"
         :color="'#4c60f3'"
         :text-color="'#303030'"
@@ -18,11 +18,9 @@
           :key="user.name"
           class="row close align-items-center"
         >
-          <span :class="'col-1 rank text-center fade fadein-' + (i + 5)">{{
-            i + 1
-          }}</span>
-          <span :class="'col-8 name fade fadein-' + (i + 10)">{{ user }}</span>
-          <span :class="'col-2 count text-center fade fadein-' + i">{{
+          <span class="col-1 rank text-center fade">{{ i + 1 }}</span>
+          <span class="col-8 name fade">{{ user }}</span>
+          <span class="col-2 count text-center fade">{{
             counts[i].toLocaleString()
           }}</span>
         </div>
@@ -54,7 +52,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 #messages {
   cursor: default;
   padding-left: 2.3em;

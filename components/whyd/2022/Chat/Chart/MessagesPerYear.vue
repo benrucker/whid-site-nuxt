@@ -1,5 +1,5 @@
 <template>
-  <Whyd2022EchartBar
+  <Whyd2022ChatChartEchartBar
     :bg-color="'transparent'"
     :color="'#4c60f3'"
     :text-color="'#303030'"

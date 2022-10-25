@@ -1,12 +1,11 @@
 <template>
-  <Whyd2022ChatLeagueVsSomeoneChart
+  <Whyd2022ChatChartLeagueVsSomeone
+    v-if="leaguers && apexers"
     :league-count="leagueCount"
-    :other-count="otherCount"
-    other-name="everything
-other than
-league"
+    :other-count="apexCount"
+    other-name="apex"
     :leaguers="leaguers"
-    :others="others"
+    :others="apexers"
     :min-value="minValue"
     :max-value="maxValue"
     :other-color="rightColor"
@@ -27,21 +26,22 @@ export default {
       leagueCount: 0,
       apexCount: 0,
       leaguers: [],
-      others: [],
+      apexers: [],
       minValue: 0,
       maxValue: 0,
-      rightColor: '#444dd6',
-      rightCenterColor: 'rgb(39, 43, 65)'
+      rightColor: '#d64d44',
+      rightCenterColor: 'rgb(65, 43, 39)'
     }
   },
   mounted() {
     this.leagueCount = this.stats.server['Number of Game Pings']['@leg']
-    this.otherCount = this.stats.server['Number of Game Pings'].allOther
+    this.apexCount =
+      this.stats.server['Number of Game Pings']['@gaysex legends']
 
     const leaguePings =
       this.stats.server['Number of pings from each user']['@leg']
-    const otherPings =
-      this.stats.server['Number of pings from each user'].allOther
+    const apexPings =
+      this.stats.server['Number of pings from each user']['@gaysex legends']
 
     this.leaguers = Object.entries(leaguePings)
       .filter(([_, count]) => count > 0)
@@ -52,7 +52,7 @@ export default {
           avatar: this.stats.server.avatars[id]
         }
       })
-    this.others = Object.entries(otherPings)
+    this.apexers = Object.entries(apexPings)
       .filter(([_, count]) => count > 0)
       .map(([id, count]) => {
         return {
@@ -61,6 +61,10 @@ export default {
           avatar: this.stats.server.avatars[id]
         }
       })
+
+    const otherCount = this.stats.server['Number of Game Pings'].allOther
+    this.minValue = Math.min(this.leagueCount, otherCount, this.apexCount)
+    this.maxValue = Math.max(this.leagueCount, otherCount, this.apexCount)
   }
 }
 </script>

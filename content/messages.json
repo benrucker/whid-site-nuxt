@@ -26,7 +26,7 @@
       "author": "JermaBot"
     },
     {
-      "type": "MessagesPerYearBarChart",
+      "type": "ChartMessagesPerYear",
       "content": "",
       "side": "left",
       "author": "JermaBot"
@@ -67,12 +67,12 @@
       "author": "JermaBot"
     },
     {
-      "type": "MessagesLeaderboard",
+      "type": "ChartMessagesLeaderboard",
       "side": "left",
       "author": "JermaBot"
     },
     {
-      "type": "EmojisCloud",
+      "type": "ChartEmojisCloud",
       "side": "left",
       "author": "JermaBot"
     },
@@ -180,7 +180,7 @@
     {
       "side": "right",
       "author": "Shigure",
-      "type": "LeagueVsApexChart",
+      "type": "ChartLeagueVsApex",
       "hideBubble": true
     },
     {
@@ -197,7 +197,7 @@
     {
       "side": "right",
       "author": "Shigure",
-      "type": "LeagueVsAllChart",
+      "type": "ChartLeagueVsAll",
       "hideBubble": true
     },
     {
