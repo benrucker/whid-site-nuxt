@@ -433,8 +433,8 @@ canvas {
   transform-origin: center;
   background-image: radial-gradient(
       circle,
-      rgba(17, 231, 238, 0.05) 0%,
-      rgba(53, 25, 4, 0.4) 150%
+      rgba(224, 254, 255, 0.07) 0%,
+      rgba(27, 13, 2, 0.8) 150%
     ),
     linear-gradient(
       to right,
