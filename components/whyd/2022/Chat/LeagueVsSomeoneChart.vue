@@ -206,7 +206,7 @@ export default {
           // choose an X and Y position for the avatar
           // in a ring around (0, 0), closer to the center the larger the scale
           const angle = i++ % (2 * Math.PI)
-          const radius = 30 * Math.log(proportionalScale) ?? 1 + 3
+          const radius = 35 * Math.log(proportionalScale) ?? 1 + 3
           const x = (radius / 2) * Math.cos(angle)
           const y = radius * Math.sin(angle)
 

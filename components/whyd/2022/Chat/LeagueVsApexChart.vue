@@ -49,7 +49,7 @@ export default {
         return {
           name: this.stats.server.idsToNames[id],
           pings: count,
-          avatar: '/whyd/2022/emojis/cheeto.png' // TODO this.stats.server.avatars[id]
+          avatar: this.stats.server.avatars[id]
         }
       })
     this.apexers = Object.entries(apexPings)
@@ -58,7 +58,7 @@ export default {
         return {
           name: this.stats.server.idsToNames[id],
           pings: count,
-          avatar: '/whyd/2022/emojis/cheeto.png' // TODO this.stats.server.avatars[id]
+          avatar: this.stats.server.avatars[id]
         }
       })
 
