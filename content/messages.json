@@ -32,7 +32,7 @@
       "author": "JermaBot"
     },
     {
-      "content": "I count a grand total of {{messageCountThisYear | number}} in 2022 alone! Wowza! Compliments the bar chart quite well if I do say so myself.",
+      "content": "I count a grand total of {{messageCountThisYear | number}} in 2022 alone! Wowza! Complements the bar chart quite well if I do say so myself.",
       "side": "left",
       "author": "JermaBot"
     },
@@ -180,7 +180,8 @@
     {
       "side": "right",
       "author": "Shigure",
-      "type": "LeagueVsApexChart"
+      "type": "LeagueVsApexChart",
+      "hideBubble": true
     },
     {
       "content": "Look, Shigure. These really are great stats, but I don't think trying to split the server between League and Apex is the best idea for our celebratio-",
@@ -196,7 +197,8 @@
     {
       "side": "right",
       "author": "Shigure",
-      "type": "LeagueVsAllChart"
+      "type": "LeagueVsAllChart",
+      "hideBubble": true
     },
     {
       "content": "...",
