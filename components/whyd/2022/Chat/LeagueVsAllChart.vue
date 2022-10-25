@@ -2,13 +2,15 @@
   <Whyd2022ChatLeagueVsSomeoneChart
     :league-count="leagueCount"
     :other-count="otherCount"
-    other-name="everyone
-else"
+    other-name="everything
+other than
+league"
     :leaguers="leaguers"
     :others="others"
     :min-value="minValue"
     :max-value="maxValue"
     :other-color="rightColor"
+    :other-center-color="rightCenterColor"
   />
 </template>
 
@@ -28,7 +30,8 @@ export default {
       others: [],
       minValue: 0,
       maxValue: 0,
-      rightColor: '#444dd6'
+      rightColor: '#444dd6',
+      rightCenterColor: 'rgb(39, 43, 65)'
     }
   },
   mounted() {

@@ -9,6 +9,7 @@
     :min-value="minValue"
     :max-value="maxValue"
     :other-color="rightColor"
+    :other-center-color="rightCenterColor"
   />
 </template>
 
@@ -28,7 +29,8 @@ export default {
       apexers: [],
       minValue: 0,
       maxValue: 0,
-      rightColor: '#d64d44'
+      rightColor: '#d64d44',
+      rightCenterColor: 'rgb(65, 43, 39)'
     }
   },
   mounted() {

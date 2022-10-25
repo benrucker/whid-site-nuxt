@@ -90,6 +90,10 @@ export default {
     otherColor: {
       type: String,
       default: 'black'
+    },
+    otherCenterColor: {
+      type: String,
+      default: 'black'
     }
   },
   data() {
@@ -105,7 +109,13 @@ export default {
     }
   },
   mounted() {
-    this.$refs.root.style = '--other-color: ' + this.otherColor
+    this.$refs.root.style =
+      '--other-color: ' +
+      this.otherColor +
+      '; ' +
+      '--other-center-color: ' +
+      this.otherCenterColor +
+      ';'
 
     setTimeout(() => {
       this.moveElementsIntoPlace()
@@ -114,7 +124,7 @@ export default {
         this.avatarWiggler = setInterval(this.wiggleAvatars, 4000)
       }, 100)
       this.numberUpper = setInterval(this.numberUp, 16)
-    }, 2000) // TODO bring this back to 2000
+    }, 1000) // TODO bring this back to 2000
 
     this.$nextTick(() => {
       this.rootRef = this.$refs.root
@@ -174,40 +184,42 @@ export default {
         }
       }
 
-      avatars = avatars.sort((avatar, other) => {
-        const thisPings =
-          this.leaguers.find((leaguer) => leaguer.name === avatar.id) ||
-          this.others.find((apexer) => apexer.name === avatar.id)
-        const otherPings =
-          this.leaguers.find((leaguer) => leaguer.name === other.id) ||
-          this.others.find((apexer) => apexer.name === other.id)
-        return thisPings.pings - otherPings.pings
-      })
+      setTimeout(() => {
+        avatars = avatars.sort((avatar, other) => {
+          const thisPings =
+            this.leaguers.find((leaguer) => leaguer.name === avatar.id) ||
+            this.others.find((apexer) => apexer.name === avatar.id)
+          const otherPings =
+            this.leaguers.find((leaguer) => leaguer.name === other.id) ||
+            this.others.find((apexer) => apexer.name === other.id)
+          return thisPings.pings - otherPings.pings
+        })
 
-      let i = 0
-      for (const avatar of avatars) {
-        const data =
-          this.leaguers.find((leaguer) => leaguer.name === avatar.id) ||
-          this.others.find((apexer) => apexer.name === avatar.id)
-        const scale = data.pings
-        const proportionalScale = (scale + 1 - this.minCount) / this.maxCount
+        let i = 0
+        for (const avatar of avatars) {
+          const data =
+            this.leaguers.find((leaguer) => leaguer.name === avatar.id) ||
+            this.others.find((apexer) => apexer.name === avatar.id)
+          const scale = data.pings
+          const proportionalScale = (scale + 1 - this.minCount) / this.maxCount
 
-        // choose an X and Y position for the avatar
-        // in a ring around (0, 0), closer to the center the larger the scale
-        const angle = i++ % (2 * Math.PI)
-        const radius = 30 * Math.log(proportionalScale) ?? 1 + 3
-        const x = (radius / 2) * Math.cos(angle)
-        const y = radius * Math.sin(angle)
+          // choose an X and Y position for the avatar
+          // in a ring around (0, 0), closer to the center the larger the scale
+          const angle = i++ % (2 * Math.PI)
+          const radius = 30 * Math.log(proportionalScale) ?? 1 + 3
+          const x = (radius / 2) * Math.cos(angle)
+          const y = radius * Math.sin(angle)
 
-        console.log(proportionalScale, scale, x, y, radius, angle)
-
-        avatar.style.setProperty(
-          'transform',
-          `translate3d(${x}px, ${y}px, ${scale}px) scale(${1 + scale / 100})`,
-          'important'
-        )
-        avatar.style.setProperty('opacity', `1`)
-      }
+          avatar.style.setProperty(
+            'transform',
+            `translate3d(${x}px, ${y}px, ${60 * proportionalScale}px) scale(${
+              1 + proportionalScale
+            })`,
+            'important'
+          )
+          avatar.style.setProperty('opacity', `1`)
+        }
+      }, 1000)
     },
     wiggleAvatars() {
       document.querySelectorAll('.image-div img').forEach((img) => {
@@ -427,8 +439,8 @@ canvas {
     linear-gradient(
       to right,
       var(--league-color),
-      rgb(31, 13, 13) var(--center),
-      rgb(39, 26, 26) var(--center),
+      rgb(52, 52, 54) var(--center),
+      var(--other-center-color) var(--center),
       var(--other-color)
     );
   opacity: 1;
