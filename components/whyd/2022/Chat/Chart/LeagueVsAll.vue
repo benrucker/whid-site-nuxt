@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       leagueCount: 0,
-      apexCount: 0,
+      otherCount: 0,
       leaguers: [],
       others: [],
       minValue: 0,
