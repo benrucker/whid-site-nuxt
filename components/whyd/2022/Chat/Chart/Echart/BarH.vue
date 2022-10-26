@@ -141,9 +141,3 @@ export default {
   z-index: 0;
 }
 </style>
-
-<style>
-body {
-  margin: 0;
-}
-</style>
