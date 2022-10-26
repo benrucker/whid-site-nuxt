@@ -125,9 +125,3 @@ export default {
   min-height: 10px;
 }
 </style>
-
-<style>
-body {
-  margin: 0;
-}
-</style>
