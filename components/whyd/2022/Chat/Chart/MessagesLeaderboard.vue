@@ -1,26 +1,26 @@
 <template>
   <div>
-    <div class="title text-center">
+    <div class="lb-title text-center">
       <h4>Who sent the most messages?</h4>
     </div>
-    <div id="messages">
+    <div id="lb-messages">
       <Whyd2022ChatChartEchartBarH
         :bg-color="'transparent'"
         :color="'#4c60f3'"
         :text-color="'#303030'"
         :x-axis="counts"
         :y-axis="users"
-        class="chart"
+        class="lb-chart"
       />
-      <div class="text">
+      <div class="lb-text">
         <div
           v-for="(user, i) in users"
           :key="user.name"
           class="row close align-items-center"
         >
-          <span class="col-1 rank text-center fade">{{ i + 1 }}</span>
-          <span class="col-8 name fade">{{ user }}</span>
-          <span class="col-2 count text-center fade">{{
+          <span class="col-1 lb-rank text-center lb-fade">{{ i + 1 }}</span>
+          <span class="col-8 lb-name lb-fade">{{ user }}</span>
+          <span class="col-2 lb-count text-center lb-fade">{{
             counts[i].toLocaleString()
           }}</span>
         </div>
@@ -53,40 +53,36 @@ export default {
 </script>
 
 <style>
-#messages {
+#lb-messages {
   cursor: default;
   padding-left: 2.3em;
   width: calc(var(--convo-width) - 150px);
   position: relative;
 }
 
-.text {
+.lb-text {
   z-index: 1;
 }
 
-.rank {
+.lb-rank {
   font-weight: bold;
   font-style: italic;
   font-size: 2em;
 }
-.name {
+.lb-name {
   padding-left: 0.5em;
   font-size: 1.5em;
 }
-.count {
+.lb-count {
   font-size: 1em;
   padding-left: 1em;
 }
 
-.unit {
-  font-size: 1em;
+.lb-fade {
+  animation: 0.5s lb-fadein 0s ease-in-out forwards;
 }
 
-.fade {
-  animation: 0.5s fadein 0s ease-in-out forwards;
-}
-
-@keyframes fadein {
+@keyframes lb-fadein {
   0% {
     opacity: 0;
   }
@@ -95,7 +91,7 @@ export default {
   }
 }
 
-.chart {
+.lb-chart {
   position: absolute;
   width: calc(var(--convo-width) - 150px);
   height: 100%;

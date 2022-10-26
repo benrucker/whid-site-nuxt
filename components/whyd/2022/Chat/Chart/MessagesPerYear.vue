@@ -5,7 +5,7 @@
     :text-color="'#303030'"
     :y-axis="msgCounts"
     :x-axis="years"
-    class="chart"
+    class="msg-per-year"
   />
 </template>
 
@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style scoped>
-.chart {
+.msg-per-year {
   width: calc(var(--convo-width) - 160px);
   height: 200px;
   padding: 0px;

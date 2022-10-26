@@ -1,6 +1,9 @@
 <template>
   <span class="parsed-text">
-    <span v-for="token in parsedContent" :key="token.text" :class="token.styles"
+    <span
+      v-for="token in parsedContent"
+      :key="token.text !== '' ? token.text : token.src"
+      :class="token.styles"
       ><span v-if="token.text != null">{{ token.text }}</span
       ><img v-else :src="token.src"
     /></span>
