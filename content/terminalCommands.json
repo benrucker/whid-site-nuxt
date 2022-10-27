@@ -1,44 +1,68 @@
 {
+  "cd ..": {
+    "prettyName": "cd .."
+  },
   "peas": {
     "prettyName": "🥫",
-    "dependencies": ["1"]
+    "path": "/root/whyd",
+    "functionName": "testFunction"
   },
   "nerd": {
     "prettyName": "🤓",
-    "dependencies": ["1"]
+    "path": "/root/whyd",
+    "functionName": "testFunction"
   },
   "test": {
     "prettyName": "proofOfConcept",
     "dependencies": ["1"],
-    "functionName": "testFunction"
+    "functionName": "sampleFunction",
+    "path": "/root/whyd/test"
   },
   "9": {
-    "prettyName": "Nine"
+    "prettyName": "Nine",
+    "path": "/root/whyd/test",
+    "functionName": "testFunction"
   },
   "8": {
     "prettyName": "Eight",
-    "dependencies": ["7"]
+    "dependencies": ["7"],
+    "path": "/root/whyd/test",
+    "functionName": "testFunction"
   },
   "7": {
-    "prettyName": "Seven"
+    "prettyName": "Seven",
+    "path": "/root/whyd/test",
+    "functionName": "testFunction"
   },
   "6": {
-    "prettyName": "Six"
+    "prettyName": "Six",
+    "path": "/root/whyd/test",
+    "functionName": "testFunction"
   },
   "5": {
-    "prettyName": "Five"
+    "prettyName": "Five",
+    "path": "/root/whyd/test",
+    "functionName": "testFunction"
   },
   "4": {
     "prettyName": "Four",
-    "dependencies": ["3"]
+    "dependencies": ["3"],
+    "path": "/root/whyd/test",
+    "functionName": "testFunction"
   },
   "3": {
-    "prettyName": "Three"
+    "prettyName": "Three",
+    "path": "/root/whyd/test",
+    "functionName": "testFunction"
   },
   "2": {
-    "prettyName": "Two"
+    "prettyName": "Two",
+    "path": "/root/whyd/test",
+    "functionName": "testFunction"
   },
   "1": {
-    "prettyName": "One"
+    "prettyName": "One",
+    "path": "/root/whyd/test",
+    "functionName": "testFunction"
   }
 }
