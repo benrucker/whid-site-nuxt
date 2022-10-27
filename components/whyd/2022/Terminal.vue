@@ -6,13 +6,15 @@
         @clicked="terminalMouseDown"
       />
       <div id="textViewport" class="center" @click="focusInput">
-        <p
-          v-for="(line, index) in displayedTerminalLines"
-          :key="index"
-          :class="line.class"
-        >
-          {{ line.content }}
-        </p>
+        <div v-for="(text, index) in displayedTerminalContent" :key="index">
+          <p
+            v-for="(line, idx) of text.content.split('\n')"
+            :key="idx"
+            :class="text.class"
+          >
+            {{ line }}
+          </p>
+        </div>
         <Whyd2022TerminalUserInputArea
           ref="inputArea"
           @scrollToBottom="scrollToBottom"
@@ -29,9 +31,7 @@ export default {
   data() {
     return {
       isShowTerminal: true,
-      displayedTerminalLines: [
-        { content: 'C:/whid.live/whyd/22/username.exe', class: '' }
-      ],
+      displayedTerminalContent: [],
       offsetX: 40,
       offsetY: 40,
       dragging: false
@@ -45,7 +45,7 @@ export default {
       this.isShowTerminal = !this.isShowTerminal
     },
     addTextLine(line) {
-      this.displayedTerminalLines.push(line)
+      this.displayedTerminalContent.push(line)
     },
     scrollToBottom() {
       this.$nextTick(() => {
@@ -132,7 +132,7 @@ p.error-text {
   color: red;
 }
 
-p.italic {
+p.italic-text {
   font-style: italic;
 }
 </style>

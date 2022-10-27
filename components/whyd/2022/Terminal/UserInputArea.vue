@@ -64,7 +64,9 @@ export default {
       isShowProceed: false,
       terminalLinesQueue: [
         'This line should never appear. Ff it does, Ethan fucked up probably'
-      ]
+      ],
+      path: '/root/whyd/test', // ['root', 'whyd', 'test'],
+      validPaths: new Set(['/', '/root', '/root/whyd', '/root/whyd/test'])
     }
   },
   async fetch() {
@@ -83,14 +85,19 @@ export default {
     ).buttons
   },
   computed: {
+    displayedPath() {
+      return this.path
+    },
     displayedButtons() {
-      // is this the ground-truth for displaying buttons?
-      // even for buttons that appear in an interaction tree?
-      // i.e. click "Nerd" -> user is presented with "Yes" and "No" buttons -> click to continue mode
       return this.buttonData.filter((name) => {
         const command = this.terminalCommands[name]
+        if (command.path === undefined) {
+          return true // possibly add here logic to not add cd .. to certain pages
+        }
         const unlocked = this.areDependenciesMet(command.dependencies)
-        return unlocked && !command.hasBeenRun
+        return (
+          unlocked && !command.hasBeenRun && command.path === this.displayedPath
+        )
       })
     }
   },
@@ -106,7 +113,14 @@ export default {
       })
     }
     this.terminalLinesQueue.reverse()
-    console.log(this.methods)
+    // console.log(this.methods)
+    this.$emit('addTextLine', { content: this.displayedPath })
+
+    const paths = new Set(
+      Object.values(this.terminalCommands).map((command) => command.path)
+    )
+    this.validPaths = paths
+    console.log(this.validPaths)
   },
   methods: {
     // #region Page Control Functions
@@ -128,7 +142,7 @@ export default {
       const input = this.userInput
       this.$refs.terminalTextInput.disabled = true
 
-      this.$emit('addTextLine', { content: `> ${input}`, class: '' })
+      this.$emit('addTextLine', { content: `> ${input}` })
       this.processCommand(input)
 
       this.userInput = ''
@@ -139,13 +153,12 @@ export default {
     optionButtonClick(_, commandKey) {
       // event parameter is discarded
       // const command = this.terminalCommands[commandKey]
-      this.$emit('addTextLine', { content: `> ${commandKey}`, class: '' })
+      this.$emit('addTextLine', { content: `> ${commandKey}` })
       this.processCommand(commandKey)
       this.scrollToBottom()
     },
     processCommand(input) {
-      const processed = input.trim().toLowerCase()
-      console.log(processed)
+      const processed = input.trim() // .toLowerCase() fuck you if you try to use caps in the terminal
       const valid = Object.keys(this.terminalCommands)
       if (valid.includes(processed)) {
         this.terminalCommands[input].hasBeenRun = true
@@ -153,13 +166,17 @@ export default {
         const func = this[command.functionName]
         if (typeof func === 'function') {
           func()
+          return
         }
-      } else {
-        this.$emit('addTextLine', {
-          content: `Error: Command not found '${processed}'`,
-          class: 'error-text'
-        })
       }
+      if (processed.startsWith('cd')) {
+        this.navigateTo(processed.replace('cd', '').trim())
+        return
+      }
+      this.$emit('addTextLine', {
+        content: `Error: Command not found '${processed}'`,
+        class: 'error-text'
+      })
     },
     // #endregion
     // #region hybridInput Control Functions
@@ -182,24 +199,40 @@ export default {
       if (this.terminalLinesQueue.length <= 0) {
         this.isShowProceed = false
         this.terminalMode = mode.hybridInput
-        this.$emit('addTextLine', { content: 'End of Command', class: '' })
-        this.$emit('addTextLine', {
-          content: '-----------------------------',
-          class: ''
-        })
       }
       this.scrollToBottom()
     },
     executeCommandText(lines) {
       // takes a list of processed text lines and puts the terminal in clickContinue mode to read through them
-      this.terminalLinesQueue = lines.reverse() // overwrite any other terminal lines that may exist
+      lines.push({ content: 'End of Command\n--------------------------' })
+      this.terminalLinesQueue = lines.reverse()
       this.terminalMode = mode.clickContinue
       this.isShowProceed = true
-      this.continueText() // add this in a nextTick if issues arise?
+      this.continueText()
+    },
+    // #endregion
+    // #region Files handling Functions
+    navigateTo(target) {
+      // const arg = processed.replace('cd ', '')
+
+      const newPath =
+        target === '..'
+          ? this.path.split('/').slice(0, -1).join('/')
+          : this.path + '/' + target
+
+      if (this.validPaths.has(newPath)) {
+        this.path = newPath
+        this.$emit('addTextLine', { content: this.displayedPath })
+      } else {
+        this.$emit('addTextLine', {
+          content: `Error: Invalid Directory ${newPath}`,
+          class: 'error-text'
+        })
+      }
     },
     // #endregion
     // #region Command Specific Functions
-    testFunction() {
+    sampleFunction() {
       // example command
       const val1 = 85 // presumably load this from data
       const val1Response =
@@ -208,14 +241,19 @@ export default {
           : `You gotta pump those numbers up`
 
       const testLines = [
-        { content: 'Test line 1', class: '' },
-        { content: `you were a dick to trent ${val1} times`, class: '' },
-        { content: val1Response, class: '' }
+        { content: 'Test line 1' },
+        { content: `you were a dick to trent ${val1} times` },
+        { content: val1Response }
       ]
 
       this.executeCommandText(testLines)
+    },
+    testFunction() {
+      this.$emit('addTextLine', {
+        content: 'test command invoked',
+        class: 'italic-text'
+      })
     }
-
     // #endregion
   }
 }

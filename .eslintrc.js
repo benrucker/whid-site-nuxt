@@ -17,6 +17,7 @@ module.exports = {
     'vue/no-reserved-props': 'off',
     'vue/no-v-text-v-html-on-component': 'off',
     'vue/valid-attribute-name': 'off',
-    'vue/valid-model-definition': 'off'
+    'vue/valid-model-definition': 'off',
+    'vue/multi-word-component-names': 'off'
   }
 }
