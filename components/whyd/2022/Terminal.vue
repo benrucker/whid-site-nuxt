@@ -6,7 +6,7 @@
         @clicked="terminalMouseDown"
       />
       <div id="textViewport" class="center" @click="focusInput">
-        <div v-for="(text, index) in displayedTerminalLines" :key="index">
+        <div v-for="(text, index) in displayedTerminalContent" :key="index">
           <p
             v-for="(line, idx) of text.content.split('\n')"
             :key="idx"
@@ -31,7 +31,7 @@ export default {
   data() {
     return {
       isShowTerminal: true,
-      displayedTerminalLines: [],
+      displayedTerminalContent: [],
       offsetX: 40,
       offsetY: 40,
       dragging: false
@@ -45,7 +45,7 @@ export default {
       this.isShowTerminal = !this.isShowTerminal
     },
     addTextLine(line) {
-      this.displayedTerminalLines.push(line)
+      this.displayedTerminalContent.push(line)
     },
     scrollToBottom() {
       this.$nextTick(() => {
@@ -132,7 +132,7 @@ p.error-text {
   color: red;
 }
 
-p.italic {
+p.italic-text {
   font-style: italic;
 }
 </style>

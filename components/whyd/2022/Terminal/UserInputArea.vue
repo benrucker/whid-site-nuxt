@@ -65,8 +65,8 @@ export default {
       terminalLinesQueue: [
         'This line should never appear. Ff it does, Ethan fucked up probably'
       ],
-      path: ['root', 'whyd', 'test'],
-      validPaths: ['/', '/root', '/root/whyd', '/root/whyd/test']
+      path: '/root/whyd/test', // ['root', 'whyd', 'test'],
+      validPaths: new Set(['/', '/root', '/root/whyd', '/root/whyd/test'])
     }
   },
   async fetch() {
@@ -86,12 +86,12 @@ export default {
   },
   computed: {
     displayedPath() {
-      return '/' + this.path.join('/')
+      return this.path
     },
     displayedButtons() {
       return this.buttonData.filter((name) => {
         const command = this.terminalCommands[name]
-        if (command.path === '*') {
+        if (command.path === undefined) {
           return true // possibly add here logic to not add cd .. to certain pages
         }
         const unlocked = this.areDependenciesMet(command.dependencies)
@@ -113,8 +113,14 @@ export default {
       })
     }
     this.terminalLinesQueue.reverse()
-    console.log(this.methods)
+    // console.log(this.methods)
     this.$emit('addTextLine', { content: this.displayedPath })
+
+    const paths = new Set(
+      Object.values(this.terminalCommands).map((command) => command.path)
+    )
+    this.validPaths = paths
+    console.log(this.validPaths)
   },
   methods: {
     // #region Page Control Functions
@@ -160,20 +166,17 @@ export default {
         const func = this[command.functionName]
         if (typeof func === 'function') {
           func()
+          return
         }
-        if (processed.startsWith('cd')) {
-          // for cds from buttons
-          this.navigate(processed.replace('cd ', ''))
-        }
-      } else if (processed.startsWith('cd')) {
-        // for extra cds
-        this.navigate(processed.replace('cd', '').trim())
-      } else {
-        this.$emit('addTextLine', {
-          content: `Error: Command not found '${processed}'`,
-          class: 'error-text'
-        })
       }
+      if (processed.startsWith('cd')) {
+        this.navigateTo(processed.replace('cd', '').trim())
+        return
+      }
+      this.$emit('addTextLine', {
+        content: `Error: Command not found '${processed}'`,
+        class: 'error-text'
+      })
     },
     // #endregion
     // #region hybridInput Control Functions
@@ -209,31 +212,22 @@ export default {
     },
     // #endregion
     // #region Files handling Functions
-    navigate(arg) {
+    navigateTo(target) {
       // const arg = processed.replace('cd ', '')
-      if (arg === '..') {
-        const newPath = '/' + this.path.slice(0, -1).join('/')
-        if (this.validPaths.includes(newPath)) {
-          this.path.pop()
-          this.$emit('addTextLine', { content: this.displayedPath })
-        } else {
-          this.$emit('addTextLine', {
-            content: 'Error: No navigable parent folder',
-            class: 'error-text'
-          })
-        }
+
+      const newPath =
+        target === '..'
+          ? this.path.split('/').slice(0, -1).join('/')
+          : this.path + '/' + target
+
+      if (this.validPaths.has(newPath)) {
+        this.path = newPath
+        this.$emit('addTextLine', { content: this.displayedPath })
       } else {
-        const newPath = this.displayedPath + '/' + arg
-        console.log(newPath)
-        if (this.validPaths.includes(newPath)) {
-          this.path.push(arg)
-          this.$emit('addTextLine', { content: this.displayedPath })
-        } else {
-          this.$emit('addTextLine', {
-            content: `Error: Invalid Directory ${newPath}`,
-            class: 'error-text'
-          })
-        }
+        this.$emit('addTextLine', {
+          content: `Error: Invalid Directory ${newPath}`,
+          class: 'error-text'
+        })
       }
     },
     // #endregion
@@ -257,7 +251,7 @@ export default {
     testFunction() {
       this.$emit('addTextLine', {
         content: 'test command invoked',
-        class: 'error-text'
+        class: 'italic-text'
       })
     }
     // #endregion
