@@ -5,8 +5,8 @@
       :key="token.text !== '' ? token.text : token.src"
       :class="token.styles"
       ><span v-if="token.text != null">{{ token.text }}</span
-      ><img v-else :src="token.src"
-    /></span>
+      ><span v-else class="emoji"><img :src="token.src" /></span
+    ></span>
   </span>
 </template>
 
@@ -122,7 +122,13 @@ function parseEmoji(data) {
   background-color: hsl(235, 86%, 65%);
 }
 
-.parsed-text img {
+.parsed-text .emoji {
   height: 1em;
+  width: 1em;
+}
+
+.parsed-text .emoji img {
+  max-height: 1em;
+  max-width: 1em;
 }
 </style>

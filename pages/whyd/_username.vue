@@ -53,7 +53,7 @@ export default {
       showTyping: true,
       waitingToAutomaticallyAdvance: false,
       autoAdvanceTimeout: undefined,
-      debugShowAll: true,
+      debugShowAll: false,
       stats: null
     }
   },
@@ -108,7 +108,9 @@ export default {
 
         this.displayed.push(messageInfo)
 
-        this.$el.scrollIntoView({ behavior: 'smooth', block: 'end' })
+        this.$nextTick(() => {
+          this.$el.scrollIntoView({ behavior: 'smooth', block: 'end' })
+        })
       }
 
       if (this.messages.length > 0) {
