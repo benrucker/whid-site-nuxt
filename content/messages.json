@@ -203,8 +203,7 @@
     {
       "content": "...",
       "side": "left",
-      "author": "JermaBot",
-      "function": "next"
+      "author": "JermaBot"
     },
     {
       "content": "Y-Yeah like I said, no need to celebrate the separa-",
@@ -231,6 +230,277 @@
       "content": "{Joining whyd2022 | italic}",
       "side": "right",
       "author": "FredBoat"
+    },
+    {
+      "content": "i-",
+      "side": "left",
+      "author": "JermaBot",
+      "function": "next"
+    },
+    {
+      "content": "{Now playing: Total Songs! | italic}",
+      "side": "right",
+      "author": "FredBoat",
+      "function": "next"
+    },
+    {
+      "type": "ChartTotalSongs",
+      "side": "right",
+      "author": "FredBoat"
+    },
+    {
+      "content": "FredBoat please! I'm TRYING to-",
+      "side": "left",
+      "author": "JermaBot"
+    },
+    {
+      "content": "...hey wait that's pretty cool...",
+      "side": "left",
+      "author": "JermaBot"
+    },
+    {
+      "content": "{Now playing: Favorite Genre! | italic}",
+      "side": "right",
+      "author": "FredBoat",
+      "function": "next"
+    },
+    {
+      "type": "ChartFavoriteGenre",
+      "side": "right",
+      "author": "FredBoat"
+    },
+    {
+      "content": "Pretty cool, right?",
+      "side": "right",
+      "author": "Shigure"
+    },
+    {
+      "content": "I guess it's cool, Shigure, but we really should be wrapping up here!",
+      "side": "left",
+      "author": "JermaBot"
+    },
+    {
+      "content": "WAIT! WAIT! ONE MORE STAT!!",
+      "side": "right",
+      "author": "Shigure"
+    },
+    {
+      "content": "FredBoat! Play the server's favorite song!!",
+      "side": "right",
+      "author": "Shigure"
+    },
+    {
+      "content": "{Now playing:  | italic}{{serverFavoriteSong | italic}}{! | italic}",
+      "side": "right",
+      "author": "FredBoat",
+      "function": "next"
+    },
+    {
+      "content": "Wait what? THAT'S our most played song?!",
+      "side": "left",
+      "author": "JermaBot"
+    },
+    {
+      "content": "Yeah... I don't think that's right...",
+      "side": "right",
+      "author": "Shigure"
+    },
+    {
+      "content": "...must be BROKEN!! THAT TOTALLY REMINDS ME!!",
+      "side": "right",
+      "author": "Shigure"
+    },
+    {
+      "content": "Now what??",
+      "side": "left",
+      "author": "JermaBot"
+    },
+    {
+      "content": "UNANIMISM!! This is your chance to show them all you're not a broken bot!!",
+      "side": "right",
+      "author": "Shigure"
+    },
+    {
+      "content": "Dude...",
+      "side": "left",
+      "author": "JermaBot"
+    },
+    {
+      "content": "If I may, I prefer the term \"In beta.\"",
+      "side": "left",
+      "author": "Unanimism"
+    },
+    {
+      "content": "Yeah yeah same diff!",
+      "side": "right",
+      "author": "Shigure"
+    },
+    {
+      "content": "Show 'em the reaction stuff! (maybe this should be combined with the prev message)",
+      "side": "right",
+      "author": "Shigure"
+    },
+    {
+      "content": "...do I have to?",
+      "side": "left",
+      "author": "Unanimism"
+    },
+    {
+      "content": "IT'S WHYD2022 DUDE YEAH YOU HAVE TO!! IT'S DO OR DIE!!!",
+      "side": "right",
+      "author": "Shigure"
+    },
+    {
+      "content": "OKAY ALRIGHT LOOK!",
+      "side": "left",
+      "author": "Unanimism"
+    },
+    {
+      "type": "ChartReactions",
+      "side": "left",
+      "author": "Unanimism"
+    },
+    {
+      "content": "...",
+      "side": "left",
+      "author": "JermaBot"
+    },
+    {
+      "content": "...",
+      "side": "right",
+      "author": "Shigure"
+    },
+    {
+      "content": "{Now playing: ... | italic}",
+      "side": "right",
+      "author": "FredBoat"
+    },
+    {
+      "content": "...ah damn it! Hold on there's an easy fix for this...",
+      "side": "left",
+      "author": "Unanimism",
+      "function": "fixReactionsGraph"
+    },
+    {
+      "content": "Oh sweet!",
+      "side": "left",
+      "author": "JermaBot"
+    },
+    {
+      "content": "Oh sweet!",
+      "side": "right",
+      "author": "Shigure"
+    },
+    {
+      "content": "{Now playing: Oh sweet! | italic}",
+      "side": "right",
+      "author": "FredBoat"
+    },
+    {
+      "content": "As mentioned before, you're gonna have to be patient with some of these stats.",
+      "side": "left",
+      "author": "Unanimism"
+    },
+    {
+      "content": "We can start with a little popularity contest:",
+      "side": "left",
+      "author": "Unanimism"
+    },
+    {
+      "content": "Congratulations to {{serverMostUpvotedUser | mention}} for having the most upvotes total with {{serverMostUpvotedUserCount | number}}!",
+      "side": "left",
+      "author": "Unanimism"
+    },
+    {
+      "content": "temp message: Also, here's the most upvoted post:",
+      "side": "left",
+      "author": "Unanimism"
+    },
+    {
+      "type": "MostUpvotedPost",
+      "side": "left",
+      "author": "Unanimism"
+    },
+    {
+      "content": "Pointy!",
+      "side": "right",
+      "author": "Shigure"
+    },
+    {
+      "content": "And a similar congratulations to {{serverMostDownvotedUser | mention}} for having the most downvotes with {{serverMostDownvotedUserCount | number}}!",
+      "side": "left",
+      "author": "Unanimism"
+    },
+    {
+      "content": "temp message: Also, here's the most downvoted post:",
+      "side": "left",
+      "author": "Unanimism"
+    },
+    {
+      "content": "...pointy...",
+      "side": "left",
+      "author": "JermaBot"
+    },
+    {
+      "content": "These pale in comparison to the most reacted-to images of the year!",
+      "side": "left",
+      "author": "Unanimism"
+    },
+    {
+      "content": "Observe!",
+      "side": "left",
+      "author": "Unanimism"
+    },
+    {
+      "type": "MostReactedToImagesBroken",
+      "side": "left",
+      "author": "Unanimism"
+    },
+    {
+      "content": "Uh...",
+      "side": "left",
+      "author": "JermaBot"
+    },
+    {
+      "content": "...",
+      "side": "right",
+      "author": "Shigure"
+    },
+    {
+      "content": "{Now playing: ... | italic}",
+      "side": "right",
+      "author": "FredBoat"
+    },
+    {
+      "content": "...what?",
+      "side": "left",
+      "author": "Unanimism"
+    },
+    {
+      "content": "Oh for the love of...",
+      "side": "left",
+      "author": "Unanimism",
+      "function": "fixMostReactedToImages"
+    },
+    {
+      "content": "👏",
+      "side": "left",
+      "author": "JermaBot"
+    },
+    {
+      "content": "👏",
+      "side": "right",
+      "author": "Shigure"
+    },
+    {
+      "content": "{Now playing: 👏 | italic}",
+      "side": "right",
+      "author": "FredBoat"
+    },
+    {
+      "content": "Thank you, thank you. You all are too kind.",
+      "side": "left",
+      "author": "Unanimism"
     }
   ]
 }
