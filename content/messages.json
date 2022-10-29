@@ -296,6 +296,12 @@
       "function": "next"
     },
     {
+      "type": "ChartFavoriteSong",
+      "side": "right",
+      "author": "FredBoat",
+      "hideBubble": true
+    },
+    {
       "content": "Wait what? THAT'S our most played song?!",
       "side": "left",
       "author": "JermaBot"
