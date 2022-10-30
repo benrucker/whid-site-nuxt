@@ -53,7 +53,7 @@ export default {
       showTyping: true,
       waitingToAutomaticallyAdvance: false,
       autoAdvanceTimeout: undefined,
-      debugShowAll: false,
+      debugShowAll: true,
       stats: null
     }
   },
