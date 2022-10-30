@@ -5,7 +5,7 @@
     @click.stop="onClick($event)"
     @mousemove="handleTransformPanel($event)"
   >
-    <div class="bg"><img ref="bg" src="/whyd/2022/album.png" /></div>
+    <Whyd2022ChatChartMusicBackground ref="bg" src="/whyd/2022/album.png" />
     <div class="text">
       <h2>fav song title</h2>
       <h4 class="text-muted">fav song artist</h4>
@@ -167,8 +167,7 @@ export default {
       const percentX = -(mouseX - rootCenterX) / (this.rootRef.clientWidth / 2)
       const percentY = -(mouseY - rootCenterY) / (this.rootRef.clientHeight / 2)
 
-      this.bgRef.style.transform =
-        'translate(' + percentX * 10 + 'px, ' + percentY * 10 + 'px)'
+      this.bgRef.moveImg(percentX, percentY)
     }
   }
 }
@@ -201,14 +200,6 @@ export default {
   z-index: -1;
   overflow: clip;
   border-radius: 30px;
-}
-
-.favorite-song .bg img {
-  filter: blur(10px) brightness(0.7);
-  width: 150%;
-  position: absolute;
-  top: -25%;
-  left: -25%;
 }
 
 .favorite-song .text {
