@@ -8,6 +8,7 @@
     <Whyd2022ChatMessage
       v-for="(msg, index) in displayed"
       :key="msg.id"
+      :ref="msg.type"
       :stats="stats"
       :is-last-in-group="displayed[index + 1]?.author !== msg.author"
       :is-first-in-group="displayed[index - 1]?.author !== msg.author"
@@ -54,6 +55,7 @@ export default {
       waitingToAutomaticallyAdvance: false,
       autoAdvanceTimeout: undefined,
       debugShowAll: true,
+      debugShowAllLimit: 80,
       stats: null
     }
   },
@@ -76,8 +78,9 @@ export default {
 
     setTimeout(() => {
       if (this.debugShowAll) {
-        let i = this.messages.length
-        while (i > 1) {
+        const length = this.messages.length
+        let i = length
+        while (i > Math.max(length - this.debugShowAllLimit, 1)) {
           this.advance()
           i--
         }
@@ -148,6 +151,11 @@ export default {
       } else {
         return content.neither
       }
+    },
+    fixMostReactedToImages(content) {
+      // the [0] is needed for some reason
+      this.$refs.ChartMostReactedToImages[0].propogateEvent('fix')
+      return content
     }
   }
 }

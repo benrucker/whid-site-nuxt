@@ -425,7 +425,7 @@
       "author": "Unanimism"
     },
     {
-      "type": "MostUpvotedPost",
+      "type": "ChartMostUpvotedPost",
       "side": "left",
       "author": "Unanimism"
     },
@@ -445,6 +445,11 @@
       "author": "Unanimism"
     },
     {
+      "type": "ChartMostDownvotedPost",
+      "side": "left",
+      "author": "Unanimism"
+    },
+    {
       "content": "...pointy...",
       "side": "left",
       "author": "JermaBot"
@@ -460,7 +465,7 @@
       "author": "Unanimism"
     },
     {
-      "type": "MostReactedToImagesBroken",
+      "type": "ChartMostReactedToImages",
       "side": "left",
       "author": "Unanimism"
     },
