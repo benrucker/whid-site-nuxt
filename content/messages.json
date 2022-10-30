@@ -246,7 +246,8 @@
     {
       "type": "ChartTotalSongs",
       "side": "right",
-      "author": "FredBoat"
+      "author": "FredBoat",
+      "hideBubble": true
     },
     {
       "content": "FredBoat please! I'm TRYING to-",
@@ -267,7 +268,8 @@
     {
       "type": "ChartFavoriteGenre",
       "side": "right",
-      "author": "FredBoat"
+      "author": "FredBoat",
+      "hideBubble": true
     },
     {
       "content": "Pretty cool, right?",
