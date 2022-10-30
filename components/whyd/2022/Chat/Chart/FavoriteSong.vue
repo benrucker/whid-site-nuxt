@@ -1,6 +1,11 @@
 <template>
-  <div class="favorite-song" @click.stop="onClick($event)">
-    <div class="bg"><img src="/whyd/2022/album.png" /></div>
+  <div
+    ref="root"
+    class="favorite-song"
+    @click.stop="onClick($event)"
+    @mousemove="handleTransformPanel($event)"
+  >
+    <div class="bg"><img ref="bg" src="/whyd/2022/album.png" /></div>
     <div class="text">
       <h2>fav song title</h2>
       <h4 class="text-muted">fav song artist</h4>
@@ -95,8 +100,16 @@ export default {
   data: () => ({
     seeking: false,
     playing: false,
-    muted: false
+    muted: false,
+    rootRef: null,
+    bgRef: null
   }),
+  mounted() {
+    this.$nextTick(() => {
+      this.rootRef = this.$refs.root
+      this.bgRef = this.$refs.bg
+    })
+  },
   methods: {
     onClick(event) {
       event.preventDefault()
@@ -141,6 +154,21 @@ export default {
     onUnmuteClick() {
       this.muted = false
       this.$refs.audio.muted = false
+    },
+    handleTransformPanel(event) {
+      const mouseX = event.clientX
+      const mouseY = event.clientY
+
+      const rootRect = this.rootRef.getBoundingClientRect()
+
+      const rootCenterX = rootRect.left + rootRect.width / 2
+      const rootCenterY = rootRect.top + rootRect.height / 2
+
+      const percentX = -(mouseX - rootCenterX) / (this.rootRef.clientWidth / 2)
+      const percentY = -(mouseY - rootCenterY) / (this.rootRef.clientHeight / 2)
+
+      this.bgRef.style.transform =
+        'translate(' + percentX * 10 + 'px, ' + percentY * 10 + 'px)'
     }
   }
 }
@@ -153,12 +181,14 @@ export default {
   align-items: center;
   justify-content: center;
   width: 350px;
-  min-height: 150px;
+  height: 240px;
   padding: 40px 0;
   row-gap: 30px;
   border: 2px solid rgba(0, 0, 0, 0.2);
   border-radius: 30px;
   overflow: clip;
+
+  animation: fade-in 2s ease-in-out;
 }
 
 .favorite-song .bg {
@@ -174,7 +204,7 @@ export default {
 }
 
 .favorite-song .bg img {
-  filter: blur(10px);
+  filter: blur(10px) brightness(0.7);
   width: 150%;
   position: absolute;
   top: -25%;
