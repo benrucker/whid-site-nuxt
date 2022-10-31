@@ -55,7 +55,7 @@ export default {
       waitingToAutomaticallyAdvance: false,
       autoAdvanceTimeout: undefined,
       debugShowAll: true,
-      debugShowAllLimit: 80,
+      debugShowAllLimit: 61,
       stats: null
     }
   },
@@ -155,6 +155,10 @@ export default {
     fixMostReactedToImages(content) {
       // the [0] is needed for some reason
       this.$refs.ChartMostReactedToImages[0].propogateEvent('fix')
+      return content
+    },
+    fixReactionsGraph(content) {
+      this.$refs.ChartMostUsedReactions[0].propogateEvent('fix')
       return content
     }
   }
