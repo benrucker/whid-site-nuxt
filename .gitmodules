@@ -1,0 +1,3 @@
+[submodule "static/whyd/2022/data"]
+	path = static/whyd/2022/data
+	url = https://github.com/benrucker/whyd22-data
