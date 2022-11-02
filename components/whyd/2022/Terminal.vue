@@ -39,6 +39,7 @@ export default {
   },
   mounted() {
     this.scrollToBottom()
+    this.displayedTerminalContent = []
   },
   methods: {
     hideTerminal() {
@@ -134,5 +135,9 @@ p.error-text {
 
 p.italic-text {
   font-style: italic;
+}
+
+p.confirmed-text {
+  color: lime;
 }
 </style>

@@ -1,12 +1,23 @@
 <template>
-  <div id="last" ref="last" class="mb-0">
+  <div
+    id="last"
+    ref="last"
+    class="mb-0"
+    :class="terminalMode === mode.passwordInput ? 'red-text' : ''"
+  >
     >
     <span
       v-if="
-        terminalMode === mode.textInput || terminalMode === mode.hybridInput
+        terminalMode === mode.textInput ||
+        terminalMode === mode.hybridInput ||
+        terminalMode === mode.passwordInput
       "
       id="userInputDisplay"
-      >{{ userInput }}</span
+      >{{
+        terminalMode === mode.passwordInput
+          ? '*'.repeat(userInput.length)
+          : userInput
+      }}</span
     ><a ref="blinkingUnderscore" class="blink">_</a><br />
     <a
       v-if="isShowProceed && terminalMode === mode.clickContinue"
@@ -49,7 +60,8 @@ const mode = {
   clickContinue: 'clickContinue',
   buttonInput: 'buttonInput',
   textInput: 'textInput',
-  hybridInput: 'hybridInput'
+  hybridInput: 'hybridInput',
+  passwordInput: 'passwordInput'
 }
 
 export default {
@@ -57,7 +69,7 @@ export default {
   data() {
     return {
       mode,
-      terminalMode: mode.hybridInput, // clickContinue, buttonInput, textInput, hybridInput
+      terminalMode: mode.passwordInput, // clickContinue, buttonInput, textInput, hybridInput
       terminalCommands: {},
       buttonData: [],
       userInput: '',
@@ -102,6 +114,7 @@ export default {
     }
   },
   mounted() {
+    console.log(this.terminalMode)
     if (this.terminalMode === mode.clickContinue) {
       this.isShowProceed = this.terminalLinesQueue.length > 0
     } else if (
@@ -110,11 +123,21 @@ export default {
     ) {
       this.$nextTick(() => {
         this.focusInput()
+        this.$emit('addTextLine', { content: this.displayedPath })
+      })
+    } else if (this.terminalMode === mode.passwordInput) {
+      this.$nextTick(() => {
+        this.focusInput()
+        this.$emit('addTextLine', {
+          content: 'Enter Password',
+          class: 'error-text'
+        })
       })
     }
+
     this.terminalLinesQueue.reverse()
+
     // console.log(this.methods)
-    this.$emit('addTextLine', { content: this.displayedPath })
 
     const paths = new Set(
       Object.values(this.terminalCommands).map((command) => command.path)
@@ -127,7 +150,8 @@ export default {
     focusInput() {
       if (
         this.terminalMode === mode.textInput ||
-        this.terminalMode === mode.hybridInput
+        this.terminalMode === mode.hybridInput ||
+        this.terminalMode === mode.passwordInput
       ) {
         this.$refs.terminalTextInput.focus()
       }
@@ -138,17 +162,42 @@ export default {
     // #endregion
     // #region User Input Control Functions
     submitTextCommand() {
-      // NEEDS TO BE UPDATED TO WORK WITH TERMINALCOMMANDS
       const input = this.userInput
       this.$refs.terminalTextInput.disabled = true
 
-      this.$emit('addTextLine', { content: `> ${input}` })
-      this.processCommand(input)
+      if (this.terminalMode === mode.passwordInput) {
+        this.processPasswordInput(input)
+      } else {
+        this.$emit('addTextLine', { content: `> ${input}` })
+        this.processCommand(input)
+      }
 
       this.userInput = ''
       this.$refs.terminalTextInput.disabled = false
       this.scrollToBottom()
       this.focusInput()
+    },
+    processPasswordInput(input) {
+      const censoredInput = '*'.repeat(input.length)
+      this.$emit('addTextLine', {
+        content: `> ${censoredInput}`,
+        class: 'error-text'
+      })
+
+      if (input === 'fidlersphatass') {
+        this.$emit('addTextLine', {
+          content: 'Accepted',
+          class: 'confirmed-text'
+        })
+        this.displayLogInText()
+        this.terminalMode = mode.hybridInput
+        this.$emit('addTextLine', { content: this.displayedPath })
+      } else {
+        this.$emit('addTextLine', {
+          content: 'Denied',
+          class: 'error-text'
+        })
+      }
     },
     optionButtonClick(_, commandKey) {
       // event parameter is discarded
@@ -232,6 +281,15 @@ export default {
     },
     // #endregion
     // #region Command Specific Functions
+    displayLogInText() {
+      this.$emit('addTextLine', {
+        content: 'Denied',
+        class: 'error-text'
+      })
+      this.$emit('addTextLine', {
+        content: 'Logging in...'
+      })
+    },
     sampleFunction() {
       // example command
       const val1 = 85 // presumably load this from data
@@ -283,5 +341,13 @@ export default {
 #terminalTextInput {
   opacity: 0;
   position: absolute;
+}
+
+.red-text {
+  color: red;
+}
+
+.red-text a {
+  color: red;
 }
 </style>
