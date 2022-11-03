@@ -5,7 +5,7 @@
         @hideTerminal="hideTerminal"
         @clicked="terminalMouseDown"
       />
-      <div id="textViewport" class="center" @click="focusInput">
+      <div id="textViewport" class="center text-view" @click="focusInput">
         <div v-for="(text, index) in displayedTerminalContent" :key="index">
           <p
             v-for="(line, idx) of text.content.split('\n')"
@@ -21,6 +21,11 @@
           @addTextLine="addTextLine"
         />
       </div>
+      <Whyd2022TerminalPasswordInputArea
+        v-if="!loggedIn"
+        class="center"
+        @logIn="logIn"
+      ></Whyd2022TerminalPasswordInputArea>
     </div>
   </div>
 </template>
@@ -34,7 +39,8 @@ export default {
       displayedTerminalContent: [],
       offsetX: 40,
       offsetY: 40,
-      dragging: false
+      dragging: false,
+      loggedIn: false
     }
   },
   mounted() {
@@ -55,6 +61,10 @@ export default {
     },
     focusInput() {
       this.$refs.inputArea.focusInput()
+    },
+    logIn() {
+      this.loggedIn = true
+      this.$refs.inputArea.logIn()
     },
     moveTerminal(x, y) {
       const terminal = this.$refs.terminal
@@ -106,11 +116,21 @@ export default {
 
 .center {
   background-color: var(--background);
+  user-select: none;
+}
+
+.text-view {
   color: var(--primary);
   padding: 1.5em;
-  user-select: none;
   overflow-y: auto;
   flex: 1;
+}
+
+.pass-view {
+  position: absolute;
+  top: 1.75em;
+  width: 99%;
+  height: 92%;
 }
 
 #terminal {

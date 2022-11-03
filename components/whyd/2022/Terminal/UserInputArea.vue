@@ -1,23 +1,12 @@
 <template>
-  <div
-    id="last"
-    ref="last"
-    class="mb-0"
-    :class="terminalMode === mode.passwordInput ? 'red-text' : ''"
-  >
+  <div id="last" ref="last" class="mb-0">
     >
     <span
       v-if="
-        terminalMode === mode.textInput ||
-        terminalMode === mode.hybridInput ||
-        terminalMode === mode.passwordInput
+        terminalMode === mode.textInput || terminalMode === mode.hybridInput
       "
       id="userInputDisplay"
-      >{{
-        terminalMode === mode.passwordInput
-          ? '*'.repeat(userInput.length)
-          : userInput
-      }}</span
+      >{{ userInput }}</span
     ><a ref="blinkingUnderscore" class="blink">_</a><br />
     <a
       v-if="isShowProceed && terminalMode === mode.clickContinue"
@@ -61,7 +50,8 @@ const mode = {
   buttonInput: 'buttonInput',
   textInput: 'textInput',
   hybridInput: 'hybridInput',
-  passwordInput: 'passwordInput'
+  passwordInput: 'passwordInput',
+  disabled: 'disabled'
 }
 
 export default {
@@ -69,7 +59,7 @@ export default {
   data() {
     return {
       mode,
-      terminalMode: mode.passwordInput, // clickContinue, buttonInput, textInput, hybridInput
+      terminalMode: mode.disabled, // clickContinue, buttonInput, textInput, hybridInput, disabled
       terminalCommands: {},
       buttonData: [],
       userInput: '',
@@ -281,13 +271,13 @@ export default {
     },
     // #endregion
     // #region Command Specific Functions
-    displayLogInText() {
-      this.$emit('addTextLine', {
-        content: 'Denied',
-        class: 'error-text'
-      })
+    logIn() {
+      this.terminalMode = mode.hybridInput
       this.$emit('addTextLine', {
         content: 'Logging in...'
+      })
+      this.$emit('addTextLine', {
+        content: `${this.path}/`
       })
     },
     sampleFunction() {
