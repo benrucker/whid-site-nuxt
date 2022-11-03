@@ -50,7 +50,6 @@ const mode = {
   buttonInput: 'buttonInput',
   textInput: 'textInput',
   hybridInput: 'hybridInput',
-  passwordInput: 'passwordInput',
   disabled: 'disabled'
 }
 
@@ -115,14 +114,6 @@ export default {
         this.focusInput()
         this.$emit('addTextLine', { content: this.displayedPath })
       })
-    } else if (this.terminalMode === mode.passwordInput) {
-      this.$nextTick(() => {
-        this.focusInput()
-        this.$emit('addTextLine', {
-          content: 'Enter Password',
-          class: 'error-text'
-        })
-      })
     }
 
     this.terminalLinesQueue.reverse()
@@ -140,8 +131,7 @@ export default {
     focusInput() {
       if (
         this.terminalMode === mode.textInput ||
-        this.terminalMode === mode.hybridInput ||
-        this.terminalMode === mode.passwordInput
+        this.terminalMode === mode.hybridInput
       ) {
         this.$refs.terminalTextInput.focus()
       }
@@ -155,39 +145,13 @@ export default {
       const input = this.userInput
       this.$refs.terminalTextInput.disabled = true
 
-      if (this.terminalMode === mode.passwordInput) {
-        this.processPasswordInput(input)
-      } else {
-        this.$emit('addTextLine', { content: `> ${input}` })
-        this.processCommand(input)
-      }
+      this.$emit('addTextLine', { content: `> ${input}` })
+      this.processCommand(input)
 
       this.userInput = ''
       this.$refs.terminalTextInput.disabled = false
       this.scrollToBottom()
       this.focusInput()
-    },
-    processPasswordInput(input) {
-      const censoredInput = '*'.repeat(input.length)
-      this.$emit('addTextLine', {
-        content: `> ${censoredInput}`,
-        class: 'error-text'
-      })
-
-      if (input === 'fidlersphatass') {
-        this.$emit('addTextLine', {
-          content: 'Accepted',
-          class: 'confirmed-text'
-        })
-        this.displayLogInText()
-        this.terminalMode = mode.hybridInput
-        this.$emit('addTextLine', { content: this.displayedPath })
-      } else {
-        this.$emit('addTextLine', {
-          content: 'Denied',
-          class: 'error-text'
-        })
-      }
     },
     optionButtonClick(_, commandKey) {
       // event parameter is discarded
