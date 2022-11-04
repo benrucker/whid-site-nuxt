@@ -13,7 +13,10 @@
     </div>
     <div class="bottom-row">
       <div v-for="reaction in otherReactions" :key="reaction" class="reaction">
-        <img :src="`/whyd/2022/emojis/${reaction}.png`" :alt="reaction" />
+        <img
+          :src="imgUrl ?? `/whyd/2022/emojis/${reaction}.png`"
+          :alt="imgUrl ? 'cheeto' : reaction"
+        />
         <span class="count">{{ reactions[reaction] }}</span>
       </div>
     </div>
@@ -26,6 +29,10 @@ export default {
     stats: {
       type: Object,
       required: true
+    },
+    imgUrl: {
+      type: String,
+      default: undefined
     }
   },
   data() {
