@@ -17,6 +17,7 @@
       />
       <component
         :is="'Whyd2022Chat' + (msg.type || 'Text')"
+        ref="component"
         :content="msg.content"
         :stats="stats"
       />
@@ -77,6 +78,9 @@ export default {
     },
     resetInterpolation() {
       document.documentElement.style.setProperty('--avatar-slide-distance', '0')
+    },
+    propogateEvent(event) {
+      this.$refs.component[event]()
     }
   }
 }

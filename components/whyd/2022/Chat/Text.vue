@@ -32,7 +32,8 @@ export default {
         userMessageCountThisYear: () =>
           this.stats.user['Number of Messages per User'],
         userMessagePercentageThisYear: () =>
-          this.stats.user['Percentage of Messages per Users']
+          this.stats.user['Percentage of Messages per Users'],
+        user: () => this.stats.user.name
       }
     }
   },
@@ -56,11 +57,7 @@ export default {
 function parseValue(data, values) {
   const nameAndStyle = data.slice(2, -2)
   const [valueName, styles] = nameAndStyle.split(' | ')
-  if (valueName in values) {
-    return { text: getValue(values, valueName), styles }
-  } else {
-    return { text: valueName, styles }
-  }
+  return { text: getValue(values, valueName), styles }
 }
 
 function getValue(values, valueName) {
@@ -78,6 +75,7 @@ function getValue(values, valueName) {
       return value
     }
   } else {
+    console.warn(`Value ${valueName} not found`)
     return valueName
   }
 }

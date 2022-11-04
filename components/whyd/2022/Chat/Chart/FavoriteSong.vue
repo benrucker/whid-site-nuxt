@@ -7,8 +7,8 @@
   >
     <Whyd2022ChatChartMusicBackground ref="bg" src="/whyd/2022/album.png" />
     <div class="text">
-      <h2>fav song title</h2>
-      <h4 class="text-muted">fav song artist</h4>
+      <h2>talkxture</h2>
+      <h4 class="text-muted">what has ben done?</h4>
     </div>
     <div class="controls">
       <div v-if="playing" class="pause" @click="onPauseClick">
