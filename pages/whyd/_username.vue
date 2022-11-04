@@ -1,40 +1,38 @@
 <template>
-  <div
-    v-if="stats != null"
-    id="conversation"
-    class="container"
-    @click="onClick"
-  >
-    <Whyd2022ChatMessage
-      v-for="(msg, index) in displayed"
-      :key="msg.id"
-      :stats="stats"
-      :is-last-in-group="displayed[index + 1]?.author !== msg.author"
-      :is-first-in-group="displayed[index - 1]?.author !== msg.author"
-      :msg="msg"
-      :index="index"
-    />
-    <div
-      v-if="showTyping"
-      :class="'message typing ' + messages[0].side + ' text-muted'"
-    >
-      <div class="content">
-        <div class="typingDots">
-          <div class="t1" />
-          <div class="t2" />
-          <div class="t3" />
+  <div v-if="stats != null" id="the-one-above-conversation" @click="onClick">
+    <div id="conversation" class="container">
+      <Whyd2022ChatMessage
+        v-for="(msg, index) in displayed"
+        :key="msg.id"
+        :ref="msg.type"
+        :stats="stats"
+        :is-last-in-group="displayed[index + 1]?.author !== msg.author"
+        :is-first-in-group="displayed[index - 1]?.author !== msg.author"
+        :msg="msg"
+        :index="index"
+      />
+      <div
+        v-if="showTyping"
+        :class="'message typing ' + messages[0].side + ' text-muted'"
+      >
+        <div class="content">
+          <div class="typingDots">
+            <div class="t1" />
+            <div class="t2" />
+            <div class="t3" />
+          </div>
         </div>
       </div>
+      <div v-if="showHint" class="hint text-center text-muted">
+        Click to continue!
+      </div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
-    <div v-if="showHint" class="hint text-center text-muted">
-      Click to continue!
-    </div>
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
   </div>
 </template>
 
@@ -54,6 +52,7 @@ export default {
       waitingToAutomaticallyAdvance: false,
       autoAdvanceTimeout: undefined,
       debugShowAll: true,
+      debugShowAllLimit: 61,
       stats: null
     }
   },
@@ -73,11 +72,13 @@ export default {
     ).then((r) => r.json())
 
     this.stats = { server, user }
+    this.stats.user.name = this.username
 
     setTimeout(() => {
       if (this.debugShowAll) {
-        let i = this.messages.length
-        while (i > 1) {
+        const length = this.messages.length
+        let i = length
+        while (i > Math.max(length - this.debugShowAllLimit, 1)) {
           this.advance()
           i--
         }
@@ -148,6 +149,15 @@ export default {
       } else {
         return content.neither
       }
+    },
+    fixMostReactedToImages(content) {
+      // the [0] is needed for some reason
+      this.$refs.ChartMostReactedToImages[0].propogateEvent('fix')
+      return content
+    },
+    fixReactionsGraph(content) {
+      this.$refs.ChartMostUsedReactions[0].propogateEvent('fix')
+      return content
     }
   }
 }
@@ -158,9 +168,12 @@ export default {
   --convo-width: 100vw;
 }
 
+#the-one-above-conversation {
+  overflow-x: hidden;
+}
+
 #conversation {
   min-height: 2em;
-  overflow-y: hidden;
   width: var(--convo-width);
   padding: 0;
   min-height: 80vh;
