@@ -173,7 +173,7 @@
       "author": "Shigure"
     },
     {
-      "content": "I was curious myself and compile a little somethin'-somethin':",
+      "content": "I was curious myself and compiled a little somethin'-somethin':",
       "side": "right",
       "author": "Shigure"
     },
@@ -364,7 +364,7 @@
       "author": "Unanimism"
     },
     {
-      "type": "ChartReactions",
+      "type": "ChartMostUsedReactions",
       "side": "left",
       "author": "Unanimism"
     },
@@ -425,7 +425,7 @@
       "author": "Unanimism"
     },
     {
-      "type": "MostUpvotedPost",
+      "type": "ChartMostUpvotedPost",
       "side": "left",
       "author": "Unanimism"
     },
@@ -445,6 +445,11 @@
       "author": "Unanimism"
     },
     {
+      "type": "ChartMostDownvotedPost",
+      "side": "left",
+      "author": "Unanimism"
+    },
+    {
       "content": "...pointy...",
       "side": "left",
       "author": "JermaBot"
@@ -460,7 +465,7 @@
       "author": "Unanimism"
     },
     {
-      "type": "MostReactedToImagesBroken",
+      "type": "ChartMostReactedToImages",
       "side": "left",
       "author": "Unanimism"
     },
