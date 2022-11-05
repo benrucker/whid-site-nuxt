@@ -14,13 +14,13 @@ export default {
     return {
       message: {
         content: 'bad take or smn',
-        reactions: {
-          downvote: 20,
-          cheeto: 5,
-          ahegao1: 1,
-          downvote2: 4,
-          downvote3: 5
-        },
+        reactions: [
+          { name: 'downvote', count: 20 },
+          { name: 'cheeto', count: 5 },
+          { name: 'ahegao1', count: 1 },
+          { name: 'downvote2', count: 4 },
+          { name: 'downvote3', count: 5 }
+        ],
         authorName: 'bebenebenebeb',
         timestamp: '09/23/2022',
         authorAvatar:

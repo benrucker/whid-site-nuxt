@@ -21,20 +21,20 @@
       </div>
       <div class="reactions">
         <div
-          v-for="(count, reaction) in reactions"
-          :key="reaction"
+          v-for="reaction in reactions"
+          :key="reaction.name"
           class="reaction-bubble"
           data-bs-toggle="tooltip"
           data-bs-placement="top"
           data-bs-html="true"
           data-bs-delay="500"
-          :title="`${count} people reacted with ${reaction}`"
+          :title="`${count} people reacted with ${reaction.name}`"
         >
           <img
-            :src="`/whyd/2022/emojis/${reaction}.png`"
+            :src="`/whyd/2022/emojis/${reaction.name}.png`"
             class="reaction-emoji"
           />
-          <div class="reaction-count">{{ count }}</div>
+          <div class="reaction-count">{{ reaction.count }}</div>
         </div>
       </div>
     </div>
@@ -178,6 +178,7 @@ export default {
 
 .message-content {
   font-size: 1em;
+  min-height: 4px;
   color: #dcddde;
 }
 

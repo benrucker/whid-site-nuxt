@@ -14,13 +14,13 @@ export default {
     return {
       message1: {
         content: 'things',
-        reactions: {
-          downvote: 20,
-          cheeto: 5,
-          ahegao1: 1,
-          downvote2: 4,
-          downvote3: 5
-        },
+        reactions: [
+          { name: 'upvote', count: 20 },
+          { name: 'cheeto', count: 5 },
+          { name: 'ahegao1', count: 1 },
+          { name: 'downvote2', count: 4 },
+          { name: 'downvote3', count: 5 }
+        ],
         authorName: 'fops',
         timestamp: '09/24/2022',
         authorAvatar:
@@ -29,13 +29,13 @@ export default {
       },
       message2: {
         content: 'fun stuff',
-        reactions: {
-          upvote: 20,
-          cheeto: 5,
-          ahegao1: 1,
-          downvote2: 4,
-          downvote3: 5
-        },
+        reactions: [
+          { name: 'upvote', count: 20 },
+          { name: 'cheeto', count: 5 },
+          { name: 'ahegao1', count: 1 },
+          { name: 'downvote2', count: 4 },
+          { name: 'downvote3', count: 5 }
+        ],
         authorName: 'noss',
         timestamp: '09/25/2022',
         authorAvatar:
