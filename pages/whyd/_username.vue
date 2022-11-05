@@ -109,9 +109,13 @@ export default {
 
         this.displayed.push(messageInfo)
 
-        this.$nextTick(() => {
-          this.$el.scrollIntoView({ behavior: 'smooth', block: 'end' })
-        })
+        setTimeout(() => {
+          this.$el.scrollIntoView({
+            behavior: 'smooth',
+            block: 'end',
+            inline: 'nearest'
+          })
+        }, 50)
       }
 
       if (this.messages.length > 0) {
