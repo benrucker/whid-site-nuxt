@@ -1,42 +1,40 @@
 <template>
-  <div class="message-block">
-    <div class="message">
-      <div class="name-bar">
-        <img class="d-msg-avatar" :src="authorAvatar" />
-        <h2 class="name-ts">
-          <span class="name">{{ authorName }}</span>
-          <span class="timestamp">{{ timestamp }}</span>
-        </h2>
+  <div class="message">
+    <div class="name-bar">
+      <img class="d-msg-avatar" :src="authorAvatar" />
+      <h2 class="name-ts">
+        <span class="name">{{ authorName }}</span>
+        <span class="timestamp">{{ timestamp }}</span>
+      </h2>
+    </div>
+    <div class="message-content">
+      {{ content }}
+    </div>
+    <div class="message-extras">
+      <div class="attachments">
+        <img
+          v-for="attachment in attachments"
+          :key="attachment"
+          :src="attachment"
+          class="attachment"
+        />
       </div>
-      <div class="message-content">
-        {{ content }}
-      </div>
-      <div class="message-extras">
-        <div class="attachments">
+      <div class="reactions">
+        <div
+          v-for="(count, reaction) in reactions"
+          :key="reaction"
+          class="reaction-bubble"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          data-bs-html="true"
+          data-bs-delay="500"
+          :title="`${count} people reacted with ${reaction}`"
+        >
           <img
-            v-for="attachment in attachments"
-            :key="attachment"
-            :src="attachment"
-            class="attachment"
+            :src="`/whyd/2022/emojis/${reaction}.png`"
+            class="reaction-emoji"
           />
-        </div>
-        <div class="reactions">
-          <div
-            v-for="(count, reaction) in reactions"
-            :key="reaction"
-            class="reaction-bubble"
-            data-bs-toggle="tooltip"
-            data-bs-placement="top"
-            data-bs-html="true"
-            data-bs-delay="500"
-            :title="`${count} people reacted with ${reaction}`"
-          >
-            <img
-              :src="`/whyd/2022/emojis/${reaction}.png`"
-              class="reaction-emoji"
-            />
-            <div class="reaction-count">{{ count }}</div>
-          </div>
+          <div class="reaction-count">{{ count }}</div>
         </div>
       </div>
     </div>
@@ -75,16 +73,6 @@ export default {
 </script>
 
 <style scoped>
-.message-block {
-  background-color: #393c43;
-  border-radius: 5px;
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
-  /* overflow: hidden; */
-  padding-top: 5px;
-  padding-bottom: 0.1em;
-  font-size: 0.95em;
-}
-
 .message {
   min-height: 2.75rem;
 
