@@ -36,23 +36,28 @@ export default {
   data() {
     return {
       isShowTerminal: true,
-      displayedTerminalContent: [],
+      terminalContent: [],
       offsetX: 40,
       offsetY: 40,
       dragging: false,
       loggedIn: false
     }
   },
+  computed: {
+    displayedTerminalContent() {
+      return this.terminalContent.slice(-20)
+    }
+  },
   mounted() {
     this.scrollToBottom()
-    this.displayedTerminalContent = []
+    this.terminalContent = []
   },
   methods: {
     hideTerminal() {
       this.isShowTerminal = !this.isShowTerminal
     },
     addTextLine(line) {
-      this.displayedTerminalContent.push(line)
+      this.terminalContent.push(line)
     },
     scrollToBottom() {
       this.$nextTick(() => {
