@@ -3,20 +3,18 @@
     <Whyd2022ChatChartMostUsedReactionsBroken v-if="broken" :stats="stats" />
     <Whyd2022ChatChartMostUsedReactionsFixed v-else :stats="stats" />
     <div v-if="fixing" class="hand fly-in">
-      <img src="/whyd/2022/emojis/you.png" />
+      <img src="/whyd/2022/hand1.png" />
     </div>
     <div v-if="fixed" class="hand bounce">
-      <img src="/whyd/2022/emojis/you.png" />
+      <img src="/whyd/2022/hand1.png" />
     </div>
     <div v-if="fixed" class="explosion">
-      <img
-        src="https://i.gifer.com/origin/a0/a07ad08920f303f655251b1a0b353b86_w200.gif"
-      />
+      <img src="/whyd/2022/explosion-fast.gif" />
     </div>
     <img
       v-if="!fixing && !fixed"
       style="display: none"
-      src="https://i.gifer.com/origin/a0/a07ad08920f303f655251b1a0b353b86_w200.gif"
+      src="/whyd/2022/explosion-fast.gif"
     />
   </div>
 </template>
@@ -64,10 +62,17 @@ export default {
 <style scoped>
 .hand {
   position: absolute;
-  top: 0;
+  top: 40%;
   left: 0;
   transform: translate(0, 0);
   transform-origin: right center;
+  width: 100px;
+  height: 100px;
+}
+
+.hand img {
+  width: 100%;
+  height: 100%;
 }
 
 .hand.fly-in {
@@ -88,7 +93,12 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: fade-out-explosion 1s forwards;
+  animation: fade-out-explosion 1s forwards step-end;
+}
+
+.explosion img {
+  width: 100%;
+  height: 100%;
 }
 
 @keyframes hand-fly-in {
