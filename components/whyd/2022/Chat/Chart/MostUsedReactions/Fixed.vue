@@ -67,6 +67,8 @@ export default {
 }
 
 .title {
+  padding-left: 20px;
+  margin-right: -10px;
 }
 
 .top-2 {
