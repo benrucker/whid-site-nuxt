@@ -52,7 +52,7 @@ export default {
       waitingToAutomaticallyAdvance: false,
       autoAdvanceTimeout: undefined,
       debugShowAll: true,
-      debugShowAllLimit: 61,
+      debugShowAllLimit: 9999,
       stats: null
     }
   },
