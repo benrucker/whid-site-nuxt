@@ -49,7 +49,8 @@ const mode = {
   clickContinue: 'clickContinue',
   buttonInput: 'buttonInput',
   textInput: 'textInput',
-  hybridInput: 'hybridInput'
+  hybridInput: 'hybridInput',
+  disabled: 'disabled'
 }
 
 export default {
@@ -57,7 +58,7 @@ export default {
   data() {
     return {
       mode,
-      terminalMode: mode.hybridInput, // clickContinue, buttonInput, textInput, hybridInput
+      terminalMode: mode.disabled, // clickContinue, buttonInput, textInput, hybridInput, disabled
       terminalCommands: {},
       buttonData: [],
       userInput: '',
@@ -102,6 +103,7 @@ export default {
     }
   },
   mounted() {
+    console.log(this.terminalMode)
     if (this.terminalMode === mode.clickContinue) {
       this.isShowProceed = this.terminalLinesQueue.length > 0
     } else if (
@@ -110,11 +112,13 @@ export default {
     ) {
       this.$nextTick(() => {
         this.focusInput()
+        this.$emit('addTextLine', { content: this.displayedPath })
       })
     }
+
     this.terminalLinesQueue.reverse()
+
     // console.log(this.methods)
-    this.$emit('addTextLine', { content: this.displayedPath })
 
     const paths = new Set(
       Object.values(this.terminalCommands).map((command) => command.path)
@@ -138,7 +142,6 @@ export default {
     // #endregion
     // #region User Input Control Functions
     submitTextCommand() {
-      // NEEDS TO BE UPDATED TO WORK WITH TERMINALCOMMANDS
       const input = this.userInput
       this.$refs.terminalTextInput.disabled = true
 
@@ -232,6 +235,15 @@ export default {
     },
     // #endregion
     // #region Command Specific Functions
+    logIn() {
+      this.terminalMode = mode.hybridInput
+      this.$emit('addTextLine', {
+        content: 'Logging in...'
+      })
+      this.$emit('addTextLine', {
+        content: `${this.path}/`
+      })
+    },
     sampleFunction() {
       // example command
       const val1 = 85 // presumably load this from data
@@ -283,5 +295,13 @@ export default {
 #terminalTextInput {
   opacity: 0;
   position: absolute;
+}
+
+.red-text {
+  color: red;
+}
+
+.red-text a {
+  color: red;
 }
 </style>
