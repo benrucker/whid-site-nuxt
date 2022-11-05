@@ -2,7 +2,7 @@
   <div class="message-block">
     <Whyd2022ChatDiscordMessage
       v-for="msg in messages"
-      :key="msg.content + msg.authorName + msg.timestamp"
+      :key="`${msg.content}${msg.authorName}${msg.timestamp}`"
       :content="msg.content"
       :reactions="msg.reactions"
       :author-name="msg.authorName"

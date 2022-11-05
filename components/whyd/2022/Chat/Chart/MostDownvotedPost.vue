@@ -12,26 +12,24 @@ export default {
   },
   data() {
     return {
-      message: {}
-    }
-  },
-  mounted() {
-    if (this.stats.server.mostDownvotedPost == null) {
-      this.message.content = 'Bad take'
-      this.message.reactions = {
-        downvote: 20,
-        cheeto: 5,
-        ahegao1: 1,
-        downvote2: 4,
-        downvote3: 5
+      message: {
+        content: 'bad take or smn',
+        reactions: {
+          downvote: 20,
+          cheeto: 5,
+          ahegao1: 1,
+          downvote2: 4,
+          downvote3: 5
+        },
+        authorName: 'bebenebenebeb',
+        timestamp: '09/23/2022',
+        authorAvatar:
+          'https://cdn.discordapp.com/avatars/171471874969042945/052a661e1ec4f31166cc3e93dc588d4d.png?size=1024',
+        attachments: ['/miniwyatt.png', '/icon-l.png']
       }
-      this.message.authorName = 'bebenebenebeb'
-      this.message.authorAvatar =
-        'https://cdn.discordapp.com/avatars/171471874969042945/052a661e1ec4f31166cc3e93dc588d4d.png?size=1024'
-      this.message.attachments = ['/miniwyatt.png', '/whyd/camera.png']
-      this.message.timestamp = '09/25/2022'
     }
   },
+  mounted() {},
   methods: {}
 }
 </script>

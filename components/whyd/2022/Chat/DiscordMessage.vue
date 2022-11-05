@@ -193,11 +193,18 @@ export default {
   position: relative;
 }
 
+.attachments {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
 .attachment {
   justify-self: start;
   -ms-flex-item-align: start;
   align-self: start;
   position: relative;
+  max-width: 100%;
 }
 
 .attachment img {
