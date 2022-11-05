@@ -60,7 +60,7 @@ export default {
 
       this.userPasswordInput = ''
       if (!this.locked) {
-        this.$refs.passwordTextInput.disabled = false
+        this.$refs.passwordTextInput.disabled = this.locked
       }
     }
   }
@@ -84,19 +84,19 @@ export default {
 }
 
 .incorrect {
-  color: red;
+  color: var(--error);
 }
 
 .incorrect a {
-  color: red;
+  color: var(--error);
 }
 
 .correct {
-  color: lime;
+  color: var(--success);
 }
 
 .correct a {
-  color: lime;
+  color: var(--success);
 }
 
 #passwordTextInput {

@@ -99,6 +99,8 @@ export default {
   --secondary: #eec584; /* gold */
   --outline: #b6a083; /* beige*/
   --background: #171214; /* background */
+  --error: rgb(150, 0, 0);
+  --success: rgb(0, 150, 0);
 }
 
 .outer {
