@@ -447,7 +447,8 @@
     {
       "type": "ChartMostDownvotedPost",
       "side": "left",
-      "author": "Unanimism"
+      "author": "Unanimism",
+      "hideBubble": true
     },
     {
       "content": "...pointy...",
@@ -467,7 +468,8 @@
     {
       "type": "ChartMostReactedToImages",
       "side": "left",
-      "author": "Unanimism"
+      "author": "Unanimism",
+      "hideBubble": true
     },
     {
       "content": "Uh...",
