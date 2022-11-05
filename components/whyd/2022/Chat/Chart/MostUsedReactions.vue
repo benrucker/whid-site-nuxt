@@ -51,6 +51,9 @@ export default {
 
           setTimeout(() => {
             this.broken = false
+            this.$nextTick(() => {
+              this.$el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+            })
           }, 1000)
         }, 500)
       }, 2000)
