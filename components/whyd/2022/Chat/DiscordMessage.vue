@@ -2,7 +2,7 @@
   <div class="message-block">
     <div class="message">
       <div class="name-bar">
-        <img class="avatar" :src="authorAvatar" />
+        <img class="d-msg-avatar" :src="authorAvatar" />
         <h2 class="name-ts">
           <span class="name">{{ authorName }}</span>
           <span class="timestamp">{{ timestamp }}</span>
@@ -88,9 +88,7 @@ export default {
 .message {
   min-height: 2.75rem;
 
-  padding-left: 76px;
-  padding-right: 1.5em;
-  padding-bottom: 0.2em;
+  padding: 2px 48px 2px 72px;
 
   margin-top: 10px;
   margin-bottom: 1em;
@@ -167,13 +165,19 @@ export default {
   vertical-align: baseline;
 }
 
-.avatar {
+.d-msg-avatar {
   position: absolute;
   left: 18px;
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  margin-top: 25px;
+  margin-top: 2px;
+  filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0));
+  transition: filter 0.05s ease;
+}
+
+.d-msg-avatar:hover {
+  filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.16));
 }
 
 .message-block a:link {
