@@ -188,6 +188,8 @@ export default {
   overflow: clip;
 
   animation: fade-in 2s ease-in-out;
+
+  color: white;
 }
 
 .favorite-song .bg {
