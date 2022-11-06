@@ -52,7 +52,7 @@ export default {
       waitingToAutomaticallyAdvance: false,
       autoAdvanceTimeout: undefined,
       debugShowAll: true,
-      debugShowAllLimit: 9999,
+      debugShowAllLimit: 9999999,
       stats: null
     }
   },
@@ -111,6 +111,8 @@ export default {
           messageInfo.author ?? this.displayed[this.displayed.length - 1].author
         messageInfo.side =
           messageInfo.side ?? this.getDefaultSide(messageInfo.author)
+        messageInfo.color =
+          messageInfo.color ?? messageInfo.author.toLowerCase()
 
         this.displayed.push(messageInfo)
 
@@ -140,7 +142,8 @@ export default {
         Unanimism: 'left',
         UsBot: 'left',
         NotSoBot: 'right',
-        Perlymolt: 'left'
+        Perlymolt: 'left',
+        SecuityBot: 'left'
       }
       return sides[author]
     },

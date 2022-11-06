@@ -1,10 +1,10 @@
 <template>
-  <div :class="msg.side + ' message'">
+  <div :class="`${msg.side} ${msg.color} message`">
     <span class="avatar-wrapper">
       <img
         v-if="isLastInGroup"
         :key="index"
-        src="/whyd/2021/emojis/cheeto.png"
+        :src="`/whyd/2022/bots/${msg.author}.png`"
         class="avatar"
       />
     </span>
@@ -13,6 +13,7 @@
         v-if="!msg.hideBubble"
         ref="bubble"
         :msg-id="msg.id"
+        :color="msg.color"
         :is-last-in-group="isLastInGroup"
       />
       <component
@@ -91,6 +92,40 @@ export default {
   --avatar-slide-distance: 0px;
 }
 
+.jermabot {
+  --bubble-color: gray;
+  --text-color: white;
+}
+.shigure {
+  --bubble-color: #77c2ff;
+  --text-color: black;
+}
+.fredboat {
+  --bubble-color: #1cbfe2;
+  --text-color: black;
+}
+.unanimism {
+  --bubble-color: #5684ae;
+  --text-color: white;
+}
+.usbot {
+  --bubble-color: #f04747;
+  --text-color: white;
+}
+.notsobot {
+  --bubble-color: #554c58;
+  --text-color: white;
+}
+.secuitybot {
+  --bubble-color: antiquewhite;
+  --text-color: black;
+  --text-style: serif;
+}
+.perlymolt {
+  --bubble-color: #ed5a22;
+  --text-color: white;
+}
+
 .message .avatar-wrapper {
   position: relative;
   width: 40px;
@@ -101,12 +136,37 @@ export default {
   clip-path: circle(20px);
   width: 40px;
   height: 40px;
-  top: -20px;
+  top: -15px;
   animation: slide-in 0.5s ease-in-out both;
 }
 
 .fade-in {
   animation: fade-in 0.5s ease-in-out both;
+}
+
+.message .content {
+  position: relative;
+  top: inherit;
+  left: inherit;
+  padding-left: 0.22em;
+  padding-right: 0.25em;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+
+  margin-left: 2em;
+  margin-right: 2em;
+
+  max-width: 75%;
+
+  height: fit-content;
+
+  color: var(--text-color);
+  font-family: var(--text-style);
+}
+
+.message .content span {
+  animation: fade 0.15s ease-in 0.1s 1 both;
+  white-space: pre-wrap;
 }
 
 @keyframes fade-in {
@@ -126,26 +186,5 @@ export default {
   100% {
     transform: translateY(0);
   }
-}
-
-.message .content {
-  position: relative;
-  top: inherit;
-  left: inherit;
-  padding-left: 0.22em;
-  padding-right: 0.25em;
-  padding-top: 0.25em;
-  padding-bottom: 0.25em;
-
-  margin-left: 2em;
-  margin-right: 2em;
-
-  max-width: 75%;
-
-  height: fit-content;
-}
-
-.message .content span {
-  animation: fade 0.15s ease-in 0.1s 1 both;
 }
 </style>
