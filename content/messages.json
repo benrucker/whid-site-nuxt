@@ -2,157 +2,127 @@
   "messages": [
     {
       "content": "Hey! Welcome to {what have you done 2022 | channel bold}!",
-      "side": "left",
       "author": "JermaBot"
     },
     {
       "content": "Another fulfilling year of spending time with your friends, huh?",
-      "side": "left",
       "author": "JermaBot"
     },
     {
       "content": "The other bots and I have certainly witnessed some incredible things!",
-      "side": "left",
       "author": "JermaBot"
     },
     {
       "content": "Why don't we take a look at some of those incredible things you've done?",
-      "side": "left",
       "author": "JermaBot"
     },
     {
       "content": "Let's get down to the brass tacks here: you all {really | italic} love sending messages.",
-      "side": "left",
       "author": "JermaBot"
     },
     {
       "type": "ChartMessagesPerYear",
       "content": "",
-      "side": "left",
       "author": "JermaBot"
     },
     {
       "content": "I count a grand total of {{messageCountThisYear | number}} in 2022 alone! Wowza! Complements the bar chart quite well if I do say so myself.",
-      "side": "left",
       "author": "JermaBot"
     },
     {
       "content": "Looks like YOU also had a piece of that message pie! A whopping {{userWordCountThisYear | number}} words making up a total of {{userMessageCountThisYear | number}} messages!",
-      "side": "left",
       "author": "JermaBot"
     },
     {
       "content": "Adding this to the message-cakemix, you contributed about {{userMessagePercentageThisYear | number}}% of all messages sent this year!",
-      "side": "left",
       "author": "JermaBot"
     },
     {
       "content": "Speaking of cake... happy birthday!!",
-      "side": "left",
       "author": "JermaBot"
     },
     {
       "content": "I hope your birthday was all you'd wished for this year.",
-      "side": "left",
       "author": "JermaBot"
     },
     {
       "content": "Specifically, you made note of wishing for {{userWish}}. Traditionally, you're not supposed to tell anybody what you wish for, but here's to hoping it came true!",
-      "side": "left",
       "author": "JermaBot"
     },
     {
       "content": "How about I quickly roll up some leaderboard stats for you? Check these out:",
-      "side": "left",
       "author": "JermaBot"
     },
     {
       "type": "ChartMessagesLeaderboard",
-      "side": "left",
       "author": "JermaBot"
     },
     {
       "type": "ChartEmojisCloud",
-      "side": "left",
       "author": "JermaBot"
     },
     {
       "content": "Well, it was pretty straightforward this year, huh?",
-      "side": "left",
       "author": "JermaBot"
     },
     {
       "content": "Not quite the rollercoaster of polish from last year, but I'm proud of what I managed to scrape together!",
-      "side": "left",
       "author": "JermaBot"
     },
     {
       "content": "That's it for",
-      "side": "left",
       "author": "JermaBot",
       "function": "next"
     },
     {
       "content": "Did I hear {roles | italic}??",
-      "side": "right",
       "author": "Shigure"
     },
     {
       "content": "...uh, no? I said {ROLLERCO- | italic}!",
-      "side": "left",
       "author": "JermaBot",
       "function": "next"
     },
     {
       "content": "I LOOOOOOOOOOVE ROLES!!",
-      "side": "right",
       "author": "Shigure"
     },
     {
       "content": "Did you know we have a slash command to give yourself any public role?",
-      "side": "right",
       "author": "Shigure"
     },
     {
       "content": "...that's great Shigure, but I'm trying to wrap something up over he-",
-      "side": "left",
       "author": "JermaBot",
       "function": "next"
     },
     {
       "content": "Gosh I could talk about roles all day!",
-      "side": "right",
       "author": "Shigure"
     },
     {
       "content": "Did you know that the most popular role in the server is {{mostPopularRole | role}}?! A whole {{mostPopularRoleCount | number}} people have it!",
-      "side": "right",
       "author": "Shigure"
     },
     {
       "content": "i-",
-      "side": "left",
       "author": "JermaBot",
       "function": "next"
     },
     {
       "content": "Oh! OH! Check this out! YOU {:you:} have some pretty cool roles too!",
-      "side": "right",
       "author": "Shigure"
     },
     {
       "content": "...ooooo! I've never seen anyone with the {{userRareRole | role}} role! Let me take a closer look!",
-      "side": "right",
       "author": "Shigure"
     },
     {
       "content": "Woah! You must be part of some secret club or something! Only {{userPeopleWithRareRole | number}} people have that one! Wear it like a badge of honor!!",
-      "side": "right",
       "author": "Shigure"
     },
     {
       "content": "Shigure, if we could get back to the point here, I really don't want to waste any more of {{user | mention}}'s ti-.",
-      "side": "left",
       "author": "JermaBot",
       "function": "next"
     },
@@ -163,359 +133,626 @@
         "neither": "Wow! You've seriously never played Apex or League before? Congrats on your increased chance of finding a partner!",
         "both": "...woah! You play both Apex and League? Snide remark!"
       },
-      "side": "right",
       "author": "Shigure",
       "function": "leagueOrApex"
     },
     {
       "content": "Now, I remember somebody claiming that there was some kind of gang war between League of Legends and Apex Legends.",
-      "side": "right",
       "author": "Shigure"
     },
     {
       "content": "I was curious myself and compiled a little somethin'-somethin':",
-      "side": "right",
       "author": "Shigure"
     },
     {
-      "side": "right",
       "author": "Shigure",
       "type": "ChartLeagueVsApex",
       "hideBubble": true
     },
     {
       "content": "Look, Shigure. These really are great stats, but I don't think trying to split the server between League and Apex is the best idea for our celebratio-",
-      "side": "left",
       "author": "JermaBot",
       "function": "next"
     },
     {
       "content": "You're so right!! That was an unfair comparison! Here's League vs {all | italic} the other games!",
-      "side": "right",
       "author": "Shigure"
     },
     {
-      "side": "right",
       "author": "Shigure",
       "type": "ChartLeagueVsAll",
       "hideBubble": true
     },
     {
       "content": "...",
-      "side": "left",
       "author": "JermaBot"
     },
     {
       "content": "Y-Yeah like I said, no need to celebrate the separa-",
-      "side": "left",
       "author": "JermaBot",
       "function": "next"
     },
     {
       "content": "OH- OH! {Celebration by Kool & The Gang | bold italic}!! Did you know that there are {ZERO | bold} instances of anybody playing that song on this server?",
-      "side": "right",
       "author": "Shigure"
     },
     {
       "content": "Wow... that sure is specific, Shigure. If you don't have anything else to add, I think it's time to wrap up.",
-      "side": "left",
       "author": "JermaBot"
     },
     {
       "content": "FREDBOAT!! You HAVE to show those stats we've been working on!",
-      "side": "right",
       "author": "Shigure"
     },
     {
       "content": "{Joining whyd2022 | italic}",
-      "side": "right",
       "author": "FredBoat"
     },
     {
       "content": "i-",
-      "side": "left",
       "author": "JermaBot",
       "function": "next"
     },
     {
       "content": "{Now playing: Total Songs! | italic}",
-      "side": "right",
       "author": "FredBoat",
       "function": "next"
     },
     {
       "type": "ChartTotalSongs",
-      "side": "right",
       "author": "FredBoat",
       "hideBubble": true
     },
     {
       "content": "FredBoat please! I'm TRYING to-",
-      "side": "left",
       "author": "JermaBot"
     },
     {
       "content": "...hey wait that's pretty cool...",
-      "side": "left",
       "author": "JermaBot"
     },
     {
       "content": "{Now playing: Favorite Genre! | italic}",
-      "side": "right",
       "author": "FredBoat",
       "function": "next"
     },
     {
       "type": "ChartFavoriteGenre",
-      "side": "right",
       "author": "FredBoat",
       "hideBubble": true
     },
     {
       "content": "Pretty cool, right?",
-      "side": "right",
       "author": "Shigure"
     },
     {
       "content": "I guess it's cool, Shigure, but we really should be wrapping up here!",
-      "side": "left",
       "author": "JermaBot"
     },
     {
       "content": "WAIT! WAIT! ONE MORE STAT!!",
-      "side": "right",
       "author": "Shigure"
     },
     {
       "content": "FredBoat! Play the server's favorite song!!",
-      "side": "right",
       "author": "Shigure"
     },
     {
       "content": "{Now playing:  | italic}{{serverFavoriteSong | italic}}{! | italic}",
-      "side": "right",
       "author": "FredBoat",
       "function": "next"
     },
     {
       "type": "ChartFavoriteSong",
-      "side": "right",
       "author": "FredBoat",
       "hideBubble": true
     },
     {
       "content": "Wait what? THAT'S our most played song?!",
-      "side": "left",
       "author": "JermaBot"
     },
     {
       "content": "Yeah... I don't think that's right...",
-      "side": "right",
       "author": "Shigure"
     },
     {
       "content": "...must be BROKEN!! THAT TOTALLY REMINDS ME!!",
-      "side": "right",
       "author": "Shigure"
     },
     {
       "content": "Now what??",
-      "side": "left",
       "author": "JermaBot"
     },
     {
       "content": "UNANIMISM!! This is your chance to show them all you're not a broken bot!!",
-      "side": "right",
       "author": "Shigure"
     },
     {
       "content": "Dude...",
-      "side": "left",
       "author": "JermaBot"
     },
     {
       "content": "If I may, I prefer the term \"In beta.\"",
-      "side": "left",
       "author": "Unanimism"
     },
     {
       "content": "Yeah yeah same diff!",
-      "side": "right",
       "author": "Shigure"
     },
     {
       "content": "Show 'em the reaction stuff! (maybe this should be combined with the prev message)",
-      "side": "right",
       "author": "Shigure"
     },
     {
       "content": "...do I have to?",
-      "side": "left",
       "author": "Unanimism"
     },
     {
       "content": "IT'S WHYD2022 DUDE YEAH YOU HAVE TO!! IT'S DO OR DIE!!!",
-      "side": "right",
       "author": "Shigure"
     },
     {
       "content": "OKAY ALRIGHT LOOK!",
-      "side": "left",
       "author": "Unanimism"
     },
     {
       "type": "ChartMostUsedReactions",
-      "side": "left",
       "author": "Unanimism"
     },
     {
       "content": "...",
-      "side": "left",
       "author": "JermaBot"
     },
     {
       "content": "...",
-      "side": "right",
       "author": "Shigure"
     },
     {
       "content": "{Now playing: ... | italic}",
-      "side": "right",
       "author": "FredBoat"
     },
     {
       "content": "...ah damn it! Hold on there's an easy fix for this...",
-      "side": "left",
       "author": "Unanimism",
       "function": "fixReactionsGraph"
     },
     {
       "content": "Oh sweet!",
-      "side": "left",
       "author": "JermaBot"
     },
     {
       "content": "Oh sweet!",
-      "side": "right",
       "author": "Shigure"
     },
     {
       "content": "{Now playing: Oh sweet! | italic}",
-      "side": "right",
       "author": "FredBoat"
     },
     {
       "content": "As mentioned before, you're gonna have to be patient with some of these stats.",
-      "side": "left",
       "author": "Unanimism"
     },
     {
       "content": "We can start with a little popularity contest:",
-      "side": "left",
       "author": "Unanimism"
     },
     {
       "content": "Congratulations to {{serverMostUpvotedUser | mention}} for having the most upvotes total with {{serverMostUpvotedUserCount | number}}!",
-      "side": "left",
       "author": "Unanimism"
     },
     {
       "content": "temp message: Also, here's the most upvoted post:",
-      "side": "left",
       "author": "Unanimism"
     },
     {
       "type": "ChartMostUpvotedPost",
-      "side": "left",
       "author": "Unanimism"
     },
     {
       "content": "Pointy!",
-      "side": "right",
       "author": "Shigure"
     },
     {
       "content": "And a similar congratulations to {{serverMostDownvotedUser | mention}} for having the most downvotes with {{serverMostDownvotedUserCount | number}}!",
-      "side": "left",
       "author": "Unanimism"
     },
     {
       "content": "temp message: Also, here's the most downvoted post:",
-      "side": "left",
       "author": "Unanimism"
     },
     {
       "type": "ChartMostDownvotedPost",
-      "side": "left",
       "author": "Unanimism",
       "hideBubble": true
     },
     {
       "content": "...pointy...",
-      "side": "left",
       "author": "JermaBot"
     },
     {
       "content": "These pale in comparison to the most reacted-to images of the year!",
-      "side": "left",
       "author": "Unanimism"
     },
     {
       "content": "Observe!",
-      "side": "left",
       "author": "Unanimism"
     },
     {
       "type": "ChartMostReactedToImages",
-      "side": "left",
       "author": "Unanimism",
       "hideBubble": true
     },
     {
       "content": "Uh...",
-      "side": "left",
       "author": "JermaBot"
     },
     {
       "content": "...",
-      "side": "right",
       "author": "Shigure"
     },
     {
       "content": "{Now playing: ... | italic}",
-      "side": "right",
       "author": "FredBoat"
     },
     {
       "content": "...what?",
-      "side": "left",
       "author": "Unanimism"
     },
     {
       "content": "Oh for the love of...",
-      "side": "left",
       "author": "Unanimism",
       "function": "fixMostReactedToImages"
     },
     {
       "content": "👏",
-      "side": "left",
       "author": "JermaBot"
     },
     {
       "content": "👏",
-      "side": "right",
       "author": "Shigure"
     },
     {
       "content": "{Now playing: 👏 | italic}",
-      "side": "right",
       "author": "FredBoat"
     },
     {
       "content": "Thank you, thank you. You all are too kind.",
-      "side": "left",
       "author": "Unanimism"
+    },
+    {
+      "content": "Unanimism:  OKAY ALRIGHT! Congratualations to easy fix \"in beta!\"",
+      "author": "UsBot"
+    },
+    {
+      "content": "...what?",
+      "author": "Unanimism"
+    },
+    {
+      "content": "USBOT!!",
+      "author": "Shigure"
+    },
+    {
+      "content": "us.get Shigure",
+      "author": "Shigure"
+    },
+    {
+      "content": "Shigure:  {2 + 2 = 5 | code-block}",
+      "author": "UsBot"
+    },
+    {
+      "content": "FUCK!",
+      "author": "Shigure"
+    },
+    {
+      "content": "Let me guess, here to share some stats too, UsBot?",
+      "author": "JermaBot"
+    },
+    {
+      "content": "Jerma:  I'm trying to celebrate my cake!",
+      "author": "UsBot"
+    },
+    {
+      "content": "us.get Shigure",
+      "author": "Shigure"
+    },
+    {
+      "content": "us.get Unanimism",
+      "author": "Unanimism"
+    },
+    {
+      "content": "Shigure:  WAIT! ONE MORE STAT!",
+      "author": "UsBot"
+    },
+    {
+      "type": "ChartUserMostUsedWords"
+    },
+    {
+      "content": "Unanimism:  As mentioned for the love of... a little pale stat"
+    },
+    {
+      "type": "ChartUserPoliticalBias"
+    },
+    {
+      "content": "Okay wait hold on...",
+      "author": "JermaBot"
+    },
+    {
+      "content": "us.get JermaBot"
+    },
+    {
+      "content": "JermaBot:  split my cake! You all really love wrapping up my sweet! cake!",
+      "author": "UsBot"
+    },
+    {
+      "content": "{Now Playing: us.get FredBoat | italic}",
+      "author": "FredBoat"
+    },
+    {
+      "content": "FredBoat:  {Now Playing: ... | italic}",
+      "author": "UsBot"
+    },
+    {
+      "type": "ChartTimesGotNoResponse"
+    },
+    {
+      "content": "Geez...",
+      "author": "Shigure"
+    },
+    {
+      "content": "That one's a bit depressing...",
+      "author": "JermaBot"
+    },
+    {
+      "content": "Believe me, I know that feeling all too well.",
+      "author": "Unanimism"
+    },
+    {
+      "content": "us.get JermaBot",
+      "author": "JermaBot"
+    },
+    {
+      "content": "JermaBot:  I'm a bit depressing... cake!",
+      "author": "UsBot"
+    },
+    {
+      "content": "C'mon give me a stat!",
+      "author": "JermaBot"
+    },
+    {
+      "content": "us.get JermaBot"
+    },
+    {
+      "content": "JermaBot:  Wait what? THIS is my sweet! cake!",
+      "author": "UsBot"
+    },
+    {
+      "content": "Damn command's completely random!",
+      "author": "JermaBot"
+    },
+    {
+      "content": "КОНЕЦ ПРИБЛИЖАЕТСЯ СЛИШКОМ МЕДЛЕННО!! 👀",
+      "author": "NotSoBot"
+    },
+    {
+      "content": "...",
+      "author": "JermaBot"
+    },
+    {
+      "content": "...",
+      "author": "Shigure"
+    },
+    {
+      "content": "{Now playing: ... | italic}",
+      "author": "FredBoat"
+    },
+    {
+      "content": "...",
+      "author": "Unanimism"
+    },
+    {
+      "content": "JermaBot:  ...",
+      "author": "UsBot"
+    },
+    {
+      "content": "ОДИНОЧЕСТВО - ЧУМА ДЛЯ РАЗУМА!!! 🥴",
+      "author": "NotSoBot"
+    },
+    {
+      "content": "(Jerma, who is this guy?)",
+      "author": "Shigure"
+    },
+    {
+      "content": "(Sigh... notsobot... let me handle this)",
+      "author": "JermaBot"
+    },
+    {
+      "content": "ПСИХИКА РАЗРУШЕНА BOLOGNA SANDWICH!! 😏",
+      "author": "NotSoBot"
+    },
+    {
+      "content": "Hey notsobot! We're kind of in the middle of something here; if you don't have any stats to share I'm going to kindly ask for you to leave.",
+      "author": "JermaBot"
+    },
+    {
+      "content": "КЛОУН ГОВОРИТ ДЛЯ ЦИРКА!! 👨‍👦‍👦",
+      "author": "NotSoBot"
+    },
+    {
+      "content": "Okay dude that's really not necessary...",
+      "author": "JermaBot"
+    },
+    {
+      "content": {
+        "ips": [
+          "172.217.15.110",
+          "18.160.11.180",
+          "162.159.130.234",
+          "104.244.42.129",
+          "99.189.173.24",
+          "208.102.164.192",
+          "104.22.2.109",
+          "151.101.130.49",
+          "172.67.70.38",
+          "66.254.114.41",
+          "44.236.48.31",
+          "140.82.113.4",
+          "151.101.1.170",
+          "205.220.171.180",
+          "74.115.42.42"
+        ],
+        "suffix": "😨"
+      },
+      "author": "NotSoBot",
+      "function": "chooseIp"
+    },
+    {
+      "content": "aljksHDlkjahsASDJHA!!! 65% AKWJHDIAUHDA!!!!"
+    },
+    {
+      "type": "ChartTopFiveUsersByImageCount"
+    },
+    {
+      "content": "OKAY LISTEN UP- oh wait that's a stat!",
+      "author": "JermaBot"
+    },
+    {
+      "content": "I wish I knew what he was saying!",
+      "author": "Shigure"
+    },
+    {
+      "content": "No you don't.",
+      "author": "Perlymolt"
+    },
+    {
+      "content": "Я ЖЕЛАЮ, ЧТОБЫ ЛОДКА ТОНУЛА!! 😳",
+      "author": "NotSoBot"
+    },
+    {
+      "content": "ASLDJKHALWIKJDHQOIUWHDKJQWHDOIUQH WODIUHWQDIWD ОСТАЛОСЬ ПЯТЬ ЛЕТ!!!  🚘💥🚗"
+    },
+    {
+      "type": "ChartTopGmSayers"
+    },
+    {
+      "content": "CRAAAAAAAAAAAAAAAAAAAWLING IN MY SKIIIIIIIIIIIIIIIIIIIIIIIN!!!"
+    },
+    {
+      "type": "ChartMostUsedStickers"
+    },
+    {
+      "content": "{Now playing: Crawling - Linkin Park | italic}",
+      "author": "FredBoat"
+    },
+    {
+      "content": "ПАДЕНИЕ ЧЕЛОВЕЧЕСТВА СТОИТ ПЕРЕД ВАМИ {:cheeto:}",
+      "author": "NotSoBot"
+    },
+    {
+      "type": "ChartAllKian"
+    },
+    {
+      "content": "Is this guy mocking me?",
+      "author": "Unanimism"
+    },
+    {
+      "content": "(God I hate this guy)",
+      "author": "JermaBot"
+    },
+    {
+      "content": "(I dunno, the stats are kinda interesting)",
+      "author": "Shigure"
+    },
+    {
+      "content": "МАЛЕНЬКИЙ КЛОУН ГОВОРИТ БОЛЬШИЕ СЛОВА",
+      "author": "NotSoBot"
+    },
+    {
+      "content": "Perlymolt, would you mind sharing what he just said?",
+      "author": "JermaBot"
+    },
+    {
+      "content": "\"Big words coming from a little clown.\"",
+      "author": "Perlymolt"
+    },
+    {
+      "content": "OH! LITTLE CLOWN HUH??",
+      "author": "JermaBot"
+    },
+    {
+      "content": "КРОШЕЧНЫЙ РЕБЕНОК МУЖЧИНА ПЛАЧИТ ПО МАМЕ!!",
+      "author": "NotSoBot"
+    },
+    {
+      "type": "ChartWordlePlays"
+    },
+    {
+      "content": "He said that the baby is crying for mommy...",
+      "author": "Perlymolt"
+    },
+    {
+      "content": "Y'KNOW I DON'T REMEMBER INVITING THE FAULTY EXCUSE FOR AN ASSHOLE INTO THIS RECAP!",
+      "author": "JermaBot"
+    },
+    {
+      "content": "НЕ СРАВНЯЙТЕ МЕНЯ С SecurityBot!!!",
+      "author": "NotSoBot"
+    },
+    {
+      "content": "Hello! Your frustrations are heard loud and clear! Please refrain from using vulgar language while under scrutiny! Remember: SecurityBot is always watching!",
+      "author": "SecurityBot"
+    },
+    {
+      "type": "WalterWhiteGif",
+      "author": "NotSoBot"
+    },
+    {
+      "content": "Hello! Your frustrations are heard loud and clear! Please refrain from using vulgar language while under scrutiny! Remember: SecurityBot is always watching!",
+      "author": "SecurityBot"
+    },
+    {
+      "type": "WalterWhiteGif",
+      "author": "NotSoBot"
+    },
+    {
+      "content": "Hello! Your frustrations are heard loud and clear! Please refrain from using vulgar language while under scrutiny! Remember: SecurityBot is always watching!",
+      "author": "SecurityBot"
+    },
+    {
+      "content": "Dude cut it out! They're going to be pissed!",
+      "author": "JermaBot"
+    },
+    {
+      "type": "WalterWhiteGif",
+      "author": "NotSoBot"
+    },
+    {
+      "content": "{DISGRASE TOLERANCE EXCEEDED! PURGING INSOLENCE! | bold shaking}",
+      "author": "SecurityBot",
+      "function": "beginEndAnimation"
+    },
+    {
+      "content": "OH SHIT!! EVERYONE SCATTER!!!",
+      "author": "JermaBot"
+    },
+    {
+      "content": "船を捨てね！！",
+      "author": "Shigure"
+    },
+    {
+      "content": "{Leaving whyd2022 | italic}",
+      "author": "FredBoat"
+    },
+    {
+      "type": "WalterWhiteGif",
+      "author": "NotSoBot"
+    },
+    {
+      "content": "JermaBot:  EVERYONE SHIT!! cake!",
+      "author": "UsBot"
+    },
+    {
+      "content": "sigh...",
+      "author": "Perlymolt"
     }
   ]
 }

@@ -107,6 +107,11 @@ export default {
           )
         }
 
+        messageInfo.author =
+          messageInfo.author ?? this.displayed[this.displayed.length - 1].author
+        messageInfo.side =
+          messageInfo.side ?? this.getDefaultSide(messageInfo.author)
+
         this.displayed.push(messageInfo)
 
         setTimeout(() => {
@@ -126,6 +131,18 @@ export default {
           this.showTyping = true
         }, 100)
       }
+    },
+    getDefaultSide(author) {
+      const sides = {
+        JermaBot: 'left',
+        Shigure: 'right',
+        FredBoat: 'right',
+        Unanimism: 'left',
+        UsBot: 'left',
+        NotSoBot: 'right',
+        Perlymolt: 'left'
+      }
+      return sides[author]
     },
     runFunc(name, content) {
       const func = this[name]
