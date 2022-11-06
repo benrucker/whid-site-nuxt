@@ -1,8 +1,9 @@
 <template>
-  <div ref="bubble" class="bubble">
+  <div ref="bubble" :class="`bubble`">
     <transition :key="msgId" name="tail-exit">
       <div v-if="isLastInGroup" class="tail" />
     </transition>
+    <div class="background" />
   </div>
 </template>
 
@@ -11,6 +12,10 @@ export default {
   props: {
     msgId: {
       type: Number,
+      required: true
+    },
+    color: {
+      type: String,
       required: true
     },
     isLastInGroup: {
@@ -42,20 +47,20 @@ export default {
   animation: expand-right 0.2s ease-out 0s 1 both;
 }
 
-.message .content .bubble::after {
+.message .content .bubble .background {
   position: absolute;
   width: 100%;
   height: 100%;
   content: '';
 }
 
-.message.right .content .bubble::after {
+.message.right .content .bubble .background {
   right: 0;
 
   transform-origin: bottom right;
 }
 
-.message.left .content .bubble::after {
+.message.left .content .bubble .background {
   transform-origin: bottom left;
 }
 
@@ -71,17 +76,35 @@ export default {
 
 .message.left .content .bubble .tail {
   clip-path: polygon(0 0, 100% 0, 0 75%);
-  background: grey;
+  background: var(--bubble-color);
 }
 
 .message.right .content .bubble .tail {
   right: 0;
   clip-path: polygon(0 0, 100% 0, 100% 75%);
-  background-color: rgb(37, 145, 181);
+  background-color: var(--bubble-color);
 }
 
 .tail-exit-leave-active {
   animation: slide-up 0.5s;
+}
+
+.message.left .content .bubble .background {
+  background-color: var(--bubble-color);
+
+  border-bottom-right-radius: 1em;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top-left-radius: 1em;
+}
+
+.message.right .content .bubble .background {
+  background-color: var(--bubble-color);
+
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 1em;
+  border-top-right-radius: 1em;
+  border-top-left-radius: 0;
 }
 
 @keyframes slide-up {
@@ -115,23 +138,5 @@ export default {
     opacity: 1;
     transform: scale(1) skew(9deg);
   }
-}
-
-.message.left .content .bubble::after {
-  background-color: gray;
-
-  border-bottom-right-radius: 1em;
-  border-bottom-left-radius: 0;
-  border-top-right-radius: 0;
-  border-top-left-radius: 1em;
-}
-
-.message.right .content .bubble::after {
-  background-color: rgb(37, 145, 181);
-
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 1em;
-  border-top-right-radius: 1em;
-  border-top-left-radius: 0;
 }
 </style>
