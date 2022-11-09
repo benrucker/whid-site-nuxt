@@ -1,12 +1,15 @@
 <template>
   <span class="parsed-text">
-    <span
-      v-for="token in parsedContent"
-      :key="token.text !== '' ? token.text : token.src"
-      :class="token.styles"
-      ><span v-if="token.text != null">{{ token.text }}</span
-      ><span v-else class="emoji"><img :src="token.src" /></span
-    ></span>
+    <template v-for="token in parsedContent"
+      ><span
+        v-if="token.text != null"
+        :key="token.text"
+        :class="token.styles"
+        >{{ token.text }}</span
+      >
+      <div v-else :key="token.src" class="emoji" :class="token.styles">
+        <img :src="token.src" /></div
+    ></template>
   </span>
 </template>
 
@@ -121,12 +124,18 @@ function parseEmoji(data) {
 }
 
 .parsed-text .emoji {
-  height: 1em;
-  width: 1em;
+  height: 19px;
+  width: 15px;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
 }
 
 .parsed-text .emoji img {
-  max-height: 1em;
-  max-width: 1em;
+  max-height: 1.1em;
+  max-width: 1.1em;
+  top: calc(0.3em - 0.1em);
+  left: calc(0.05em - 0.1em);
+  position: absolute;
 }
 </style>

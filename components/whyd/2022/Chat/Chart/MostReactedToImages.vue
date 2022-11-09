@@ -54,6 +54,7 @@ export default {
             this.$nextTick(() => {
               this.$el.scrollIntoView({ behavior: 'smooth', block: 'center' })
             })
+            this.$emit('graphFixed')
           }, 1000)
         }, 500)
       }, 2000)
