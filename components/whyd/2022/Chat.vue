@@ -12,6 +12,9 @@
         :index="index"
         @graphFixed="handleGraphFixed"
       />
+      <div id="afterLastMessage">
+        <div id="afterLastMessageInner" ref="afterLastMessage" />
+      </div>
       <div
         v-if="showTyping && !advancingIsDisabled"
         :class="'message typing ' + messages[0].side + ' text-muted'"
@@ -30,12 +33,7 @@
       >
         Click to continue!
       </div>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
+      <div style="height: 80vh" />
     </div>
   </div>
 </template>
@@ -111,10 +109,9 @@ export default {
         this.displayed.push(messageInfo)
 
         setTimeout(() => {
-          this.$el.scrollIntoView({
+          this.$refs.afterLastMessage.scrollIntoView({
             behavior: 'smooth',
-            block: 'end',
-            inline: 'nearest'
+            block: 'center'
           })
         }, 50)
       }
@@ -205,6 +202,15 @@ export default {
 
 #the-one-above-conversation {
   overflow-x: hidden;
+}
+
+#afterLastMessage {
+  position: relative;
+}
+
+#afterLastMessage #afterLastMessageInner {
+  position: absolute;
+  top: -30vh;
 }
 
 #conversation {
