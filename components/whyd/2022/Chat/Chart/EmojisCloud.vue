@@ -118,7 +118,9 @@ export default {
       canvas.style.height = `${rect.height}px`
     },
     async render() {
-      const ctx = this.$refs.canvas.getContext('2d')
+      const ctx = this.$refs.canvas.getContext('2d', {
+        willReadFrequently: true
+      })
 
       const width = this.$refs.canvas.width
       const height = this.$refs.canvas.height
