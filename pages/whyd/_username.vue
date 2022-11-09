@@ -10,9 +10,10 @@
         :is-first-in-group="displayed[index - 1]?.author !== msg.author"
         :msg="msg"
         :index="index"
+        @graphFixed="handleGraphFixed"
       />
       <div
-        v-if="showTyping"
+        v-if="showTyping && !advancingIsDisabled"
         :class="'message typing ' + messages[0].side + ' text-muted'"
       >
         <div class="content">
@@ -23,7 +24,10 @@
           </div>
         </div>
       </div>
-      <div v-if="showHint" class="hint text-center text-muted">
+      <div
+        v-if="showHint && !advancingIsDisabled"
+        class="hint text-center text-muted"
+      >
         Click to continue!
       </div>
       <br />
@@ -45,15 +49,16 @@ export default {
   },
   data() {
     return {
-      messages: [],
-      displayed: [],
-      showHint: true,
-      showTyping: true,
-      waitingToAutomaticallyAdvance: false,
+      advancingIsDisabled: false,
       autoAdvanceTimeout: undefined,
       debugShowAll: true,
-      debugShowAllLimit: 9999999,
-      stats: null
+      debugShowAllLimit: 60,
+      displayed: [],
+      messages: [],
+      showHint: true,
+      showTyping: true,
+      stats: null,
+      waitingToAutomaticallyAdvance: false
     }
   },
   async fetch() {
@@ -90,6 +95,8 @@ export default {
       if (this.waitingToAutomaticallyAdvance) {
         clearTimeout(this.autoAdvanceTimeout)
         this.waitingToAutomaticallyAdvance = false
+      } else if (this.advancingIsDisabled) {
+        return
       }
       this.advance()
     },
@@ -176,18 +183,29 @@ export default {
     },
     fixMostReactedToImages(content) {
       // the [0] is needed for some reason
+      this.disableAdvancing()
       this.$refs.ChartMostReactedToImages[0].propogateEvent('fix')
       return content
     },
     fixReactionsGraph(content) {
+      this.disableAdvancing()
       this.$refs.ChartMostUsedReactions[0].propogateEvent('fix')
       return content
+    },
+    handleGraphFixed() {
+      this.enableAdvancing()
     },
     chooseRandomIp(content) {
       return this.chooseRandomOption(content.ips) + ' ' + content.suffix
     },
     chooseRandomOption(content) {
       return content[Math.floor(Math.random() * content.length)]
+    },
+    disableAdvancing() {
+      this.advancingIsDisabled = true
+    },
+    enableAdvancing() {
+      this.advancingIsDisabled = false
     }
   }
 }

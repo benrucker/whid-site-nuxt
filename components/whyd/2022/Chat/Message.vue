@@ -21,6 +21,7 @@
         ref="component"
         :content="msg.content"
         :stats="stats"
+        @graphFixed="handleGraphFixed"
       />
     </div>
   </div>
@@ -82,6 +83,9 @@ export default {
     },
     propogateEvent(event) {
       this.$refs.component[event]()
+    },
+    handleGraphFixed() {
+      this.$emit('graphFixed')
     }
   }
 }
