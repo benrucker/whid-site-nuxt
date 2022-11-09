@@ -182,6 +182,12 @@ export default {
     fixReactionsGraph(content) {
       this.$refs.ChartMostUsedReactions[0].propogateEvent('fix')
       return content
+    },
+    chooseRandomIp(content) {
+      return this.chooseRandomOption(content.ips) + ' ' + content.suffix
+    },
+    chooseRandomOption(content) {
+      return content[Math.floor(Math.random() * content.length)]
     }
   }
 }

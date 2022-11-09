@@ -93,23 +93,27 @@ export default {
 }
 
 .jermabot {
-  --bubble-color: gray;
+  --bubble-color: #646464;
   --text-color: white;
 }
 .shigure {
-  --bubble-color: #77c2ff;
-  --text-color: black;
+  --bubble-color: #2f618b;
+  --text-color: white;
 }
 .fredboat {
   --bubble-color: #1cbfe2;
   --text-color: black;
 }
 .unanimism {
-  --bubble-color: #5684ae;
-  --text-color: white;
+  /* --bubble-color: #e0e169; */
+  /* --text-color: #111; */
+  /* --bubble-color: #5684ae; */
+  /* --text-color: white; */
+  --bubble-color: #9fd7d7;
+  --text-color: black;
 }
 .usbot {
-  --bubble-color: #f04747;
+  --bubble-color: #d73d3d;
   --text-color: white;
 }
 .notsobot {
