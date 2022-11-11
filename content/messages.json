@@ -9,7 +9,7 @@
       "author": "JermaBot"
     },
     {
-      "content": "The other bots and I have certainly witnessed some incredible things!",
+      "content": "I've personally witnessed some pretty incredible things!",
       "author": "JermaBot"
     },
     {
@@ -30,7 +30,7 @@
       "author": "JermaBot"
     },
     {
-      "content": "Looks like YOU also had a piece of that message pie! A whopping {{userWordCountThisYear | number}} words making up a total of {{userMessageCountThisYear | number}} messages!",
+      "content": "Looks like YOU also had a piece of that message-pie! A whopping {{userWordCountThisYear | number}} words making up a total of {{userMessageCountThisYear | number}} messages!",
       "author": "JermaBot"
     },
     {
@@ -66,11 +66,11 @@
       "author": "JermaBot"
     },
     {
-      "content": "Not quite the rollercoaster of polish from last year, but I'm proud of what I managed to scrape together!",
+      "content": "Not quite the rollercoaster of polish from last year, but I'm quite proud of what I managed to scrape together!",
       "author": "JermaBot"
     },
     {
-      "content": "That's it for",
+      "content": "That's it fo-",
       "author": "JermaBot",
       "function": "next"
     },
@@ -79,12 +79,12 @@
       "author": "Shigure"
     },
     {
-      "content": "...uh, no? I said {ROLLERCO- | italic}!",
+      "content": "...uh, no? I said {ROLLERCOA- | italic}!",
       "author": "JermaBot",
       "function": "next"
     },
     {
-      "content": "I LOOOOOOOOOOVE ROLES!!",
+      "content": "I LOOOOOVE ROLES!!",
       "author": "Shigure"
     },
     {
@@ -137,7 +137,7 @@
       "function": "leagueOrApex"
     },
     {
-      "content": "Now, I remember somebody claiming that there was some kind of gang war between League of Legends and Apex Legends.",
+      "content": "Now, I remember someone claiming that there was some kind of gang war between League of Legends and Apex Legends.",
       "author": "Shigure"
     },
     {
@@ -155,7 +155,7 @@
       "function": "next"
     },
     {
-      "content": "You're so right!! That was an unfair comparison! Here's League vs {all | italic} the other games!",
+      "content": "You're so right!! That was an unfair comparison! Here's League vs {all | bold} the other games!",
       "author": "Shigure"
     },
     {
@@ -177,8 +177,11 @@
       "author": "Shigure"
     },
     {
-      "content": "Wow... that sure is specific, Shigure. If you don't have anything else to add, I think it's time to wrap up.",
+      "content": "Wow... that sure is specific, Shigure.",
       "author": "JermaBot"
+    },
+    {
+      "content": "Look, if you don't have anything else to add, I think it's time to wrap up."
     },
     {
       "content": "FREDBOAT!! You HAVE to show those stats we've been working on!",
@@ -280,7 +283,7 @@
       "author": "Shigure"
     },
     {
-      "content": "Show 'em the reaction stuff! (maybe this should be combined with the prev message)",
+      "content": "Show 'em the reaction stuff!",
       "author": "Shigure"
     },
     {
@@ -337,11 +340,14 @@
       "author": "Unanimism"
     },
     {
-      "content": "Congratulations to {{serverMostUpvotedUser | mention}} for having the most upvotes total with {{serverMostUpvotedUserCount | number}}!",
+      "content": "Congratulations to {{serverMostUpvotedUser | mention}} for having the most upvotes - a total of {{serverMostUpvotedUserCount | number}}.",
       "author": "Unanimism"
     },
     {
-      "content": "temp message: Also, here's the most upvoted post:",
+      "content": "Don't let it go to your head."
+    },
+    {
+      "content": "The peak of whid this year goes to:",
       "author": "Unanimism"
     },
     {
@@ -349,21 +355,19 @@
       "author": "Unanimism"
     },
     {
+      "content": "What make this so popular is genuinely beyond me."
+    },
+    {
       "content": "Pointy!",
       "author": "Shigure"
     },
     {
-      "content": "And a similar congratulations to {{serverMostDownvotedUser | mention}} for having the most downvotes with {{serverMostDownvotedUserCount | number}}!",
+      "content": "And a similar congratulations to {{serverMostDownvotedUser | mention}} for having the most collective downvotes.",
       "author": "Unanimism"
     },
     {
-      "content": "temp message: Also, here's the most downvoted post:",
+      "content": "You certainly should let this one go to your head.",
       "author": "Unanimism"
-    },
-    {
-      "type": "ChartMostDownvotedPost",
-      "author": "Unanimism",
-      "hideBubble": true
     },
     {
       "content": "...pointy...",
@@ -420,12 +424,28 @@
       "author": "Unanimism"
     },
     {
-      "content": "Unanimism:  OKAY ALRIGHT! Congratualations to easy fix \"in beta!\"",
+      "content": "Good stuff Unanimism! Thank you for sharing.",
+      "author": "JermaBot"
+    },
+    {
+      "content": "Y'know guys, this whole thing was actually pretty cool. I'll be real, for a while there, I was annoyed that you all kept jumping in with this stat and that... But you all showed off some really killer stuff!"
+    },
+    {
+      "content": "Thanks for making this year's {whyd | italic} special - a real treat :)"
+    },
+    {
+      "content": "And thank you {:you:} very much for joining me for {whyd2022 | italic}. I'm excited to see what fun things come around next year!"
+    },
+    {
+      "content": "With that, I think it's time for us to get out of here."
+    },
+    {
+      "content": "{User not found: out of here | italic}",
       "author": "UsBot"
     },
     {
-      "content": "...what?",
-      "author": "Unanimism"
+      "content": "...okay what the fuck",
+      "author": "JermaBot"
     },
     {
       "content": "USBOT!!",
@@ -444,11 +464,11 @@
       "author": "Shigure"
     },
     {
-      "content": "Let me guess, here to share some stats too, UsBot?",
+      "content": "UsBot, please tell me you're just here for the sendoff.",
       "author": "JermaBot"
     },
     {
-      "content": "Jerma:  I'm trying to celebrate my cake!",
+      "content": "JermaBot:  I'm trying to celebrate my cake!",
       "author": "UsBot"
     },
     {
@@ -460,8 +480,12 @@
       "author": "Unanimism"
     },
     {
-      "content": "Shigure:  WAIT! ONE MORE STAT!",
-      "author": "UsBot"
+      "content": [
+        "Shigure:  WAIT! CAN ONE MORE STAT!",
+        "Shigure:  WAIT! ONE OF MORE STAT!"
+      ],
+      "author": "UsBot",
+      "function": "chooseRandomOption"
     },
     {
       "type": "ChartUserMostUsedWords"
@@ -642,6 +666,9 @@
     {
       "content": "{Now playing: Crawling - Linkin Park | italic}",
       "author": "FredBoat"
+    },
+    {
+      "type": "ChartCrawlingInMySkin"
     },
     {
       "content": "ПАДЕНИЕ ЧЕЛОВЕЧЕСТВА СТОИТ ПЕРЕД ВАМИ {:cheeto:}",
