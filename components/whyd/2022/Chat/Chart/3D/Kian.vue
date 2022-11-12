@@ -3,7 +3,12 @@
 </template>
 
 <script>
+// Have the kians fade in one at a time
+// Have a large spooky kian show up at some point
+// film grain? maybe it flickers on and off, maybe on just some cameras?
+
 import * as THREE from 'three'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
 export default {
@@ -44,13 +49,11 @@ export default {
         bottom: 0,
         width: 0.5,
         height: 0.2,
-        up: [0, 1, 0],
         fov,
+        pos: [dist, 0, 0],
         updateCamera: function (camera, _scene, _mouseX) {
-          camera.position.x = dist
-          camera.position.y = 0
-          camera.position.z = 0 * rotationOffset
-          camera.lookAt(0, 0, 0)
+          // camera.position.x = dist
+          // camera.lookAt(0, 0, 0)
         }
       },
       {
@@ -58,13 +61,11 @@ export default {
         bottom: 0.2,
         width: 0.5,
         height: 0.2,
-        up: [0, 1, 0],
         fov,
+        pos: [Math.sqrt(dist), 0, Math.sqrt(dist)],
         updateCamera: function (camera, _scene, _mouseX) {
-          camera.position.x = dist
-          camera.position.y = 0
-          camera.position.z = 1 * rotationOffset
-          camera.lookAt(0, 0, 0)
+          // camera.position.x = dist
+          // camera.lookAt(0, 0, 0)
         }
       },
       {
@@ -72,13 +73,11 @@ export default {
         bottom: 0.4,
         width: 0.5,
         height: 0.2,
-        up: [0, 1, 0],
         fov,
+        pos: [0, 0, -dist],
         updateCamera: function (camera, _scene, _mouseX) {
-          camera.position.x = dist
-          camera.position.y = 0
-          camera.position.z = 2 * rotationOffset
-          camera.lookAt(0, 0, 0)
+          // camera.position.x = dist
+          // camera.lookAt(0, 0, 0)
         }
       },
       {
@@ -86,13 +85,11 @@ export default {
         bottom: 0.6,
         width: 0.5,
         height: 0.2,
-        up: [0, 1, 0],
         fov,
+        pos: [-dist, 0, 0],
         updateCamera: function (camera, _scene, _mouseX) {
-          camera.position.x = dist
-          camera.position.y = 0
-          camera.position.z = 3 * rotationOffset
-          camera.lookAt(0, 0, 0)
+          // camera.position.x = dist
+          // camera.lookAt(0, 0, 0)
         }
       },
       {
@@ -100,39 +97,58 @@ export default {
         bottom: 0.8,
         width: 0.5,
         height: 0.2,
-        up: [0, 1, 0],
         fov,
+        pos: [0, 0, dist],
         updateCamera: function (camera, _scene, _mouseX) {
-          camera.position.x = dist
-          camera.position.y = 0
-          camera.position.z = 4 * rotationOffset
-          camera.lookAt(0, 0, 0)
+          // camera.position.x = dist
+          // camera.lookAt(0, 0, 0)
         }
       }
     ]
 
     for (const view of this.views) {
       const camera = new THREE.PerspectiveCamera(view.fov, aspect, near, far)
-      camera.position.fromArray([0, 0, 0])
-      camera.up.fromArray(view.up)
+      camera.position.fromArray(view.pos)
+      // camera.up.fromArray(view.up)
       view.camera = camera
+      view.controls = new OrbitControls(camera, this.renderer.domElement)
+      view.controls.enableDamping = true
+      view.controls.dampingFactor = 0.02
+      view.controls.enableZoom = false
+      view.controls.enablePan = false
+      view.controls.autoRotate = true
+      view.controls.autoRotateSpeed = 5
+      view.controls.rotateSpeed = 5
+      view.controls.maxPolarAngle = 0.5 * Math.PI
+      view.controls.minPolarAngle = 0.5 * Math.PI
+
+      this.scene.add(view.camera)
     }
 
     {
-      const skyColor = 0xb1e1ff // light blue
-      const groundColor = 0xb97a20 // brownish orange
+      const skyColor = 0xaaaaff
+      const groundColor = 0x222299
       const intensity = 1
       const light = new THREE.HemisphereLight(skyColor, groundColor, intensity)
       this.scene.add(light)
     }
 
     {
-      const color = 0xffffff
-      const intensity = 1
+      const color = 0xbebefa
+      const intensity = 2
       const light = new THREE.DirectionalLight(color, intensity)
-      light.position.set(5, 10, 2)
-      this.scene.add(light)
-      this.scene.add(light.target)
+      light.position.set(100, 10, 20)
+      light.target.position.set(0, 0, 0)
+      this.views[0].camera.add(light)
+    }
+
+    {
+      const color = 0xdabbaa
+      const intensity = 2
+      const light = new THREE.DirectionalLight(color, intensity)
+      light.position.set(-20, 0, -100)
+      light.target.position.set(0, 0, 0)
+      this.views[0].camera.add(light)
     }
 
     const loader = new GLTFLoader()
@@ -154,12 +170,13 @@ export default {
     render() {
       const updateDelta = this.clock.getDelta()
 
-      this.model.rotation.y -= updateDelta * 0.5
+      // this.model.rotation.y -= updateDelta * 0.5
 
       this.resizeRendererToDisplaySize()
 
       for (const view of this.views) {
         const camera = view.camera
+        const controls = view.controls
 
         view.updateCamera(camera, this.scene, 0)
 
@@ -176,6 +193,8 @@ export default {
 
         camera.aspect = width / height
         camera.updateProjectionMatrix()
+
+        controls.update()
 
         this.renderer.render(this.scene, camera)
       }
