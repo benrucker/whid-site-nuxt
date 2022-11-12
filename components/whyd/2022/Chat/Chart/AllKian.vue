@@ -1,11 +1,31 @@
 <template>
   <div class="kianChart">
     <div class="kianTextLayer">
-      <div class="entry">1.</div>
-      <div class="entry">2.</div>
-      <div class="entry">3.</div>
-      <div class="entry">4.</div>
-      <div class="entry">5.</div>
+      <div class="entry">
+        <div class="number">1.</div>
+        <div class="spacer" />
+        <div class="name">SilentKON</div>
+      </div>
+      <div class="entry">
+        <div class="number">2.</div>
+        <div class="spacer" />
+        <div class="name">Cameron</div>
+      </div>
+      <div class="entry">
+        <div class="number">3.</div>
+        <div class="spacer" />
+        <div class="name">Kian</div>
+      </div>
+      <div class="entry">
+        <div class="number">4.</div>
+        <div class="spacer" />
+        <div class="name">Mr. Souayvixay</div>
+      </div>
+      <div class="entry">
+        <div class="number">5.</div>
+        <div class="spacer" />
+        <div class="name">The Gilded God</div>
+      </div>
     </div>
     <Whyd2022ChatChart3DKian class="chart3d" />
   </div>
@@ -46,11 +66,23 @@
   flex-shrink: 1;
   align-items: center;
   justify-content: flex-start;
+  z-index: 1;
+  color: #222;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
 
+.entry .spacer {
+  width: 120px;
+}
+
+.entry .number {
+  width: 40px;
   font-weight: 600;
   font-size: 3em;
+}
 
-  z-index: 1;
+.entry .name {
+  font-weight: 600;
 }
 
 .entry img {

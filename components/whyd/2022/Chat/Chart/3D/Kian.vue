@@ -20,7 +20,9 @@ export default {
       renderer: undefined,
       model: undefined,
       scene: undefined,
-      views: undefined
+      views: undefined,
+      bigCamera: undefined,
+      rAF: undefined
     }
   },
   mounted() {
@@ -31,24 +33,25 @@ export default {
       antialias: true
     })
     this.renderer.outputEncoding = THREE.sRGBEncoding
+    this.renderer.autoClear = false
 
-    const fov = 10
+    const fov = 45
     const aspect = 2 // the canvas default
     const near = 0.1
-    const far = 200
+    const far = 1000
 
     this.scene = new THREE.Scene()
     this.clock = new THREE.Clock()
 
-    const dist = 60
+    const dist = 20
     const rotationOffset = -10
 
     this.views = [
       {
         left: 0,
-        bottom: 0,
+        bottom: -0.05,
         width: 0.5,
-        height: 0.2,
+        height: 0.3,
         fov,
         pos: [dist, 0, 0],
         updateCamera: function (camera, _scene, _mouseX) {
@@ -58,11 +61,11 @@ export default {
       },
       {
         left: 0,
-        bottom: 0.2,
+        bottom: 0,
         width: 0.5,
-        height: 0.2,
-        fov,
-        pos: [Math.sqrt(dist), 0, Math.sqrt(dist)],
+        height: 0.6,
+        fov: 160,
+        pos: [Math.sqrt(60) / 3, 0, Math.sqrt(60) / 3],
         updateCamera: function (camera, _scene, _mouseX) {
           // camera.position.x = dist
           // camera.lookAt(0, 0, 0)
@@ -70,11 +73,11 @@ export default {
       },
       {
         left: 0,
-        bottom: 0.4,
+        bottom: 0.3375,
         width: 0.5,
-        height: 0.2,
-        fov,
-        pos: [0, 0, -dist],
+        height: 0.3,
+        fov: 1.5,
+        pos: [0, 0, -9 * 60],
         updateCamera: function (camera, _scene, _mouseX) {
           // camera.position.x = dist
           // camera.lookAt(0, 0, 0)
@@ -82,9 +85,9 @@ export default {
       },
       {
         left: 0,
-        bottom: 0.6,
+        bottom: 0.525,
         width: 0.5,
-        height: 0.2,
+        height: 0.3,
         fov,
         pos: [-dist, 0, 0],
         updateCamera: function (camera, _scene, _mouseX) {
@@ -94,9 +97,9 @@ export default {
       },
       {
         left: 0,
-        bottom: 0.8,
+        bottom: 0.7,
         width: 0.5,
-        height: 0.2,
+        height: 0.3,
         fov,
         pos: [0, 0, dist],
         updateCamera: function (camera, _scene, _mouseX) {
@@ -124,6 +127,14 @@ export default {
 
       this.scene.add(view.camera)
     }
+
+    const bigCamera = new THREE.PerspectiveCamera(10, aspect, near, far)
+    bigCamera.position.set(0, 0, 60)
+    bigCamera.lookAt(0.85, 3.5, 0)
+    // bigCamera.position.set(10, 20, dist)
+    bigCamera.zoom = 10
+    // bigCamera.aspect = 0.1
+    this.bigCamera = bigCamera
 
     {
       const skyColor = 0xaaaaff
@@ -163,8 +174,11 @@ export default {
       // this.model.position.y += 10
       // this.model.scale.set(0.3, 0.3, 0.3)
 
-      requestAnimationFrame(this.render)
+      this.rAF = requestAnimationFrame(this.render)
     })
+  },
+  beforeDestroy() {
+    cancelAnimationFrame(this.rAF)
   },
   methods: {
     render() {
@@ -172,15 +186,33 @@ export default {
 
       // this.model.rotation.y -= updateDelta * 0.5
 
+      // this.renderer.setClearColor(0x000000, 0)
+      this.renderer.clear()
+
       this.resizeRendererToDisplaySize()
+
+      const canvas = this.renderer.domElement
+
+      const left = 0 * canvas.width
+      const bottom = 0
+      const width = 1 * canvas.width
+      const height = canvas.height
+      this.renderer.setViewport(left, bottom, width, height)
+      this.renderer.setScissor(left, bottom, width, height)
+      this.renderer.setScissorTest(true)
+
+      this.bigCamera.aspect = width / height
+      this.bigCamera.updateProjectionMatrix()
+
+      if (this.shouldShowBigGuy()) {
+        this.renderer.render(this.scene, this.bigCamera)
+      }
 
       for (const view of this.views) {
         const camera = view.camera
         const controls = view.controls
 
         view.updateCamera(camera, this.scene, 0)
-
-        const canvas = this.renderer.domElement
 
         const left = Math.floor(canvas.width * view.left)
         const bottom = Math.floor(canvas.height * view.bottom)
@@ -199,7 +231,7 @@ export default {
         this.renderer.render(this.scene, camera)
       }
 
-      requestAnimationFrame(this.render)
+      this.rAF = requestAnimationFrame(this.render)
     },
     resizeRendererToDisplaySize() {
       const canvas = this.renderer.domElement
@@ -210,6 +242,11 @@ export default {
         this.renderer.setSize(width, height, false)
       }
       return needResize
+    },
+    shouldShowBigGuy() {
+      const time = Math.floor(this.clock.elapsedTime * 20)
+      console.log(time)
+      return !(time % 4 || time % 3 || time % 6 || time % 7)
     }
   }
 }
@@ -218,7 +255,7 @@ export default {
 <style scoped>
 canvas {
   width: 100%;
-  height: calc(100% - 20px);
-  margin-top: 20px;
+  height: 100%;
+  border-radius: 20px;
 }
 </style>
