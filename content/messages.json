@@ -675,7 +675,8 @@
       "author": "NotSoBot"
     },
     {
-      "type": "ChartAllKian"
+      "type": "ChartAllKian",
+      "hideBubble": true
     },
     {
       "content": "Is this guy mocking me?",

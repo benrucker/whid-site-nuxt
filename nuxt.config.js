@@ -39,7 +39,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: [/echarts/, /zrender/],
+    transpile: [/echarts/, /zrender/, /three/, /three-addons/],
     loaders: {
       vue: {
         compiler: require('vue-template-babel-compiler')
