@@ -656,20 +656,23 @@
       "content": "ASLDJKHALWIKJDHQOIUWHDKJQWHDOIUQH WODIUHWQDIWD ОСТАЛОСЬ ПЯТЬ ЛЕТ!!!  🚘💥🚗"
     },
     {
-      "type": "ChartTopGmSayers"
+      "type": "ChartTopGmSayers",
+      "hideBubble": true
     },
     {
       "content": "CRAAAAAAAAAAAAAAAAAAAWLING IN MY SKIIIIIIIIIIIIIIIIIIIIIIIN!!!"
     },
     {
-      "type": "ChartMostUsedStickers"
+      "type": "ChartMostUsedStickers",
+      "hideBubble": true
     },
     {
       "content": "{Now playing: Crawling - Linkin Park | italic}",
       "author": "FredBoat"
     },
     {
-      "type": "ChartCrawlingInMySkin"
+      "type": "ChartCrawlingInMySkin",
+      "hideBubble": true
     },
     {
       "content": "ПАДЕНИЕ ЧЕЛОВЕЧЕСТВА СТОИТ ПЕРЕД ВАМИ{:cheeto:}",
