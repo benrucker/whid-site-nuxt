@@ -633,7 +633,8 @@
       "content": "aljksHDlkjahsASDJHA!!! 65% AKWJHDIAUHDA!!!!"
     },
     {
-      "type": "ChartTopFiveUsersByImageCount"
+      "type": "ChartTopFiveUsersByImageCount",
+      "hideBubble": true
     },
     {
       "content": "OKAY LISTEN UP- oh wait that's a stat!",
@@ -655,23 +656,26 @@
       "content": "ASLDJKHALWIKJDHQOIUWHDKJQWHDOIUQH WODIUHWQDIWD ОСТАЛОСЬ ПЯТЬ ЛЕТ!!!  🚘💥🚗"
     },
     {
-      "type": "ChartTopGmSayers"
+      "type": "ChartTopGmSayers",
+      "hideBubble": true
     },
     {
       "content": "CRAAAAAAAAAAAAAAAAAAAWLING IN MY SKIIIIIIIIIIIIIIIIIIIIIIIN!!!"
     },
     {
-      "type": "ChartMostUsedStickers"
+      "type": "ChartMostUsedStickers",
+      "hideBubble": true
     },
     {
       "content": "{Now playing: Crawling - Linkin Park | italic}",
       "author": "FredBoat"
     },
     {
-      "type": "ChartCrawlingInMySkin"
+      "type": "ChartCrawlingInMySkin",
+      "hideBubble": true
     },
     {
-      "content": "ПАДЕНИЕ ЧЕЛОВЕЧЕСТВА СТОИТ ПЕРЕД ВАМИ {:cheeto:}",
+      "content": "ПАДЕНИЕ ЧЕЛОВЕЧЕСТВА СТОИТ ПЕРЕД ВАМИ{:cheeto:}",
       "author": "NotSoBot"
     },
     {
@@ -711,7 +715,8 @@
       "author": "NotSoBot"
     },
     {
-      "type": "ChartWordlePlays"
+      "type": "ChartWordlePlays",
+      "hideBubble": true
     },
     {
       "content": "He said that the baby is crying for mommy...",
@@ -731,6 +736,7 @@
     },
     {
       "type": "WalterWhiteGif",
+      "hideBubble": true,
       "author": "NotSoBot"
     },
     {
@@ -739,6 +745,7 @@
     },
     {
       "type": "WalterWhiteGif",
+      "hideBubble": true,
       "author": "NotSoBot"
     },
     {
@@ -751,6 +758,7 @@
     },
     {
       "type": "WalterWhiteGif",
+      "hideBubble": true,
       "author": "NotSoBot"
     },
     {
@@ -771,7 +779,8 @@
       "author": "FredBoat"
     },
     {
-      "type": "WalterWhiteGif",
+      "type": "WalterWhiteGifAgony",
+      "hideBubble": true,
       "author": "NotSoBot"
     },
     {

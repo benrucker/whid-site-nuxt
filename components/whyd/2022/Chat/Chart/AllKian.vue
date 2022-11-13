@@ -1,30 +1,49 @@
 <template>
   <div class="kianChart">
-    <div class="kianTextLayer">
-      <div class="entry">
-        <div class="number">1.</div>
-        <div class="spacer" />
-        <div class="name">SilentKON</div>
-      </div>
-      <div class="entry">
-        <div class="number">2.</div>
-        <div class="spacer" />
-        <div class="name">Cameron</div>
-      </div>
-      <div class="entry">
-        <div class="number">3.</div>
-        <div class="spacer" />
-        <div class="name">Kian</div>
-      </div>
-      <div class="entry">
-        <div class="number">4.</div>
-        <div class="spacer" />
-        <div class="name">Mr. Souayvixay</div>
-      </div>
-      <div class="entry">
-        <div class="number">5.</div>
-        <div class="spacer" />
-        <div class="name">The Gilded God</div>
+    <svg
+      class="noise"
+      viewBox="0 100 400 400"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <filter id="noiseFilter">
+        <feTurbulence
+          type="fractalNoise"
+          baseFrequency="0.65"
+          numOctaves="3"
+          stitchTiles="stitch"
+        />
+      </filter>
+
+      <rect filter="url(#noiseFilter)" />
+    </svg>
+    <div class="overlay"></div>
+    <div class="notSvg">
+      <div class="kianTextLayer">
+        <div class="entry">
+          <div class="number">1.</div>
+          <div class="spacer" />
+          <div class="name">SilentKON</div>
+        </div>
+        <div class="entry">
+          <div class="number">2.</div>
+          <div class="spacer" />
+          <div class="name">Cameron</div>
+        </div>
+        <div class="entry">
+          <div class="number">3.</div>
+          <div class="spacer" />
+          <div class="name">Kian</div>
+        </div>
+        <div class="entry">
+          <div class="number">4.</div>
+          <div class="spacer" />
+          <div class="name">Mr. Souayvixay</div>
+        </div>
+        <div class="entry">
+          <div class="number">5.</div>
+          <div class="spacer" />
+          <div class="name">The Gilded God</div>
+        </div>
       </div>
     </div>
     <Whyd2022ChatChart3DKian class="chart3d" />
@@ -47,6 +66,44 @@
   border-radius: 20px;
 
   position: relative;
+
+  font-family: Brush Script MT;
+
+  border: inset 5px;
+}
+
+rect {
+  width: 100%;
+  height: 1000px;
+  top: -10px;
+}
+
+.notSvg {
+  height: 100%;
+}
+
+svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+
+  filter: contrast(170%) brightness(100%);
+  background: linear-gradient(45deg, rgb(112, 23, 129), rgba(0, 0, 0, 0));
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+
+  background: moccasin;
+  mix-blend-mode: multiply;
 }
 
 .kianTextLayer {
@@ -85,6 +142,7 @@
 
 .entry .name {
   font-weight: 600;
+  font-size: 1.5em;
 }
 
 .entry img {
