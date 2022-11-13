@@ -715,7 +715,8 @@
       "author": "NotSoBot"
     },
     {
-      "type": "ChartWordlePlays"
+      "type": "ChartWordlePlays",
+      "hideBubble": true
     },
     {
       "content": "He said that the baby is crying for mommy...",
