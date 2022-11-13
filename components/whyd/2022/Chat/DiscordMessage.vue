@@ -28,7 +28,7 @@
           data-bs-placement="top"
           data-bs-html="true"
           data-bs-delay="500"
-          :title="`${count} people reacted with ${reaction.name}`"
+          :title="`${reaction.count} people reacted with ${reaction.name}`"
         >
           <img
             :src="`/whyd/2022/emojis/${reaction.name}.png`"
@@ -49,8 +49,8 @@ export default {
       default: ''
     },
     reactions: {
-      type: Object,
-      default: () => ({})
+      type: Array,
+      default: () => []
     },
     authorName: {
       type: String,
