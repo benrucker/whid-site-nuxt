@@ -633,7 +633,8 @@
       "content": "aljksHDlkjahsASDJHA!!! 65% AKWJHDIAUHDA!!!!"
     },
     {
-      "type": "ChartTopFiveUsersByImageCount"
+      "type": "ChartTopFiveUsersByImageCount",
+      "hideBubble": true
     },
     {
       "content": "OKAY LISTEN UP- oh wait that's a stat!",
@@ -671,7 +672,7 @@
       "type": "ChartCrawlingInMySkin"
     },
     {
-      "content": "ПАДЕНИЕ ЧЕЛОВЕЧЕСТВА СТОИТ ПЕРЕД ВАМИ {:cheeto:}",
+      "content": "ПАДЕНИЕ ЧЕЛОВЕЧЕСТВА СТОИТ ПЕРЕД ВАМИ{:cheeto:}",
       "author": "NotSoBot"
     },
     {
@@ -731,6 +732,7 @@
     },
     {
       "type": "WalterWhiteGif",
+      "hideBubble": true,
       "author": "NotSoBot"
     },
     {
@@ -739,6 +741,7 @@
     },
     {
       "type": "WalterWhiteGif",
+      "hideBubble": true,
       "author": "NotSoBot"
     },
     {
@@ -751,6 +754,7 @@
     },
     {
       "type": "WalterWhiteGif",
+      "hideBubble": true,
       "author": "NotSoBot"
     },
     {
@@ -771,7 +775,8 @@
       "author": "FredBoat"
     },
     {
-      "type": "WalterWhiteGif",
+      "type": "WalterWhiteGifAgony",
+      "hideBubble": true,
       "author": "NotSoBot"
     },
     {

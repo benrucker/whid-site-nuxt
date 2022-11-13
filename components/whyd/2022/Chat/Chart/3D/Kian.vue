@@ -44,7 +44,6 @@ export default {
     this.clock = new THREE.Clock()
 
     const dist = 20
-    const rotationOffset = -10
 
     this.views = [
       {
@@ -53,11 +52,7 @@ export default {
         width: 0.5,
         height: 0.3,
         fov,
-        pos: [dist, 0, 0],
-        updateCamera: function (camera, _scene, _mouseX) {
-          // camera.position.x = dist
-          // camera.lookAt(0, 0, 0)
-        }
+        pos: [dist, 0, 0]
       },
       {
         left: -0.5,
@@ -65,11 +60,7 @@ export default {
         width: 1.5,
         height: 1.5,
         fov: 165,
-        pos: [Math.sqrt(120) / 3, 0, Math.sqrt(60) / 3],
-        updateCamera: function (camera, _scene, _mouseX) {
-          // camera.position.x = dist
-          // camera.lookAt(0, 0, 0)
-        }
+        pos: [Math.sqrt(120) / 3, 0, Math.sqrt(60) / 3]
       },
       {
         left: 0,
@@ -77,11 +68,7 @@ export default {
         width: 0.5,
         height: 0.3,
         fov: 1.5,
-        pos: [0, 0, -9 * 60],
-        updateCamera: function (camera, _scene, _mouseX) {
-          // camera.position.x = dist
-          // camera.lookAt(0, 0, 0)
-        }
+        pos: [0, 0, -9 * 60]
       },
       {
         left: 0,
@@ -89,11 +76,7 @@ export default {
         width: 0.5,
         height: 0.3,
         fov,
-        pos: [-dist, 0, 0],
-        updateCamera: function (camera, _scene, _mouseX) {
-          // camera.position.x = dist
-          // camera.lookAt(0, 0, 0)
-        }
+        pos: [-dist, 0, 0]
       },
       {
         left: -0.5,
@@ -101,11 +84,7 @@ export default {
         width: 1.5,
         height: 1.8,
         fov: 135,
-        pos: [0, 0, dist],
-        updateCamera: function (camera, _scene, _mouseX) {
-          // camera.position.x = dist
-          // camera.lookAt(0, 0, 0)
-        }
+        pos: [0, 0, dist]
       }
     ]
 
@@ -200,11 +179,8 @@ export default {
   },
   methods: {
     render() {
-      const updateDelta = this.clock.getDelta()
+      this.clock.getDelta()
 
-      // this.model.rotation.y -= updateDelta * 0.5
-
-      // this.renderer.setClearColor(0x000000, 0)
       this.renderer.clear()
 
       this.resizeRendererToDisplaySize()
@@ -229,8 +205,6 @@ export default {
       for (const view of this.views) {
         const camera = view.camera
         const controls = view.controls
-
-        view.updateCamera(camera, this.scene, 0)
 
         const left = Math.floor(canvas.width * view.left)
         const bottom = Math.floor(canvas.height * view.bottom)
@@ -263,7 +237,6 @@ export default {
     },
     shouldShowBigGuy() {
       const time = Math.floor(this.clock.elapsedTime * 20)
-      console.log(time)
       return !(time % 4 || time % 3 || time % 6 || time % 7)
     }
   }

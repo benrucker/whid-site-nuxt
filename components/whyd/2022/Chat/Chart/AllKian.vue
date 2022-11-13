@@ -47,6 +47,8 @@
   border-radius: 20px;
 
   position: relative;
+
+  font-family: Brush Script MT;
 }
 
 .kianTextLayer {
@@ -85,6 +87,7 @@
 
 .entry .name {
   font-weight: 600;
+  font-size: 1.5em;
 }
 
 .entry img {
