@@ -146,6 +146,7 @@ export default {
   height: 40px;
   top: -15px;
   animation: slide-in 0.5s ease-in-out both;
+  user-select: none;
 }
 
 .fade-in {
