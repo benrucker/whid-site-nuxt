@@ -7,7 +7,12 @@
         :class="token.styles"
         >{{ token.text }}</span
       >
-      <div v-else :key="token.src" class="emoji" :class="token.styles">
+      <div
+        v-if="token.src != null"
+        :key="token.src"
+        class="emoji"
+        :class="token.styles"
+      >
         <img :src="token.src" /></div
     ></template>
   </span>
@@ -129,6 +134,7 @@ function parseEmoji(data) {
   display: inline-flex;
   align-items: center;
   position: relative;
+  left: -5px;
 }
 
 .parsed-text .emoji img {
