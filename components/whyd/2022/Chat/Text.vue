@@ -2,7 +2,7 @@
   <span class="parsed-text">
     <template v-for="token in parsedContent"
       ><span
-        v-if="token.text != null"
+        v-if="token.text != null && token.text !== ''"
         :key="token.text"
         :class="token.styles"
         >{{ token.text }}</span

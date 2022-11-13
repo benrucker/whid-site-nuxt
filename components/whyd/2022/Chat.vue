@@ -55,7 +55,7 @@ export default {
       advancingIsDisabled: false,
       autoAdvanceTimeout: undefined,
       debugShowAll: true,
-      debugShowAllLimit: 60,
+      debugShowAllLimit: 99999,
       displayed: [],
       messagesPosition: 0,
       showHint: true,
@@ -65,15 +65,8 @@ export default {
   },
   mounted() {
     setTimeout(() => {
-      if (this.debugShowAll) {
-        const length = this.messages.length
-        let i = length
-        while (i > Math.max(length - this.debugShowAllLimit, 1)) {
-          this.advance()
-          i--
-        }
-      }
-    })
+      if (this.debugShowAll) this.autoAdvance()
+    }, 50)
   },
   methods: {
     onClick() {
@@ -85,11 +78,19 @@ export default {
       }
       this.advance()
     },
+    autoAdvance() {
+      this.advance()
+      if (this.areMoreMessagesRemaining()) {
+        setTimeout(this.autoAdvance)
+      } else {
+        setTimeout(this.scrollToLast, 2000)
+      }
+    },
     advance() {
       this.showHint = false
       this.showTyping = false
 
-      if (this.messages.length > 0) {
+      if (this.areMoreMessagesRemaining()) {
         const messageInfo = this.messages[this.messagesPosition++]
 
         if (messageInfo.function) {
@@ -108,15 +109,10 @@ export default {
 
         this.displayed.push(messageInfo)
 
-        setTimeout(() => {
-          this.$refs.afterLastMessage.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center'
-          })
-        }, 50)
+        setTimeout(this.scrollToLast, 50)
       }
 
-      if (this.messages.length > 0) {
+      if (this.areMoreMessagesRemaining()) {
         setTimeout(() => {
           this.showHint = true
         }, 100)
@@ -124,6 +120,15 @@ export default {
           this.showTyping = true
         }, 100)
       }
+    },
+    areMoreMessagesRemaining() {
+      return this.messagesPosition < this.messages.length
+    },
+    scrollToLast() {
+      this.$refs.afterLastMessage.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      })
     },
     getDefaultSide(author) {
       const sides = {
@@ -156,13 +161,13 @@ export default {
     leagueOrApex(content) {
       const roles = this.stats.user.manual.roles ?? []
       if (roles.includes('leg') && roles.includes('gaysex legends')) {
-        return content.both
+        return content?.both
       } else if (roles.includes('leg')) {
-        return content.league
+        return content?.league
       } else if (roles.includes('gaysex legends')) {
-        return content.apex
+        return content?.apex
       } else {
-        return content.neither
+        return content?.neither
       }
     },
     fixMostReactedToImages(content) {
@@ -186,10 +191,10 @@ export default {
       return content[Math.floor(Math.random() * content.length)]
     },
     disableAdvancing() {
-      this.advancingIsDisabled = true
+      if (!this.debugShowAll) this.advancingIsDisabled = true
     },
     enableAdvancing() {
-      this.advancingIsDisabled = false
+      if (!this.debugShowAll) this.advancingIsDisabled = false
     }
   }
 }

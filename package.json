@@ -20,6 +20,8 @@
     "echarts": "^5.4.0",
     "echarts-wordcloud": "^2.0.0",
     "nuxt": "^2.15.7",
+    "three": "^0.146.0",
+    "three-addons": "^1.2.0",
     "vue-client-only": "^2.1.0",
     "vue-echarts": "^6.2.3"
   },
@@ -31,6 +33,7 @@
     "@nuxtjs/composition-api": "^0.32.0",
     "@nuxtjs/eslint-config-typescript": "^11.0.0",
     "@nuxtjs/eslint-module": "^3.1.0",
+    "@types/three": "^0.146.0",
     "@vue/compiler-dom": "^3.2.41",
     "@vue/composition-api": "^1.7.1",
     "@vue/runtime-dom": "^3.2.41",
