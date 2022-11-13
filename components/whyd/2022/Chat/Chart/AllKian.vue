@@ -69,6 +69,8 @@
   z-index: 1;
   color: #222;
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  user-select: none;
+  pointer-events: none;
 }
 
 .entry .spacer {

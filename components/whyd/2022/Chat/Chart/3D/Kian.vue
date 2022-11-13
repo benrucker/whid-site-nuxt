@@ -60,12 +60,12 @@ export default {
         }
       },
       {
-        left: 0,
-        bottom: 0,
-        width: 0.5,
-        height: 0.6,
-        fov: 160,
-        pos: [Math.sqrt(60) / 3, 0, Math.sqrt(60) / 3],
+        left: -0.5,
+        bottom: -0.5,
+        width: 1.5,
+        height: 1.5,
+        fov: 165,
+        pos: [Math.sqrt(120) / 3, 0, Math.sqrt(60) / 3],
         updateCamera: function (camera, _scene, _mouseX) {
           // camera.position.x = dist
           // camera.lookAt(0, 0, 0)
@@ -96,11 +96,11 @@ export default {
         }
       },
       {
-        left: 0,
-        bottom: 0.7,
-        width: 0.5,
-        height: 0.3,
-        fov,
+        left: -0.5,
+        bottom: -0.05,
+        width: 1.5,
+        height: 1.8,
+        fov: 135,
         pos: [0, 0, dist],
         updateCamera: function (camera, _scene, _mouseX) {
           // camera.position.x = dist
@@ -148,9 +148,10 @@ export default {
         side: THREE.DoubleSide,
         transparent: true
       })
-      planeMat.opacity = 0.02
+      planeMat.opacity = 0.5
+      planeMat.specular = new THREE.Color(0x020102)
       const mesh = new THREE.Mesh(planeGeo, planeMat)
-      this.scene.add(mesh)
+      this.views[0].camera.add(mesh)
     }
 
     {
