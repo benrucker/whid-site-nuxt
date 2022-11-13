@@ -137,6 +137,23 @@ export default {
     this.bigCamera = bigCamera
 
     {
+      const planeSize = 100
+
+      const loader = new THREE.TextureLoader()
+      const texture = loader.load('/whyd/2022/missing_texture_large.png')
+
+      const planeGeo = new THREE.PlaneGeometry(planeSize, planeSize)
+      const planeMat = new THREE.MeshPhongMaterial({
+        map: texture,
+        side: THREE.DoubleSide,
+        transparent: true
+      })
+      planeMat.opacity = 0.02
+      const mesh = new THREE.Mesh(planeGeo, planeMat)
+      this.scene.add(mesh)
+    }
+
+    {
       const skyColor = 0xaaaaff
       const groundColor = 0x222299
       const intensity = 1
