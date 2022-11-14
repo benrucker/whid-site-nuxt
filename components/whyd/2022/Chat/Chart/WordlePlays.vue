@@ -94,7 +94,7 @@ export default {
   border: inset 5px;
   font-size: 2em;
 
-  color: #111;
+  color: #151515;
   text-shadow: 10px 10px 5px rgba(0, 0, 0, 0.3);
 
   position: relative;
@@ -138,6 +138,13 @@ div .notSvg {
   isolation: isolate;
 }
 
+.notSvg ol {
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .entry {
   display: flex;
   align-items: center;
@@ -152,6 +159,8 @@ div .notSvg {
   border-radius: 50%;
   margin-right: 10px;
   border: 3px dashed rgb(19, 13, 5);
+
+  filter: drop-shadow(10px 10px 5px rgba(0, 0, 0, 0.3));
 }
 
 .button {

@@ -1,5 +1,9 @@
 <template>
-  <div class="bg"><img ref="bg" :src="src" /></div>
+  <div ref="root" class="bg">
+    <img ref="bg" :src="src" class="bgimg" />
+    <div ref="dots" class="dots" />
+    <div class="musicShadow" />
+  </div>
 </template>
 
 <script>
@@ -12,53 +16,150 @@ export default {
   },
   data() {
     return {
+      rootRef: null,
       bgRef: null,
-      targetX: 0,
-      targetY: 0,
-      currentX: 0,
-      currentY: 0,
-      raf: null
+      bgTargetX: 0,
+      bgTargetY: 0,
+      bgCurrentX: 0,
+      bgCurrentY: 0,
+      bgRaf: null,
+      dotsRef: null,
+      dotsTargetX: 0,
+      dotsTargetY: 0,
+      dotsCurrentX: 0,
+      dotsCurrentY: 0,
+      dotsRaf: null
     }
   },
   mounted() {
     this.$nextTick(() => {
+      this.rootRef = this.$refs.root
       this.bgRef = this.$refs.bg
+      this.dotsRef = this.$refs.dots
     })
   },
   methods: {
     moveImg(x, y) {
-      if (this.raf == null) {
-        this.raf = window.requestAnimationFrame(this.updateImg)
+      if (this.bgRaf == null) {
+        this.bgRaf = window.requestAnimationFrame(this.updateImg)
       }
-      this.targetX = x
-      this.targetY = y
+      this.bgTargetX = x
+      this.bgTargetY = y
+    },
+    moveDots(x, y) {
+      if (this.dotsRaf == null) {
+        this.dotsRaf = window.requestAnimationFrame(this.updateDots)
+      }
+      this.dotsTargetX = x
+      this.dotsTargetY = y
     },
     updateImg() {
-      this.currentX = (this.targetX - this.currentX) * 0.1 + this.currentX
-      this.currentY = (this.targetY - this.currentY) * 0.1 + this.currentY
+      ;[this.bgCurrentX, this.bgCurrentY, this.bgRaf] = this.updateThing(
+        this.bgCurrentX,
+        this.bgCurrentY,
+        this.bgTargetX,
+        this.bgTargetY,
+        this.rafBg,
+        this.updateImg,
+        this.bgRef
+      )
+    },
+    updateDots() {
+      ;[this.dotsCurrentX, this.dotsCurrentY, this.dotsRaf] = this.updateThing(
+        this.dotsCurrentX,
+        this.dotsCurrentY,
+        this.dotsTargetX,
+        this.dotsTargetY,
+        this.rafDots,
+        this.updateDots,
+        this.dotsRef
+      )
+    },
+    updateThing(currentX, currentY, targetX, targetY, raf, method, ref) {
+      currentX = (targetX - currentX) * 0.1 + currentX
+      currentY = (targetY - currentY) * 0.1 + currentY
 
-      this.bgRef.style.transform =
-        'translate(' + this.currentX * 10 + 'px, ' + this.currentY * 10 + 'px)'
+      ref.style.transform =
+        'translate(' + currentX * 10 + 'px, ' + currentY * 10 + 'px)'
 
       if (
-        Math.abs(this.currentX - this.targetX) > 0.01 ||
-        Math.abs(this.currentY - this.targetY) > 0.01
+        Math.abs(currentX - targetX) > 0.01 ||
+        Math.abs(currentY - targetY) > 0.01
       ) {
-        this.raf = window.requestAnimationFrame(this.updateImg)
+        raf = window.requestAnimationFrame(method)
       } else {
-        this.raf = null
+        raf = null
       }
+
+      return [currentX, currentY, raf]
+    },
+    handleTransformPanel(event) {
+      const mouseX = event.clientX
+      const mouseY = event.clientY
+
+      const rootRect = this.rootRef.getBoundingClientRect()
+
+      const rootCenterX = rootRect.left + rootRect.width / 2
+      const rootCenterY = rootRect.top + rootRect.height / 2
+
+      const percentX = -(mouseX - rootCenterX) / (this.rootRef.clientWidth / 2)
+      const percentY = -(mouseY - rootCenterY) / (this.rootRef.clientHeight / 2)
+
+      this.moveImg(percentX, percentY)
+      this.moveDots(percentX / 3, percentY / 3)
     }
   }
 }
 </script>
 
-<style>
-.favorite-song .bg img {
+<style scoped>
+.bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  overflow: clip;
+  border-radius: 30px;
+}
+
+.bgimg {
   filter: blur(10px) brightness(0.7);
   width: 150%;
   position: absolute;
   top: -25%;
   left: -25%;
+}
+
+.dots {
+  background: radial-gradient(rgba(255, 255, 255, 0.2) 8%, transparent 8%);
+  background-position: 0% 0%;
+  background-size: 24px 24px;
+  transition: background-position 350ms ease;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.dots:hover {
+  background-position: -10% 0%;
+}
+
+.musicShadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  border: solid 5px rgba(20, 20, 20, 0);
+  box-shadow: inset 0 0 5px black;
+
+  border-radius: 30px;
 }
 </style>

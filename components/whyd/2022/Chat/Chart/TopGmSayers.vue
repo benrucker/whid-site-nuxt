@@ -112,7 +112,7 @@ export default {
   border: inset 5px;
   font-size: 2em;
 
-  color: #111;
+  color: #151515;
   text-shadow: 10px 10px 5px rgba(0, 0, 0, 0.3);
 
   position: relative;
