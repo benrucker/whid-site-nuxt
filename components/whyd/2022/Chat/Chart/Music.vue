@@ -48,22 +48,11 @@ export default {
     })
   },
   methods: {
-    handleTransformPanel(event) {
-      const mouseX = event.clientX
-      const mouseY = event.clientY
-
-      const rootRect = this.rootRef.getBoundingClientRect()
-
-      const rootCenterX = rootRect.left + rootRect.width / 2
-      const rootCenterY = rootRect.top + rootRect.height / 2
-
-      const percentX = -(mouseX - rootCenterX) / (this.rootRef.clientWidth / 2)
-      const percentY = -(mouseY - rootCenterY) / (this.rootRef.clientHeight / 2)
-
-      this.bgRef.moveImg(percentX, percentY)
-    },
     onClick(event) {
       event.preventDefault()
+    },
+    handleTransformPanel(event) {
+      this.bgRef.handleTransformPanel(event)
     }
   }
 }
@@ -79,25 +68,15 @@ export default {
   height: 240px;
   padding: 40px 0;
   row-gap: 30px;
-  border: 2px solid rgba(0, 0, 0, 0.2);
+  /* border: 2px solid rgba(0, 0, 0, 0.2); */
   border-radius: 30px;
   overflow: clip;
 
   animation: fade-in 2s ease-in-out;
 
   color: white;
-}
 
-.favorite-song .bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
-  overflow: clip;
-  border-radius: 30px;
+  position: relative;
 }
 
 .favorite-song .text {
