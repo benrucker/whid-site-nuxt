@@ -54,7 +54,7 @@ export default {
     return {
       advancingIsDisabled: false,
       autoAdvanceTimeout: undefined,
-      debugShowAll: false,
+      debugShowAll: true,
       debugShowAllLimit: 99999,
       displayed: [],
       messagesPosition: 0,
