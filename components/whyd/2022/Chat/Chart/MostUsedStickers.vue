@@ -103,7 +103,7 @@ export default {
   border: inset 5px;
   font-size: 2em;
 
-  color: #111;
+  color: #151515;
   text-shadow: 10px 10px 5px rgba(0, 0, 0, 0.3);
 
   position: relative;
@@ -162,6 +162,8 @@ div .notSvg {
   animation: place-sticker 1s ease-in both;
 
   position: absolute;
+
+  filter: drop-shadow(10px 10px 5px rgba(0, 0, 0, 0.3));
 }
 
 @keyframes place-sticker {

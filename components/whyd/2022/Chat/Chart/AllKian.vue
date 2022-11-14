@@ -124,8 +124,8 @@ svg {
   align-items: center;
   justify-content: flex-start;
   z-index: 1;
-  color: #222;
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  color: #151515;
+  text-shadow: 10px 10px 5px rgba(0, 0, 0, 0.3);
   user-select: none;
   pointer-events: none;
 }

@@ -26,7 +26,7 @@
             :src="userData[id].avatar"
             :alt="userData[id].username"
           />
-          <div>{{ userData[id].username }}</div>
+          <div class="imgUsername">{{ userData[id].username }}</div>
           <div>{{ userData[id].imageCount }}</div>
           <div class="button" @click="handleClick(id)">wanna see one? 😏</div>
         </li>
@@ -115,7 +115,7 @@ export default {
   border: inset 5px;
   font-size: 2em;
 
-  color: #111;
+  color: #151515;
   text-shadow: 10px 10px 5px rgba(0, 0, 0, 0.3);
 
   position: relative;
@@ -155,12 +155,20 @@ div .notSvg {
   isolation: isolate;
 }
 
+.notSvg ol {
+  padding-left: 0;
+}
+
 .entry {
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  gap: 10px;
+  gap: 20px;
+}
+
+.imgUsername {
+  flex-grow: 1;
 }
 
 .imgAvatar {
@@ -175,11 +183,11 @@ div .notSvg {
   background-color: #4caf50;
   border: none;
   color: white;
-  padding: 15px 32px;
+  padding: 15px 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 0.7em;
   margin: 4px 2px;
   cursor: pointer;
   opacity: 0.9;
