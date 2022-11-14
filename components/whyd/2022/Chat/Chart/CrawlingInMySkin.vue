@@ -1,3 +1,8 @@
 <template>
-  <h1>crawling in my skin song player</h1>
+  <Whyd2022ChatChartMusic
+    title="Crawling"
+    subtitle="Linkin Park"
+    bg-img="/whyd/2022/music/crawling.jpg"
+    song="/whyd/2022/music/crawling.mp3"
+  />
 </template>

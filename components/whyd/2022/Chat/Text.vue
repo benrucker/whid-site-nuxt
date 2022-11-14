@@ -4,16 +4,14 @@
       ><span
         v-if="token.text != null && token.text !== ''"
         :key="token.text"
-        :class="token.styles"
+        :class="token.styles + ' text'"
         >{{ token.text }}</span
-      >
-      <div
-        v-if="token.src != null"
+      ><span
+        v-if="token.emoji"
         :key="token.src"
         class="emoji"
         :class="token.styles"
-      >
-        <img :src="token.src" /></div
+        ><img :src="token.src" /></span
     ></template>
   </span>
 </template>
@@ -96,11 +94,15 @@ function parseStyling(data) {
 
 function parseEmoji(data) {
   const emojiName = data.slice(2, -2)
-  return { src: `/whyd/2022/emojis/${emojiName}.png` }
+  return { src: `/whyd/2022/emojis/${emojiName}.png`, emoji: true }
 }
 </script>
 
 <style>
+.parsed-text .text {
+  white-space: pre-wrap;
+}
+
 .parsed-text .bold {
   font-weight: bold;
 }
@@ -134,7 +136,6 @@ function parseEmoji(data) {
   display: inline-flex;
   align-items: center;
   position: relative;
-  left: -5px;
 }
 
 .parsed-text .emoji img {
