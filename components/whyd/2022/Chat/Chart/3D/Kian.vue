@@ -247,6 +247,8 @@ export default {
 canvas {
   width: 100%;
   height: 100%;
-  border-radius: 20px;
+  border-radius: 15px;
+
+  filter: drop-shadow(10px 10px 5px rgba(0, 0, 0, 0.3));
 }
 </style>

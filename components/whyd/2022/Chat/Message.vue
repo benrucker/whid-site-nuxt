@@ -175,7 +175,6 @@ export default {
 
 .message .content span {
   animation: fade 0.15s ease-in 0.1s 1 both;
-  white-space: pre-wrap;
 }
 
 @keyframes fade-in {
