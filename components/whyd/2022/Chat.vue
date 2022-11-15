@@ -55,7 +55,7 @@ export default {
       advancingIsDisabled: false,
       autoAdvanceTimeout: undefined,
       debugShowAll: true,
-      debugShowAllLimit: 99999,
+      debugShowAllLimit: 130,
       displayed: [],
       messagesPosition: 0,
       showHint: true,
@@ -80,7 +80,7 @@ export default {
     },
     autoAdvance() {
       this.advance()
-      if (this.areMoreMessagesRemaining()) {
+      if (this.areMoreMessagesRemaining() && this.debugShowAllLimit-- > 0) {
         setTimeout(this.autoAdvance)
       } else {
         setTimeout(this.scrollToLast, 2000)
