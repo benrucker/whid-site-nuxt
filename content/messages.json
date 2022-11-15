@@ -437,15 +437,19 @@
       "content": "And thank you {:you:} very much for joining me for {whyd2022 | italic}. I'm excited to see what fun things come around next year!"
     },
     {
-      "content": "With that, I think it's time for us to get out of here."
+      "content": "With that, I think it's time for us.get out of here."
+    },
+    {
+      "content": "us to get*"
     },
     {
       "content": "{User not found: out of here | italic}",
       "author": "UsBot"
     },
     {
-      "content": "...okay what the fuck",
-      "author": "JermaBot"
+      "content": "...oh fuck",
+      "author": "JermaBot",
+      "function": "next"
     },
     {
       "content": "USBOT!!",
