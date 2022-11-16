@@ -1,30 +1,52 @@
 <template>
   <div>
     <div v-show="doneParsing" ref="root1" class="usbotGraph">
-      <div
-        v-for="line in numLines"
-        :key="line"
-        :ref="line + 'line'"
-        :class="`line--${line} line`"
-      >
-        <span
-          v-for="(word, index) in displayedWords[line]"
-          :key="index"
-          class="word"
-          >{{ word }}
-        </span>
+      <div class="usbotGraphHeader">your most used words</div>
+      <div class="usbotGraphContent">
+        <div :ref="'1line'" class="line--1 line">
+          <span
+            v-for="(word, index) in displayedWords[1]"
+            :key="index"
+            class="word"
+            >{{ word }}
+          </span>
+        </div>
+        <div class="rest-of-the-lines">
+          <div
+            v-for="line in numLines - 1"
+            :key="line + 1"
+            class="line-segment"
+          >
+            <div
+              :ref="line + 1 + 'line'"
+              :class="`line--${line + 1} line start`"
+            >
+              <span
+                v-for="(word, index) in displayedWords[line + 1]"
+                :key="index"
+                class="word"
+                >{{ word }}
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div v-show="!doneParsing" ref="root2" class="usbotGraph hidden">
-      <div
-        v-for="line in numLines"
-        :key="line"
-        :ref="line + 'hidden'"
-        :class="`line--${line}`"
-      >
-        <template v-for="(word, index) in calculatedWords[line]"
-          >{{ word }}
-        </template>
+    <div v-show="!doneParsing" ref="root2" class="usbotGraph">
+      <div class="usbotGraphHeader">loading...</div>
+      <div class="usbotGraphContent">
+        <div
+          v-for="line in numLines"
+          :key="line"
+          :ref="line + 'hidden'"
+          :class="`line--${line} usbotGraph--center`"
+        >
+          <span>
+            <template v-for="word in calculatedWords[line]"
+              >{{ word }}
+            </template>
+          </span>
+        </div>
       </div>
     </div>
   </div>
@@ -37,7 +59,8 @@ export default {
   props: {
     stats: {
       type: Object,
-      required: true
+      required: false,
+      default: null
     }
   },
   data() {
@@ -48,14 +71,15 @@ export default {
       numDisplayedLines: 1,
       raf: undefined,
       doneParsing: false,
-      timeout: undefined
+      timeout: undefined,
+      timeoutDelay: 300
     }
   },
   computed: {
     words() {
       return (
         this.stats?.user?.mostUsedWords ??
-        'play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jk'.split(
+        'play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jk play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jk play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jk play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jk play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jk play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jk play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jk play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jkplay us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jk play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven '.split(
           ' '
         )
       )
@@ -75,7 +99,7 @@ export default {
   },
   methods: {
     advance() {
-      if (this.words.length > 0) {
+      if (this.words.length > 0 && this.numLines <= 200) {
         this.calculatedWords[this.numLines].push(this.words.shift())
         requestAnimationFrame(() => {
           if (this.didBreakLine()) {
@@ -84,18 +108,17 @@ export default {
             // when a property is added to an object
             Vue.set(this.calculatedWords, this.numLines + 1, [word])
 
-            // use a range to get the offsetleft of the first char of the last line
-            // thank you copilot. this sucks
-            const range = document.createRange()
-            range.setStart(this.$refs[this.numLines + 'hidden'][0], 0)
-            range.setEnd(this.$refs[this.numLines + 'hidden'][0], 1)
-            const rect = range.getBoundingClientRect()
-            const padding =
-              rect.left - this.$refs[this.numLines + 'hidden'][0].offsetLeft
+            // for this line, get the offset between the first letter and the edge of the line
+            const line = this.$refs[this.numLines + 'hidden'][0]
+            const absolutePosition = line.getBoundingClientRect().left
+            const firstLetterPosition = line
+              .querySelector('span')
+              .getBoundingClientRect().left
+            const offset = firstLetterPosition - absolutePosition
 
             this.$refs.root1.style.setProperty(
               `--line-${this.numLines}-padding`,
-              `${padding}px`
+              `${offset}px`
             )
 
             this.numLines++
@@ -108,10 +131,16 @@ export default {
       }
     },
     display() {
+      this.timeoutDelay -= 10
       // move words from calculatedWords to displayedWords one at a time
       if (this.numDisplayedLines <= this.numLines) {
         if (this.displayedWords[this.numDisplayedLines] === undefined) {
           Vue.set(this.displayedWords, this.numDisplayedLines, [])
+          requestAnimationFrame(() => {
+            const line = this.$refs[this.numDisplayedLines + 'line']
+            if (line?.style != null) line.style.opacity = 1
+            else if (line != null) line[0].style.opacity = 1
+          })
         }
         this.displayedWords[this.numDisplayedLines].push(
           this.calculatedWords[this.numDisplayedLines].shift()
@@ -119,20 +148,22 @@ export default {
         if (this.calculatedWords[this.numDisplayedLines].length === 0) {
           this.numDisplayedLines++
         }
-        this.timeout = setTimeout(this.display, 500)
+        this.timeout = setTimeout(this.display, this.timeoutDelay)
       }
     },
     didBreakLine() {
-      const textNode = this.$refs.root2.lastChild
+      const textNode = this.$refs.root2.lastChild.lastChild
+      console.log(textNode)
       const range = document.createRange()
       range.selectNode(textNode)
+      console.log(range.getBoundingClientRect())
       return range.getClientRects().length > 2
     }
   }
 }
 </script>
 
-<style>
+<style lang="scss">
 .usbotGraph {
   --bubble-color: #d66f6f;
 
@@ -147,6 +178,41 @@ export default {
     0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
+.usbotGraphHeader {
+  // border-bottom: 3px solid var(--bubble-color);
+  border-radius: 2px;
+  background-color: #111;
+  width: 100%;
+  box-shadow: 0 0 0 5px #d66f6f;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  font-size: larger;
+  font-weight: bold;
+  padding: 5px;
+}
+
+.usbotGraphContent {
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  &::after {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    top: 5px;
+    left: 0;
+    // border-top: 10px solid var(--bubble-color);
+    border-radius: 30px;
+    box-shadow: 0 0 0 15px #d66f6f;
+  }
+}
+
 .box {
   /* background-color: rgba(255, 248, 0, 0.2);
   border-radius: 2px 2px 2px 2px;
@@ -158,37 +224,52 @@ export default {
 }
 </style>
 
-<style scoped>
+<style scoped lang="scss">
+@use 'sass:math';
+
 .usbotGraph {
-  color: black;
+  color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: start;
+  overflow: hidden;
+}
 
-  --line-1-padding: 0;
-  --line-2-padding: 0;
-  --line-3-padding: 0;
-  --line-4-padding: 0;
-  --line-5-padding: 0;
-  --line-6-padding: 0;
-  --line-7-padding: 0;
-  --line-8-padding: 0;
-  --line-9-padding: 0;
-  --line-10-padding: 0;
+.rest-of-the-lines {
+  width: 100%;
+  gap: 0;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .usbotGraph.hidden {
-  opacity: 0;
+  // opacity: 0;
   text-align: center;
 }
 
 .word {
-  animation: fadein 0.5s ease-in-out;
+  // animation: fadein 0.5s ease-in-out;
 }
 
 .line {
-  animation: fadein 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
+  // opacity: 0;
+}
+
+.word {
+  // relative position is needed to keep the words above an
+  // absolutely positions ::before pseudoelement
+  position: relative;
+}
+
+.line-segment {
+  width: 50%;
+  display: inline-flex;
+  justify-content: center;
+  height: fit-content;
+  justify-self: start;
+  flex-shrink: 0;
 }
 
 @keyframes fadein {
@@ -202,91 +283,113 @@ export default {
 
 .line--1 {
   font-size: 1.9em;
-  width: 90%;
-  background-color: aliceblue;
-}
-.line--1.line {
-  padding-left: var(--line-1-padding);
+  width: 100%;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 110%;
+    height: 120%;
+    top: 0;
+    left: -5%;
+    background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 1) -20%,
+      rgba(87, 87, 87, 1) 100%
+    );
+    // background-color: #222;
+    box-shadow: inset 0 0 0.6em 0.4em #111;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 110%;
+    height: 120%;
+    top: 0;
+    left: -5%;
+    background: radial-gradient(
+        circle at 3% 90%,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 1) 0.7%,
+        rgba(255, 255, 255, 0) 1.2%
+      ),
+      radial-gradient(
+        circle at 50% 90%,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 1) 0.7%,
+        rgba(255, 255, 255, 0) 1.2%
+      ),
+      radial-gradient(
+        circle at 97% 90%,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 1) 0.7%,
+        rgba(255, 255, 255, 0) 1.2%
+      );
+  }
+  &.line {
+    padding-left: var(--line-1-padding);
+    text-align: start !important;
+  }
 }
 
-.line--2 {
-  font-size: 1.2em;
-  width: 75%;
-  background-color: antiquewhite;
-}
-.line--2.line {
-  padding-left: var(--line-2-padding);
+.usbotGraph--center {
+  text-align: center;
 }
 
-.line--3 {
-  font-size: 1em;
-  width: 65%;
-  background-color: bisque;
-}
-.line--3.line {
-  padding-left: var(--line-3-padding);
-}
+@for $i from 2 through 200 {
+  .line--#{$i} {
+    --shrink-factor: #{math.div(
+        1,
+        math.div(math.floor(math.div($i + 2, 2)), 2)
+      )};
+    font-size: calc(1.2em * var(--shrink-factor));
+    width: calc(160px * var(--shrink-factor));
+    // background-color: rgba(255, 255, 255, var(--shrink-factor));
+    color: rgba(255, 255, 255, var(--shrink-factor));
+    padding-left: var(--line-#{$i}-padding);
+    height: 1.5em;
+    // overflow: show;
+    text-align: start;
+    position: relative;
 
-.line--4 {
-  font-size: 0.95em;
-  width: 60%;
-  background-color: azure;
-}
-.line--4.line {
-  padding-left: var(--line-4-padding);
-}
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: radial-gradient(
+          circle at 3% 90%,
+          rgba(255, 255, 255, var(--shrink-factor)) 0%,
+          rgba(255, 255, 255, var(--shrink-factor)) 1%,
+          rgba(255, 255, 255, 0) 2%
+        ),
+        radial-gradient(
+          circle at 97% 90%,
+          rgba(255, 255, 255, var(--shrink-factor)) 0%,
+          rgba(255, 255, 255, var(--shrink-factor)) 1%,
+          rgba(255, 255, 255, 0) 2%
+        );
+    }
 
-.line--5 {
-  font-size: 0.9em;
-  width: 56%;
-  background-color: beige;
-}
-.line--5.line {
-  padding-left: var(--line-5-padding);
-}
-
-.line--6 {
-  font-size: 0.85em;
-  width: 53%;
-  background-color: blanchedalmond;
-}
-.line--6.line {
-  padding-left: var(--line-6-padding);
-}
-
-.line--7 {
-  font-size: 0.8em;
-  width: 51%;
-  background-color: blueviolet;
-}
-.line--7.line {
-  padding-left: var(--line-7-padding);
-}
-
-.line--8 {
-  font-size: 0.75em;
-  width: 49%;
-  background-color: brown;
-}
-.line--8.line {
-  padding-left: var(--line-8-padding);
-}
-
-.line--9 {
-  font-size: 0.7em;
-  width: 48%;
-  background-color: burlywood;
-}
-.line--9.line {
-  padding-left: var(--line-9-padding);
-}
-
-.line--10 {
-  font-size: 0.65em;
-  width: 47%;
-  background-color: cadetblue;
-}
-.line--10.line {
-  padding-left: var(--line-10-padding);
+    &::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 1) -20%,
+        rgba(87, 87, 87, 1) 100%
+      );
+      // background-color: #222;
+      box-shadow: inset 0 0 0.6em 0.4em #111;
+    }
+  }
 }
 </style>
