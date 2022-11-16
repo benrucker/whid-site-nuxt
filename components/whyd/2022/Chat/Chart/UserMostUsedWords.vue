@@ -41,7 +41,7 @@
           :ref="line + 'hidden'"
           :class="`line--${line} usbotGraph--center`"
         >
-          <span>
+          <span class="usbotGraphTransparent">
             <template v-for="word in calculatedWords[line]"
               >{{ word }}
             </template>
@@ -79,7 +79,7 @@ export default {
     words() {
       return (
         this.stats?.user?.mostUsedWords ??
-        'play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jk play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jk play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jk play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jk play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jk play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jk play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jk play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jkplay us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jk play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven '.split(
+        'play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jk play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jk play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jk play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jk play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jk play us get ethan hi gm gn wyatt tristan ben lorem play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jk play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jk play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jk play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jk play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jk play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jk play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jk play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jkplay us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven did you know that fourty seven in japanese is something like yonjuunana is not that the most diabolical thing you ever heard lolol jk play us get ethan hi gm gn wyatt tristan ben lorem ipsum gaming gamers games i need more words here but they make sense so its not very accurate oh well its called fake data its called one get bent pupper wow text is really small so its hard to get this to overflow many lines lines lines work work work work work thats what i call music fourty seven '.split(
           ' '
         )
       )
@@ -99,10 +99,15 @@ export default {
   },
   methods: {
     advance() {
-      if (this.words.length > 0 && this.numLines <= 200) {
+      if (this.words.length > 0 && this.numLines <= 15) {
         this.calculatedWords[this.numLines].push(this.words.shift())
         requestAnimationFrame(() => {
           if (this.didBreakLine()) {
+            if (this.didFallOffBottom()) {
+              this.calculatedWords[this.numLines].pop()
+              return
+            }
+
             const word = this.calculatedWords[this.numLines].pop()
             // Vue.set is needed because Vue can't detect
             // when a property is added to an object
@@ -153,11 +158,19 @@ export default {
     },
     didBreakLine() {
       const textNode = this.$refs.root2.lastChild.lastChild
-      console.log(textNode)
       const range = document.createRange()
       range.selectNode(textNode)
-      console.log(range.getBoundingClientRect())
       return range.getClientRects().length > 2
+    },
+    didFallOffBottom() {
+      const textNode = this.$refs.root2.lastChild.lastChild
+      console.log(this.$refs.root2.offsetHeight)
+      const range = document.createRange()
+      range.selectNode(textNode)
+      console.log(range.getBoundingClientRect().bottom)
+      return (
+        range.getBoundingClientRect().bottom > this.$refs.root2.lastChild.height
+      )
     }
   }
 }
@@ -209,7 +222,7 @@ export default {
     left: 0;
     // border-top: 10px solid var(--bubble-color);
     border-radius: 30px;
-    box-shadow: 0 0 0 15px #d66f6f;
+    box-shadow: 0 0 0 15px rgb(214, 111, 111);
   }
 }
 
@@ -244,17 +257,17 @@ export default {
 }
 
 .usbotGraph.hidden {
-  // opacity: 0;
+  opacity: 0;
   text-align: center;
 }
 
 .word {
-  // animation: fadein 0.5s ease-in-out;
+  animation: fadein 0.5s ease-in-out;
 }
 
 .line {
   transition: opacity 0.5s ease-in-out;
-  // opacity: 0;
+  opacity: 0;
 }
 
 .word {
@@ -264,7 +277,7 @@ export default {
 }
 
 .line-segment {
-  width: 50%;
+  width: 100%;
   display: inline-flex;
   justify-content: center;
   height: fit-content;
@@ -281,71 +294,74 @@ export default {
   }
 }
 
-.line--1 {
-  font-size: 1.9em;
-  width: 100%;
-  position: relative;
+// .line--1 {
+//   font-size: 1.9em;
+//   width: 100%;
+//   position: relative;
 
-  &::before {
-    content: '';
-    position: absolute;
-    width: 110%;
-    height: 120%;
-    top: 0;
-    left: -5%;
-    background: linear-gradient(
-      0deg,
-      rgba(0, 0, 0, 1) -20%,
-      rgba(87, 87, 87, 1) 100%
-    );
-    // background-color: #222;
-    box-shadow: inset 0 0 0.6em 0.4em #111;
-  }
+//   &::before {
+//     content: '';
+//     position: absolute;
+//     width: 110%;
+//     height: 120%;
+//     top: 0;
+//     left: -5%;
+//     background: linear-gradient(
+//       0deg,
+//       rgba(0, 0, 0, 1) -20%,
+//       rgba(87, 87, 87, 1) 100%
+//     );
+//     // background-color: #222;
+//     box-shadow: inset 0 0 0.6em 0.4em #111;
+//   }
 
-  &::after {
-    content: '';
-    position: absolute;
-    width: 110%;
-    height: 120%;
-    top: 0;
-    left: -5%;
-    background: radial-gradient(
-        circle at 3% 90%,
-        rgba(255, 255, 255, 1) 0%,
-        rgba(255, 255, 255, 1) 0.7%,
-        rgba(255, 255, 255, 0) 1.2%
-      ),
-      radial-gradient(
-        circle at 50% 90%,
-        rgba(255, 255, 255, 1) 0%,
-        rgba(255, 255, 255, 1) 0.7%,
-        rgba(255, 255, 255, 0) 1.2%
-      ),
-      radial-gradient(
-        circle at 97% 90%,
-        rgba(255, 255, 255, 1) 0%,
-        rgba(255, 255, 255, 1) 0.7%,
-        rgba(255, 255, 255, 0) 1.2%
-      );
-  }
-  &.line {
-    padding-left: var(--line-1-padding);
-    text-align: start !important;
-  }
-}
+//   &::after {
+//     content: '';
+//     position: absolute;
+//     width: 110%;
+//     height: 120%;
+//     top: 0;
+//     left: -5%;
+//     background: radial-gradient(
+//         circle at 3% 90%,
+//         rgba(255, 255, 255, 1) 0%,
+//         rgba(255, 255, 255, 1) 0.7%,
+//         rgba(255, 255, 255, 0) 1.2%
+//       ),
+//       radial-gradient(
+//         circle at 50% 90%,
+//         rgba(255, 255, 255, 1) 0%,
+//         rgba(255, 255, 255, 1) 0.7%,
+//         rgba(255, 255, 255, 0) 1.2%
+//       ),
+//       radial-gradient(
+//         circle at 97% 90%,
+//         rgba(255, 255, 255, 1) 0%,
+//         rgba(255, 255, 255, 1) 0.7%,
+//         rgba(255, 255, 255, 0) 1.2%
+//       );
+//   }
+//   &.line {
+//     padding-left: var(--line-1-padding);
+//     text-align: start !important;
+//   }
+// }
 
 .usbotGraph--center {
   text-align: center;
+  color: transparent;
 }
 
-@for $i from 2 through 200 {
+.usbotGraphTransparent {
+  color: transparent;
+}
+
+@for $i from 1 through 30 {
   .line--#{$i} {
-    --shrink-factor: #{math.div(
-        1,
-        math.div(math.floor(math.div($i + 2, 2)), 2)
-      )};
+    --shrink-factor: #{math.div(1, math.div(math.div($i + 1, 2), 2))};
     font-size: calc(1.2em * var(--shrink-factor));
-    width: calc(160px * var(--shrink-factor));
+    width: 100%;
+    // width: calc(160px * var(--shrink-factor));
     // background-color: rgba(255, 255, 255, var(--shrink-factor));
     color: rgba(255, 255, 255, var(--shrink-factor));
     padding-left: var(--line-#{$i}-padding);
@@ -357,21 +373,23 @@ export default {
     &::after {
       content: '';
       position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
+      width: 150%;
+      height: 150%;
+      top: -25%;
+      left: -25%;
       background: radial-gradient(
-          circle at 3% 90%,
-          rgba(255, 255, 255, var(--shrink-factor)) 0%,
-          rgba(255, 255, 255, var(--shrink-factor)) 1%,
-          rgba(255, 255, 255, 0) 2%
+          circle at 14.5% 50%,
+          rgba(214, 111, 111, var(--shrink-factor)) 0%,
+          rgba(214, 111, 111, var(--shrink-factor))
+            calc(var(--shrink-factor) * 1%),
+          rgba(214, 111, 111, 0) calc(var(--shrink-factor) * 1.1%)
         ),
         radial-gradient(
-          circle at 97% 90%,
-          rgba(255, 255, 255, var(--shrink-factor)) 0%,
-          rgba(255, 255, 255, var(--shrink-factor)) 1%,
-          rgba(255, 255, 255, 0) 2%
+          circle at 85.5% 50%,
+          rgba(214, 111, 111, var(--shrink-factor)) 0%,
+          rgba(214, 111, 111, var(--shrink-factor))
+            calc(var(--shrink-factor) * 1%),
+          rgba(214, 111, 111, 0) calc(var(--shrink-factor) * 1.1%)
         );
     }
 
@@ -382,13 +400,6 @@ export default {
       height: 100%;
       top: 0;
       left: 0;
-      background: linear-gradient(
-        0deg,
-        rgba(0, 0, 0, 1) -20%,
-        rgba(87, 87, 87, 1) 100%
-      );
-      // background-color: #222;
-      box-shadow: inset 0 0 0.6em 0.4em #111;
     }
   }
 }

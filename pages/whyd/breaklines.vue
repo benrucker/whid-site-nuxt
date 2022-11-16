@@ -1,5 +1,5 @@
 <template>
-  <Whyd2022ChatChartUserMostUsedWords :stats="null" />
+  <Whyd2022ChatChartUserMostUsedWordsTwo :stats="null" />
 </template>
 
 <script>
