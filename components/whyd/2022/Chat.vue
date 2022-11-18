@@ -223,7 +223,7 @@ export default {
   width: var(--convo-width);
   padding: 0;
   min-height: 80vh;
-  user-select: text;
+  user-select: none;
 }
 
 @media (min-width: 576px) {
