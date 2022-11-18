@@ -437,15 +437,19 @@
       "content": "And thank you {:you:} very much for joining me for {whyd2022 | italic}. I'm excited to see what fun things come around next year!"
     },
     {
-      "content": "With that, I think it's time for us to get out of here."
+      "content": "With that, I think it's time for us.get out of here."
+    },
+    {
+      "content": "us to get*"
     },
     {
       "content": "{User not found: out of here | italic}",
       "author": "UsBot"
     },
     {
-      "content": "...okay what the fuck",
-      "author": "JermaBot"
+      "content": "...oh fuck",
+      "author": "JermaBot",
+      "function": "next"
     },
     {
       "content": "USBOT!!",
@@ -488,13 +492,15 @@
       "function": "chooseRandomOption"
     },
     {
-      "type": "ChartUserMostUsedWords"
+      "type": "ChartUserMostUsedWords",
+      "hideBubble": true
     },
     {
       "content": "Unanimism:  As mentioned for the love of... a little pale stat"
     },
     {
-      "type": "ChartUserPoliticalBias"
+      "type": "ChartUserPoliticalBias",
+      "hideBubble": true
     },
     {
       "content": "Okay wait hold on...",
@@ -516,7 +522,8 @@
       "author": "UsBot"
     },
     {
-      "type": "ChartTimesGotNoResponse"
+      "type": "ChartUserNoResponse",
+      "hideBubble": true
     },
     {
       "content": "Geez...",
