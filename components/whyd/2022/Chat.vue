@@ -54,8 +54,8 @@ export default {
     return {
       advancingIsDisabled: false,
       autoAdvanceTimeout: undefined,
-      debugShowAll: true,
-      debugShowAllLimit: 99999,
+      debugShowAll: false,
+      debugShowAllLimit: 130,
       displayed: [],
       messagesPosition: 0,
       showHint: true,
@@ -80,7 +80,7 @@ export default {
     },
     autoAdvance() {
       this.advance()
-      if (this.areMoreMessagesRemaining()) {
+      if (this.areMoreMessagesRemaining() && this.debugShowAllLimit-- > 0) {
         setTimeout(this.autoAdvance)
       } else {
         setTimeout(this.scrollToLast, 2000)
@@ -223,7 +223,7 @@ export default {
   width: var(--convo-width);
   padding: 0;
   min-height: 80vh;
-  user-select: text;
+  user-select: none;
 }
 
 @media (min-width: 576px) {
