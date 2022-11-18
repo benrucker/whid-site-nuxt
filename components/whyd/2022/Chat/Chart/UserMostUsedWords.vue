@@ -225,16 +225,6 @@ export default {
     box-shadow: 0 0 0 15px rgb(214, 111, 111);
   }
 }
-
-.box {
-  /* background-color: rgba(255, 248, 0, 0.2);
-  border-radius: 2px 2px 2px 2px;
-  box-sizing: border-box;
-  outline: 1px dashed #ff0000;
-  outline-offset: 1px;
-  pointer-events: none;
-  position: fixed; */
-}
 </style>
 
 <style scoped lang="scss">
@@ -294,59 +284,6 @@ export default {
   }
 }
 
-// .line--1 {
-//   font-size: 1.9em;
-//   width: 100%;
-//   position: relative;
-
-//   &::before {
-//     content: '';
-//     position: absolute;
-//     width: 110%;
-//     height: 120%;
-//     top: 0;
-//     left: -5%;
-//     background: linear-gradient(
-//       0deg,
-//       rgba(0, 0, 0, 1) -20%,
-//       rgba(87, 87, 87, 1) 100%
-//     );
-//     // background-color: #222;
-//     box-shadow: inset 0 0 0.6em 0.4em #111;
-//   }
-
-//   &::after {
-//     content: '';
-//     position: absolute;
-//     width: 110%;
-//     height: 120%;
-//     top: 0;
-//     left: -5%;
-//     background: radial-gradient(
-//         circle at 3% 90%,
-//         rgba(255, 255, 255, 1) 0%,
-//         rgba(255, 255, 255, 1) 0.7%,
-//         rgba(255, 255, 255, 0) 1.2%
-//       ),
-//       radial-gradient(
-//         circle at 50% 90%,
-//         rgba(255, 255, 255, 1) 0%,
-//         rgba(255, 255, 255, 1) 0.7%,
-//         rgba(255, 255, 255, 0) 1.2%
-//       ),
-//       radial-gradient(
-//         circle at 97% 90%,
-//         rgba(255, 255, 255, 1) 0%,
-//         rgba(255, 255, 255, 1) 0.7%,
-//         rgba(255, 255, 255, 0) 1.2%
-//       );
-//   }
-//   &.line {
-//     padding-left: var(--line-1-padding);
-//     text-align: start !important;
-//   }
-// }
-
 .usbotGraph--center {
   text-align: center;
   color: transparent;
@@ -366,7 +303,6 @@ export default {
     color: rgba(255, 255, 255, var(--shrink-factor));
     padding-left: var(--line-#{$i}-padding);
     height: 1.5em;
-    // overflow: show;
     text-align: start;
     position: relative;
 
