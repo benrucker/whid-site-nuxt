@@ -54,10 +54,5 @@ export default {
   background-color: inherit;
   color: var(--background);
   user-select: none;
-  cursor: grab;
-}
-
-.top:active {
-  cursor: grabbing;
 }
 </style>

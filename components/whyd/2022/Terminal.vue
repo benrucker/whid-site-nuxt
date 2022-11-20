@@ -140,11 +140,11 @@ export default {
   height: 92%;
 }
 
-/* #terminal {
+#terminal {
   position: absolute;
-  left: 30%;
-  top: 30%;
-} */
+  left: 40px;
+  top: 40px;
+}
 
 #textViewport p {
   margin-bottom: 0.25em;
@@ -157,7 +157,7 @@ export default {
 }
 
 p.error-text {
-  color: var(--error);
+  color: red;
 }
 
 p.italic-text {
@@ -165,6 +165,6 @@ p.italic-text {
 }
 
 p.confirmed-text {
-  color: var(--success);
+  color: lime;
 }
 </style>
