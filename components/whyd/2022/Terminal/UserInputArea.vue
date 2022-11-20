@@ -298,10 +298,10 @@ export default {
 }
 
 .red-text {
-  color: red;
+  color: var(--error);
 }
 
 .red-text a {
-  color: red;
+  color: var(--error);
 }
 </style>
