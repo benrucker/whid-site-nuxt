@@ -1,6 +1,14 @@
 <template>
   <div class="center pass-view" @click="focusPasswordInput">
-    <div class="text-area" :class="correctPassword ? 'correct' : 'incorrect'">
+    <div v-if="correctPassword" class="login-graphic">
+      <Whyd2022Terminal3DWhid class="chart3d" />
+      <p class="correct">{{ promptText }}</p>
+    </div>
+    <div
+      v-if="!correctPassword"
+      class="text-area"
+      :class="correctPassword ? 'correct' : 'incorrect'"
+    >
       <p id="passwordPromptText" class="mb-0 text-nowrap">{{ promptText }}</p>
 
       <span id="userPasswordInputDisplay" class="text-nowrap">{{
@@ -28,6 +36,7 @@ export default {
       password: 'fidlersphatass',
       attempts: 0,
       locked: false
+      // loggingIn: false
     }
   },
   methods: {
@@ -40,10 +49,7 @@ export default {
       this.$refs.passwordTextInput.disabled = true
       if (inputText === this.password) {
         this.correctPassword = true
-        this.promptText = 'Correct - Logging in'
-        setTimeout(() => {
-          this.$emit('logIn')
-        }, 2000)
+        this.showLoggingIn()
       } else if (this.attempts === 3) {
         this.promptText = 'Too many attempts - Locking terminal...'
         this.locked = true
@@ -62,6 +68,37 @@ export default {
       if (!this.locked) {
         this.$refs.passwordTextInput.disabled = this.locked
       }
+    },
+    showLoggingIn() {
+      this.promptText = 'Logging in...'
+      this.loggingIn = true
+      setTimeout(() => {
+        this.promptText = 'Compiling SecuityBot data...'
+      }, 1500)
+      setTimeout(() => {
+        this.promptText = 'Proofreading username...'
+      }, 2000)
+      setTimeout(() => {
+        this.promptText = 'Triangulating your location...'
+      }, 2500)
+      setTimeout(() => {
+        this.promptText = 'Counting cheetos...'
+      }, 3000)
+      setTimeout(() => {
+        this.promptText = 'Scoring users...'
+      }, 3500)
+      setTimeout(() => {
+        this.promptText = 'Performing Complex Calculations...'
+      }, 4000)
+      setTimeout(() => {
+        this.promptText = 'Emailing Dennis...'
+      }, 4500)
+      setTimeout(() => {
+        this.promptText = 'Looking at the graphic...'
+      }, 5000)
+      setTimeout(() => {
+        this.$emit('logIn')
+      }, 9000) // give 5 seconds
     }
   }
 }
@@ -77,6 +114,18 @@ export default {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+}
+
+.login-graphic {
+  position: absolute;
+  height: 55%;
+  width: 60%;
+  background-color: inherit;
+  z-index: 10;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .text-area {
