@@ -101,6 +101,7 @@ h4 {
   /* margin-top: 20px; */
   /* background-color: #ddd; */
   overflow: visible;
+  --bubble-color-2: hsl(190, 30%, 56%);
   background: radial-gradient(
       circle at 0% 50%,
       var(--bubble-color) 0,
@@ -109,10 +110,14 @@ h4 {
     ),
     radial-gradient(
       circle at 100% 50%,
-      var(--bubble-color) 0,
-      var(--bubble-color) var(--size),
+      var(--bubble-color-2) 0,
+      var(--bubble-color-2) var(--size),
       rgba(255, 255, 255, 0) calc(var(--size) + 1px)
     );
+}
+
+.lineGroup2 .usbotLine {
+  transform: scaleX(-1);
 }
 
 .line1 {
