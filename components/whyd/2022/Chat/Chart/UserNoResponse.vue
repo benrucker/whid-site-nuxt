@@ -28,7 +28,7 @@
         </div>
       </div>
 
-      <h4 class="text-end">times</h4>
+      <h4 class="text-end">times!</h4>
     </div>
   </div>
 </template>
