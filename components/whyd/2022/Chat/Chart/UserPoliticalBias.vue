@@ -40,8 +40,8 @@
 <style scoped>
 .usbotGraph {
   --leftWidth: 60%;
-  --political-color-1: #54b354;
-  --political-color-2: #8149e9;
+  --political-color-1: hsl(190, 30%, 56%);
+  --political-color-2: hsl(0, 30%, 56%);
 }
 
 .graphContent {
