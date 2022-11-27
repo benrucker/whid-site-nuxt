@@ -38,7 +38,7 @@
 <style scoped>
 .usbotGraph {
   --leftWidth: 60%;
-  padding: 0 10px;
+  padding: 0 0;
 }
 
 .graphContent {
@@ -48,16 +48,19 @@
   height: 100%;
 }
 
+h4 {
+  padding: 0 10px;
+}
+
 .number {
   text-align: center;
   position: relative;
   justify-content: space-between;
   align-items: center;
-  width: 95%;
+  width: 100%;
   flex-shrink: 0;
   flex-grow: 1;
-  margin: 10px 10px;
-  /* padding: 10px 5px; */
+  margin: 10px 0;
 }
 
 .number h1 {
@@ -74,7 +77,7 @@
   min-height: 80%;
   width: 100%;
   display: flex;
-  padding: 0 10px;
+  padding: 0 0;
   flex-grow: 2;
 }
 
@@ -93,61 +96,70 @@
 
 .usbotLine {
   min-height: 5px;
+  height: calc(var(--size) * 2.5);
   display: block;
   /* margin-top: 20px; */
   /* background-color: #ddd; */
   overflow: visible;
   background: radial-gradient(
       circle at 0% 50%,
-      rgba(255, 255, 255, 0.5) 0,
-      rgba(255, 255, 255, 0.5) 2px,
-      rgba(255, 255, 255, 0) 3px
+      var(--bubble-color) 0,
+      var(--bubble-color) var(--size),
+      rgba(255, 255, 255, 0) calc(var(--size) + 1px)
     ),
     radial-gradient(
       circle at 100% 50%,
-      rgba(255, 255, 255, 0.5) 0,
-      rgba(255, 255, 255, 0.5) 2px,
-      rgba(255, 255, 255, 0) 3px
+      var(--bubble-color) 0,
+      var(--bubble-color) var(--size),
+      rgba(255, 255, 255, 0) calc(var(--size) + 1px)
     );
 }
 
 .line1 {
-  opacity: 70%;
+  --size: 7px;
+  opacity: 100%;
   width: 100%;
 }
 
 .line2 {
-  opacity: 55%;
+  --size: 7px;
+  opacity: 75%;
   width: 55%;
 }
 
 .line3 {
-  opacity: 35%;
+  --size: 7px;
+  opacity: 50%;
   width: 25%;
 }
 
 .line4 {
-  opacity: 22%;
+  --size: 7px;
+  opacity: 30%;
   width: 12%;
 }
 
 .line5 {
-  opacity: 17%;
+  --size: 7px;
+  opacity: 19%;
   width: 7%;
 }
 
 .line6 {
-  opacity: 13.5%;
+  --size: 7px;
+  opacity: 12%;
   width: 3.5%;
 }
 
 .line7 {
-  opacity: 12%;
+  --size: 7px;
+  opacity: 9%;
   width: 2%;
 }
 
 .line8 {
-  opacity: 11%;
+  --size: 7px;
+  opacity: 6%;
   width: 1%;
 }
 </style>
