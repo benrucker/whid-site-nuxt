@@ -92,6 +92,7 @@ export default {
     loader.load('/whyd/2022/3d/whid.glb', (gltf) => {
       this.model = gltf.scene
       this.scene.add(this.model)
+      this.model.rotation.y = Math.PI
 
       this.rAF = requestAnimationFrame(this.render)
     })
