@@ -62,6 +62,7 @@ export default {
       terminalCommands: {},
       buttonData: [],
       userInput: '',
+      userName: '#USERNAME',
       isShowProceed: false,
       terminalLinesQueue: [
         'This line should never appear. Ff it does, Ethan fucked up probably'
@@ -103,7 +104,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.terminalMode)
+    // console.log(this.terminalMode)
     if (this.terminalMode === mode.clickContinue) {
       this.isShowProceed = this.terminalLinesQueue.length > 0
     } else if (
@@ -265,6 +266,13 @@ export default {
         content: 'test command invoked',
         class: 'italic-text'
       })
+    },
+    SecBotDmsFunction() {
+      const numWalter = 5
+
+      const lines = [{ content: '@secuityBot4891#1995 Direct Message logs...' }]
+
+      this.executeCommandText(lines)
     }
     // #endregion
   }

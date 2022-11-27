@@ -12,6 +12,11 @@
     "path": "/root/whyd",
     "functionName": "testFunction"
   },
+  "dms": {
+    "prettyName": "DMs",
+    "path": "/root/whyd/SecBot",
+    "functionName": "SecBotDMsFunction"
+  },
   "test": {
     "prettyName": "proofOfConcept",
     "dependencies": ["1"],
