@@ -146,6 +146,7 @@ svg {
   width: 100%;
   height: 100%;
   z-index: -1;
+  border-radius: 15px;
 
   filter: contrast(170%) brightness(1000%);
   background: linear-gradient(45deg, rgb(112, 23, 129), rgba(0, 0, 0, 0));
@@ -162,6 +163,7 @@ span.gm {
   width: 100%;
   height: 100%;
   z-index: -1;
+  border-radius: 15px;
 
   background: moccasin;
   mix-blend-mode: multiply;
