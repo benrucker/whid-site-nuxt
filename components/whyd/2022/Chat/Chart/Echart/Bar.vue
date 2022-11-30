@@ -58,64 +58,62 @@ export default {
     window.addEventListener('resize', () => {
       this.$refs.chart.resize()
     })
-    setTimeout(() => {
-      this.$refs.chart.resize()
-      this.option = {
-        grid: {
-          left: '6%',
-          right: '4%',
-          bottom: '3%',
-          top: '4%',
-          containLabel: true
+    this.$refs.chart.resize()
+    this.option = {
+      grid: {
+        left: '6%',
+        right: '4%',
+        bottom: '3%',
+        top: '4%',
+        containLabel: true
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
         },
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: {
-            type: 'shadow'
-          },
-          backgroundColor: 'rgba(255, 255, 255, 0.7)'
-        },
-        xAxis: [
-          {
-            type: 'category',
-            data: this.xAxis,
-            axisTick: {
-              // alignWithLabel: true,
-            }
+        backgroundColor: 'rgba(255, 255, 255, 0.7)'
+      },
+      xAxis: [
+        {
+          type: 'category',
+          data: this.xAxis,
+          axisTick: {
+            // alignWithLabel: true,
           }
-        ],
-        yAxis: [
-          {
-            type: 'value'
-          }
-        ],
-        series: [
-          {
-            name: this.title,
-            type: 'bar',
-            data: this.yAxis,
-            barWidth: '70%',
-            roundCap: true,
-            itemStyle: {
-              borderRadius: [5, 5, 0, 0]
-            },
-            animationDelay(idx) {
-              return idx * 150
-            },
-            animationDuration() {
-              return 400
-            }
-          }
-        ],
-        color: [this.color],
-        backgroundColor: this.bgColor,
-        textStyle: {
-          color: this.textColor,
-          fontSize: 36,
-          fontWeight: 'bold'
         }
+      ],
+      yAxis: [
+        {
+          type: 'value'
+        }
+      ],
+      series: [
+        {
+          name: this.title,
+          type: 'bar',
+          data: this.yAxis,
+          barWidth: '70%',
+          roundCap: true,
+          itemStyle: {
+            borderRadius: [5, 5, 0, 0]
+          },
+          animationDelay(idx) {
+            return idx * 200
+          },
+          animationDuration() {
+            return 500
+          }
+        }
+      ],
+      color: [this.color],
+      backgroundColor: this.bgColor,
+      textStyle: {
+        color: this.textColor,
+        fontSize: 36,
+        fontWeight: 'bold'
       }
-    }, 500)
+    }
   }
 }
 </script>

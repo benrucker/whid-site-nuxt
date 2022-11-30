@@ -84,7 +84,7 @@ export default {
 }
 
 .hand.bounce {
-  animation: hand-bounce 1s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation: hand-bounce 0.5s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94);
   opacity: 1;
 }
 
@@ -120,18 +120,15 @@ export default {
     opacity: 1;
   }
   25% {
-    rotate: 5deg;
+    rotate: -5deg;
     opacity: 0.75;
   }
   50% {
-    rotate: -5deg;
-  }
-  75% {
-    rotate: 5deg;
+    rotate: 2deg;
   }
   100% {
-    rotate: -5deg;
-    transform: translate(-40px, -10px);
+    rotate: -15deg;
+    transform: translate(-80px, -10px);
     opacity: 0;
   }
 }

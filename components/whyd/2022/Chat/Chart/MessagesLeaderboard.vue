@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div v-if="counts.length" class="messagesLeaderboard">
     <div class="lb-title text-center">
       <h4>Who sent the most messages?</h4>
     </div>
     <div id="lb-messages">
       <Whyd2022ChatChartEchartBarH
         :bg-color="'transparent'"
-        :color="'#4c60f3'"
+        :color="'#8677cb'"
         :text-color="'#303030'"
         :x-axis="counts"
         :y-axis="users"
@@ -53,6 +53,10 @@ export default {
 </script>
 
 <style>
+.messagesLeaderboard {
+  animation: fade-in 0.5s ease-in-out 0.1s both;
+}
+
 #lb-messages {
   cursor: default;
   padding-left: 2.3em;
