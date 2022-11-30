@@ -237,6 +237,7 @@ class Emoji {
   padding: 0.3em;
   cursor: default;
   width: calc(var(--convo-width) - 150px);
+  animation: fade-in 0.5s ease-in-out;
 }
 
 canvas {
