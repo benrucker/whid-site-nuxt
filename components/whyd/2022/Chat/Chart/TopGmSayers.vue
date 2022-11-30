@@ -1,5 +1,5 @@
 <template>
-  <div class="topimages">
+  <div class="topimages" @click.stop="">
     <svg
       class="noise"
       viewBox="0 100 400 400"
@@ -116,6 +116,21 @@ export default {
   text-shadow: 10px 10px 5px rgba(0, 0, 0, 0.3);
 
   position: relative;
+  animation: bounce-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both;
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 rect {
