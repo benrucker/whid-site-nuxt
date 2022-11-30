@@ -1,5 +1,5 @@
 <template>
-  <div class="stickersChart" @click="init">
+  <div class="stickersChart" @click.stop="handleClick($event)">
     <svg
       class="noise"
       viewBox="0 100 400 400"
@@ -55,7 +55,7 @@ export default {
       { name: 'wave', url: '/whyd/2022/emojis/myson.png', count: 100 },
       { name: 'DEAL', url: '/whyd/2022/emojis/myson.png', count: 10 }
     ]
-    setTimeout(this.resizeStickers)
+    setTimeout(this.resizeStickers, 60)
   },
   methods: {
     resizeStickers() {
@@ -77,7 +77,7 @@ export default {
 
         stickerElement.style.width = `${stickerSize}px`
         stickerElement.style.transform = `scale(100) rotate(${
-          Math.random() * 90 - 45
+          Math.random() * 120 - 60
         }deg)`
         stickerElement.style.animationDelay = `${index * 0.5}s`
 
@@ -87,9 +87,9 @@ export default {
         index += 1
       }
     },
-    init() {
+    handleClick(event) {
       setTimeout(this.resizeStickers)
-      // comment
+      event.preventDefault()
     }
   }
 }
@@ -109,6 +109,22 @@ export default {
   position: relative;
 
   user-select: none;
+
+  animation: bounce-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both;
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 rect {
@@ -124,6 +140,7 @@ svg {
   width: 100%;
   height: 100%;
   z-index: -1;
+  border-radius: 15px;
 
   filter: contrast(170%) brightness(1000%);
   background: linear-gradient(45deg, rgb(112, 23, 129), rgba(0, 0, 0, 0));
@@ -140,6 +157,7 @@ span.gm {
   width: 100%;
   height: 100%;
   z-index: -1;
+  border-radius: 15px;
 
   background: moccasin;
   mix-blend-mode: multiply;

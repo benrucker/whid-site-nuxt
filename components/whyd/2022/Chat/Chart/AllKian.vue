@@ -1,5 +1,5 @@
 <template>
-  <div class="kianChart">
+  <div class="kianChart" @click.stop="">
     <svg
       class="noise"
       viewBox="0 100 400 400"
@@ -70,15 +70,33 @@
   font-family: Brush Script MT;
 
   border: inset 5px;
+
+  animation: bounce-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both;
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 rect {
   width: 100%;
   height: 1000px;
   top: -10px;
+  border-radius: 20px;
 }
 
 .notSvg {
+  border-radius: 15px;
   height: 100%;
 }
 
@@ -89,7 +107,7 @@ svg {
   width: 100%;
   height: 100%;
   z-index: -1;
-
+  border-radius: 15px;
   filter: contrast(170%) brightness(100%);
   background: linear-gradient(45deg, rgb(112, 23, 129), rgba(0, 0, 0, 0));
 }
@@ -101,7 +119,7 @@ svg {
   width: 100%;
   height: 100%;
   z-index: -1;
-
+  border-radius: 15px;
   background: moccasin;
   mix-blend-mode: multiply;
 }
