@@ -58,79 +58,77 @@ export default {
     window.addEventListener('resize', () => {
       this.$refs.chart.resize()
     })
-    setTimeout(() => {
-      this.$refs.chart.resize()
-      this.option = {
-        grid: {
-          left: '3%',
-          right: '4%',
-          bottom: '0%',
-          top: '0%',
-          containLabel: true
+    this.$refs.chart.resize()
+    this.option = {
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '0%',
+        top: '0%',
+        containLabel: true
+      },
+      tooltip: {
+        trigger: 'none',
+        axisPointer: {
+          type: 'shadow'
         },
-        tooltip: {
-          trigger: 'none',
-          axisPointer: {
-            type: 'shadow'
+        backgroundColor: 'rgba(255, 255, 255, 0.7)'
+      },
+      yAxis: [
+        {
+          type: 'category',
+          data: [...this.yAxis].reverse(),
+          axisTick: {
+            show: false
           },
-          backgroundColor: 'rgba(255, 255, 255, 0.7)'
-        },
-        yAxis: [
-          {
-            type: 'category',
-            data: [...this.yAxis].reverse(),
-            axisTick: {
-              show: false
-            },
-            axisLabel: {
-              show: false,
-              inside: true,
-              verticalAlign: 'top'
-            }
+          axisLabel: {
+            show: false,
+            inside: true,
+            verticalAlign: 'top'
           }
-        ],
-        xAxis: [
-          {
-            type: 'value',
-            axisLabel: {
-              show: false
-            },
-            axisTick: {
-              show: false
-            },
-            splitLine: {
-              show: false
-            }
-          }
-        ],
-        series: [
-          {
-            name: this.title,
-            type: 'bar',
-            data: [...this.xAxis].reverse(),
-            barWidth: '80%',
-            roundCap: true,
-            itemStyle: {
-              borderRadius: [0, 5, 5, 0]
-            },
-            z: -1,
-            animationDelay: (idx) => {
-              return (this.xAxis.length - idx) * 250
-            },
-            animationDuration() {
-              return 1000
-            }
-          }
-        ],
-        color: [this.color],
-        backgroundColor: this.bgColor,
-        textStyle: {
-          color: this.textColor,
-          fontSize: 36,
-          fontWeight: 'bold'
         }
+      ],
+      xAxis: [
+        {
+          type: 'value',
+          axisLabel: {
+            show: false
+          },
+          axisTick: {
+            show: false
+          },
+          splitLine: {
+            show: false
+          }
+        }
+      ],
+      series: [
+        {
+          name: this.title,
+          type: 'bar',
+          data: [...this.xAxis].reverse(),
+          barWidth: '80%',
+          roundCap: true,
+          itemStyle: {
+            borderRadius: [0, 5, 5, 0]
+          },
+          z: -1,
+          animationDelay: (idx) => {
+            return (this.xAxis.length - idx) * 250
+          },
+          animationDuration() {
+            return 1000
+          }
+        }
+      ],
+      color: [this.color],
+      backgroundColor: this.bgColor,
+      textStyle: {
+        color: this.textColor,
+        fontSize: 36,
+        fontWeight: 'bold'
       }
-    }, 500)
+    }
   }
 }
 </script>

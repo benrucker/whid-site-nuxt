@@ -1,6 +1,7 @@
 <template>
   <Whyd2022ChatChartLeagueVsSomeone
     v-if="leaguers && apexers"
+    class="leagueVsApex"
     :league-count="leagueCount"
     :other-count="apexCount"
     other-name="apex"
@@ -69,4 +70,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.leagueVsApex {
+  animation: fade-in 0.5s ease-in-out;
+}
+</style>

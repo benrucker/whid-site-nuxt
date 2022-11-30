@@ -67,6 +67,7 @@ export default {
     setTimeout(() => {
       if (this.debugShowAll) this.autoAdvance()
     }, 50)
+    prefetchResources()
   },
   methods: {
     onClick() {
@@ -197,6 +198,21 @@ export default {
       if (!this.debugShowAll) this.advancingIsDisabled = false
     }
   }
+}
+
+function prefetchResources() {
+  ;[
+    '/whyd/2022/bots/FredBoat.png',
+    '/whyd/2022/bots/JermaBot.png',
+    '/whyd/2022/bots/NotSoBot.png',
+    '/whyd/2022/bots/secuitybot.png',
+    '/whyd/2022/bots/PerlyMolt.png',
+    '/whyd/2022/bots/Shigure.png',
+    '/whyd/2022/bots/Unanimism.png',
+    '/whyd/2022/bots/UsBot.png',
+    'https://media.tenor.com/S_to1tY3ixUAAAAC/breaking-bad-walter-white.gif',
+    'https://media.tenor.com/GIVLitDIxr8AAAAC/breaking-bad-walter-white.gif'
+  ].forEach(fetch)
 }
 </script>
 
