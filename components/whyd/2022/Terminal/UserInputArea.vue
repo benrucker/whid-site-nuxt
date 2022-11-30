@@ -97,6 +97,9 @@ export default {
           return true // possibly add here logic to not add cd .. to certain pages
         }
         const unlocked = this.areDependenciesMet(command.dependencies)
+        if (name.split(' ')[0] === 'cd') {
+          return command.path === this.displayedPath
+        }
         return (
           unlocked && !command.hasBeenRun && command.path === this.displayedPath
         )
@@ -125,7 +128,7 @@ export default {
       Object.values(this.terminalCommands).map((command) => command.path)
     )
     this.validPaths = paths
-    console.log(this.validPaths)
+    // console.log(this.validPaths)
   },
   methods: {
     // #region Page Control Functions
@@ -239,7 +242,7 @@ export default {
     logIn() {
       this.terminalMode = mode.hybridInput
       this.$emit('addTextLine', {
-        content: 'Logging in...'
+        content: `Logged in as ${this.userName}`
       })
       this.$emit('addTextLine', {
         content: `${this.path}/`
@@ -267,10 +270,18 @@ export default {
         class: 'italic-text'
       })
     },
-    SecBotDmsFunction() {
+    SecBotDMsFunction() {
       const numWalter = 5
+      const differentWalterUsers = 3
 
-      const lines = [{ content: '@secuityBot4891#1995 Direct Message logs...' }]
+      const lines = [
+        { content: '@secuityBot4891#1995 Direct Message logs...\n' },
+        {
+          content: `This image was sent [${numWalter}] times by [${differentWalterUsers}] users.`,
+          type: 'image',
+          url: 'https://media.tenor.com/S_to1tY3ixUAAAAd/breaking-bad-walter-white.gif'
+        }
+      ]
 
       this.executeCommandText(lines)
     }

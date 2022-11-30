@@ -1,6 +1,7 @@
 {
   "buttons": [
     "cd ..",
+    "cd SecBot",
     "1",
     "2",
     "3",
@@ -12,6 +13,7 @@
     "9",
     "test",
     "nerd",
-    "peas"
+    "peas",
+    "dms"
   ]
 }

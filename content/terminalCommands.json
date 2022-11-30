@@ -2,6 +2,10 @@
   "cd ..": {
     "prettyName": "cd .."
   },
+  "cd SecBot": {
+    "prettyName": "cd SecBot",
+    "path": "/root/whyd"
+  },
   "peas": {
     "prettyName": "🥫",
     "path": "/root/whyd",

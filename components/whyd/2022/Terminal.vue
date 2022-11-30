@@ -7,6 +7,12 @@
       />
       <div id="textViewport" class="center text-view" @click="focusInput">
         <div v-for="(text, index) in displayedTerminalContent" :key="index">
+          <img
+            v-if="text.type === 'image'"
+            :src="text.url"
+            width="120px"
+            height="100px"
+          />
           <p
             v-for="(line, idx) of text.content.split('\n')"
             :key="idx"
