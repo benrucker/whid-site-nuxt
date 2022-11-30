@@ -14,15 +14,15 @@
       <div class="attachments">
         <img
           v-for="attachment in attachments"
-          :key="attachment"
+          :key="`${authorName}${timestamp}${attachment}`"
           :src="attachment"
           class="attachment"
         />
       </div>
       <div class="reactions">
         <div
-          v-for="reaction in reactions"
-          :key="reaction.name"
+          v-for="(reaction, index) in reactions"
+          :key="`${authorName}${timestamp}${reaction.name}${index}`"
           class="reaction-bubble"
           data-bs-toggle="tooltip"
           data-bs-placement="top"
