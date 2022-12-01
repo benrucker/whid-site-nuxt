@@ -23,22 +23,22 @@
         <li v-for="id in userIds" :key="id" class="entry">
           <img
             class="imgAvatar"
-            :src="userData[id].avatar"
-            :alt="userData[id].username"
+            :src="stats.server.avatars[id]"
+            :alt="stats.server.idsToNames[id]"
           />
-          <div>{{ userData[id].username }}</div>
-          <div>{{ userData[id].gmCount }}</div>
+          <div>{{ stats.server.idsToNames[id] }}</div>
+          <div>{{ countsById[id] }}</div>
           <div
             class="reaction-bubble"
             data-bs-toggle="tooltip"
             data-bs-placement="top"
             data-bs-html="true"
             data-bs-delay="500"
-            :title="`${userData[id].mysonReactionCount} people reacted with myson`"
+            :title="`${countsById[id]} people reacted with myson`"
           >
             <img :src="`/whyd/2022/emojis/myson.png`" class="reaction-emoji" />
             <div class="reaction-count">
-              {{ userData[id].mysonReactionCount }}
+              {{ countsById[id] }}
             </div>
           </div>
         </li>
@@ -55,50 +55,12 @@ export default {
       default: () => ({})
     }
   },
-  data() {
-    return {
-      userData: {},
-      userIds: []
-    }
-  },
-  mounted() {
-    this.userData = this.stats.server['Top 5 Users by Image Count'] ?? {
-      '174672596275691521': {
-        gmCount: 123,
-        mysonReactionCount: 123
-      },
-      '275002179763306517': {
-        gmCount: 123,
-        mysonReactionCount: 123
-      },
-      '175705032161886208': {
-        gmCount: 123,
-        mysonReactionCount: 123
-      },
-      '184078144003768321': {
-        gmCount: 123,
-        mysonReactionCount: 123
-      },
-      '439205512425504771': {
-        gmCount: 123,
-        mysonReactionCount: 123
-      }
-    }
-    this.userIds = Object.keys(this.userData)
-
-    this.userIds.forEach((id) => {
-      this.userData[id].username = this.stats.server.idsToNames[id]
-      this.userData[id].avatar = this.stats.server.avatars[id]
-    })
-  },
-  methods: {
-    handleClick(id) {
-      window.open(
-        this.userData[id].images[
-          (Math.random() * this.userData[id].images.length) | 0
-        ],
-        '_blank'
-      )
+  computed: {
+    countsById() {
+      return this.stats.server['List of users by gms']
+    },
+    userIds() {
+      return Array.from(Object.keys(this.countsById))?.slice(0, 5) ?? []
     }
   }
 }

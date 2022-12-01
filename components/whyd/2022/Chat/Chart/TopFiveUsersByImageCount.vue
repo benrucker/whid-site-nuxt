@@ -1,5 +1,5 @@
 <template>
-  <div class="topimages" @click.stop="">
+  <div v-if="stats" class="topimages" @click.stop="">
     <svg
       class="noise"
       viewBox="0 100 400 400"
@@ -23,11 +23,11 @@
         <li v-for="id in userIds" :key="id" class="entry">
           <img
             class="imgAvatar"
-            :src="userData[id].avatar"
-            :alt="userData[id].username"
+            :src="stats.server.avatars[id]"
+            :alt="stats.server.idsToNames[id]"
           />
-          <div class="imgUsername">{{ userData[id].username }}</div>
-          <div>{{ userData[id].imageCount }}</div>
+          <div class="imgUsername">{{ stats.server.idsToNames[id] }}</div>
+          <div>{{ imageCountByUser[id] }}</div>
           <div class="button" @click="handleClick(id)">wanna see one? 😏</div>
         </li>
       </ol>
@@ -43,63 +43,46 @@ export default {
       default: () => ({})
     }
   },
-  data() {
-    return {
-      userData: {},
-      userIds: []
+  computed: {
+    userIds() {
+      return Array.from(Object.keys(this.imageCountByUser)).slice(0, 5) ?? []
+    },
+    imageCountByUser() {
+      return this.stats.server['Top Five Users By Images Sent']
+    },
+    imageUrlsByUser() {
+      return (
+        this.stats.server['Top Five Users Images'] ?? {
+          '173839815400357888': [
+            'https://media.tenor.com/GIVLitDIxr8AAAAC/breaking-bad-walter-white.gif',
+            'https://media.tenor.com/S_to1tY3ixUAAAAC/breaking-bad-walter-white.gif'
+          ],
+          '256553939800031233': [
+            'https://media.tenor.com/GIVLitDIxr8AAAAC/breaking-bad-walter-white.gif',
+            'https://media.tenor.com/S_to1tY3ixUAAAAC/breaking-bad-walter-white.gif'
+          ],
+          '175705032161886208': [
+            'https://media.tenor.com/GIVLitDIxr8AAAAC/breaking-bad-walter-white.gif',
+            'https://media.tenor.com/S_to1tY3ixUAAAAC/breaking-bad-walter-white.gif'
+          ],
+          '174672596275691521': [
+            'https://media.tenor.com/GIVLitDIxr8AAAAC/breaking-bad-walter-white.gif',
+            'https://media.tenor.com/S_to1tY3ixUAAAAC/breaking-bad-walter-white.gif'
+          ],
+          '161144318160011265': [
+            'https://media.tenor.com/GIVLitDIxr8AAAAC/breaking-bad-walter-white.gif',
+            'https://media.tenor.com/S_to1tY3ixUAAAAC/breaking-bad-walter-white.gif'
+          ]
+        }
+      )
     }
-  },
-  mounted() {
-    this.userData = this.stats.server['Top 5 Users by Image Count'] ?? {
-      '174672596275691521': {
-        imageCount: 123,
-        images: [
-          'https://media.tenor.com/GIVLitDIxr8AAAAC/breaking-bad-walter-white.gif',
-          'https://media.tenor.com/S_to1tY3ixUAAAAC/breaking-bad-walter-white.gif'
-        ]
-      },
-      '275002179763306517': {
-        imageCount: 123,
-        images: [
-          'https://media.tenor.com/GIVLitDIxr8AAAAC/breaking-bad-walter-white.gif',
-          'https://media.tenor.com/S_to1tY3ixUAAAAC/breaking-bad-walter-white.gif'
-        ]
-      },
-      '175705032161886208': {
-        imageCount: 123,
-        images: [
-          'https://media.tenor.com/GIVLitDIxr8AAAAC/breaking-bad-walter-white.gif',
-          'https://media.tenor.com/S_to1tY3ixUAAAAC/breaking-bad-walter-white.gif'
-        ]
-      },
-      '184078144003768321': {
-        imageCount: 123,
-        images: [
-          'https://media.tenor.com/GIVLitDIxr8AAAAC/breaking-bad-walter-white.gif',
-          'https://media.tenor.com/S_to1tY3ixUAAAAC/breaking-bad-walter-white.gif'
-        ]
-      },
-      '439205512425504771': {
-        imageCount: 123,
-        images: [
-          'https://media.tenor.com/GIVLitDIxr8AAAAC/breaking-bad-walter-white.gif',
-          'https://media.tenor.com/S_to1tY3ixUAAAAC/breaking-bad-walter-white.gif'
-        ]
-      }
-    }
-    this.userIds = Object.keys(this.userData)
-
-    this.userIds.forEach((id) => {
-      this.userData[id].username = this.stats.server.idsToNames[id]
-      this.userData[id].avatar = this.stats.server.avatars[id]
-    })
   },
   methods: {
     handleClick(id) {
       window.open(
-        this.userData[id].images[
-          (Math.random() * this.userData[id].images.length) | 0
-        ],
+        this.imageUrlsByUser[id]?.[
+          (Math.random() * this.imageUrlsByUser[id].length) | 0
+        ] ?? 'about:blank',
         '_blank'
       )
     }
