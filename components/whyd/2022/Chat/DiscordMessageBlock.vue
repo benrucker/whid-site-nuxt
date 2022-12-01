@@ -7,6 +7,7 @@
       :reactions="msg.reactions"
       :author-name="msg.authorName"
       :author-avatar="msg.authorAvatar"
+      :author-color="msg.authorColor"
       :attachments="msg.attachments"
       :timestamp="msg.timestamp"
     />
