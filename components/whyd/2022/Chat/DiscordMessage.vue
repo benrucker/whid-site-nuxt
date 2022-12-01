@@ -3,8 +3,10 @@
     <div class="name-bar">
       <img class="d-msg-avatar" :src="authorAvatar" />
       <h2 class="name-ts">
-        <span class="name">{{ authorName }}</span>
-        <span class="timestamp">{{ timestamp }}</span>
+        <span class="name" :style="`color: ${authorColor}`">{{
+          authorName
+        }}</span>
+        <span class="timestamp">{{ parseTimestamp(timestamp) }}</span>
       </h2>
     </div>
     <div class="message-content">
@@ -60,6 +62,10 @@ export default {
       type: String,
       default: ''
     },
+    authorColor: {
+      type: String,
+      default: ''
+    },
     attachments: {
       type: Array,
       default: () => []
@@ -67,6 +73,26 @@ export default {
     timestamp: {
       type: String,
       default: ''
+    }
+  },
+  methods: {
+    parseTimestamp(timestamp) {
+      const date = Date.parse(timestamp)
+      // returns date in the format:
+      // 11/26/2022 2:48 PM
+      return (
+        new Date(date).toLocaleString('en-US', {
+          month: 'numeric',
+          day: 'numeric',
+          year: 'numeric'
+        }) +
+        ' ' +
+        new Date(date).toLocaleString('en-US', {
+          hour: 'numeric',
+          minute: 'numeric',
+          hour12: true
+        })
+      )
     }
   }
 }

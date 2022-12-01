@@ -164,10 +164,8 @@ export default {
     },
     didFallOffBottom() {
       const textNode = this.$refs.root2.lastChild.lastChild
-      console.log(this.$refs.root2.offsetHeight)
       const range = document.createRange()
       range.selectNode(textNode)
-      console.log(range.getBoundingClientRect().bottom)
       return (
         range.getBoundingClientRect().bottom > this.$refs.root2.lastChild.height
       )
