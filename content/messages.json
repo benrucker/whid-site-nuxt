@@ -352,7 +352,8 @@
     },
     {
       "type": "ChartMostUpvotedPost",
-      "author": "Unanimism"
+      "author": "Unanimism",
+      "hideBubble": true
     },
     {
       "content": "What make this so popular is genuinely beyond me."
