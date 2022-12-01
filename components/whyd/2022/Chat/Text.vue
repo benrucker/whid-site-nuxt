@@ -33,13 +33,19 @@ export default {
       parsedContent: [],
       values: {
         messageCountThisYear: () => this.stats.server.totalMessages,
+        user: () => this.stats.user.name,
         userWordCountThisYear: () =>
           this.stats.user['Number of Words Sent Per User'],
         userMessageCountThisYear: () =>
           this.stats.user['Number of Messages per User'],
         userMessagePercentageThisYear: () =>
           this.stats.user['Percentage of Messages per Users'],
-        user: () => this.stats.user.name
+        serverMostUpvotedUser: () =>
+          this.idToName(this.stats.server['Most Upvoted User']),
+        serverMostUpvotedUserCount: () =>
+          this.stats.server['Most Upvoted User Count'],
+        serverMostDownvotedUser: () =>
+          this.idToName(this.stats.server['Most Downvoted User'])
       }
     }
   },
@@ -57,6 +63,11 @@ export default {
         return { text: token }
       }
     })
+  },
+  methods: {
+    idToName(id) {
+      return this.stats.server.idsToNames[id]
+    }
   }
 }
 
