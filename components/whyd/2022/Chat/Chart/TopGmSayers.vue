@@ -34,11 +34,11 @@
             data-bs-placement="top"
             data-bs-html="true"
             data-bs-delay="500"
-            :title="`${countsById[id]} people reacted with myson`"
+            :title="`${mysonReactions[id]} people reacted with myson`"
           >
             <img :src="`/whyd/2022/emojis/myson.png`" class="reaction-emoji" />
             <div class="reaction-count">
-              {{ countsById[id] }}
+              {{ mysonReactions[id] }}
             </div>
           </div>
         </li>
@@ -61,6 +61,9 @@ export default {
     },
     userIds() {
       return Array.from(Object.keys(this.countsById))?.slice(0, 5) ?? []
+    },
+    mysonReactions() {
+      return this.stats.server['List of users by myson reactions']
     }
   }
 }
