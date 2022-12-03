@@ -272,8 +272,7 @@ function prefetchResources() {
 .message {
   width: 100%;
   display: flex;
-  margin-top: 16px;
-  margin-bottom: 16px;
+  margin-top: 6px;
   min-height: 2em;
   align-items: center;
 }

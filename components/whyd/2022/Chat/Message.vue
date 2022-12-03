@@ -1,5 +1,9 @@
 <template>
-  <div :class="`${msg.side} ${msg.color} message`">
+  <div
+    :class="`${msg.side} ${msg.color} message ${
+      isFirstInGroup ? 'first-in-group' : ''
+    }`"
+  >
     <span class="avatar-wrapper">
       <img
         v-if="isLastInGroup"
@@ -73,7 +77,7 @@ export default {
 
           document.documentElement.style.setProperty(
             '--avatar-slide-distance',
-            `-${prevHeight + thisHeight + 16}px`
+            `-${prevHeight + thisHeight + 6}px`
           )
         }
       })
@@ -141,11 +145,16 @@ export default {
   position: relative;
 }
 
+.message.first-in-group {
+  margin-top: 30px;
+}
+
 .author-name {
   position: absolute;
   top: -18px;
   font-weight: 500;
   font-size: 12px;
+  opacity: 0.5;
 }
 
 .right .author-name {
