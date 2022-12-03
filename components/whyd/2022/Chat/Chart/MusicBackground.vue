@@ -7,6 +7,9 @@
 </template>
 
 <script>
+const lerpEnter = 0.2
+const lerpWithin = 1
+
 export default {
   props: {
     src: {
@@ -28,7 +31,8 @@ export default {
       dotsTargetY: 0,
       dotsCurrentX: 0,
       dotsCurrentY: 0,
-      dotsRaf: null
+      dotsRaf: null,
+      lerpFraction: lerpEnter
     }
   },
   mounted() {
@@ -76,8 +80,8 @@ export default {
       )
     },
     updateThing(currentX, currentY, targetX, targetY, raf, method, ref) {
-      currentX = (targetX - currentX) * 0.1 + currentX
-      currentY = (targetY - currentY) * 0.1 + currentY
+      currentX = (targetX - currentX) * this.lerpFraction + currentX
+      currentY = (targetY - currentY) * this.lerpFraction + currentY
 
       ref.style.transform =
         'translate(' + currentX * 10 + 'px, ' + currentY * 10 + 'px)'
@@ -88,6 +92,7 @@ export default {
       ) {
         raf = window.requestAnimationFrame(method)
       } else {
+        this.lerpFraction = lerpWithin
         raf = null
       }
 
@@ -107,6 +112,9 @@ export default {
 
       this.moveImg(percentX, percentY)
       this.moveDots(percentX / 3, percentY / 3)
+    },
+    handleMouseEnter() {
+      this.lerpFraction = lerpEnter
     }
   }
 }

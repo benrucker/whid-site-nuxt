@@ -4,6 +4,7 @@
     class="favorite-song"
     @click.stop="onClick($event)"
     @mousemove="handleTransformPanel($event)"
+    @mouseenter="handleMouseEnter()"
   >
     <Whyd2022ChatChartMusicBackground ref="bg" :src="bgImg" />
     <div class="text">
@@ -53,6 +54,9 @@ export default {
     },
     handleTransformPanel(event) {
       this.bgRef.handleTransformPanel(event)
+    },
+    handleMouseEnter() {
+      this.bgRef.handleMouseEnter()
     }
   }
 }
