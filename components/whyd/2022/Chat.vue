@@ -47,7 +47,7 @@ export default {
     return {
       advancingIsDisabled: false,
       autoAdvanceTimeout: undefined,
-      debugShowAll: false,
+      debugShowAll: true,
       debugShowAllLimit: 130,
       displayed: [],
       messagesPosition: 0,
@@ -58,12 +58,16 @@ export default {
   },
   computed: {
     typingIndicatorSide() {
-      return this.getDefaultSide(this.messages[this.messagesPosition].author)
+      return this.getDefaultSide(
+        this.messages[this.messagesPosition].author ??
+          this.displayed[this.messagesPosition - 1].author
+      )
     },
     typingIndicatorFirstInGroup() {
       return (
+        this.messages[this.messagesPosition].author != null &&
         this.displayed[this.messagesPosition - 1]?.author !==
-        this.messages[this.messagesPosition].author
+          this.messages[this.messagesPosition].author
       )
     }
   },
