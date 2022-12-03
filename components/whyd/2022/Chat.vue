@@ -15,18 +15,11 @@
       <div id="afterLastMessage">
         <div id="afterLastMessageInner" ref="afterLastMessage" />
       </div>
-      <div
-        v-if="showTyping && !advancingIsDisabled"
-        :class="'message typing ' + messages[0].side + ' text-muted'"
-      >
-        <div class="content">
-          <div class="typingDots">
-            <div class="t1" />
-            <div class="t2" />
-            <div class="t3" />
-          </div>
-        </div>
-      </div>
+      <Whyd2022ChatTypingIndicator
+        v-if="showTyping && !advancingIsDisabled && areMoreMessagesRemaining()"
+        :side="typingIndicatorSide"
+        :is-first-in-group="typingIndicatorFirstInGroup"
+      />
       <div
         v-if="showHint && !advancingIsDisabled"
         class="hint text-center text-muted"
@@ -63,6 +56,17 @@ export default {
       waitingToAutomaticallyAdvance: false
     }
   },
+  computed: {
+    typingIndicatorSide() {
+      return this.getDefaultSide(this.messages[this.messagesPosition].author)
+    },
+    typingIndicatorFirstInGroup() {
+      return (
+        this.displayed[this.messagesPosition - 1]?.author !==
+        this.messages[this.messagesPosition].author
+      )
+    }
+  },
   mounted() {
     setTimeout(() => {
       if (this.debugShowAll) this.autoAdvance()
@@ -90,29 +94,23 @@ export default {
     advance() {
       this.showHint = false
       this.showTyping = false
-
       if (this.areMoreMessagesRemaining()) {
         const messageInfo = this.messages[this.messagesPosition++]
-
         if (messageInfo.function) {
           messageInfo.content = this.runFunc(
             messageInfo.function,
             messageInfo.content
           )
         }
-
         messageInfo.author =
           messageInfo.author ?? this.displayed[this.displayed.length - 1].author
         messageInfo.side =
           messageInfo.side ?? this.getDefaultSide(messageInfo.author)
         messageInfo.color =
           messageInfo.color ?? messageInfo.author.toLowerCase()
-
         this.displayed.push(messageInfo)
-
         setTimeout(this.scrollToLast, 50)
       }
-
       if (this.areMoreMessagesRemaining()) {
         setTimeout(() => {
           this.showHint = true
@@ -284,71 +282,6 @@ function prefetchResources() {
 
 .message.left {
   justify-content: start;
-}
-
-.typing .content::after {
-  animation-delay: 1s;
-}
-
-.typing .content .typingDots {
-  height: 1em;
-  margin-top: 0.1em;
-  margin-bottom: 0.1em;
-
-  animation-name: fade;
-  animation-delay: 1s;
-  animation-fill-mode: both;
-  animation-timing-function: ease-in-out;
-  animation-duration: 0.5s;
-
-  display: flex;
-  justify-content: space-around;
-}
-
-.typing .t1 {
-  animation-delay: 0s;
-}
-
-.typing .t2 {
-  animation-delay: 0.2s;
-}
-
-.typing .t3 {
-  animation-delay: 0.4s;
-}
-
-.typing .content .t1,
-.typing .content .t2,
-.typing .content .t3 {
-  width: 1em;
-  height: 1em;
-  background-color: darkgray;
-  clip-path: circle(0.3em);
-  margin-left: 0.1em;
-  margin-right: 0.1em;
-
-  animation-name: pulse;
-  animation-duration: 2.75s;
-  animation-fill-mode: both;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
-
-  opacity: 0.75;
-  mix-blend-mode: lighten;
-}
-
-@keyframes pulse {
-  0% {
-    background-color: rgb(170, 170, 170);
-  }
-
-  50% {
-    background-color: rgb(255, 255, 255);
-  }
-
-  100% {
-    background-color: rgb(170, 170, 170);
-  }
 }
 
 .hint {
