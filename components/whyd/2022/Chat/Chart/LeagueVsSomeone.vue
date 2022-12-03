@@ -49,9 +49,7 @@
 // TODO define a max distance for the roel with more pings to move
 // TODO define the lower-bound for the role with fewer pings
 //        (base it subjectively off the lowest possible value that will pass in here)
-// TODO make the random distance from the center for avatars inversely proportional with their scale (pyramid effect)
 // TODO edit background colors
-// TODO animation on start?
 
 export default {
   props: {
@@ -146,30 +144,36 @@ export default {
         ...this.others.map((other) => other.pings)
       )
 
-      let larger, smaller, proportion
+      let larger, smaller, proportion, xDistanceSmaller, xDistanceLarger
       if (this.leagueCount > this.otherCount) {
         larger = this.$refs.left.children
         smaller = this.$refs.right.children
 
         proportion =
           (this.otherCount - this.minValue) / (this.leagueCount - this.minValue)
+        xDistanceSmaller = -25 * proportion
+        xDistanceLarger = 25
       } else {
         larger = this.$refs.right.children
         smaller = this.$refs.left.children
 
         proportion =
           (this.leagueCount - this.minValue) / (this.otherCount - this.minValue)
+        xDistanceSmaller = 10
+        xDistanceLarger = -25
       }
 
       const maxZDist = 160
       const minZDist = 80
 
       const zDistance = (maxZDist - minZDist) * proportion + minZDist
-      const xDistance = -25 * proportion
 
-      this.transformGraphElements(`translate3d(25px, 0, ${maxZDist}px)`, larger)
       this.transformGraphElements(
-        `translate3d(${xDistance}px, 0, ${zDistance}px)`,
+        `translate3d(${xDistanceLarger}px, 0, ${maxZDist}px)`,
+        larger
+      )
+      this.transformGraphElements(
+        `translate3d(${xDistanceSmaller}px, 0, ${zDistance}px)`,
         smaller
       )
     },
