@@ -19,30 +19,59 @@
     <div class="overlay"></div>
     <div class="notSvg">
       <h1>who said <span class="gm">gm</span> the most</h1>
-      <ol>
-        <li v-for="id in userIds" :key="id" class="entry">
+      <div v-for="(id, index) in userIds" :key="id" class="entry">
+        <div class="left">
+          <div class="rank">
+            {{ index + 1 }}
+          </div>
           <img
             class="imgAvatar"
             :src="stats.server.avatars[id]"
             :alt="stats.server.idsToNames[id]"
           />
-          <div>{{ stats.server.idsToNames[id] }}</div>
-          <div>{{ countsById[id] }}</div>
-          <div
-            class="reaction-bubble"
-            data-bs-toggle="tooltip"
-            data-bs-placement="top"
-            data-bs-html="true"
-            data-bs-delay="500"
-            :title="`${countsById[id]} people reacted with myson`"
-          >
-            <img :src="`/whyd/2022/emojis/myson.png`" class="reaction-emoji" />
-            <div class="reaction-count">
-              {{ countsById[id] }}
-            </div>
+        </div>
+        <div>{{ stats.server.idsToNames[id] }}</div>
+        <div>{{ countsById[id] }}</div>
+        <div
+          class="reaction-bubble"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          data-bs-html="true"
+          data-bs-delay="500"
+          :title="`${mysonReactions[id]} :myson: reactions`"
+        >
+          <img :src="`/whyd/2022/emojis/myson.png`" class="reaction-emoji" />
+          <div class="reaction-count">
+            {{ mysonReactions[id] }}
           </div>
-        </li>
-      </ol>
+        </div>
+      </div>
+      <hr v-if="!userIds.includes(stats.user.id)" />
+      <div v-if="!userIds.includes(stats.user.id)" class="entry">
+        <div class="left">
+          <div class="rank">{{ rankOfUser }}</div>
+          <img
+            class="imgAvatar"
+            :src="stats.server.avatars[stats.user.id]"
+            :alt="stats.server.idsToNames[stats.user.id]"
+          />
+        </div>
+        <div>{{ stats.server.idsToNames[stats.user.id] }}</div>
+        <div>{{ countsById[stats.user.id] }}</div>
+        <div
+          class="reaction-bubble"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          data-bs-html="true"
+          data-bs-delay="500"
+          :title="`${mysonReactions[stats.user.id]} :myson: reactions`"
+        >
+          <img :src="`/whyd/2022/emojis/myson.png`" class="reaction-emoji" />
+          <div class="reaction-count">
+            {{ mysonReactions[stats.user.id] }}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -59,8 +88,14 @@ export default {
     countsById() {
       return this.stats.server['List of users by gms']
     },
+    rankOfUser() {
+      return Object.keys(this.countsById).indexOf(this.stats.user.id) + 1
+    },
     userIds() {
       return Array.from(Object.keys(this.countsById))?.slice(0, 5) ?? []
+    },
+    mysonReactions() {
+      return this.stats.server['List of users by myson reactions']
     }
   }
 }
@@ -99,6 +134,17 @@ rect {
   width: 100%;
   height: 1000px;
   top: -10px;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rank {
+  width: 20px;
+  text-align: center;
 }
 
 svg {
