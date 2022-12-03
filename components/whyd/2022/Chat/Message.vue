@@ -1,5 +1,9 @@
 <template>
-  <div :class="`${msg.side} ${msg.color} message`">
+  <div
+    :class="`${msg.side} ${msg.color} message ${
+      isFirstInGroup ? 'first-in-group' : ''
+    }`"
+  >
     <span class="avatar-wrapper">
       <img
         v-if="isLastInGroup"
@@ -8,6 +12,9 @@
         class="avatar"
       />
     </span>
+    <div v-if="isFirstInGroup" class="author-name text-muted">
+      {{ msg.author }}
+    </div>
     <div class="content">
       <Whyd2022ChatBubble
         v-if="!msg.hideBubble"
@@ -70,7 +77,7 @@ export default {
 
           document.documentElement.style.setProperty(
             '--avatar-slide-distance',
-            `-${prevHeight + thisHeight + 16}px`
+            `-${prevHeight + thisHeight + 6}px`
           )
         }
       })
@@ -132,6 +139,30 @@ export default {
 .perlymolt {
   --bubble-color: #ed5a22;
   --text-color: white;
+}
+
+.message {
+  position: relative;
+}
+
+.message.first-in-group {
+  margin-top: 30px;
+}
+
+.author-name {
+  position: absolute;
+  top: -18px;
+  font-weight: 500;
+  font-size: 12px;
+  opacity: 0.5;
+}
+
+.right .author-name {
+  right: 75px;
+}
+
+.left .author-name {
+  left: 75px;
 }
 
 .message .avatar-wrapper {
