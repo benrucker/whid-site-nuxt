@@ -8,6 +8,9 @@
         class="avatar"
       />
     </span>
+    <div v-if="isFirstInGroup" class="author-name text-muted">
+      {{ msg.author }}
+    </div>
     <div class="content">
       <Whyd2022ChatBubble
         v-if="!msg.hideBubble"
@@ -132,6 +135,25 @@ export default {
 .perlymolt {
   --bubble-color: #ed5a22;
   --text-color: white;
+}
+
+.message {
+  position: relative;
+}
+
+.author-name {
+  position: absolute;
+  top: -18px;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.right .author-name {
+  right: 75px;
+}
+
+.left .author-name {
+  left: 75px;
 }
 
 .message .avatar-wrapper {

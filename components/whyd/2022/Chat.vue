@@ -237,7 +237,7 @@ function prefetchResources() {
 #conversation {
   min-height: 2em;
   width: var(--convo-width);
-  padding: 0;
+  padding: 20px 0;
   min-height: 80vh;
   user-select: none;
 }
