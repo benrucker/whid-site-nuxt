@@ -32,6 +32,7 @@ export default {
 
     this.stats = { server, user }
     this.stats.user.name = this.username
+    this.stats.user.id = namesToIds[this.username]
   }
 }
 </script>
