@@ -1,6 +1,11 @@
 <template>
-  <div v-if="stats != null" id="the-one-above-conversation" @click="onClick">
-    <div id="conversation" class="container">
+  <div
+    v-if="stats != null"
+    id="the-one-above-conversation"
+    ref="theOneAboveConversation"
+    @click="onClick"
+  >
+    <div id="conversation" ref="conversation" class="container">
       <Whyd2022ChatMessage
         v-for="(msg, index) in displayed"
         :key="msg.id"
@@ -48,12 +53,13 @@ export default {
       advancingIsDisabled: false,
       autoAdvanceTimeout: undefined,
       debugShowAll: true,
-      debugShowAllLimit: 130,
+      debugShowAllLimit: 170,
       displayed: [],
       messagesPosition: 0,
       showHint: true,
       showTyping: true,
-      waitingToAutomaticallyAdvance: false
+      waitingToAutomaticallyAdvance: false,
+      scrollTo: true
     }
   },
   computed: {
@@ -75,7 +81,7 @@ export default {
     setTimeout(() => {
       if (this.debugShowAll) this.autoAdvance()
     }, 50)
-    prefetchResources()
+    // prefetchResources()
   },
   methods: {
     onClick() {
@@ -113,7 +119,9 @@ export default {
         messageInfo.color =
           messageInfo.color ?? messageInfo.author.toLowerCase()
         this.displayed.push(messageInfo)
-        setTimeout(this.scrollToLast, 50)
+        if (this.scrollTo) {
+          setTimeout(this.scrollToLast, 50)
+        }
       }
       if (this.areMoreMessagesRemaining()) {
         setTimeout(() => {
@@ -145,6 +153,15 @@ export default {
         SecuityBot: 'left'
       }
       return sides[author]
+    },
+    disableScrollTo() {
+      this.scrollTo = false
+    },
+    disableAdvancing() {
+      if (!this.debugShowAll) this.advancingIsDisabled = true
+    },
+    enableAdvancing() {
+      if (!this.debugShowAll) this.advancingIsDisabled = false
     },
     runFunc(name, content) {
       const func = this[name]
@@ -193,11 +210,14 @@ export default {
     chooseRandomOption(content) {
       return content[Math.floor(Math.random() * content.length)]
     },
-    disableAdvancing() {
-      if (!this.debugShowAll) this.advancingIsDisabled = true
-    },
-    enableAdvancing() {
-      if (!this.debugShowAll) this.advancingIsDisabled = false
+    beginEndAnimation(content) {
+      this.$refs.theOneAboveConversation.classList.add('breaking')
+      this.$refs.conversation.classList.add('breaking')
+      this.disableAdvancing()
+      setTimeout(() => {
+        setInterval(this.advance, 1500)
+      }, 1500)
+      return content
     }
   }
 }
