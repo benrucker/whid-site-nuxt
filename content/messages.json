@@ -797,7 +797,8 @@
     },
     {
       "content": "sigh...",
-      "author": "Perlymolt"
+      "author": "Perlymolt",
+      "function": "lastMessageSent"
     }
   ]
 }
