@@ -53,7 +53,7 @@ export default {
       advancingIsDisabled: false,
       autoAdvanceTimeout: undefined,
       debugShowAll: true,
-      debugShowAllLimit: 170,
+      debugShowAllLimit: 150,
       displayed: [],
       messagesPosition: 0,
       showHint: true,
@@ -210,14 +210,16 @@ export default {
     chooseRandomOption(content) {
       return content[Math.floor(Math.random() * content.length)]
     },
-    beginEndAnimation(content) {
-      this.$refs.theOneAboveConversation.classList.add('breaking')
-      this.$refs.conversation.classList.add('breaking')
-      this.disableAdvancing()
+    beginEndAnimation() {
       setTimeout(() => {
-        setInterval(this.advance, 1500)
-      }, 1500)
-      return content
+        this.$refs.theOneAboveConversation.classList.add('breaking')
+        this.$refs.conversation.classList.add('breaking')
+        this.disableAdvancing()
+        setTimeout(() => {
+          setInterval(this.advance, 1500)
+        }, 1500)
+      }, 1000)
+      return ''
     }
   }
 }

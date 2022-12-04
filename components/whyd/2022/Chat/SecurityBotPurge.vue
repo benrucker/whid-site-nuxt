@@ -8,7 +8,12 @@
         DISGRACE TOLERANCE EXCEEDED! PURGING INSOLENCE!
       </div>
     </div>
-    <div id="end-anim-overlay" ref="overlayStuff" class="secbot-end-anim">
+    <div
+      v-if="animationBegin"
+      id="end-anim-overlay"
+      ref="overlayStuff"
+      class="secbot-end-anim"
+    >
       <div class="white-fade"></div>
       <div class="random-move">
         <div class="shuffle-z">
@@ -32,14 +37,31 @@
 
 <script>
 export default {
+  data() {
+    return {
+      animationBegin: false
+    }
+  },
   mounted() {
-    const conversation = document.getElementById('the-one-above-conversation')
-    conversation.after(this.$refs.overlayStuff) // ref points to new location
-    this.explode()
+    setTimeout(() => {
+      this.animationBegin = true
 
-    const whiteFade = document.createElement('div')
-    whiteFade.classList.add('white-fade')
-    this.$refs.overlayStuff.after(whiteFade)
+      this.$nextTick(() => {
+        const conversation = document.getElementById(
+          'the-one-above-conversation'
+        )
+        conversation.after(this.$refs.overlayStuff) // ref points to new location
+        this.explode()
+
+        const whiteFade = document.createElement('div')
+        whiteFade.classList.add('white-fade')
+        this.$refs.overlayStuff.after(whiteFade)
+      })
+    }, 1000)
+  },
+  beforeDestroy() {
+    this.$refs.overlayStuff.nextSibling.remove()
+    this.$refs.overlayStuff.remove()
   },
   methods: {
     explode() {
