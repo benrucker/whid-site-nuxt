@@ -770,7 +770,7 @@
       "author": "NotSoBot"
     },
     {
-      "content": "{DISGRASE TOLERANCE EXCEEDED! PURGING INSOLENCE! | bold shaking}",
+      "type": "SecurityBotPurge",
       "author": "SecuityBot",
       "function": "beginEndAnimation"
     },
