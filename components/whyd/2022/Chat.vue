@@ -211,15 +211,23 @@ export default {
       return content[Math.floor(Math.random() * content.length)]
     },
     beginEndAnimation() {
+      this.debugShowAll = false
+      this.disableAdvancing()
       setTimeout(() => {
         this.$refs.theOneAboveConversation.classList.add('breaking')
         this.$refs.conversation.classList.add('breaking')
-        this.disableAdvancing()
         setTimeout(() => {
           setInterval(this.advance, 1500)
         }, 1500)
       }, 1000)
       return ''
+    },
+    lastMessageSent(content) {
+      setTimeout(() => {
+        this.$router.push(`/whyd/terminal`)
+      }, 5000)
+
+      return content
     }
   }
 }
