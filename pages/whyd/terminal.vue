@@ -6,6 +6,7 @@
   >
     <img id="StickyNote" src="../../static/whyd/2022/sticky.png" />
     <Whyd2022Terminal id="Terminal" ref="terminal" />
+    <Whyd2022TerminalInitialAnimation v-if="shouldShowIntroAnimation" />
   </div>
 </template>
 
@@ -14,6 +15,7 @@ export default {
   layout: 'blank',
   data() {
     return {
+      shouldShowIntroAnimation: false,
       terminalRef: null
     }
   },
