@@ -62,6 +62,7 @@ export default {
       terminalCommands: {},
       buttonData: [],
       userInput: '',
+      userName: '#USERNAME',
       isShowProceed: false,
       terminalLinesQueue: [
         'This line should never appear. Ff it does, Ethan fucked up probably'
@@ -96,6 +97,9 @@ export default {
           return true // possibly add here logic to not add cd .. to certain pages
         }
         const unlocked = this.areDependenciesMet(command.dependencies)
+        if (name.split(' ')[0] === 'cd') {
+          return command.path === this.displayedPath
+        }
         return (
           unlocked && !command.hasBeenRun && command.path === this.displayedPath
         )
@@ -103,7 +107,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.terminalMode)
+    // console.log(this.terminalMode)
     if (this.terminalMode === mode.clickContinue) {
       this.isShowProceed = this.terminalLinesQueue.length > 0
     } else if (
@@ -124,7 +128,7 @@ export default {
       Object.values(this.terminalCommands).map((command) => command.path)
     )
     this.validPaths = paths
-    console.log(this.validPaths)
+    // console.log(this.validPaths)
   },
   methods: {
     // #region Page Control Functions
@@ -174,6 +178,21 @@ export default {
       }
       if (processed.startsWith('cd')) {
         this.navigateTo(processed.replace('cd', '').trim())
+        return
+      }
+      if (processed === 'ls') {
+        const list = Object.keys(this.terminalCommands)
+          .filter((key) => this.terminalCommands[key].path === this.path)
+          .join(', ')
+        this.$emit('addTextLine', {
+          content: `~${this.path}\n${list}\n--------------------------`
+        })
+        return
+      }
+      if (processed === 'dir') {
+        this.$emit('addTextLine', {
+          content: `~${this.path}`
+        })
         return
       }
       this.$emit('addTextLine', {
@@ -238,7 +257,7 @@ export default {
     logIn() {
       this.terminalMode = mode.hybridInput
       this.$emit('addTextLine', {
-        content: 'Logging in...'
+        content: `Logged in as ${this.userName}`
       })
       this.$emit('addTextLine', {
         content: `${this.path}/`
@@ -265,6 +284,21 @@ export default {
         content: 'test command invoked',
         class: 'italic-text'
       })
+    },
+    SecBotDMsFunction() {
+      const numWalter = 5
+      const differentWalterUsers = 3
+
+      const lines = [
+        { content: '@secuityBot4891#1995 Direct Message logs...\n' },
+        {
+          content: `This image was sent [${numWalter}] times by [${differentWalterUsers}] users.`,
+          type: 'image',
+          url: 'https://media.tenor.com/S_to1tY3ixUAAAAd/breaking-bad-walter-white.gif'
+        }
+      ]
+
+      this.executeCommandText(lines)
     }
     // #endregion
   }

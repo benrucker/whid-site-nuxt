@@ -1,6 +1,13 @@
 {
+  "ls": {
+    "prettyName": "ls"
+  },
   "cd ..": {
     "prettyName": "cd .."
+  },
+  "cd SecBot": {
+    "prettyName": "cd SecBot",
+    "path": "/root/whyd"
   },
   "peas": {
     "prettyName": "🥫",
@@ -11,6 +18,11 @@
     "prettyName": "🤓",
     "path": "/root/whyd",
     "functionName": "testFunction"
+  },
+  "dms": {
+    "prettyName": "DMs",
+    "path": "/root/whyd/SecBot",
+    "functionName": "SecBotDMsFunction"
   },
   "test": {
     "prettyName": "proofOfConcept",
