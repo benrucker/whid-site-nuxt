@@ -7,6 +7,12 @@
       />
       <div id="textViewport" class="center text-view" @click="focusInput">
         <div v-for="(text, index) in displayedTerminalContent" :key="index">
+          <img
+            v-if="text.type === 'image'"
+            :src="text.url"
+            width="120px"
+            height="100px"
+          />
           <p
             v-for="(line, idx) of text.content.split('\n')"
             :key="idx"
@@ -45,7 +51,8 @@ export default {
   },
   computed: {
     displayedTerminalContent() {
-      return this.terminalContent.slice(-20)
+      // return this.terminalContent
+      return this.terminalContent.slice(-50)
     }
   },
   mounted() {
@@ -119,6 +126,7 @@ export default {
   align-items: stretch;
   background-color: var(--outline);
   font-family: monospace;
+  overflow-y: clip;
 }
 
 .center {
