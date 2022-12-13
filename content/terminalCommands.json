@@ -1,4 +1,7 @@
 {
+  "ls": {
+    "prettyName": "ls"
+  },
   "cd ..": {
     "prettyName": "cd .."
   },

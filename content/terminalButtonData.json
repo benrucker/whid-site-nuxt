@@ -1,5 +1,6 @@
 {
   "buttons": [
+    "ls",
     "cd ..",
     "cd SecBot",
     "1",

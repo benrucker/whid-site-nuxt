@@ -180,6 +180,21 @@ export default {
         this.navigateTo(processed.replace('cd', '').trim())
         return
       }
+      if (processed === 'ls') {
+        const list = Object.keys(this.terminalCommands)
+          .filter((key) => this.terminalCommands[key].path === this.path)
+          .join(', ')
+        this.$emit('addTextLine', {
+          content: `~${this.path}\n${list}\n--------------------------`
+        })
+        return
+      }
+      if (processed === 'dir') {
+        this.$emit('addTextLine', {
+          content: `~${this.path}`
+        })
+        return
+      }
       this.$emit('addTextLine', {
         content: `Error: Command not found '${processed}'`,
         class: 'error-text'

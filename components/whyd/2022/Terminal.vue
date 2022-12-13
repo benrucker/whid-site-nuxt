@@ -51,7 +51,8 @@ export default {
   },
   computed: {
     displayedTerminalContent() {
-      return this.terminalContent.slice(-20)
+      // return this.terminalContent
+      return this.terminalContent.slice(-50)
     }
   },
   mounted() {
@@ -125,6 +126,7 @@ export default {
   align-items: stretch;
   background-color: var(--outline);
   font-family: monospace;
+  overflow-y: clip;
 }
 
 .center {
