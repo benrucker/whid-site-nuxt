@@ -175,4 +175,12 @@ p.italic-text {
 p.confirmed-text {
   color: var(--success);
 }
+
+p.underlined-text {
+  text-decoration: underline;
+}
+
+p.emphasized-text {
+  font-weight: bold;
+}
 </style>
