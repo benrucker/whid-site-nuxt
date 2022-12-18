@@ -30,6 +30,7 @@ export default {
       minScale: 20,
       maxScale: 50,
       intervals: 0,
+      renderFrame: 0,
       resizeListener: new AbortController()
     }
   },
@@ -83,21 +84,21 @@ export default {
   beforeDestroy() {
     this.intervals.forEach(clearInterval)
     this.resizeListener.abort()
+    cancelAnimationFrame(this.renderFrame)
   },
   methods: {
     init() {
       this.intervals = [
-        setInterval(() => {
-          this.render()
-        }, 30),
         setInterval(() => {
           this.emojiPlanets.forEach((planet) => {
             planet.squish()
           })
         }, 500)
       ]
+      this.renderFrame = requestAnimationFrame(this.render)
+      this.prevTime = performance.now()
     },
-    render() {
+    render(time) {
       const { width, height } = this.$refs.canvas.getBoundingClientRect()
 
       this.emojiPlanets.forEach((planet, index) => {
@@ -107,10 +108,13 @@ export default {
       })
 
       this.emojiPlanets.forEach((planet) => {
-        planet.move(0.1)
+        planet.move((time - this.prevTime) / 400)
         planet.clip(0, width, 0, height)
         planet.draw()
       })
+
+      requestAnimationFrame(this.render)
+      this.prevTime = time
     }
   }
 }
@@ -120,8 +124,8 @@ class Emoji {
     this.emoji = emoji
     this.x = x
     this.y = y
-    this.xvel = Math.random()
-    this.yvel = Math.random()
+    this.xvel = Math.random() * 50
+    this.yvel = Math.random() * 50
     this.diameter = diameter
     this.mass = diameter * diameter
     this.squishValue1 = 0
