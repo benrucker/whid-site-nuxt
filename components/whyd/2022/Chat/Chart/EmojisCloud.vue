@@ -1,19 +1,19 @@
 <template>
   <div id="graph-root" ref="root">
     <div class="title text-center">
-      <h4>Most Used Emojis! 🎉</h4>
+      <h4>Most Used <span>(Custom)</span> Emojis! 🎉</h4>
     </div>
-    <div id="canvas-size" ref="canvasSize">
-      <canvas :ref="'canvas'"></canvas>
+    <div id="canvas-size" ref="canvas">
+      <img
+        v-for="emoji in emojis"
+        :id="emoji"
+        :key="emoji"
+        :src="`/whyd/2022/data/emojis/${emojiNameToFilename[emoji]}`"
+        class="cloud-emoji"
+        :alt="emoji"
+        :title="emoji"
+      />
     </div>
-    <img
-      v-for="emoji in emojis"
-      :id="emoji"
-      :key="emoji"
-      :src="`/whyd/2022/emojis/${emoji}.png`"
-      hidden
-      class="cloud-emoji"
-    />
   </div>
 </template>
 
@@ -27,49 +27,56 @@ export default {
   },
   data() {
     return {
-      ranks: {},
-      emojis: [],
-      emojiPlanets: [],
-      counts: [],
-      maxCount: 0,
-      minCount: 0,
       minScale: 20,
       maxScale: 50,
-
       intervals: 0,
+      renderFrame: 0,
       resizeListener: new AbortController()
     }
   },
+  computed: {
+    ranks() {
+      return this.stats.server['Custom Emojis ranked by usage']
+    },
+    emojiNameToFilename() {
+      return this.stats.server.emojiNameToFilename
+    },
+    emojis() {
+      if (this.ranks == null) return []
+      return Object.keys(this.ranks)
+    },
+    counts() {
+      if (this.ranks == null) return []
+      return Object.values(this.ranks).map((x) => x.toLocaleString())
+    },
+    maxCount() {
+      if (this.ranks == null) return 0
+      return Math.max(...Object.values(this.ranks))
+    },
+    minCount() {
+      if (this.ranks == null) return 0
+      return Math.min(...Object.values(this.ranks))
+    },
+    emojiPlanets() {
+      if (this.ranks == null) return []
+      return this.emojis.map((emoji) => {
+        const count = this.ranks[emoji]
+        const size =
+          ((count - this.minCount) / (this.maxCount - this.minCount)) *
+            (this.maxScale - this.minScale) +
+          this.minScale
+        return new Emoji(
+          document.getElementById(emoji),
+          Math.random() *
+            (this.$refs.canvas.getBoundingClientRect().width - size),
+          Math.random() *
+            (this.$refs.canvas.getBoundingClientRect().height - size),
+          size
+        )
+      })
+    }
+  },
   mounted() {
-    this.ranks = [
-      { emoji: 'ahegao1', count: 50 },
-      { emoji: 'amogus', count: 40 },
-      { emoji: 'benheh', count: 30 },
-      { emoji: 'cheeto', count: 20 },
-      { emoji: 'upvote', count: 10 },
-      { emoji: 'downvote', count: 5 },
-      { emoji: 'ford', count: 5 },
-      { emoji: 'gunright', count: 4 },
-      { emoji: 'johndgemental', count: 3 },
-      { emoji: 'komodohype', count: 2 },
-      { emoji: 'lfg', count: 1 },
-      { emoji: 'myson', count: 1 },
-      { emoji: 'shredward', count: 20 },
-      { emoji: 'troll', count: 1 },
-      { emoji: 'voredoor', count: 1 }
-    ]
-    this.emojis = this.ranks.map((x) => x.emoji)
-    this.counts = this.ranks.map((x) => x.count.toLocaleString())
-    this.maxCount = Math.max(...this.ranks.map((x) => x.count))
-    this.minCount = Math.min(...this.ranks.map((x) => x.count))
-    window.addEventListener(
-      'resize',
-      () => {
-        this.resizeCanvas()
-      },
-      { signal: this.resizeListener.signal }
-    )
-
     this.$nextTick(() => {
       this.init()
     })
@@ -77,60 +84,22 @@ export default {
   beforeDestroy() {
     this.intervals.forEach(clearInterval)
     this.resizeListener.abort()
+    cancelAnimationFrame(this.renderFrame)
   },
   methods: {
     init() {
-      this.resizeCanvas()
-
-      this.emojiPlanets = this.ranks.map(({ emoji, count }) => {
-        const size =
-          ((count - this.minCount) / (this.maxCount - this.minCount)) *
-            (this.maxScale - this.minScale) +
-          this.minScale
-        return new Emoji(
-          document.getElementById(emoji),
-          Math.random() * (this.$refs.canvas.width - size),
-          Math.random() * (this.$refs.canvas.height - size),
-          size
-        )
-      })
-
       this.intervals = [
-        setInterval(() => {
-          this.render()
-        }, 30),
         setInterval(() => {
           this.emojiPlanets.forEach((planet) => {
             planet.squish()
           })
         }, 500)
       ]
+      this.renderFrame = requestAnimationFrame(this.render)
+      this.prevTime = performance.now()
     },
-    resizeCanvas() {
-      const canvas = this.$refs.canvas
-      const size = this.$refs.canvasSize
-      const dpr = window.devicePixelRatio
-      const rect = size.getBoundingClientRect()
-      canvas.width = rect.width * dpr
-      canvas.height = rect.height * dpr
-      canvas.getContext('2d').scale(dpr, dpr)
-      canvas.style.width = `${rect.width}px`
-      canvas.style.height = `${rect.height}px`
-    },
-    async render() {
-      const ctx = this.$refs.canvas.getContext('2d', {
-        willReadFrequently: true
-      })
-
-      const width = this.$refs.canvas.width
-      const height = this.$refs.canvas.height
-
-      const prevFrame = ctx.getImageData(0, 0, width, height)
-      ctx.clearRect(0, 0, width, height)
-
-      ctx.globalAlpha = 0.4
-      ctx.drawImage(await createImageBitmap(prevFrame), 0, 0)
-      ctx.globalAlpha = 1
+    render(time) {
+      const { width, height } = this.$refs.canvas.getBoundingClientRect()
 
       this.emojiPlanets.forEach((planet, index) => {
         this.emojiPlanets.slice(index + 1).forEach((other) => {
@@ -139,10 +108,13 @@ export default {
       })
 
       this.emojiPlanets.forEach((planet) => {
-        planet.move(0.1)
+        planet.move((time - this.prevTime) / 400)
         planet.clip(0, width, 0, height)
-        planet.draw(ctx)
+        planet.draw()
       })
+
+      requestAnimationFrame(this.render)
+      this.prevTime = time
     }
   }
 }
@@ -152,35 +124,31 @@ class Emoji {
     this.emoji = emoji
     this.x = x
     this.y = y
-    this.xvel = Math.random()
-    this.yvel = Math.random()
+    this.xvel = Math.random() * 50
+    this.yvel = Math.random() * 50
     this.diameter = diameter
     this.mass = diameter * diameter
     this.squishValue1 = 0
     this.squishValue2 = 0
-    this.squishValue3 = 0
-    this.squishValue4 = 0
     this.squish()
+
+    this.emoji.style.setProperty('width', `${this.diameter}px`)
   }
 
-  draw(ctx) {
-    ctx.drawImage(
-      this.emoji,
-      this.x + this.squishValue1,
-      this.y + this.squishValue2,
-      this.diameter + this.squishValue3,
-      this.diameter + this.squishValue4
+  draw() {
+    this.emoji.style.setProperty(
+      'transform',
+      `translate(${this.x}px, ${this.y}px) scale(${this.squishValue1}, ${this.squishValue2}) `
     )
   }
 
   squish() {
+    const maxStretch = 0.1
     function calc() {
-      return (Math.random() - 0.5) * 4
+      return (Math.random() - 0.5) * maxStretch + 1
     }
     this.squishValue1 = calc()
     this.squishValue2 = calc()
-    this.squishValue3 = calc()
-    this.squishValue4 = calc()
   }
 
   move(delta) {
@@ -240,18 +208,21 @@ class Emoji {
   animation: fade-in 0.5s ease-in-out;
 }
 
-canvas {
-  position: absolute;
-  top: 0;
-  left: 10px;
-  width: 100%;
-  height: 100%;
-}
-
 #canvas-size {
   position: relative;
   width: 95%;
   height: 200px;
-  margin-right: 0 20px 0 10px;
+  margin: 0 20px 0 10px;
+}
+
+.cloud-emoji {
+  position: absolute;
+  width: 16px;
+  /* height: 16px; */
+  top: 0px;
+  left: 0px;
+  transform-origin: center;
+  transform: translate(0, 0) scale(1, 1);
+  filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.3));
 }
 </style>

@@ -12,18 +12,27 @@
 
 <script>
 export default {
-  data() {
-    return {
-      years: [],
-      msgCounts: []
+  props: {
+    stats: {
+      type: Object,
+      default: () => ({})
     }
   },
-  async fetch() {
-    const yearCounts = await fetch('2021/data/msgPerYear.json').then((res) =>
-      res.json()
-    )
-    this.years = ['2016', '2017', '2018', '2019', '2020', '2021']
-    this.msgCounts = Object.values(yearCounts)
+  data() {
+    return {
+      years: ['2016', '2017', '2018', '2019', '2020', '2021', '2022']
+    }
+  },
+  computed: {
+    msgCounts() {
+      const msgCountsPastYears = Object.values(
+        this.stats.server.messagesInPastYears
+      )
+      const msgCountsAllYears = msgCountsPastYears.concat(
+        this.stats.server.totalMessages
+      )
+      return msgCountsAllYears
+    }
   }
 }
 </script>
