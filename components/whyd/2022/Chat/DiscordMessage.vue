@@ -49,6 +49,10 @@
 <script>
 export default {
   props: {
+    stats: {
+      type: Object,
+      default: () => {}
+    },
     content: {
       type: String,
       default: ''
@@ -99,12 +103,18 @@ export default {
     },
     getUrlFor(emoji) {
       if (emoji == null) return ''
-      if (emoji.imageUrl.includes('twemoji')) {
-        return emoji.imageUrl
+
+      if (emoji.imageUrl != null) {
+        if (emoji.imageUrl.includes('twemoji')) {
+          return emoji.imageUrl
+        } else {
+          return `/whyd/2022/data/emojis/${emoji.name}.${
+            emoji.imageUrl.split('.')[emoji.imageUrl.split('.').length - 1]
+          }`
+        }
       } else {
-        return `/whyd/2022/data/emojis/${emoji.name}.${
-          emoji.imageUrl.split('.')[emoji.imageUrl.split('.').length - 1]
-        }`
+        const url = this.stats.server.emojiNameToFilename[emoji.name]
+        return `/whyd/2022/data/emojis/${url}`
       }
     }
   }

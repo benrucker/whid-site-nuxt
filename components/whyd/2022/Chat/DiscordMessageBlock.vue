@@ -10,6 +10,7 @@
       :author-color="msg.authorColor"
       :attachments="msg.attachments"
       :timestamp="msg.timestamp"
+      :stats="stats"
     />
   </div>
 </template>
@@ -17,6 +18,10 @@
 <script>
 export default {
   props: {
+    stats: {
+      type: Object,
+      default: () => {}
+    },
     messages: {
       type: Array,
       default: () => []

@@ -1,5 +1,5 @@
 <template>
-  <Whyd2022ChatDiscordMessageBlock :messages="[message]" />
+  <Whyd2022ChatDiscordMessageBlock :messages="[message]" :stats="stats" />
 </template>
 
 <script>
@@ -7,7 +7,7 @@ export default {
   props: {
     stats: {
       type: Object,
-      default: () => ({})
+      default: () => {}
     }
   },
   computed: {
