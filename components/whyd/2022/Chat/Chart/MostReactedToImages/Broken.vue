@@ -1,10 +1,16 @@
 <template>
   <div class="broken-reactions-root">
     <div class="duplicate clip-stutter">
-      <Whyd2022ChatDiscordMessageBlock :messages="[message1, message2]" />
+      <Whyd2022ChatDiscordMessageBlock
+        :messages="[message1, message2]"
+        :stats="stats"
+      />
     </div>
     <div class="gitching1">
-      <Whyd2022ChatDiscordMessageBlock :messages="[message1, message2]" />
+      <Whyd2022ChatDiscordMessageBlock
+        :messages="[message1, message2]"
+        :stats="stats"
+      />
     </div>
   </div>
 </template>
@@ -14,7 +20,7 @@ export default {
   props: {
     stats: {
       type: Object,
-      default: () => ({})
+      default: () => {}
     }
   },
 
@@ -22,11 +28,46 @@ export default {
     return {
       message1: {
         reactions: [
-          { name: 'marioAndSonic', count: 20 },
-          { name: 'marioAndSonic', count: 5 },
-          { name: 'marioAndSonic', count: 1 },
-          { name: 'marioAndSonic', count: 4 },
-          { name: 'marioAndSonic', count: 5 }
+          {
+            emoji: {
+              name: 'marioAndSonic',
+              imageUrl:
+                'https://media.tenor.com/9z3rpvYfoDIAAAAd/sonic-and-mario-kiss.gif'
+            },
+            count: 20
+          },
+          {
+            emoji: {
+              name: 'marioAndSonic',
+              imageUrl:
+                'https://media.tenor.com/9z3rpvYfoDIAAAAd/sonic-and-mario-kiss.gif'
+            },
+            count: 5
+          },
+          {
+            emoji: {
+              name: 'marioAndSonic',
+              imageUrl:
+                'https://media.tenor.com/9z3rpvYfoDIAAAAd/sonic-and-mario-kiss.gif'
+            },
+            count: 1
+          },
+          {
+            emoji: {
+              name: 'marioAndSonic',
+              imageUrl:
+                'https://media.tenor.com/9z3rpvYfoDIAAAAd/sonic-and-mario-kiss.gif'
+            },
+            count: 4
+          },
+          {
+            emoji: {
+              name: 'marioAndSonic',
+              imageUrl:
+                'https://media.tenor.com/9z3rpvYfoDIAAAAd/sonic-and-mario-kiss.gif'
+            },
+            count: 5
+          }
         ],
         authorName: 'SergeiLNL',
         timestamp: '09/24/2022',
@@ -38,11 +79,11 @@ export default {
       },
       message2: {
         reactions: [
-          { name: 'downvote', count: 20 },
-          { name: 'cheeto', count: 5 },
-          { name: 'ahegao1', count: 1 },
-          { name: 'downvote2', count: 4 },
-          { name: 'downvote3', count: 5 }
+          { emoji: { name: 'downvote' }, count: 20 },
+          { emoji: { name: 'cheeto' }, count: 5 },
+          { emoji: { name: 'ahegao1' }, count: 1 },
+          { emoji: { name: 'downvote' }, count: 4 },
+          { emoji: { name: 'downvote' }, count: 5 }
         ],
         authorName: 'Mario & Sonic at the Olympic Winter Games',
         timestamp: '10/13/2009',
