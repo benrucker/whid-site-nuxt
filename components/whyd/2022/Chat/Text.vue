@@ -45,7 +45,11 @@ export default {
         serverMostUpvotedUserCount: () =>
           Object.values(this.stats.server['Most Upvoted User'])[0],
         serverMostDownvotedUser: () =>
-          this.idToName(this.stats.server['Most Downvoted User']),
+          this.idToName(
+            Object.keys(this.stats.server['Most Downvoted User'])[0]
+          ),
+        serverMostDownvotedUserCount: () =>
+          Object.values(this.stats.server['Most Downvoted User'])[0],
         mostPopularRole: () =>
           Object.keys(this.stats.server.mostPopularRole)[0],
         mostPopularRoleCount: () =>
