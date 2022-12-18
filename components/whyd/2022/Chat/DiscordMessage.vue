@@ -24,17 +24,20 @@
       <div class="reactions">
         <div
           v-for="(reaction, index) in reactions"
-          :key="`${authorName}${timestamp}${reaction.name}${index}`"
+          :key="`${authorName}${timestamp}${reaction.emoji?.name}${index}`"
           class="reaction-bubble"
           data-bs-toggle="tooltip"
           data-bs-placement="top"
           data-bs-html="true"
           data-bs-delay="500"
-          :title="`${reaction.count} people reacted with ${reaction.name}`"
+          :title="`${reaction.count} people reacted with ${reaction.emoji?.name}`"
         >
           <img
-            :src="`/whyd/2022/emojis/${reaction.name}.png`"
-            class="reaction-emoji"
+            :src="getUrlFor(reaction.emoji)"
+            :class="
+              'reaction-emoji ' +
+              (getUrlFor(reaction.emoji).includes('.svg') ? 'svg' : '')
+            "
           />
           <div class="reaction-count">{{ reaction.count }}</div>
         </div>
@@ -93,6 +96,16 @@ export default {
           hour12: true
         })
       )
+    },
+    getUrlFor(emoji) {
+      if (emoji == null) return ''
+      if (emoji.imageUrl.includes('twemoji')) {
+        return emoji.imageUrl
+      } else {
+        return `/whyd/2022/data/emojis/${emoji.name}.${
+          emoji.imageUrl.split('.')[emoji.imageUrl.split('.').length - 1]
+        }`
+      }
     }
   }
 }
@@ -324,6 +337,10 @@ export default {
 .reaction-emoji {
   max-width: 1em;
   max-height: 1em;
+}
+
+.reaction-emoji.svg {
+  width: 1em;
 }
 
 .reaction-count {

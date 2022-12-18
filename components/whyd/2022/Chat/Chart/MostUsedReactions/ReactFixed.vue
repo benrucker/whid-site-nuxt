@@ -14,10 +14,12 @@
     <div class="bottom-row">
       <div v-for="reaction in otherReactions" :key="reaction" class="reaction">
         <img
-          :src="imgUrl ?? `/whyd/2022/emojis/${reaction}.png`"
-          :alt="imgUrl ? 'cheeto' : reaction"
+          :src="
+            imgUrl ?? `/whyd/2022/data/emojis/${reactions[reaction].name}.png`
+          "
+          :alt="imgUrl ? 'cheeto' : reactions[reaction].name"
         />
-        <span class="count">{{ reactions[reaction] }}</span>
+        <span class="count">{{ reactions[reaction].uses }}</span>
       </div>
     </div>
   </div>
@@ -35,27 +37,24 @@ export default {
       default: undefined
     }
   },
-  data() {
-    return {
-      upvoteCount: 0,
-      downvoteCount: 0,
-      reactions: {},
-      otherReactions: {}
+  computed: {
+    reactions() {
+      return this.stats.server.mostUsedReactions
+    },
+    otherReactions() {
+      if (this.reactions == null) return []
+      return Object.keys(this.reactions).filter(
+        (r) => r !== '627365768111194117' && r !== '627365780849426442'
+      )
+    },
+    upvoteCount() {
+      if (this.reactions == null) return 0
+      return this.reactions['627365768111194117'].uses
+    },
+    downvoteCount() {
+      if (this.reactions == null) return 0
+      return this.reactions['627365780849426442'].uses
     }
-  },
-  mounted() {
-    this.reactions = this.stats.server.mostUsedReactions ?? {
-      upvote: 900,
-      downvote: 100,
-      cheeto: 50,
-      ahegao1: 40,
-      benheh: 30
-    }
-    this.otherReactions = Object.keys(this.reactions).filter(
-      (r) => r !== 'upvote' && r !== 'downvote'
-    )
-    this.upvoteCount = this.reactions.upvote
-    this.downvoteCount = this.reactions.downvote
   }
 }
 </script>
@@ -64,6 +63,7 @@ export default {
 .reactions-root {
   padding-left: 35px;
   text-align: center;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.2));
 }
 
 .title {
