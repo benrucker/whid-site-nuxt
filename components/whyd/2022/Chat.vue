@@ -53,7 +53,7 @@ export default {
       advancingIsDisabled: false,
       autoAdvanceTimeout: undefined,
       debugShowAll: true,
-      debugShowAllLimit: 150,
+      debugShowAllLimit: 75,
       displayed: [],
       messagesPosition: 0,
       showHint: true,
@@ -81,7 +81,7 @@ export default {
     setTimeout(() => {
       if (this.debugShowAll) this.autoAdvance()
     }, 50)
-    // prefetchResources()
+    prefetchResources()
   },
   methods: {
     onClick() {
@@ -244,7 +244,7 @@ function prefetchResources() {
     '/whyd/2022/bots/UsBot.png',
     'https://media.tenor.com/S_to1tY3ixUAAAAC/breaking-bad-walter-white.gif',
     'https://media.tenor.com/GIVLitDIxr8AAAAC/breaking-bad-walter-white.gif'
-  ].forEach(fetch)
+  ].forEach((url) => fetch(url))
 }
 </script>
 

@@ -11,30 +11,10 @@ export default {
     }
   },
   computed: {
-    messagesByColumn() {
-      return this.stats.server['Most Reacted Image']
-    },
-    messageIds() {
-      return Object.keys(this.messagesByColumn.type)
-    },
     messages() {
-      const val = this.messageIds?.map((messageId) => {
-        return {
-          authorName: this.messagesByColumn?.author[messageId].name,
-          authorAvatar:
-            this.stats.server?.avatars[
-              this.messagesByColumn.author[messageId].id
-            ],
-          authorColor: this.messagesByColumn?.author[messageId].color,
-          attachments: this.messagesByColumn?.attachments[messageId].map(
-            (attachment) => attachment.url
-          ),
-          content: this.messagesByColumn?.content[messageId],
-          reactions: this.messagesByColumn?.reactions[messageId],
-          timestamp: this.messagesByColumn?.timestamp[messageId]
-        }
-      })
-      return val
+      const threeMostReactedImages = this.stats.server['Most Reacted Image']
+      const ids = Object.keys(threeMostReactedImages).slice(0, 2)
+      return [threeMostReactedImages[ids[0]], threeMostReactedImages[ids[1]]]
     }
   },
   mounted() {},
