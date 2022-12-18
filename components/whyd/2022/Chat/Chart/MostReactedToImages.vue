@@ -72,6 +72,8 @@ export default {
   transform-origin: right center;
   width: 100px;
   height: 100px;
+
+  pointer-events: none;
 }
 
 .hand img {
@@ -98,6 +100,7 @@ export default {
   align-items: center;
   justify-content: center;
   animation: fade-out-explosion 1s forwards step-end;
+  pointer-events: none;
 }
 
 .explosion img {
