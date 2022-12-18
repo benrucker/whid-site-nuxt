@@ -1,17 +1,20 @@
 <template>
   <div class="broken-reactions-root">
     <div class="blurring duplicate clip-stutter">
-      <Whyd2022ChatChartMostUsedReactionsFixed
+      <Whyd2022ChatChartMostUsedReactionsReactFixed
         :stats="stats"
         img-url="/whyd/2022/emojis/cheeto.png"
       />
     </div>
     <div class="blurring duplicate clip-glitch">
-      <Whyd2022ChatChartMostUsedReactionsFixed :stats="stats" img-url="hi" />
+      <Whyd2022ChatChartMostUsedReactionsReactFixed
+        :stats="stats"
+        img-url="hi"
+      />
     </div>
     <div class="gitching1">
       <div class="blurring">
-        <Whyd2022ChatChartMostUsedReactionsFixed
+        <Whyd2022ChatChartMostUsedReactionsReactFixed
           :stats="stats"
           class="gitching2"
           img-url="/whyd/2022/missing_texture_small.png"
