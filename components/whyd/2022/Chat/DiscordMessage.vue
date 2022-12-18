@@ -24,13 +24,13 @@
       <div class="reactions">
         <div
           v-for="(reaction, index) in reactions"
-          :key="`${authorName}${timestamp}${reaction.emoji.name}${index}`"
+          :key="`${authorName}${timestamp}${reaction.emoji?.name}${index}`"
           class="reaction-bubble"
           data-bs-toggle="tooltip"
           data-bs-placement="top"
           data-bs-html="true"
           data-bs-delay="500"
-          :title="`${reaction.count} people reacted with ${reaction.emoji.name}`"
+          :title="`${reaction.count} people reacted with ${reaction.emoji?.name}`"
         >
           <img
             :src="getUrlFor(reaction.emoji)"
