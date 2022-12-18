@@ -24,10 +24,11 @@
           v-for="sticker in stickers"
           :id="sticker.name"
           :key="sticker.name"
-          :ref="sticker.name"
+          :ref="sticker.id"
           class="sticker"
           :src="sticker.url"
           :alt="sticker.name"
+          :title="sticker.name + ' - ' + sticker.count + ' uses'"
         />
       </div>
     </div>
@@ -44,31 +45,39 @@ export default {
   },
   data() {
     return {
-      stickers: {}
+      updated: 0
     }
   },
-  mounted() {
-    this.stickers = this.stats.server['Top 5 Stickers'] ?? [
-      { name: 'myson', url: '/whyd/2022/emojis/myson.png', count: 500 },
-      { name: 'sonochess', url: '/whyd/2022/emojis/myson.png', count: 300 },
-      { name: 'eyebrow', url: '/whyd/2022/emojis/myson.png', count: 200 },
-      { name: 'wave', url: '/whyd/2022/emojis/myson.png', count: 100 },
-      { name: 'DEAL', url: '/whyd/2022/emojis/myson.png', count: 10 }
-    ]
-    setTimeout(this.resizeStickers, 60)
+  computed: {
+    stickers() {
+      const allStickers = this.stats.server['List of stickers by uses']
+      const array = Object.entries(allStickers).map(([key, value]) => {
+        return { ...value, id: key }
+      })
+      array.sort((a, b) => {
+        return b.count - a.count
+      })
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.updated++
+      return array.slice(0, 10)
+    },
+    maxUses() {
+      return Object.values(this.stickers).reduce(
+        (prev, { count }) => (count > prev ? count : prev),
+        0
+      )
+    }
   },
-  methods: {
-    resizeStickers() {
+  watch: {
+    updated(_) {
       let index = 0
-      for (const stickerElement of this.$refs.stickers.children) {
-        const stickerInfo = this.stickers.find(
-          (sticker) => sticker.name === stickerElement.id
-        )
-        const stickerSize = stickerInfo.count / 10 + 50
-
+      for (const stickerInfo of this.stickers) {
+        const stickerId = stickerInfo.id
+        const stickerElement = this.$refs[stickerId][0]
+        const stickerSize = stickerInfo.count / this.maxUses + 50
         const stickerXPositionPercent = Math.max(
-          -10,
-          Math.random() * 100 - stickerSize / 2
+          -5,
+          Math.random() * 110 - stickerSize / 2
         )
         const stickerYPositionPercent = Math.min(
           100,
@@ -86,9 +95,11 @@ export default {
 
         index += 1
       }
-    },
+    }
+  },
+  methods: {
     handleClick(event) {
-      setTimeout(this.resizeStickers)
+      setTimeout(() => this.updated++)
       event.preventDefault()
     }
   }
@@ -111,6 +122,8 @@ export default {
   user-select: none;
 
   animation: bounce-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both;
+
+  cursor: pointer;
 }
 
 @keyframes bounce-in {
@@ -176,8 +189,8 @@ div .notSvg {
 .sticker {
   opacity: 0;
   transform: scale(100) rotate(90deg);
-  animation-delay: 1s;
-  animation: place-sticker 1s ease-in both;
+  animation-delay: 0.5s;
+  animation: place-sticker 0.5s ease-in both;
 
   position: absolute;
 
