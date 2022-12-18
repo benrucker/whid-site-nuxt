@@ -41,9 +41,9 @@ export default {
         userMessagePercentageThisYear: () =>
           this.stats.user['Percentage of Messages per Users'],
         serverMostUpvotedUser: () =>
-          this.idToName(this.stats.server['Most Upvoted User']),
+          this.idToName(Object.keys(this.stats.server['Most Upvoted User'])[0]),
         serverMostUpvotedUserCount: () =>
-          this.stats.server['Most Upvoted User Count'],
+          Object.values(this.stats.server['Most Upvoted User'])[0],
         serverMostDownvotedUser: () =>
           this.idToName(this.stats.server['Most Downvoted User']),
         mostPopularRole: () =>
