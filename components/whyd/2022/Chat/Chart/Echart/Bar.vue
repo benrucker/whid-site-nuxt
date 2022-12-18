@@ -55,10 +55,14 @@ export default {
     }
   },
   mounted() {
-    window.addEventListener('resize', () => {
+    this.$nextTick(() => {
+      window.addEventListener('resize', () => {
+        this.$refs.chart.resize()
+      })
+    })
+    this.$nextTick(() => {
       this.$refs.chart.resize()
     })
-    this.$refs.chart.resize()
     this.option = {
       grid: {
         left: '6%',

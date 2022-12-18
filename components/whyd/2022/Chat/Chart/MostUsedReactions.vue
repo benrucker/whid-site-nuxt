@@ -1,7 +1,10 @@
 <template>
   <div>
-    <Whyd2022ChatChartMostUsedReactionsBroken v-if="broken" :stats="stats" />
-    <Whyd2022ChatChartMostUsedReactionsFixed v-else :stats="stats" />
+    <Whyd2022ChatChartMostUsedReactionsReactBroken
+      v-if="broken"
+      :stats="stats"
+    />
+    <Whyd2022ChatChartMostUsedReactionsReactFixed v-else :stats="stats" />
     <div v-if="fixing" class="hand fly-in">
       <img src="/whyd/2022/hand1.png" />
     </div>
