@@ -359,8 +359,15 @@ export default {
     },
     SecBotVoiceEventsFunction() {
       const user = this.username
-      const VECountTotal = 55
-      const VECountUser = 55
+
+      // let VECountTotal = 55
+      const VECountTotal = Object.values(
+        this.stats.server['SecBot voice event type_counts']
+      ).reduce((accumulator, currentValue) => accumulator + currentValue)
+
+      const VECountUser = Object.values(
+        this.stats.user['SecBot voice event type counts']
+      ).reduce((accumulator, currentValue) => accumulator + currentValue)
       const VECountMax = 55 // count for most active user
       const maxUser = '#MAX' // display name for most active user
 
@@ -375,7 +382,7 @@ export default {
 
       if (VECountUser === VECountMax) {
         lines.push({
-          content: `User ${user} had the highest Voice Event count with ${VECountUser}!`
+          content: `User ${maxUser} had the highest Voice Event count with ${VECountUser}!`
         })
       } else {
         lines.push({
@@ -388,8 +395,14 @@ export default {
     },
     SecBotVoiceEventsMostActiveDayFunction() {
       const user = this.username
-      const MADUser = '#DATE'
-      const MADServer = '#DATE'
+      const MADUser = this.stats.user['SecBot most active voice event days'] // mostActiveDay and numEvents
+      // Date.today().toString("MMMM dS, yyyy") // "April 12th, 2008"
+      const date = new Date(MADUser.mostActiveDay)
+      const MADUserDate = date.toLocaleDateString('en-US', {
+        dateStyle: 'long'
+      })
+      const MADServerDate = '#DATE'
+      const MADServerNum = 55
 
       const lines = [
         {
@@ -397,7 +410,10 @@ export default {
           class: 'underlined-text'
         },
         {
-          content: `${user} was most active on ${MADUser}, and the most active day overall was ${MADServer}.`
+          content: `${user} was most active on ${MADUserDate} with ${MADUser.numEvents} unique events.`
+        },
+        {
+          content: `The server's most active day overall was ${MADServerDate} with ${MADServerNum} unique recorded events...`
         },
         {
           content:
@@ -411,7 +427,9 @@ export default {
       // very subject to change when data relating to actual time in VCs is computed;
       // compare number of joins and total time spent in a channel
       const user = this.username
-      const joinsTotal = 55
+      const joinsTotal = Math.trunc(
+        this.stats.user['SecBot voice event type counts'].join
+      )
       const favoriteChannelName = '#CHANNEL'
       const favoriteChannelJoins = 55
 
@@ -426,9 +444,10 @@ export default {
       this.executeCommandText(lines)
     },
     SecBotVoiceEventsMutesFunction() {
+      const vec = this.stats.user['SecBot voice event type counts']
       const user = this.username
-      const selfMutes = 55
-      const serverMutes = 55
+      const selfMutes = Math.trunc(vec.mute)
+      const serverMutes = Math.trunc(vec['server mute'])
 
       const lines = [
         { content: `Mutes`, class: 'underlined-text' },
@@ -448,8 +467,8 @@ export default {
     },
     SecBotScores() {
       const user = this.username
-      const firstEpochScore = 55 // GET THIS DATAAAAA
-      const finalScore = 55
+      const firstEpochScore = 55 // this.stats.user[""]
+      const finalScore = this.stats.user['SecBot user final score'].score
 
       const lines = [
         { content: 'SecurityBot Scores', class: 'underlined-text' },
@@ -461,7 +480,7 @@ export default {
           content: `By the end of the first scoring period, ${user} had a score of ${firstEpochScore}.`
         },
         {
-          content: `As of the final grading period of the year, ${user} has a score of ${finalScore}.`
+          content: `As of the final grading period of the year, ${user} had a score of ${finalScore}.`
         }
       ]
 
@@ -475,9 +494,11 @@ export default {
     },
     SecBotScoresHigh() {
       const user = this.username
-      const userHighScore = 55
-      const serverHighScore = 55
-      const serverHighScoreUser = '#HIGHSCOREUSER'
+      const userHighScore = this.stats.user['SecBot user max score'].score
+      const serverHigh = this.stats.server['SecBot server high score']
+      const serverHighScore = serverHigh.score
+      const serverHighScoreUser =
+        this.stats.server.idsToNames[serverHigh.member_id]
 
       const lines = [
         { content: 'High Score', class: 'underlined-text' },
@@ -498,9 +519,11 @@ export default {
     },
     SecBotScoresLow() {
       const user = this.username
-      const userLowScore = 55
-      const serverLowScore = 55
-      const serverLowScoreUser = '#LOWSCOREUSER'
+      const userLowScore = this.stats.user['SecBot user min score'].score
+      const serverLow = this.stats.server['SecBot server low score']
+      const serverLowScore = serverLow.score
+      const serverLowScoreUser =
+        this.stats.server.idsToNames[serverLow.member_id]
 
       const lines = [
         { content: `Low Score`, class: 'underlined-text' },
@@ -526,8 +549,8 @@ export default {
     },
     SecBotScoresAverage() {
       const user = this.username
-      const userAverage = 55
-      const serverAverage = 55
+      const userAverage = this.stats.user['SecBot user average score'].score
+      const serverAverage = 55 // this.stats.server['']
 
       const lines = [
         { content: `Average Scores`, class: 'underlined-text' },
