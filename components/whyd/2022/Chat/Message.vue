@@ -113,7 +113,7 @@ export default {
 }
 .fredboat {
   --bubble-color: #1cbfe2;
-  --text-color: black;
+  --text-color: #131922;
 }
 .unanimism {
   /* --bubble-color: #e0e169; */
