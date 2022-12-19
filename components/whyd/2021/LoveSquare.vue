@@ -6,28 +6,30 @@
           repliedTo
         }}
         by replying to them {{ replyToCount }}
-        {{ replyToCount == 1 ? "time" : "times" }}
+        {{ replyToCount == 1 ? 'time' : 'times' }}
       </h3>
     </div>
     <div class="row py-5">
       <h3 class="col-6" />
       <h3 class="col-6">
-        ...on the other hand, @{{ repliedToYou }} replied to you more
-        than anyone else did with {{ repliedToYouCount }}...
+        ...on the other hand, @{{ repliedToYou }} replied to you more than
+        anyone else did with {{ repliedToYouCount }}...
       </h3>
     </div>
     <div class="row py-5">
       <h3 class="col-6">
-        ...on the <i>other</i> other hand, replies don't tell you the whole story.<br>you
-        were most likely to send a message if @{{ messagedAfter }} had sent the
-        previous one.
+        ...on the <i>other</i> other hand, replies don't tell you the whole
+        story.<br />you were most likely to send a message if @{{
+          messagedAfter
+        }}
+        had sent the previous one.
       </h3>
     </div>
     <div class="d-flex justify-content-center py-5">
       <div class="w-50">
         <h3 class="text-center">
           let's move on before this becomes some weird love square
-          <WhydEmoji
+          <Whyd2021Emoji
             :spoiler="true"
             :big="false"
             :url-prefix="urlPrefix"
@@ -52,7 +54,7 @@ export default {
       default: ''
     }
   },
-  data () {
+  data() {
     return {
       title: '',
       repliedTo: '',
@@ -62,18 +64,18 @@ export default {
       messagedAfter: ''
     }
   },
-  async mounted () {},
+  async mounted() {},
   methods: {
-    async init (id, urlPrefix) {
+    async init(id, urlPrefix) {
       const youMostRepliedTo = await fetch(
         `${urlPrefix}/user/${id}/repliedTo.json`
-      ).then(res => res.json())
+      ).then((res) => res.json())
       const mostRepliedToYou = await fetch(
         `${urlPrefix}/user/${id}/repliedToYou.json`
-      ).then(res => res.json())
+      ).then((res) => res.json())
       const sentMessageAfter = await fetch(
         `${urlPrefix}/user/${id}/sentMessageAfter.json`
-      ).then(res => res.json())
+      ).then((res) => res.json())
 
       this.repliedTo = youMostRepliedTo.mostRepliedTo
       this.replyToCount = youMostRepliedTo.mostRepliedToCount

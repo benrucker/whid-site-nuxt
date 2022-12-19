@@ -1,5 +1,5 @@
 <template>
-  <WhydEchartBarH
+  <Whyd2021EchartBarH
     ref="channelBarChart"
     :title="'Messages'"
     :bg-color="'#222'"
@@ -10,14 +10,14 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {}
   },
   methods: {
-    async init (urlPrefix) {
+    async init(urlPrefix) {
       const channelCounts = await fetch(
         `${urlPrefix}/messagesByChannel.json`
-      ).then(res => res.json())
+      ).then((res) => res.json())
       const channels = [
         'dont',
         'japan',
@@ -40,7 +40,7 @@ export default {
         'lowlights'
       ]
       const axis = channels.reverse()
-      const msgCounts = channels.map(x => channelCounts[x])
+      const msgCounts = channels.map((x) => channelCounts[x])
       this.$refs.channelBarChart.init(axis, msgCounts)
     }
   }
