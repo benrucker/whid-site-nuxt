@@ -10,6 +10,12 @@ import { AsciiEffect } from 'three/examples/jsm/effects/AsciiEffect'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
 export default {
+  props: {
+    shouldStopWhenFacingForward: {
+      type: Boolean,
+      default: false
+    }
+  },
   data: function () {
     return {
       mixer: undefined,
@@ -114,7 +120,19 @@ export default {
     render() {
       const updateDelta = this.clock.getDelta()
 
-      this.model.rotation.y -= updateDelta * 1
+      const newY = this.model.rotation.y - updateDelta * 1
+
+      if (this.shouldStopWhenFacingForward && newY !== newY % (2 * Math.PI)) {
+        this.model.rotation.y = -0.02
+
+        const camera = this.view.camera
+        camera.updateProjectionMatrix()
+        this.effect.render(this.scene, camera)
+
+        return
+      } else {
+        this.model.rotation.y = newY
+      }
 
       if (this.resizeRendererToDisplaySize()) {
         const canvas = this.renderer.domElement
