@@ -6,7 +6,7 @@
       responding in less than a minute
     </p>
     <div class="timeOfDayChart ratio ratio-16x9 w-100 align-self-center">
-      <WhydEchartHist
+      <Whyd2021EchartHist
         ref="hist"
         :title="''"
         :color="'#ffffff'"
@@ -29,16 +29,16 @@
 <script>
 export default {
   props: {},
-  data () {
+  data() {
     return {
       title: '',
       exists: false,
       count: 0
     }
   },
-  async mounted () {},
+  async mounted() {},
   methods: {
-    async init (id, urlPrefix) {
+    async init(id, urlPrefix) {
       const data = await fetch(`${urlPrefix}/user/${id}/teammate.json`).then(
         (res) => {
           if (res.status === 404) {
@@ -49,13 +49,15 @@ export default {
           return res.json()
         }
       )
-      if (!this.exists) { return }
+      if (!this.exists) {
+        return
+      }
 
       this.count = data.count
       const rank = data.rank
 
       const serverData = await fetch(`${urlPrefix}/teammateTimes.json`).then(
-        res => res.json()
+        (res) => res.json()
       )
 
       const labels = Object.keys(serverData).map((key) => {

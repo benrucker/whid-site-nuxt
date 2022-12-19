@@ -4,10 +4,11 @@
       <h3>and speaking of firsts: this year, you did something special!</h3>
       <div v-for="(stuff, channel) in channelAccolades" :key="channel">
         <h4 class="ps-5 pt-3">
-          you sent the first message in <b>#{{ channel }}</b>:
+          you sent the first message in <b>#{{ channel }}</b
+          >:
         </h4>
         <div class="pt-3 d-flex justify-content-center">
-          <WhydMessage
+          <Whyd2021Message
             :content="stuff.content"
             :attachments="stuff.attachments"
             :class="'w-50 ' + (stuff.firstEver ? 'firstEverShadow' : '')"
@@ -34,25 +35,29 @@ export default {
       default: ''
     }
   },
-  data () {
+  data() {
     return {
       channelAccolades: []
     }
   },
   computed: {},
-  async mounted () {},
+  async mounted() {},
   methods: {
-    async init (id, urlPrefix) {
+    async init(id, urlPrefix) {
       const firstInChannels = await fetch(
         `${urlPrefix}/user/${id}/firstMessageInChannels.json`
       ).then((res) => {
-        if (res.status === 404) { return false }
+        if (res.status === 404) {
+          return false
+        }
         return res.json()
       })
       console.log(firstInChannels)
       if (firstInChannels) {
         this.channelAccolades = firstInChannels
-      } else { this.channelAccolades = false }
+      } else {
+        this.channelAccolades = false
+      }
     }
   }
 }
@@ -64,6 +69,6 @@ export default {
 }
 
 div.firstEver::after {
-  content: "first in whole server!";
+  content: 'first in whole server!';
 }
 </style>

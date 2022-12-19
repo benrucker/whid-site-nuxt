@@ -3,7 +3,7 @@
     <h4>you're {{ title }}</h4>
     <p>better check your horoscope</p>
     <div class="astroChart ratio ratio-4x3 w-75 align-self-center">
-      <WhydEchartBarPolar
+      <Whyd2021EchartBarPolar
         ref="astroChart"
         :title="'Messages'"
         :color="'#fff'"
@@ -17,20 +17,22 @@
 <script>
 export default {
   props: {},
-  data () {
+  data() {
     return {
       title: '',
       preposition: '',
       timeRange: ''
     }
   },
-  async mounted () {},
+  async mounted() {},
   methods: {
-    async init (id, urlPrefix) {
+    async init(id, urlPrefix) {
       const data = await fetch(`${urlPrefix}/user/${id}/sign.json`).then(
-        res => res.json()
+        (res) => res.json()
       )
-      this.title = `${/^[AEIOU]/.test(data.maxSign) ? 'an' : 'a'} ${data.maxSign}`
+      this.title = `${/^[AEIOU]/.test(data.maxSign) ? 'an' : 'a'} ${
+        data.maxSign
+      }`
       delete data.maxSign
 
       const signs = Object.keys(data)
@@ -42,5 +44,4 @@ export default {
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
