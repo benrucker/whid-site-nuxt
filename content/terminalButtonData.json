@@ -3,6 +3,16 @@
     "ls",
     "cd ..",
     "cd SecBot",
+    "help",
+    "voice events",
+    "most active day",
+    "favorite voice channel",
+    "mutes",
+    "dms",
+    "scores",
+    "score highs",
+    "score lows",
+    "score averages",
     "1",
     "2",
     "3",
@@ -14,7 +24,6 @@
     "9",
     "test",
     "nerd",
-    "peas",
-    "dms"
+    "peas"
   ]
 }
