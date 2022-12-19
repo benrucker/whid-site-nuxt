@@ -3,7 +3,7 @@
     <h4>{{ title }}</h4>
     <p>{{ percentage }}% of your messages were edited</p>
     <div class="timeOfDayChart ratio ratio-16x9 w-100 align-self-center">
-      <WhydEchartPie
+      <Whyd2021EchartPie
         ref="pie"
         :title="''"
         :colors="[]"
@@ -17,19 +17,19 @@
 <script>
 export default {
   props: {},
-  data () {
+  data() {
     return {
       title: '',
       count: 0,
       percentage: 0
     }
   },
-  async mounted () {},
+  async mounted() {},
   methods: {
-    async init (id, urlPrefix) {
+    async init(id, urlPrefix) {
       const data = await fetch(
         `${urlPrefix}/user/${id}/editProportion.json`
-      ).then(res => res.json())
+      ).then((res) => res.json())
       const totalMessages = data.total
       const editedMessages = data.edited
       const editRatio = data.editRatio

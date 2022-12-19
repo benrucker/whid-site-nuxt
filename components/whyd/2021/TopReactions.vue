@@ -1,6 +1,6 @@
 <template>
   <div>
-    <WhydTop5
+    <Whyd2021Top5
       :names="users"
       :counts="counts"
       :emojis="true"
@@ -18,20 +18,20 @@ export default {
       default: ''
     }
   },
-  data () {
+  data() {
     return {
       users: [],
       counts: []
     }
   },
-  async mounted () {
+  async mounted() {
     const data = await fetch(`${this.urlPrefix}/serverReactions.json`).then(
-      res => res.json()
+      (res) => res.json()
     )
     this.users = Object.keys(data).slice(0, 5)
     this.counts = Object.values(data)
       .slice(0, 5)
-      .map(x => x.toLocaleString())
+      .map((x) => x.toLocaleString())
   },
   methods: {}
 }

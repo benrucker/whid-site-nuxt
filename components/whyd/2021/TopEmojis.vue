@@ -1,6 +1,6 @@
 <template>
   <div>
-    <WhydTop5
+    <Whyd2021Top5
       :names="users"
       :counts="counts"
       :unit="'Emojis'"
@@ -18,15 +18,15 @@ export default {
       default: ''
     }
   },
-  data () {
+  data() {
     return {
       users: [],
       counts: []
     }
   },
-  async mounted () {
-    const data = await fetch(`${this.urlPrefix}/serverEmojis.json`).then(res =>
-      res.json()
+  async mounted() {
+    const data = await fetch(`${this.urlPrefix}/serverEmojis.json`).then(
+      (res) => res.json()
     )
     data["(':shred:',)"] += data["(':trueshred:',)"]
     delete data["(':trueshred:',)"]
@@ -37,8 +37,8 @@ export default {
     }
     sorted.sort((a, b) => b[1] - a[1])
 
-    this.users = sorted.slice(0, 5).map(x => x[0].replace(/\(|\)|,|\'/g, ''))
-    this.counts = sorted.slice(0, 5).map(x => x[1].toLocaleString())
+    this.users = sorted.slice(0, 5).map((x) => x[0].replace(/\(|\)|,|\'/g, ''))
+    this.counts = sorted.slice(0, 5).map((x) => x[1].toLocaleString())
   },
   methods: {}
 }

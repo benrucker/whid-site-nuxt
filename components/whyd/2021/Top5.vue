@@ -3,18 +3,19 @@
     <div class="title text-center">
       {{ unit }}
     </div>
-    <div
-      v-for="(name, i) in names"
-      :key="name"
-      class="row align-items-center"
-    >
+    <div v-for="(name, i) in names" :key="name" class="row align-items-center">
       <span :class="'col-2 close rank text-center fadein-' + (i + 5)">{{
         i + 1
       }}</span>
-      <span
-        :class="'col-6 close name fadein-' + (i + 10)"
-      ><WhydEmoji v-if="emojis" :url-prefix="urlPrefix" :emoji="name" :big="true" />
-        <span v-else>{{ name }}</span></span>
+      <span :class="'col-6 close name fadein-' + (i + 10)"
+        ><Whyd2021Emoji
+          v-if="emojis"
+          :url-prefix="urlPrefix"
+          :emoji="name"
+          :big="true"
+        />
+        <span v-else>{{ name }}</span></span
+      >
       <span :class="'col-4 close count text-center fadein-' + i">{{
         counts[i]
       }}</span>
@@ -31,7 +32,7 @@ export default {
     emojis: false,
     urlPrefix: ''
   },
-  async mounted () {},
+  async mounted() {},
   methods: {}
 }
 </script>
