@@ -1,9 +1,11 @@
 <template>
   <div class="text-center">
     <div class="container">
-      <h1>you seem to have been most active in <b>{{ month }}</b></h1>
+      <h1>
+        you seem to have been most active in <b>{{ month }}</b>
+      </h1>
       <div class="ratio ratio-16x9">
-        <WhydEchartLineAndHist
+        <Whyd2021EchartLineAndHist
           ref="monthsChart"
           :title="'Messages by Month'"
           :color="'#fff'"
@@ -14,14 +16,15 @@
         <i>you must not have had a lot else going on...</i>
       </h4>
     </div>
-    <img src="/whyd/2021/lightblue-angle.svg">
+    <img src="/whyd/2021/lightblue-angle.svg" />
     <div class="bg lightblue">
       <h3 class="p-0 m-0">
-        btw, in {{ month }}, the word you used the most was <b>{{ word }}</b>.<br>
+        btw, in {{ month }}, the word you used the most was <b>{{ word }}</b
+        >.<br />
         maybe that explains what was going on?
       </h3>
     </div>
-    <img src="/whyd/2021/lightblue-angle2.svg" :class="'bg ' + nextBg">
+    <img src="/whyd/2021/lightblue-angle2.svg" :class="'bg ' + nextBg" />
   </div>
 </template>
 
@@ -41,7 +44,7 @@ export default {
       default: ''
     }
   },
-  data () {
+  data() {
     return {
       months: [
         'January',
@@ -62,16 +65,16 @@ export default {
       month: ''
     }
   },
-  async mounted () {},
+  async mounted() {},
   methods: {
-    async init () {
+    async init() {
       const data = await fetch(
         `${this.urlPrefix}/user/${this.id}/monthCounts.json`
-      ).then(res => res.json())
+      ).then((res) => res.json())
       this.monthCounts = Object.values(data)
       const favData = await fetch(
         `${this.urlPrefix}/user/${this.id}/favMonth.json`
-      ).then(res => res.json())
+      ).then((res) => res.json())
       this.month = favData.maxMonth
       this.word = favData.word
 

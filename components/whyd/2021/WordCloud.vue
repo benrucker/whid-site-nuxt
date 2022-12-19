@@ -1,6 +1,6 @@
 <template>
   <div class="chart ratio ratio-16x9">
-    <WhydEchartWordCloud
+    <Whyd2021EchartWordCloud
       ref="wordCloud"
       :words="wordUsage"
       :size-min="wordSizeMin"
@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       id: '',
       wordUsage: [],
@@ -21,13 +21,13 @@ export default {
       wordGridSize: 8
     }
   },
-  async fetch () {},
-  async mounted () {},
+  async fetch() {},
+  async mounted() {},
   methods: {
-    async init (id, urlPrefix) {
+    async init(id, urlPrefix) {
       const wordData = await fetch(
         `${urlPrefix}/user/${id}/mostUsedWordsNoStop.json`
-      ).then(res => res.json())
+      ).then((res) => res.json())
       for (const key in wordData) {
         this.wordUsage.push({
           name: wordData[key][0],

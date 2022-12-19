@@ -24,21 +24,20 @@ export default {
     sizeMax: 0,
     gridSize: 0
   },
-  data () {
+  data() {
     return {
       option: {},
       lines: [],
       labels: []
     }
   },
-  mounted () {},
-  mounted () {
+  mounted() {
     window.onresize = () => {
       this.$refs.chart.resize()
     }
   },
   methods: {
-    init () {
+    init() {
       const maskImage = new Image()
       maskImage.src = '/whyd/2021/2021.png'
       maskImage.onload = () => {

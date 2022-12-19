@@ -3,7 +3,7 @@
     <h4>you're {{ title }}</h4>
     <p>many of your messages were sent {{ preposition }}, {{ timeRange }}</p>
     <div class="timeOfDayChart ratio ratio-16x9 w-75 align-self-center">
-      <WhydEchartHist
+      <Whyd2021EchartHist
         ref="hist"
         :title="'Messages'"
         :color="'#fff'"
@@ -38,18 +38,18 @@ const timeMap = {
 
 export default {
   props: {},
-  data () {
+  data() {
     return {
       title: '',
       preposition: '',
       timeRange: ''
     }
   },
-  async mounted () {},
+  async mounted() {},
   methods: {
-    async init (id, urlPrefix) {
+    async init(id, urlPrefix) {
       const data = await fetch(`${urlPrefix}/user/${id}/timeOfDay.json`).then(
-        res => res.json()
+        (res) => res.json()
       )
       this.title = titleMap[data.maxTime]
       this.preposition = prepositioned[data.maxTime]
@@ -70,6 +70,6 @@ export default {
 
 <style scoped>
 .timeOfDayChart {
-    width: 50%;
+  width: 50%;
 }
 </style>

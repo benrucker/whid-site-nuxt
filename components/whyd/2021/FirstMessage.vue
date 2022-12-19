@@ -1,11 +1,15 @@
 <template>
   <div>
     <h3>
-      to wrap things up, let's see the first thing that came out of your
-      mouth this year:
+      to wrap things up, let's see the first thing that came out of your mouth
+      this year:
     </h3>
     <div class="pt-3 d-flex justify-content-center">
-      <WhydMessage :content="content" :attachments="attachments" class="w-50" />
+      <Whyd2021Message
+        :content="content"
+        :attachments="attachments"
+        class="w-50"
+      />
     </div>
   </div>
 </template>
@@ -22,16 +26,16 @@ export default {
       default: ''
     }
   },
-  data () {
+  data() {
     return {
       content: '',
       attachments: []
     }
   },
   computed: {},
-  async mounted () {},
+  async mounted() {},
   methods: {
-    async init (id, urlPrefix) {
+    async init(id, urlPrefix) {
       const firstMsg = await fetch(
         `${urlPrefix}/user/${id}/firstMessage.json`
       ).then((res) => {
@@ -52,6 +56,6 @@ export default {
 }
 
 div.firstEver::after {
-  content: "first in whole server!";
+  content: 'first in whole server!';
 }
 </style>

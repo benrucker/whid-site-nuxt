@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container text-center pt-5">
-      <img src="/whyd/2021/you.png" class="w-25 pb-4">
+      <img src="/whyd/2021/you.png" class="w-25 pb-4" />
       <h1 class="pb-3">
         <b><i>what have you done 2021</i></b>
       </h1>
@@ -13,10 +13,10 @@
           class="form-control"
           list="namelist"
           placeholder="Enter your name..."
-        >
+        />
         <datalist id="namelist">
-          <option v-for="name in Object.keys(names)" :key="name">
-            {{ name }}
+          <option v-for="nameOption in Object.keys(names)" :key="nameOption">
+            {{ nameOption }}
           </option>
         </datalist>
         <button
@@ -33,22 +33,21 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       names: {},
       name: ''
     }
   },
-  async mounted () {
-    this.names = await fetch('/whyd/2021/data/nameToName.json').then(res =>
+  async mounted() {
+    this.names = await fetch('/whyd/2021/data/nameToName.json').then((res) =>
       res.json()
     )
-    console.log(this.names)
   },
   methods: {
-    inputButtonPressed () {
+    inputButtonPressed() {
       if (Object.keys(this.names).includes(this.name)) {
-        this.$router.push(`/whyd/${this.names[this.name]}`)
+        this.$router.push(`/whyd/2021/${this.names[this.name]}`)
       }
     }
   }
