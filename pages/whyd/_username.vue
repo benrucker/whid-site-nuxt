@@ -33,6 +33,9 @@ export default {
     this.stats = { server, user }
     this.stats.user.name = this.username
     this.stats.user.id = namesToIds[this.username]
+
+    localStorage.username = this.username
+    localStorage.userId = namesToIds[this.username]
   }
 }
 </script>
