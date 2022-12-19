@@ -83,7 +83,6 @@ export default {
   width: 1em;
   height: 1em;
   background-color: rgb(119, 119, 119);
-  clip-path: circle(0.3em);
   margin-left: 0.1em;
   margin-right: 0.1em;
 
@@ -95,6 +94,9 @@ export default {
 
   opacity: 0.75;
   mix-blend-mode: lighten;
+
+  border-radius: 50%;
+  scale: 0.56;
 }
 
 @keyframes pulse {
