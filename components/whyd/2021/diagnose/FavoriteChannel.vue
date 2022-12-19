@@ -3,7 +3,7 @@
     <h4>{{ title }}</h4>
     <p>your favorite channel was #{{ favorite }}</p>
     <div class="channelChart ratio ratio-4x3 w-100 align-self-center">
-      <WhydEchartDonut
+      <Whyd2021EchartDonut
         ref="donut"
         :title="'Messages'"
         :color="'#fff'"
@@ -37,17 +37,17 @@ const titleMap = {
 
 export default {
   props: {},
-  data () {
+  data() {
     return {
       title: '',
       favorite: ''
     }
   },
-  async mounted () {},
+  async mounted() {},
   methods: {
-    async init (id, urlPrefix) {
+    async init(id, urlPrefix) {
       const data = await fetch(`${urlPrefix}/user/${id}/channels.json`).then(
-        res => res.json()
+        (res) => res.json()
       )
       this.favorite = data.favChannel
       this.title = titleMap[this.favorite]

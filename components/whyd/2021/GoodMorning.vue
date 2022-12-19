@@ -2,14 +2,14 @@
   <div class="gm">
     <div class="container d-flex justify-content-center py-3">
       <div class="gmbox d-flex align-items-center text-dark">
-        <WhydEmoji
+        <Whyd2021Emoji
           class="pe-3"
           emoji=":myson:"
           :url-prefix="urlPrefix"
           :big="true"
         />
         <h4>
-          You said good morning {{ count }} {{ count == 1 ? "time" : "times" }}!
+          You said good morning {{ count }} {{ count == 1 ? 'time' : 'times' }}!
         </h4>
       </div>
     </div>
@@ -21,21 +21,25 @@ export default {
   props: {
     urlPrefix: ''
   },
-  data () {
+  data() {
     return {
       count: 0
     }
   },
-  async mounted () {},
+  async mounted() {},
   methods: {
-    async init (id, urlPrefix) {
+    async init(id, urlPrefix) {
       this.count = await fetch(`${urlPrefix}/user/${id}/goodMorning.json`).then(
         (res) => {
-          if (res.status === 404) { return 0 }
+          if (res.status === 404) {
+            return 0
+          }
           return res.json()
         }
       )
-      if (this.count) { this.count = this.count['0'] }
+      if (this.count) {
+        this.count = this.count['0']
+      }
     }
   }
 }
