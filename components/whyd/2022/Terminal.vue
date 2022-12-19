@@ -148,12 +148,6 @@ export default {
   height: 92%;
 }
 
-/* #terminal {
-  position: absolute;
-  left: 30%;
-  top: 30%;
-} */
-
 #textViewport p {
   margin-bottom: 0.25em;
 }

@@ -168,12 +168,18 @@ export default {
       return ++this.uniqueLineId
     },
     // #region Page Control Functions
-    focusInput() {
+    focusInput(proceed = true) {
       if (
         this.terminalMode === mode.textInput ||
         this.terminalMode === mode.hybridInput
       ) {
         this.$refs.terminalTextInput.focus()
+      } else if (
+        proceed &&
+        this.isShowProceed &&
+        this.terminalMode === mode.clickContinue
+      ) {
+        this.handleContinueButtonClick()
       }
     },
     scrollToBottom() {
@@ -191,13 +197,15 @@ export default {
       this.userInput = ''
       this.$refs.terminalTextInput.disabled = false
       this.scrollToBottom()
-      this.focusInput()
+      this.focusInput(false)
     },
-    handleOptionButtonClick(_, commandKey) {
-      // event parameter is discarded
+    handleOptionButtonClick(event, commandKey) {
+      event.stopImmediatePropagation()
+
       this.emitNewLine({ content: `> ${commandKey}` })
       this.processCommand(commandKey)
       this.scrollToBottom()
+      this.focusInput(false)
     },
     processCommand(input) {
       const processed = input.trim() // .toLowerCase() fuck you if you try to use caps in the terminal
