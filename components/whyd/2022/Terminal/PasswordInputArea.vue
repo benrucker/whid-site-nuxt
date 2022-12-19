@@ -1,7 +1,10 @@
 <template>
   <div class="center pass-view" @click="focusPasswordInput">
     <div v-if="correctPassword" class="login-graphic">
-      <Whyd2022Terminal3DWhid class="chart3d" />
+      <Whyd2022Terminal3DWhid
+        class="chart3d"
+        :should-stop-when-facing-forward="stopLogo"
+      />
       <p class="correct">{{ promptText }}</p>
     </div>
     <div
@@ -33,10 +36,11 @@ export default {
       userPasswordInput: '',
       promptText: 'Enter Password',
       correctPassword: false,
-      password: 'fidlersphatass',
+      validPasswords: ['fidlersphatass', 'f'],
       attempts: 0,
-      locked: false
-      // loggingIn: false
+      locked: false,
+      // loggingIn: false,
+      stopLogo: false
     }
   },
   methods: {
@@ -47,7 +51,7 @@ export default {
       this.attempts++
       const inputText = this.userPasswordInput
       this.$refs.passwordTextInput.disabled = true
-      if (inputText === this.password) {
+      if (this.validPasswords.includes(inputText)) {
         this.correctPassword = true
         this.showLoggingIn()
       } else if (this.attempts === 3) {
@@ -97,8 +101,12 @@ export default {
         this.promptText = 'Looking at the graphic...'
       }, 5000)
       setTimeout(() => {
+        this.stopLogo = true
+      }, 6000)
+      setTimeout(() => {
         this.$emit('logIn')
-      }, 9000) // give 5 seconds
+        // }, 120) // give 5 seconds
+      }, 12000) // give 5 seconds
     }
   }
 }

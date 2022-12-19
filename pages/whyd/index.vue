@@ -38,16 +38,22 @@ export default {
   data() {
     return {
       names: {},
-      name: ''
+      name: '',
+      namesToIds: {}
     }
   },
   async mounted() {
-    const data = await fetch('/whyd/2021/data/nameToName.json')
-    this.names = await data.json()
+    const namesData = await fetch('/whyd/2021/data/nameToName.json')
+    this.names = await namesData.json()
+    const serverData = await fetch('/whyd/2022/data/server.json')
+    const serverJson = await serverData.json()
+    this.namesToIds = serverJson.namesToIds
   },
   methods: {
     inputButtonPressed() {
       if (Object.keys(this.names).includes(this.name)) {
+        localStorage.username = this.name
+        localStorage.userId = this.namesToIds[this.name]
         this.$router.push(`/whyd/${this.names[this.name]}`)
       }
     }

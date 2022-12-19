@@ -12,7 +12,7 @@
       v-if="isShowProceed && terminalMode === mode.clickContinue"
       style="cursor: pointer"
       class="blink"
-      @click="continueText"
+      @click="handleContinueButtonClick"
     >
       Click to continue
     </a>
@@ -29,7 +29,7 @@
         type="button"
         class="option-button"
         :value="button"
-        @click="optionButtonClick($event, button)"
+        @click="handleOptionButtonClick($event, button)"
       >
         {{ terminalCommands[button].prettyName }}
       </button>
@@ -45,6 +45,10 @@
 </template>
 
 <script>
+import commandsModule from '~/components/whyd/2022/Terminal/Commands'
+
+const commands = commandsModule.methods
+
 const mode = {
   clickContinue: 'clickContinue',
   buttonInput: 'buttonInput',
@@ -62,13 +66,22 @@ export default {
       terminalCommands: {},
       buttonData: [],
       userInput: '',
-      userName: '#USERNAME',
+      username: '#username',
+      userId: '#ID',
       isShowProceed: false,
       terminalLinesQueue: [
         'This line should never appear. Ff it does, Ethan fucked up probably'
       ],
-      path: '/root/whyd/test', // ['root', 'whyd', 'test'],
-      validPaths: new Set(['/', '/root', '/root/whyd', '/root/whyd/test'])
+      path: '/root/whyd', // ['root', 'whyd'],
+      validPaths: new Set([
+        '/',
+        '/root',
+        '/root/whyd',
+        '/root/whyd/test',
+        '/root/whyd/SecBot'
+      ]),
+      stats: undefined,
+      uniqueLineId: 0
     }
   },
   async fetch() {
@@ -106,8 +119,8 @@ export default {
       })
     }
   },
-  mounted() {
-    // console.log(this.terminalMode)
+  async mounted() {
+    // Initialize the terminal
     if (this.terminalMode === mode.clickContinue) {
       this.isShowProceed = this.terminalLinesQueue.length > 0
     } else if (
@@ -116,21 +129,44 @@ export default {
     ) {
       this.$nextTick(() => {
         this.focusInput()
-        this.$emit('addTextLine', { content: this.displayedPath })
+        this.emitNewLine({ content: this.displayedPath })
       })
     }
 
     this.terminalLinesQueue.reverse()
 
-    // console.log(this.methods)
-
     const paths = new Set(
       Object.values(this.terminalCommands).map((command) => command.path)
     )
     this.validPaths = paths
-    // console.log(this.validPaths)
+
+    // Retrive the data
+
+    this.username = localStorage.username ?? 'fops'
+    this.userId = localStorage.userId ?? '173839815400357888'
+
+    const server = await fetch('/whyd/2022/data/server.json').then((r) =>
+      r.json()
+    )
+    const namesToIds = server.namesToIds
+    const user = await fetch(
+      `/whyd/2022/data/${namesToIds[this.username]}.json`
+    ).then((r) => r.json())
+
+    this.stats = { server, user }
+    this.stats.user.name = this.username
+    this.stats.user.id = namesToIds[this.username]
   },
   methods: {
+    emitNewLine(line) {
+      this.$emit('addTextLine', {
+        ...line,
+        id: this.getUniqueLineId()
+      })
+    },
+    getUniqueLineId() {
+      return ++this.uniqueLineId
+    },
     // #region Page Control Functions
     focusInput() {
       if (
@@ -149,7 +185,7 @@ export default {
       const input = this.userInput
       this.$refs.terminalTextInput.disabled = true
 
-      this.$emit('addTextLine', { content: `> ${input}` })
+      this.emitNewLine({ content: `> ${input}` })
       this.processCommand(input)
 
       this.userInput = ''
@@ -157,47 +193,51 @@ export default {
       this.scrollToBottom()
       this.focusInput()
     },
-    optionButtonClick(_, commandKey) {
+    handleOptionButtonClick(_, commandKey) {
       // event parameter is discarded
-      // const command = this.terminalCommands[commandKey]
-      this.$emit('addTextLine', { content: `> ${commandKey}` })
+      this.emitNewLine({ content: `> ${commandKey}` })
       this.processCommand(commandKey)
       this.scrollToBottom()
     },
     processCommand(input) {
       const processed = input.trim() // .toLowerCase() fuck you if you try to use caps in the terminal
       const valid = Object.keys(this.terminalCommands)
+
       if (valid.includes(processed)) {
         this.terminalCommands[input].hasBeenRun = true
         const command = this.terminalCommands[input]
-        const func = this[command.functionName]
+        const func = commands[command.functionName]
+
         if (typeof func === 'function') {
-          func()
+          this.executeCommandText(func(this.stats))
           return
         }
       }
+
       if (processed.startsWith('cd')) {
         this.navigateTo(processed.replace('cd', '').trim())
         return
       }
+
       if (processed === 'ls') {
         const list = Object.keys(this.terminalCommands)
           .filter((key) => this.terminalCommands[key].path === this.path)
           .join(', ')
-        this.$emit('addTextLine', {
+        this.emitNewLine({
           content: `~${this.path}\n${list}\n--------------------------`
         })
         return
       }
+
       if (processed === 'dir') {
-        this.$emit('addTextLine', {
+        this.emitNewLine({
           content: `~${this.path}`
         })
         return
       }
-      this.$emit('addTextLine', {
-        content: `Error: Command not found '${processed}'`,
-        class: 'error-text'
+
+      this.emitNewLine({
+        content: `{Error: Command not found '${processed}' | error}`
       })
     },
     // #endregion
@@ -215,9 +255,9 @@ export default {
     },
     // #endregion
     // #region clickContinue Control Functions
-    continueText() {
+    handleContinueButtonClick() {
       const line = this.terminalLinesQueue.pop()
-      this.$emit('addTextLine', line)
+      this.emitNewLine(line)
       if (this.terminalLinesQueue.length <= 0) {
         this.isShowProceed = false
         this.terminalMode = mode.hybridInput
@@ -226,17 +266,15 @@ export default {
     },
     executeCommandText(lines) {
       // takes a list of processed text lines and puts the terminal in clickContinue mode to read through them
-      lines.push({ content: 'End of Command\n--------------------------' })
+      lines.push({ content: '{End of Command | underline}' })
       this.terminalLinesQueue = lines.reverse()
       this.terminalMode = mode.clickContinue
       this.isShowProceed = true
-      this.continueText()
+      this.handleContinueButtonClick()
     },
     // #endregion
     // #region Files handling Functions
     navigateTo(target) {
-      // const arg = processed.replace('cd ', '')
-
       const newPath =
         target === '..'
           ? this.path.split('/').slice(0, -1).join('/')
@@ -244,63 +282,23 @@ export default {
 
       if (this.validPaths.has(newPath)) {
         this.path = newPath
-        this.$emit('addTextLine', { content: this.displayedPath })
+        this.emitNewLine({ content: this.displayedPath })
       } else {
-        this.$emit('addTextLine', {
-          content: `Error: Invalid Directory ${newPath}`,
-          class: 'error-text'
+        this.emitNewLine({
+          content: `{Error: Invalid Directory ${newPath} | error}`
         })
       }
     },
     // #endregion
-    // #region Command Specific Functions
     logIn() {
       this.terminalMode = mode.hybridInput
-      this.$emit('addTextLine', {
-        content: `Logged in as ${this.userName}`
+      this.emitNewLine({
+        content: `Logged in as ${this.username}`
       })
-      this.$emit('addTextLine', {
+      this.emitNewLine({
         content: `${this.path}/`
       })
-    },
-    sampleFunction() {
-      // example command
-      const val1 = 85 // presumably load this from data
-      const val1Response =
-        val1 > 50
-          ? `Don't you think that's a little excessive?`
-          : `You gotta pump those numbers up`
-
-      const testLines = [
-        { content: 'Test line 1' },
-        { content: `you were a dick to trent ${val1} times` },
-        { content: val1Response }
-      ]
-
-      this.executeCommandText(testLines)
-    },
-    testFunction() {
-      this.$emit('addTextLine', {
-        content: 'test command invoked',
-        class: 'italic-text'
-      })
-    },
-    SecBotDMsFunction() {
-      const numWalter = 5
-      const differentWalterUsers = 3
-
-      const lines = [
-        { content: '@secuityBot4891#1995 Direct Message logs...\n' },
-        {
-          content: `This image was sent [${numWalter}] times by [${differentWalterUsers}] users.`,
-          type: 'image',
-          url: 'https://media.tenor.com/S_to1tY3ixUAAAAd/breaking-bad-walter-white.gif'
-        }
-      ]
-
-      this.executeCommandText(lines)
     }
-    // #endregion
   }
 }
 </script>
@@ -314,6 +312,10 @@ export default {
   background-color: var(--primary);
   color: var(--background);
   margin-right: 5px;
+  margin-bottom: 5px;
+  border-style: outset;
+  border-width: 2px;
+  border-color: white;
 }
 
 .blink {

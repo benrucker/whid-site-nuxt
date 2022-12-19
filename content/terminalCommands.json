@@ -9,6 +9,62 @@
     "prettyName": "cd SecBot",
     "path": "/root/whyd"
   },
+  "help": {
+    "prettyName": "help",
+    "path": "/root/whyd",
+    "functionName": "helpTerminalFunction"
+  },
+  "voice events": {
+    "prettyName": "voice events",
+    "path": "/root/whyd/SecBot",
+    "functionName": "SecBotVoiceEventsFunction"
+  },
+  "most active day": {
+    "prettyName": "most active day",
+    "path": "/root/whyd/SecBot",
+    "dependencies": ["voice events"],
+    "functionName": "SecBotVoiceEventsMostActiveDayFunction"
+  },
+  "favorite voice channel": {
+    "prettyName": "favorite voice channel",
+    "path": "/root/whyd/SecBot",
+    "dependencies": ["voice events"],
+    "functionName": "SecBotVoiceEventsFavoriteVoiceChannelFunction"
+  },
+  "mutes": {
+    "prettyName": "mutes",
+    "path": "/root/whyd/SecBot",
+    "dependencies": ["voice events"],
+    "functionName": "SecBotVoiceEventsMutesFunction"
+  },
+  "dms": {
+    "prettyName": "DMs",
+    "path": "/root/whyd/SecBot",
+    "functionName": "SecBotDMsFunction"
+  },
+  "scores": {
+    "prettyName": "Scores",
+    "path": "/root/whyd/SecBot",
+    "functionName": "SecBotScores"
+  },
+  "score highs": {
+    "prettyName": "Score Highs",
+    "path": "/root/whyd/SecBot",
+    "dependencies": ["scores"],
+    "functionName": "SecBotScoresHigh"
+  },
+  "score lows": {
+    "prettyName": "Score Lows",
+    "path": "/root/whyd/SecBot",
+    "dependencies": ["scores"],
+    "functionName": "SecBotScoresLow"
+  },
+  "score averages": {
+    "prettyName": "Score Averages",
+    "path": "/root/whyd/SecBot",
+    "dependencies": ["scores"],
+    "functionName": "SecBotScoresAverage"
+  },
   "peas": {
     "prettyName": "🥫",
     "path": "/root/whyd",
@@ -19,11 +75,7 @@
     "path": "/root/whyd",
     "functionName": "testFunction"
   },
-  "dms": {
-    "prettyName": "DMs",
-    "path": "/root/whyd/SecBot",
-    "functionName": "SecBotDMsFunction"
-  },
+
   "test": {
     "prettyName": "proofOfConcept",
     "dependencies": ["1"],
