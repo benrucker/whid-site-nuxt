@@ -39,7 +39,7 @@ export default {
 #page {
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
+  overflow: clip;
   position: relative;
   background: radial-gradient(ellipse at center, #2a2a2a 0%, #222 100%);
   animation: pulse 10s ease-in-out infinite;
