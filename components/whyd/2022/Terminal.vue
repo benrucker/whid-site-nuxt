@@ -6,20 +6,20 @@
         @clicked="terminalMouseDown"
       />
       <div id="textViewport" class="center text-view" @click="focusInput">
-        <div v-for="(text, index) in displayedTerminalContent" :key="index">
+        <div v-for="text in displayedTerminalContent" :key="text.id">
           <img
             v-if="text.type === 'image'"
             :src="text.url"
             width="120px"
             height="100px"
+            class="terminal-image"
           />
-          <p
+          <Whyd2022ChatText
             v-for="(line, idx) of text.content.split('\n')"
             :key="idx"
-            :class="text.class"
-          >
-            {{ line }}
-          </p>
+            style="display: block"
+            :content="line"
+          />
         </div>
         <Whyd2022TerminalUserInputArea
           ref="inputArea"
@@ -107,12 +107,12 @@ export default {
 
 <style>
 :root {
-  --primary: #c7c1a7; /* sage */
-  --secondary: #eec584; /* gold */
-  --outline: #b6a083; /* beige*/
-  --background: #171214; /* background */
-  --error: rgb(150, 0, 0);
-  --success: rgb(0, 150, 0);
+  --primary: #c7c1a7;
+  --secondary: #eec584;
+  --outline: #b6a083;
+  --background: #171214;
+  --error: rgb(205 48 48);
+  --success: rgb(77, 177, 77);
 }
 
 .outer {
@@ -164,23 +164,27 @@ export default {
   height: 50px;
 }
 
-p.error-text {
+.terminal-image {
+  filter: sepia(0.6);
+}
+
+.error-text {
   color: var(--error);
 }
 
-p.italic-text {
+.italic-text {
   font-style: italic;
 }
 
-p.confirmed-text {
+.confirmed-text {
   color: var(--success);
 }
 
-p.underlined-text {
+.underlined-text {
   text-decoration: underline;
 }
 
-p.emphasized-text {
+.emphasized-text {
   font-weight: bold;
 }
 </style>
