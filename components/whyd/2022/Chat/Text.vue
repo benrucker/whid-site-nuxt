@@ -156,4 +156,16 @@ function parseEmoji(data) {
   left: calc(0.05em - 0.1em);
   position: absolute;
 }
+
+.parsed-text .error {
+  color: var(--error);
+}
+
+.parsed-text .success {
+  color: var(--success);
+}
+
+.parsed-text .underline {
+  text-decoration: underline;
+}
 </style>
