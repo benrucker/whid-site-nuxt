@@ -27,7 +27,9 @@
             :alt="stats.server.idsToNames[id]"
           />
           <div class="imgUsername">{{ stats.server.idsToNames[id] }}</div>
-          <div>{{ imageCountByUser[id] }}</div>
+          <div :title="imageCountByUser[id] + ' images sent'">
+            {{ imageCountByUser[id] }}
+          </div>
           <div class="button" @click="handleClick(id)">wanna see one? 😏</div>
         </li>
       </ol>
@@ -96,6 +98,7 @@ export default {
   border-radius: 20px;
   padding: 20px;
   border: inset 5px;
+  border-color: white;
   font-size: 2em;
 
   color: #151515;

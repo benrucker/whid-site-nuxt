@@ -3,7 +3,7 @@
     class="leagueVsAll"
     :league-count="leagueCount"
     :other-count="otherCount"
-    other-name="everything
+    other-name="anything
 other than
 league"
     :leaguers="leaguers"

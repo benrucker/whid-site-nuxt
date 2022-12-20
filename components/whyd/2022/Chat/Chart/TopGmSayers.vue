@@ -107,6 +107,7 @@ export default {
   border-radius: 20px;
   padding: 20px;
   border: inset 5px;
+  border-color: white;
   font-size: 2em;
 
   color: #151515;
