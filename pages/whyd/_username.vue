@@ -3,10 +3,12 @@
 </template>
 
 <script>
+import Vue from 'vue'
+
 export default {
   asyncData({ params }) {
     return {
-      username: params.username
+      urlName: params.username
     }
   },
   data() {
@@ -25,17 +27,19 @@ export default {
     const server = await fetch('/whyd/2022/data/server.json').then((r) =>
       r.json()
     )
-    const namesToIds = server.namesToIds
+    const username = server.urlNamesToNames[this.urlName]
+    const userId = server.namesToIds[username]
     const user = await fetch(
-      `/whyd/2022/data/${namesToIds[this.username]}.json`
+      `/whyd/2022/data/${server.namesToIds[username]}.json`
     ).then((r) => r.json())
 
     this.stats = { server, user }
-    this.stats.user.name = this.username
-    this.stats.user.id = namesToIds[this.username]
 
-    localStorage.username = this.username
-    localStorage.userId = namesToIds[this.username]
+    Vue.set(this.stats.user, 'name', username)
+    Vue.set(this.stats.user, 'id', userId)
+
+    localStorage.setItem('username', username)
+    localStorage.setItem('userId', userId)
   }
 }
 </script>

@@ -142,8 +142,8 @@ export default {
 
     // Retrive the data
 
-    this.username = localStorage.username ?? 'fops'
-    this.userId = localStorage.userId ?? '173839815400357888'
+    this.username = localStorage.getItem('username') ?? 'fops'
+    this.userId = localStorage.getItem('userId') ?? '173839815400357888'
 
     const server = await fetch('/whyd/2022/data/server.json').then((r) =>
       r.json()
