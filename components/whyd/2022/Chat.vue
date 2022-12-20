@@ -53,7 +53,7 @@ export default {
       advancingIsDisabled: false,
       autoAdvanceTimeout: undefined,
       debugShowAll: true,
-      debugShowAllLimit: 75,
+      debugShowAllLimit: 150,
       displayed: [],
       messagesPosition: 0,
       showHint: true,
@@ -223,8 +223,8 @@ export default {
       return ''
     },
     lastMessageSent(content) {
-      setTimeout(() => {
-        this.$router.push(`/whyd/terminal`)
+      setTimeout(async () => {
+        await this.$router.push(`/whyd/terminal`)
       }, 5000)
 
       return content
