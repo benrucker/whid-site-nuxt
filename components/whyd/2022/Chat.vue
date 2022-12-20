@@ -53,7 +53,7 @@ export default {
       advancingIsDisabled: false,
       autoAdvanceTimeout: undefined,
       debugShowAll: true,
-      debugShowAllLimit: 175,
+      debugShowAllLimit: 110,
       displayed: [],
       messagesPosition: 0,
       showHint: true,

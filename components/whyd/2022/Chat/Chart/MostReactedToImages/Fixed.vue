@@ -23,7 +23,7 @@ export default {
       ].map((msg) => {
         return {
           authorName: msg.author.name,
-          authorAvatar: this.stats.server?.avatars[msg.author.id],
+          authorAvatar: this.stats.server?.idsToAvatars[msg.author.id],
           authorColor: msg.author.color,
           attachments: msg.attachments.map((attachment) => attachment.url),
           content: msg.content,

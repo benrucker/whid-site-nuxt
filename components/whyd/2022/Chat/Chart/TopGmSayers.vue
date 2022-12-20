@@ -26,7 +26,7 @@
           </div>
           <img
             class="imgAvatar"
-            :src="stats.server.avatars[id]"
+            :src="stats.server.idsToAvatars[id]"
             :alt="stats.server.idsToNames[id]"
           />
         </div>
@@ -52,7 +52,7 @@
           <div class="rank">{{ rankOfUser }}</div>
           <img
             class="imgAvatar"
-            :src="stats.server.avatars[stats.user.id]"
+            :src="stats.server.idsToAvatars[stats.user.id]"
             :alt="stats.server.idsToNames[stats.user.id]"
           />
         </div>
