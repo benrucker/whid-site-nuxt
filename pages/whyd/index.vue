@@ -24,13 +24,29 @@
         <button
           class="btn btn-secondary whyd-button"
           type="button"
+          :disabled="!isNameValid"
           @click="handleInputButtonPressed"
         >
           <i>whyd</i>
         </button>
       </div>
 
-      <div class="d-flex flex-row-reverse mt-5">
+      <div v-if="shouldShowTerminalButton" class="d-flex flex-row-reverse mt-1">
+        <button
+          class="btn btn-outline-primary btn-sm"
+          :disabled="!isNameValid"
+          :title="
+            isNameValid
+              ? 'Head straight to the terminal!'
+              : 'Enter a valid username to go to the terminal!'
+          "
+          @click="handleTerminalButtonPressed"
+        >
+          Go to terminal
+        </button>
+      </div>
+
+      <div class="d-flex flex-row-reverse mt-5 mb-5">
         <button
           class="btn btn-outline-secondary btn-sm mt-5 text-end text-muted"
           @click="handleLastYearButtonPressed"
@@ -48,7 +64,13 @@ export default {
     return {
       names: {},
       name: '',
-      namesToIds: {}
+      namesToIds: {},
+      shouldShowTerminalButton: false
+    }
+  },
+  computed: {
+    isNameValid() {
+      return Object.keys(this.names).includes(this.name)
     }
   },
   async mounted() {
@@ -57,17 +79,25 @@ export default {
     const serverData = await fetch('/whyd/2022/data/server.json')
     const serverJson = await serverData.json()
     this.namesToIds = serverJson.namesToIds
+    this.shouldShowTerminalButton =
+      localStorage.getItem('hasVisitedTerminal') === 'true'
   },
   methods: {
-    handleInputButtonPressed() {
-      if (Object.keys(this.names).includes(this.name)) {
-        localStorage.username = this.name
-        localStorage.userId = this.namesToIds[this.name]
-        this.$router.push(`/whyd/${this.names[this.name]}`)
+    goToIfValidName(path, name) {
+      if (this.isNameValid) {
+        localStorage.username = name
+        localStorage.userId = this.namesToIds[name]
+        this.$router.push(path)
       }
+    },
+    handleInputButtonPressed() {
+      this.goToIfValidName(`/whyd/${this.names[this.name]}`, this.name)
     },
     handleLastYearButtonPressed() {
       this.$router.push('/whyd/2021')
+    },
+    handleTerminalButtonPressed() {
+      this.goToIfValidName(`/whyd/terminal`, this.name)
     }
   }
 }
