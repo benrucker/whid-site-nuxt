@@ -1,7 +1,16 @@
 <template>
   <div ref="usbotGraph" class="usbotGraph">
-    <div class="graphContent">
-      <h1 class="text-center">u r libral</h1>
+    <div
+      class="graphContent"
+      title="Your political leaning, according to the content of your messages when processed thru INSERT ALGORITHM NAME HERE"
+    >
+      <h4 class="text-center mt-2">
+        {{
+          percentageFromLeft >= 50
+            ? 'you are this year, liberal.'
+            : "conservatively that you'd agree"
+        }}
+      </h4>
       <div class="politicalSlider">
         <div class="leftLine"></div>
         <div class="dotContainer">
