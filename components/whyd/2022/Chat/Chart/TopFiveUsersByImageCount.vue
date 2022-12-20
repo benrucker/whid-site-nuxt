@@ -23,7 +23,7 @@
         <li v-for="id in userIds" :key="id" class="entry">
           <img
             class="imgAvatar"
-            :src="stats.server.avatars[id]"
+            :src="stats.server.idsToAvatars[id]"
             :alt="stats.server.idsToNames[id]"
           />
           <div class="imgUsername">{{ stats.server.idsToNames[id] }}</div>

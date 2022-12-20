@@ -16,7 +16,7 @@ export default {
       const rawMessage = this.stats.server['Most Upvoted Post']
       const val = {
         authorName: rawMessage?.author.name,
-        authorAvatar: this.stats.server?.avatars[rawMessage?.author.id],
+        authorAvatar: this.stats.server?.idsToAvatars[rawMessage?.author.id],
         authorColor: rawMessage?.author.color,
         attachments: rawMessage?.attachments.map(
           (attachment) => attachment.url

@@ -50,7 +50,7 @@ export default {
         return {
           name: this.stats.server.idsToNames[id],
           pings: count,
-          avatar: this.stats.server.avatars[id]
+          avatar: this.stats.server.idsToAvatars[id]
         }
       })
     this.others = Object.entries(otherPings)
@@ -59,7 +59,7 @@ export default {
         return {
           name: this.stats.server.idsToNames[id],
           pings: count,
-          avatar: this.stats.server.avatars[id]
+          avatar: this.stats.server.idsToAvatars[id]
         }
       })
   }
