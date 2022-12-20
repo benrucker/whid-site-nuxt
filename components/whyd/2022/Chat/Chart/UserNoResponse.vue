@@ -1,7 +1,7 @@
 <template>
   <div class="usbotGraph">
     <div class="graphContent">
-      <h4>you got no response</h4>
+      <h4>you got this lack of response</h4>
       <div class="number">
         <h1>546</h1>
         <div class="usbotGraphLines">
