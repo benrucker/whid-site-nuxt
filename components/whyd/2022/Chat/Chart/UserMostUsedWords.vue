@@ -72,7 +72,8 @@ export default {
       raf: undefined,
       doneParsing: false,
       timeout: undefined,
-      timeoutDelay: 300
+      timeoutDelay: 300,
+      defaultSelectRects: undefined
     }
   },
   computed: {
@@ -157,17 +158,26 @@ export default {
       }
     },
     didBreakLine() {
-      const textNode = this.$refs.root2.lastChild.lastChild
+      const textNode = this.$refs.root2.lastChild.lastChild.lastChild
       const range = document.createRange()
       range.selectNode(textNode)
-      return range.getClientRects().length > 2
+
+      const numSelectRects = range.getClientRects().length
+
+      if (this.defaultSelectRects == null) {
+        // store a baseline to compare when our line breaks
+        this.defaultSelectRects = numSelectRects
+      }
+
+      return numSelectRects > this.defaultSelectRects
     },
     didFallOffBottom() {
       const textNode = this.$refs.root2.lastChild.lastChild
       const range = document.createRange()
       range.selectNode(textNode)
       return (
-        range.getBoundingClientRect().bottom > this.$refs.root2.lastChild.height
+        textNode.getBoundingClientRect().bottom >
+        this.$refs.root2.lastChild.height
       )
     }
   }
