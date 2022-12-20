@@ -53,7 +53,7 @@ export default {
       advancingIsDisabled: false,
       autoAdvanceTimeout: undefined,
       debugShowAll: true,
-      debugShowAllLimit: 150,
+      debugShowAllLimit: 175,
       displayed: [],
       messagesPosition: 0,
       showHint: true,
@@ -213,6 +213,7 @@ export default {
     beginEndAnimation() {
       this.debugShowAll = false
       this.disableAdvancing()
+      localStorage.setItem('shouldShowTerminalAnimation', 'true')
       setTimeout(() => {
         this.$refs.theOneAboveConversation.classList.add('breaking')
         this.$refs.conversation.classList.add('breaking')
