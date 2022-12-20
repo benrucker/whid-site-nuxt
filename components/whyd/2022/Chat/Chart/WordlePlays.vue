@@ -70,7 +70,7 @@ export default {
 
     this.userIds.forEach((id) => {
       this.userData[id].username = this.stats.server.idsToNames[id]
-      this.userData[id].avatar = this.stats.server.avatars[id]
+      this.userData[id].avatar = this.stats.server.idsToAvatars[id]
     })
   },
   methods: {
