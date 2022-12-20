@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container text-center pt-5">
+    <div v-if="server" class="container text-center pt-5">
       <img src="/whyd/2021/you.png" class="w-25 pb-4" />
       <h1 class="pb-3">
         <b>
@@ -17,7 +17,7 @@
           placeholder="Enter your name..."
         />
         <datalist id="namelist">
-          <option v-for="username in Object.keys(names)" :key="username">
+          <option v-for="username in usernames" :key="username">
             {{ username }}
           </option>
         </datalist>
@@ -62,36 +62,40 @@
 export default {
   data() {
     return {
-      names: {},
+      server: undefined,
       name: '',
-      namesToIds: {},
+      usernames: undefined,
       shouldShowTerminalButton: false
     }
   },
   computed: {
     isNameValid() {
-      return Object.keys(this.names).includes(this.name)
+      return this.usernames.includes(this.name)
     }
   },
   async mounted() {
-    const namesData = await fetch('/whyd/2021/data/nameToName.json')
-    this.names = await namesData.json()
-    const serverData = await fetch('/whyd/2022/data/server.json')
-    const serverJson = await serverData.json()
-    this.namesToIds = serverJson.namesToIds
+    this.server = await fetch('/whyd/2022/data/server.json').then((val) =>
+      val.json()
+    )
+    this.usernames = Object.values(this.server.urlNamesToNames)
     this.shouldShowTerminalButton =
       localStorage.getItem('hasVisitedTerminal') === 'true'
   },
   methods: {
     goToIfValidName(path, name) {
       if (this.isNameValid) {
-        localStorage.username = name
-        localStorage.userId = this.namesToIds[name]
+        const userId = this.server.namesToIds[name]
+
+        localStorage.setItem('username', name)
+        localStorage.setItem('userId', userId)
         this.$router.push(path)
       }
     },
     handleInputButtonPressed() {
-      this.goToIfValidName(`/whyd/${this.names[this.name]}`, this.name)
+      this.goToIfValidName(
+        `/whyd/${this.server.namesToUrlNames[this.name]}`,
+        this.name
+      )
     },
     handleLastYearButtonPressed() {
       this.$router.push('/whyd/2021')
