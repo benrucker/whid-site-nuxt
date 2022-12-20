@@ -66,6 +66,12 @@ export default {
         (prev, { count }) => (count > prev ? count : prev),
         0
       )
+    },
+    minUses() {
+      return Object.values(this.stickers).reduce(
+        (prev, { count }) => (count < prev ? count : prev),
+        10000000000 // very intelligent min-finding starting number
+      )
     }
   },
   watch: {
@@ -74,7 +80,10 @@ export default {
       for (const stickerInfo of this.stickers) {
         const stickerId = stickerInfo.id
         const stickerElement = this.$refs[stickerId][0]
-        const stickerSize = stickerInfo.count / this.maxUses + 50
+        const stickerSize =
+          ((stickerInfo.count - this.minUses) / (this.maxUses - this.minUses)) *
+            150 +
+          25
         const stickerXPositionPercent = Math.max(
           -5,
           Math.random() * 110 - stickerSize / 2
@@ -84,11 +93,11 @@ export default {
           Math.random() * 100 - stickerSize / 2
         )
 
-        stickerElement.style.width = `${stickerSize}px`
+        stickerElement.style.height = `${stickerSize}px`
         stickerElement.style.transform = `scale(100) rotate(${
           Math.random() * 120 - 60
         }deg)`
-        stickerElement.style.animationDelay = `${index * 0.5}s`
+        stickerElement.style.animationDelay = `${index * 0.25}s`
 
         stickerElement.style.top = `${stickerYPositionPercent}%`
         stickerElement.style.left = `${stickerXPositionPercent}%`
@@ -125,6 +134,8 @@ export default {
   animation: bounce-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both;
 
   cursor: pointer;
+
+  overflow: clip;
 }
 
 @keyframes bounce-in {
