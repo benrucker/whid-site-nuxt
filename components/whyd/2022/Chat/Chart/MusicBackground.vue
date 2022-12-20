@@ -1,7 +1,9 @@
 <template>
   <div ref="root" class="bg">
     <img ref="bg" :src="src" class="bgimg" />
-    <div ref="dots" class="dots" />
+    <div class="dots-parent">
+      <div ref="dots" class="dots" />
+    </div>
     <div class="musicShadow" />
   </div>
 </template>
@@ -141,21 +143,29 @@ export default {
   left: -25%;
 }
 
+.dots-parent {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: calc(100% - 10px);
+  height: calc(100% - 10px);
+  /* border: solid 5px rgba(20, 20, 20, 0); */
+  border-radius: 30px;
+
+  overflow: clip;
+}
+
 .dots {
   background: radial-gradient(rgba(255, 255, 255, 0.2) 8%, transparent 8%);
-  background-position: 0% 0%;
+  background-position: -10px -10px;
   background-size: 24px 24px;
   transition: background-position 350ms ease;
 
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.dots:hover {
-  background-position: -10% 0%;
+  width: 120%;
+  height: 120%;
 }
 
 .musicShadow {
