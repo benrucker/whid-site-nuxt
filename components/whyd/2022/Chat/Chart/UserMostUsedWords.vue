@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-show="doneParsing" ref="root1" class="usbotGraph">
+    <div v-show="doneParsing" ref="root1" class="usbotGraph real">
       <div class="usbotGraphHeader">your most used words</div>
       <div class="usbotGraphContent">
         <div :ref="'1line'" class="line--1 line">
@@ -72,7 +72,8 @@ export default {
       raf: undefined,
       doneParsing: false,
       timeout: undefined,
-      timeoutDelay: 300
+      timeoutDelay: 300,
+      defaultSelectRects: undefined
     }
   },
   computed: {
@@ -157,17 +158,26 @@ export default {
       }
     },
     didBreakLine() {
-      const textNode = this.$refs.root2.lastChild.lastChild
+      const textNode = this.$refs.root2.lastChild.lastChild.lastChild
       const range = document.createRange()
       range.selectNode(textNode)
-      return range.getClientRects().length > 2
+
+      const numSelectRects = range.getClientRects().length
+
+      if (this.defaultSelectRects == null) {
+        // store a baseline to compare when our line breaks
+        this.defaultSelectRects = numSelectRects
+      }
+
+      return numSelectRects > this.defaultSelectRects
     },
     didFallOffBottom() {
       const textNode = this.$refs.root2.lastChild.lastChild
       const range = document.createRange()
       range.selectNode(textNode)
       return (
-        range.getBoundingClientRect().bottom > this.$refs.root2.lastChild.height
+        textNode.getBoundingClientRect().bottom >
+        this.$refs.root2.lastChild.height
       )
     }
   }
@@ -187,6 +197,8 @@ export default {
   border-bottom: 10px solid var(--bubble-color);
   box-shadow: 0px 0px 0px 4px rgba(17, 17, 17, 1),
     0px 0px 10px rgba(0, 0, 0, 0.5);
+
+  animation: fade-in 1s ease-in-out;
 }
 
 .usbotGraphHeader {
@@ -235,6 +247,10 @@ export default {
   align-items: center;
   text-align: start;
   overflow: hidden;
+
+  &.real {
+    animation: none;
+  }
 }
 
 .rest-of-the-lines {

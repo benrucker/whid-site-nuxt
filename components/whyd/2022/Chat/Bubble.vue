@@ -1,7 +1,9 @@
 <template>
   <div ref="bubble" :class="`bubble`">
     <transition :key="msgId" name="tail-exit">
-      <div v-if="isLastInGroup" class="tail" />
+      <div v-if="isLastInGroup" class="tail-parent">
+        <div class="tail" />
+      </div>
     </transition>
     <div class="background" />
   </div>
@@ -64,7 +66,7 @@ export default {
   transform-origin: bottom left;
 }
 
-.message .content .bubble .tail {
+.message .content .bubble .tail-parent {
   position: absolute;
   width: 15px;
   height: 15px;
@@ -72,17 +74,32 @@ export default {
 
   content: '';
   transform: translate(0, 0px);
+
+  overflow: hidden;
+  border-radius: 0.01px;
+}
+
+.message.left .content .bubble .tail-parent {
+  left: 0;
+}
+
+.message.right .content .bubble .tail-parent {
+  right: 0;
+}
+
+.message .content .bubble .tail {
+  width: 100%;
+  height: 100%;
+  transform: rotate(0);
+  background-color: var(--bubble-color);
 }
 
 .message.left .content .bubble .tail {
   clip-path: polygon(0 0, 100% 0, 0 75%);
-  background: var(--bubble-color);
 }
 
 .message.right .content .bubble .tail {
-  right: 0;
   clip-path: polygon(0 0, 100% 0, 100% 75%);
-  background-color: var(--bubble-color);
 }
 
 .tail-exit-leave-active {
