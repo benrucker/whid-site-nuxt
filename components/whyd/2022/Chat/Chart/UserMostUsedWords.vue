@@ -1,8 +1,8 @@
 <template>
   <div>
     <div v-show="doneParsing" ref="root1" class="usbotGraph real">
-      <div class="usbotGraphHeader">your most used words</div>
-      <div class="usbotGraphContent">
+      <div class="usbotGraphHeader">yours is the most common words</div>
+      <div v-if="displayedWords?.length > 0" class="usbotGraphContent">
         <div :ref="'1line'" class="line--1 line">
           <span
             v-for="(word, index) in displayedWords[1]"
@@ -33,9 +33,16 @@
           </div>
         </div>
       </div>
+      <div v-else class="usbotGraphContent">
+        <div class="usbotZeroState text-muted">
+          you said no words came out of your mouth this year :(
+        </div>
+      </div>
     </div>
     <div v-show="!doneParsing" ref="root2" class="usbotGraph">
-      <div class="usbotGraphHeader">loading...</div>
+      <div class="usbotGraphHeader">
+        the graph is loading that takes forever...
+      </div>
       <div class="usbotGraphContent">
         <div
           v-for="line in numLines"
@@ -254,6 +261,15 @@ export default {
   &.real {
     animation: none;
   }
+}
+
+.usbotZeroState {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .rest-of-the-lines {
