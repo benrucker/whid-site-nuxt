@@ -6,7 +6,9 @@
     >
       <h4 class="text-center mt-2">
         {{
-          percentageFromLeft >= 50
+          percentageFromLeft === 50
+            ? 'the middle is rare'
+            : percentageFromLeft > 50
             ? 'you are this year, liberal.'
             : "conservatively that you'd agree"
         }}
@@ -105,13 +107,23 @@ export default {
 }
 
 .politicalSlider .centerDot {
+  --height: 25px;
+  --width: 15px;
+
   position: absolute;
-  top: -5px;
-  left: -10px;
-  width: 20px;
-  height: 20px;
-  background-color: #838383;
-  border: 1px solid #aaa;
+  width: var(--width);
+  height: var(--height);
+
+  top: calc(var(--height) / -4 - 1px);
+  left: calc(var(--width) / -2);
+
+  /* background: rgba(205, 205, 205, 1); */
+  background: linear-gradient(
+    to right,
+    var(--political-color-2) 0 25%,
+    var(--political-color-1) 75%
+  );
+  /* border-radius: 50%; */
   border-radius: 5px;
   z-index: 1;
 }
