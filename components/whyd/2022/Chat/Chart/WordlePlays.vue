@@ -27,7 +27,18 @@
             :alt="userData[id].username"
           />
           <div>{{ userData[id].username }}</div>
-          <div>{{ userData[id].playCount }}</div>
+          <div>
+            <span title="Number of plays of wordle-like games">{{
+              userData[id].playCount
+            }}</span>
+            <span class="bar">|</span>
+            <span
+              :title="`Based on an average score of ${
+                userData[id].averageScore ?? 99
+              }%`"
+              >{{ userData[id].letterGrade ?? 'A+' }}</span
+            >
+          </div>
         </li>
       </ol>
     </div>

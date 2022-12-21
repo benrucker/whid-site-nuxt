@@ -1,7 +1,16 @@
 <template>
-  <div class="usbotGraph">
-    <div class="graphContent">
-      <h1 class="text-center">u r libral</h1>
+  <div ref="usbotGraph" class="usbotGraph">
+    <div
+      class="graphContent"
+      title="Your political leaning, according to the content of your messages when processed thru INSERT ALGORITHM NAME HERE"
+    >
+      <h4 class="text-center mt-2">
+        {{
+          percentageFromLeft >= 50
+            ? 'you are this year, liberal.'
+            : "conservatively that you'd agree"
+        }}
+      </h4>
       <div class="politicalSlider">
         <div class="leftLine"></div>
         <div class="dotContainer">
@@ -35,13 +44,32 @@
   </div>
 </template>
 
-<script></script>
+<script>
+export default {
+  data() {
+    return {
+      percentageFromLeft: 50
+    }
+  },
+  watch: {
+    percentageFromLeft(val) {
+      this.$refs.usbotGraph.style.setProperty('--leftWidth', `${val}%`)
+    }
+  },
+  mounted() {
+    setTimeout(() => {
+      this.percentageFromLeft = 40
+    })
+  }
+}
+</script>
 
 <style scoped>
 .usbotGraph {
-  --leftWidth: 60%;
+  --leftWidth: 50%;
   --political-color-1: hsl(190, 30%, 56%);
   --political-color-2: hsl(0, 30%, 56%);
+  --transition: width 1s ease;
 }
 
 .graphContent {
@@ -60,12 +88,12 @@
   height: 10px;
   flex-shrink: 0;
   margin: 10px 10px;
-  /* padding: 10px 5px; */
 }
 
 .politicalSlider .leftLine {
   width: var(--leftWidth);
-  min-width: var(--leftWidth);
+  transition: var(--transition);
+
   height: 100%;
   background-color: var(--political-color-1);
 }
@@ -90,6 +118,8 @@
 
 .politicalSlider .rightLine {
   width: calc(100% - var(--leftWidth));
+  transition: var(--transition);
+
   height: 100%;
   background-color: var(--political-color-2);
 }
@@ -112,14 +142,16 @@
 }
 
 .lineGroup1 {
-  --leftWidth: 60%;
   width: var(--leftWidth);
-  min-width: var(--leftWidth);
+  transition: var(--transition);
+
   --political-color: var(--political-color-1);
 }
 
 .lineGroup2 {
-  width: 50%;
+  width: calc(100% - var(--leftWidth));
+  transition: var(--transition);
+
   flex-shrink: 1;
   padding-left: 5px;
   --political-color: var(--political-color-2);
@@ -128,7 +160,6 @@
 .usbotLine {
   height: 2px;
   display: block;
-  /* margin-top: 20px; */
   background-color: var(--political-color);
 }
 
