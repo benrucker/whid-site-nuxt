@@ -1,21 +1,22 @@
 <template>
   <div id="last" ref="last" class="mb-0">
-    >
     <span
       v-if="
         terminalMode === mode.textInput || terminalMode === mode.hybridInput
       "
       id="userInputDisplay"
-      >{{ userInput }}</span
-    ><a ref="blinkingUnderscore" class="blink">_</a><br />
-    <a
+      >> {{ userInput }}<a ref="blinkingUnderscore" class="blink">_</a></span
+    >
+    <span
       v-if="isShowProceed && terminalMode === mode.clickContinue"
       style="cursor: pointer"
-      class="blink"
       @click="handleContinueButtonClick"
     >
-      Click to continue
-    </a>
+      >
+      <span class="blink" style="text-decoration: underline"
+        >Click to continue</span
+      >
+    </span>
     <div
       v-show="
         terminalMode === mode.buttonInput || terminalMode === mode.hybridInput
@@ -80,6 +81,7 @@ export default {
         '/root/whyd/test',
         '/root/whyd/SecBot'
       ]),
+      validCommands: undefined,
       stats: undefined,
       uniqueLineId: 0
     }
@@ -140,6 +142,16 @@ export default {
     )
     this.validPaths = paths
 
+    // Valid commands
+
+    const prettyNames = Array.from(Object.values(this.terminalCommands)).map(
+      (e) => e.prettyName
+    )
+
+    this.validCommands = new Set(
+      prettyNames.concat(Array.from(Object.keys(this.terminalCommands)))
+    )
+
     // Retrive the data
 
     this.username = localStorage.getItem('username') ?? 'fops'
@@ -167,13 +179,22 @@ export default {
     getUniqueLineId() {
       return ++this.uniqueLineId
     },
+    getTerminalMode() {
+      return this.terminalMode
+    },
     // #region Page Control Functions
-    focusInput() {
+    focusInput(proceed = true) {
       if (
         this.terminalMode === mode.textInput ||
         this.terminalMode === mode.hybridInput
       ) {
         this.$refs.terminalTextInput.focus()
+      } else if (
+        proceed &&
+        this.isShowProceed &&
+        this.terminalMode === mode.clickContinue
+      ) {
+        this.handleContinueButtonClick()
       }
     },
     scrollToBottom() {
@@ -182,30 +203,42 @@ export default {
     // #endregion
     // #region User Input Control Functions
     submitTextCommand() {
+      if (this.terminalMode === mode.clickContinue) {
+        return
+      }
+
       const input = this.userInput
       this.$refs.terminalTextInput.disabled = true
 
-      this.emitNewLine({ content: `> ${input}` })
+      this.emitNewLine({ content: `{> ${input} | tall}` })
       this.processCommand(input)
 
       this.userInput = ''
       this.$refs.terminalTextInput.disabled = false
       this.scrollToBottom()
-      this.focusInput()
+      this.focusInput(false)
     },
-    handleOptionButtonClick(_, commandKey) {
-      // event parameter is discarded
-      this.emitNewLine({ content: `> ${commandKey}` })
+    handleOptionButtonClick(event, commandKey) {
+      event.stopImmediatePropagation()
+
+      this.emitNewLine({ content: `{> ${commandKey} | tall}` })
       this.processCommand(commandKey)
       this.scrollToBottom()
+      this.focusInput(false)
     },
     processCommand(input) {
       const processed = input.trim() // .toLowerCase() fuck you if you try to use caps in the terminal
-      const valid = Object.keys(this.terminalCommands)
 
-      if (valid.includes(processed)) {
-        this.terminalCommands[input].hasBeenRun = true
-        const command = this.terminalCommands[input]
+      if (this.validCommands.has(processed)) {
+        const command =
+          this.terminalCommands[input] ??
+          this.terminalCommands[
+            Object.entries(this.terminalCommands).find(
+              (e) => e[1].prettyName === processed
+            )[0]
+          ]
+        command.hasBeenRun = true
+        // const command = this.terminalCommands[input]
         const func = commands[command.functionName]
 
         if (typeof func === 'function') {
@@ -298,6 +331,7 @@ export default {
       this.emitNewLine({
         content: `${this.path}/`
       })
+      this.focusInput()
     }
   }
 }
