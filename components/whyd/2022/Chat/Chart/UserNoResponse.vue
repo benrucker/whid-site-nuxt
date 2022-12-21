@@ -1,9 +1,9 @@
 <template>
   <div class="usbotGraph">
     <div class="graphContent">
-      <h4>you got no response</h4>
+      <h4>you got the lack of response</h4>
       <div class="number">
-        <h1>546</h1>
+        <span class="value">{{ noResponseCount }}</span>
         <div class="usbotGraphLines">
           <div class="lineGroup1">
             <div class="usbotLine line1"></div>
@@ -33,11 +33,25 @@
   </div>
 </template>
 
-<script></script>
+<script>
+export default {
+  props: {
+    stats: {
+      type: Object,
+      default: () => {}
+    }
+  },
+  computed: {
+    noResponseCount() {
+      return this.stats.user.noResponseCount ?? 546
+    }
+  }
+}
+</script>
 
 <style scoped>
 .usbotGraph {
-  --leftWidth: 60%;
+  --bubble-color-2: hsl(190, 30%, 56%);
   padding: 0 0;
 }
 
@@ -63,18 +77,31 @@ h4 {
   margin: 10px 0;
 }
 
-.number h1 {
+.number .value {
+  display: inline-block;
+  margin-top: 15px;
   font-size: 3rem;
   font-weight: 700;
-  margin-top: 25px;
+  color: rgba(0, 0, 0, 0);
+  padding: 0 60px 0 60px; /* this padding resizes the backgroup ellipse */
+  background: radial-gradient(
+    ellipse at bottom,
+    var(--bubble-color-2) 0 35%,
+    var(--bubble-color) 35% 100%
+  );
+  overflow: clip;
+  background-clip: text;
+  background-size: 100% 100%;
+  background-position: 0;
+  text-decoration: none;
 }
 
 .usbotGraphLines {
   position: absolute;
-  top: 40%;
+  top: 25%;
   left: 0;
 
-  min-height: 80%;
+  min-height: 100%;
   width: 100%;
   display: flex;
   padding: 0 0;
@@ -101,7 +128,6 @@ h4 {
   /* margin-top: 20px; */
   /* background-color: #ddd; */
   overflow: visible;
-  --bubble-color-2: hsl(190, 30%, 56%);
   background: radial-gradient(
       circle at 0% 50%,
       var(--bubble-color) 0,
@@ -124,6 +150,12 @@ h4 {
   --size: 7px;
   opacity: 100%;
   width: 100%;
+  background: radial-gradient(
+    circle at 0% 50%,
+    var(--bubble-color) 0,
+    var(--bubble-color) var(--size),
+    rgba(255, 255, 255, 0) calc(var(--size) + 1px)
+  );
 }
 
 .line2 {
