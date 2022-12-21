@@ -5,7 +5,12 @@
         @hideTerminal="hideTerminal"
         @clicked="terminalMouseDown"
       />
-      <div id="textViewport" class="center text-view" @click="focusInput">
+      <div
+        id="textViewport"
+        class="center text-view"
+        :style="{ cursor: isTerminalClickContinue ? 'pointer' : 'default' }"
+        @click="focusInput"
+      >
         <div v-for="text in displayedTerminalContent" :key="text.id">
           <img
             v-if="text.type === 'image'"
@@ -46,18 +51,29 @@ export default {
       offsetX: 40,
       offsetY: 40,
       dragging: false,
-      loggedIn: false
+      loggedIn: false,
+      inputAreaRef: undefined
     }
   },
   computed: {
     displayedTerminalContent() {
-      // return this.terminalContent
       return this.terminalContent.slice(-50)
+    },
+    isTerminalClickContinue() {
+      if (this.inputAreaRef == null) {
+        return false
+      }
+
+      return this.inputAreaRef.getTerminalMode() === 'clickContinue'
     }
   },
   mounted() {
     this.scrollToBottom()
     this.terminalContent = []
+
+    this.$nextTick(() => {
+      this.inputAreaRef = this.$refs.inputArea
+    })
   },
   methods: {
     hideTerminal() {
@@ -162,7 +178,7 @@ export default {
   filter: sepia(0.6);
 }
 
-.error-text {
+/* .error-text {
   color: var(--error);
 }
 
@@ -180,5 +196,5 @@ export default {
 
 .emphasized-text {
   font-weight: bold;
-}
+} */
 </style>

@@ -43,6 +43,9 @@ export default {
       stopLogo: false
     }
   },
+  mounted() {
+    this.focusPasswordInput()
+  },
   methods: {
     focusPasswordInput() {
       this.$refs.passwordTextInput.focus()
@@ -105,7 +108,7 @@ export default {
       }, 6000)
       setTimeout(() => {
         this.$emit('logIn')
-        // }, 120) // give 5 seconds
+        // }, 120) // give .05 seconds
       }, 12000) // give 5 seconds
     }
   }
