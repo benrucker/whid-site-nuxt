@@ -57,7 +57,7 @@
           />
         </div>
         <div>{{ stats.server.idsToNames[stats.user.id] }}</div>
-        <div>{{ countsById[stats.user.id] }}</div>
+        <div>{{ countsById[stats.user.id] ?? 0 }}</div>
         <div
           class="reaction-bubble"
           data-bs-toggle="tooltip"
@@ -89,7 +89,11 @@ export default {
       return this.stats.server['List of users by gms']
     },
     rankOfUser() {
-      return Object.keys(this.countsById).indexOf(this.stats.user.id) + 1
+      const position = Object.keys(this.countsById).indexOf(this.stats.user.id)
+      if (position === -1) {
+        return '??'
+      }
+      return position + 1
     },
     userIds() {
       return Array.from(Object.keys(this.countsById))?.slice(0, 5) ?? []
