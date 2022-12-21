@@ -176,4 +176,9 @@ function parseEmoji(data) {
 .parsed-text .underline {
   text-decoration: underline;
 }
+
+.parsed-text .tall {
+  padding: 5px 0 5px 0;
+  display: inline-block;
+}
 </style>
