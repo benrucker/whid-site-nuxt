@@ -58,7 +58,7 @@ export default {
 .graphContent {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   height: 100%;
 }
 
@@ -148,7 +148,7 @@ h4 {
 
 .line1 {
   --size: 7px;
-  opacity: 100%;
+  opacity: 1;
   width: 100%;
   background: radial-gradient(
     circle at 0% 50%,
@@ -160,43 +160,43 @@ h4 {
 
 .line2 {
   --size: 7px;
-  opacity: 75%;
+  opacity: 0.75;
   width: 55%;
 }
 
 .line3 {
   --size: 7px;
-  opacity: 50%;
+  opacity: 0.5;
   width: 25%;
 }
 
 .line4 {
   --size: 7px;
-  opacity: 30%;
+  opacity: 0.3;
   width: 12%;
 }
 
 .line5 {
   --size: 7px;
-  opacity: 19%;
+  opacity: 0.19;
   width: 7%;
 }
 
 .line6 {
   --size: 7px;
-  opacity: 12%;
+  opacity: 0.12;
   width: 3.5%;
 }
 
 .line7 {
   --size: 7px;
-  opacity: 9%;
+  opacity: 0.09;
   width: 2%;
 }
 
 .line8 {
   --size: 7px;
-  opacity: 6%;
+  opacity: 0.06;
   width: 1%;
 }
 </style>
