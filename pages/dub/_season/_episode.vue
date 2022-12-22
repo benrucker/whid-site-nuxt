@@ -20,17 +20,14 @@
       <h2 class="fw-bold mb-0 mt-1">
         {{ title }}
       </h2>
-      <p v-if="releaseDate" class="text-muted">
-        Released {{ releaseDate }}
-      </p>
+      <p v-if="releaseDate" class="text-muted">Released {{ releaseDate }}</p>
 
       <p v-for="(part, index) in parts" :key="index" class="mb-0">
-        <a
-          href="javascript:void(0)"
-          @click="goToPart(index)"
-        >Part {{ index + 1 }}</a>: {{ part.members }}
+        <a href="javascript:void(0)" @click="goToPart(index)"
+          >Part {{ index + 1 }}</a
+        >: {{ part.members }}
       </p>
-      <br>
+      <br />
     </div>
   </div>
 </template>
@@ -38,7 +35,7 @@
 export default {
   layout: 'dub-layout',
   // eslint-disable-next-line require-await, @typescript-eslint/no-unused-vars
-  async asyncData ({ params, redirect }) {
+  async asyncData({ params, redirect }) {
     const season = params.season
     const episode = params.episode
 
@@ -47,7 +44,7 @@ export default {
       episode
     }
   },
-  data () {
+  data() {
     return {
       title: '',
       releaseDate: '',
@@ -60,7 +57,7 @@ export default {
       loaded: false
     }
   },
-  async fetch () {
+  async fetch() {
     this.time = this.$nuxt.context.query.t
     this.catalog = await this.$nuxt.$content('catalog').fetch()
     try {
@@ -80,7 +77,7 @@ export default {
     }
     this.loaded = true
   },
-  head () {
+  head() {
     return {
       title: 'Watching ' + this.title,
       meta: [
@@ -109,12 +106,14 @@ export default {
   },
   watch: {
     // eslint-disable-next-line require-await
-    async loaded () {
+    async loaded() {
       document.title = 'Watching ' + this.title
       const setInitialState = () => {
         try {
           this.$refs.video.volume = 0.4
-          if (this.time) { this.goToTime(this.time) }
+          if (this.time) {
+            this.goToTime(this.time)
+          }
           return true
         } catch (err) {
           console.log(err)
@@ -132,38 +131,38 @@ export default {
       interval()
     }
   },
-  async mounted () {
+  async mounted() {
     await this.setupPage()
   },
   methods: {
-    async setupPage () {},
-    goToPart (partIndex) {
+    async setupPage() {},
+    goToPart(partIndex) {
       this.goToTime(convertTimestampToSeconds(this.parts[partIndex].timestamp))
     },
-    goToTime (time) {
+    goToTime(time) {
       this.$refs.video.currentTime = time
     }
   }
 }
 
 class VideoIDError extends Error {
-  constructor (message) {
+  constructor(message) {
     super(message)
     this.name = 'VideoIDError'
   }
 }
 
-function getVideoDataFromID (catalog, season, id) {
+function getVideoDataFromID(catalog, season, id) {
   const episodes = getEpisodesFromSeason(catalog, season)
   const episode = getEpisodeFromList(episodes, id)
   return episode
 }
 
-function getEpisodesFromSeason (catalog, season) {
+function getEpisodesFromSeason(catalog, season) {
   return catalog.seasons[season].episodes
 }
 
-function getEpisodeFromList (episodes, epid) {
+function getEpisodeFromList(episodes, epid) {
   for (const episode of episodes) {
     if (episode.id === epid) {
       return episode
@@ -172,29 +171,29 @@ function getEpisodeFromList (episodes, epid) {
   throw new VideoIDError('Video ID not found in catalog')
 }
 
-function constructVideoURL (season, episode) {
-  return '/dub/videos/' + season + '/' + episode + '.mp4'
+function constructVideoURL(season, episode) {
+  return 'https://12b3.pw/whid/videos/' + season + '/' + episode + '.mp4'
 }
 
-function constructThumbnailURL (season, episode) {
-  return '/dub/thumbnails/' + season + '/' + episode + '.png'
+function constructThumbnailURL(season, episode) {
+  return 'https://12b3.pw/whid/thumbnails/' + season + '/' + episode + '.png'
 }
 
-function constructDate (ep) {
+function constructDate(ep) {
   return ep.releaseDate
 }
 
-function convertTimestampToSeconds (timestamp) {
-  const [min, sec] = timestamp.split(':').map(x => Number(x))
+function convertTimestampToSeconds(timestamp) {
+  const [min, sec] = timestamp.split(':').map((x) => Number(x))
   return min * 60 + sec
 }
 
-function getMajorColor () {
+function getMajorColor() {
   const cols = ['#ffd294', '#a3eff7', '#fcaecf', '#bda6ff']
   return cols[getRandomInt(cols.length)]
 }
 
-function getRandomInt (total) {
+function getRandomInt(total) {
   const newNum = Math.floor(Math.random() * (total - 1))
   return newNum
 }
