@@ -272,6 +272,50 @@ export default {
 
       return lines
     },
+    SecBotMessages(stats) {
+      const firstSecBotMessage = stats.server['SecBot first recorded message']
+      const firstMessageAuthor =
+        stats.server.idsToNames[firstSecBotMessage.author]
+      const date = new Date(firstSecBotMessage.timestamp)
+      const firstMessageTimestamp = date.toGMTString()
+
+      const lines = [
+        { content: '{Messages | underline}' },
+        {
+          content: `On {${firstMessageTimestamp} | bold} SecurityBot recorded it's first message in 'what have i done'. Its contents are as follows:`
+        },
+        {
+          content: `{${firstMessageAuthor}: ${firstSecBotMessage.content} | bold}`
+        }
+      ]
+
+      if (firstSecBotMessage.author === stats.user.id) {
+        lines.push({
+          content: `There's nothing special about being the first entry in a database, so there is no reason for celebration.`
+        })
+      } else {
+        const userFirstSecBotMessage =
+          stats.user['SecBot first message in SecBot']
+        const userFirstTimestamp = new Date(
+          userFirstSecBotMessage.timestamp
+        ).toGMTString()
+        lines.push({
+          content: `{${stats.user.name} | bold}'s first message was added to the database on {${userFirstTimestamp} | bold} with the following content:`
+        }),
+          lines.push({
+            content: `{ ${stats.user.name}: ${userFirstSecBotMessage.content} | bold}`
+          })
+      }
+    }, // ADD NUMBER OF TOTAL MESSAGES SEEN BY SECBOT TO THIS
+    SecBotEditedDeletedMessages(stats) {},
+    SecBotVoiceStateTime(stats) {
+      // calculate minimum wage
+      // user time + total man hours
+    },
+    SecBotVoiceStateLongest(stats) {
+      // longest user spent in vc
+      // single day where they were in VC the longest
+    },
     MetaSecBotDevelopment() {
       // describe how the scoring worked? including the initial method and how it was changed to be wackier after a few weeks while ben was drunk? (cheeto cheeto)
       // include how scores loop around from 1600
