@@ -21,6 +21,9 @@ export default {
     this.messages = (await this.$nuxt.$content('messages').fetch()).messages
     this.messages.forEach((v, i) => {
       v.id = i
+      if (v.author == null) {
+        v.author = this.messages[i - 1].author
+      }
     })
   },
   async mounted() {
