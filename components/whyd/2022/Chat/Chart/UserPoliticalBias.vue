@@ -78,7 +78,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   height: 100%;
 }
 
@@ -176,42 +176,42 @@ export default {
 }
 
 .line1 {
+  opacity: 0.7;
   width: 90%;
-  opacity: 70%;
 }
 
 .line2 {
-  opacity: 55%;
+  opacity: 0.55;
   width: 50%;
 }
 
 .line3 {
-  opacity: 35%;
+  opacity: 0.35;
   width: 25%;
 }
 
 .line4 {
-  opacity: 22%;
+  opacity: 0.22;
   width: 12%;
 }
 
 .line5 {
-  opacity: 17%;
+  opacity: 0.17;
   width: 7%;
 }
 
 .line6 {
-  opacity: 13.5%;
+  opacity: 0.135;
   width: 3.5%;
 }
 
 .line7 {
-  opacity: 12%;
+  opacity: 0.12;
   width: 2%;
 }
 
 .line8 {
-  opacity: 11%;
+  opacity: 0.11;
   width: 1%;
 }
 </style>
