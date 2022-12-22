@@ -18,9 +18,7 @@
       <p v-if="$fetchState.pending" />
       <section v-else>
         <section v-if="featured">
-          <h3 class="text-center mt-4">
-            Featured Video
-          </h3>
+          <h3 class="text-center mt-4">Featured Video</h3>
           <div class="container">
             <FeaturedVideoCard
               v-if="featured"
@@ -33,9 +31,7 @@
           </div>
         </section>
 
-        <h3 class="text-center mt-4">
-          Episodes
-        </h3>
+        <h3 class="text-center mt-4">Episodes</h3>
 
         <div class="container d-flex mt-3 mb-3">
           <div
@@ -53,12 +49,13 @@
                 name="btnradio"
                 :value="season"
                 autocomplete="off"
-              >
+              />
               <label
                 :key="season.id"
                 class="btn btn-outline-primary"
                 :for="season"
-              >{{ seasons[season].name }}</label>
+                >{{ seasons[season].name }}</label
+              >
             </template>
           </div>
         </div>
@@ -90,7 +87,7 @@
 <script>
 export default {
   layout: 'dub-layout',
-  data () {
+  data() {
     return {
       catalog: null,
       activeSeason: 's1',
@@ -100,61 +97,61 @@ export default {
       featuredDesc: ''
     }
   },
-  async fetch () {
+  async fetch() {
     this.catalog = await this.$nuxt.$content('catalog').fetch()
     addSeasonToEpisodes(this.catalog)
     this.seasons = getSeasons(this.catalog)
-    this.showAlert = this.$nuxt.context.query.error;
-    [this.featured, this.featuredDesc] = getFeaturedVideo(this.catalog)
+    this.showAlert = this.$nuxt.context.query.error
+    ;[this.featured, this.featuredDesc] = getFeaturedVideo(this.catalog)
   },
-  async mounted () {},
+  async mounted() {},
   methods: {
-    title (episode) {
+    title(episode) {
       return episode.title
     },
-    date (episode) {
+    date(episode) {
       return constructDate(episode)
     },
-    thumbnail (episode) {
+    thumbnail(episode) {
       return constructThumbnailURL(episode)
     },
-    video (episode) {
+    video(episode) {
       return constructWatchURL(episode)
     },
-    thumbnailFeatured () {
+    thumbnailFeatured() {
       return constructThumbnailURL(this.featured)
     },
-    watchFeatured () {
+    watchFeatured() {
       return constructWatchURL(this.featured)
     }
   }
 }
 
 class VideoIDError extends Error {
-  constructor (message) {
+  constructor(message) {
     super(message)
     this.name = 'VideoIDError'
   }
 }
 
-function addSeasonToEpisodes (catalog) {
+function addSeasonToEpisodes(catalog) {
   for (const seasonID in catalog.seasons) {
     const season = catalog.seasons[seasonID]
-    season.episodes.map(x => (x.season = seasonID))
+    season.episodes.map((x) => (x.season = seasonID))
   }
 }
 
-function getSeasons (catalog) {
+function getSeasons(catalog) {
   return catalog.seasons
 }
 
-function getFeaturedVideo (catalog) {
+function getFeaturedVideo(catalog) {
   const [season, id, desc] = getFeaturedVideoData(catalog)
   const data = getVideoDataFromID(catalog, season, id)
   return [data, desc]
 }
 
-function getFeaturedVideoData (catalog) {
+function getFeaturedVideoData(catalog) {
   return [
     catalog.featured.season,
     catalog.featured.id,
@@ -162,17 +159,17 @@ function getFeaturedVideoData (catalog) {
   ]
 }
 
-function getVideoDataFromID (catalog, season, id) {
+function getVideoDataFromID(catalog, season, id) {
   const episodes = getEpisodesFromSeason(catalog, season)
   const episode = getEpisodeFromList(episodes, id)
   return episode
 }
 
-function getEpisodesFromSeason (catalog, season) {
+function getEpisodesFromSeason(catalog, season) {
   return catalog.seasons[season].episodes
 }
 
-function getEpisodeFromList (episodes, epid) {
+function getEpisodeFromList(episodes, epid) {
   for (const episode of episodes) {
     if (episode.id === epid) {
       return episode
@@ -181,15 +178,15 @@ function getEpisodeFromList (episodes, epid) {
   throw new VideoIDError('Video ID not found in catalog')
 }
 
-function constructWatchURL (ep) {
+function constructWatchURL(ep) {
   return '/dub/' + ep.season + '/' + ep.id + ''
 }
 
-function constructThumbnailURL (ep) {
-  return '/dub/thumbnails/' + ep.season + '/' + ep.id + '.png'
+function constructThumbnailURL(ep) {
+  return 'https://12b3.pw/whid/thumbnails/' + ep.season + '/' + ep.id + '.png'
 }
 
-function constructDate (ep) {
+function constructDate(ep) {
   return ep.releaseDate
 }
 </script>
