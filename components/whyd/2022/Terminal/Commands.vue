@@ -299,12 +299,13 @@ export default {
         const userFirstTimestamp = new Date(
           userFirstSecBotMessage.timestamp
         ).toGMTString()
+
         lines.push({
           content: `{${stats.user.name} | bold}'s first message was added to the database on {${userFirstTimestamp} | bold} with the following content:`
-        }),
-          lines.push({
-            content: `{ ${stats.user.name}: ${userFirstSecBotMessage.content} | bold}`
-          })
+        })
+        lines.push({
+          content: `{ ${stats.user.name}: ${userFirstSecBotMessage.content} | bold}`
+        })
       }
     }, // ADD NUMBER OF TOTAL MESSAGES SEEN BY SECBOT TO THIS
     SecBotEditedDeletedMessages(stats) {},
