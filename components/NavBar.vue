@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-md navbar-dark bg-dark py-2">
     <div class="container">
       <NuxtLink class="navbar-brand" to="/">
-        <img src="/logo-l.svg" height="40" class="me-2">
+        <img src="/logo-l.svg" height="40" class="me-2" />
         what have i done
       </NuxtLink>
 
@@ -12,31 +12,23 @@
       >
         <ul class="navbar-nav my-1">
           <li class="nav-item">
-            <NuxtLink
-              to="/"
-              class="btn btn-text-primary me-2"
-              type="button"
-            >
+            <NuxtLink to="/" class="btn btn-text-primary me-2" type="button">
               Home
             </NuxtLink>
           </li>
           <li class="nav-item">
-            <NuxtLink
-              to="/dub"
-              class="btn btn-text-primary me-2"
-              type="button"
-            >
+            <NuxtLink to="/dub" class="btn btn-text-primary me-2" type="button">
               whidubbed
             </NuxtLink>
           </li>
           <li class="nav-item">
-            <a
-              href="/whbd"
+            <NuxtLink
+              to="/whbd"
               class="btn btn-text-primary me-2"
               type="button"
             >
               Anniversary
-            </a>
+            </NuxtLink>
           </li>
           <li class="nav-item">
             <NuxtLink
@@ -49,12 +41,8 @@
             </NuxtLink>
           </li>
           <li class="nav-item">
-            <NuxtLink
-              to="/score"
-              class=""
-              type=""
-            >
-              <img src="/camera.png" height="40" class="me-2">
+            <NuxtLink to="/score" class="" type="">
+              <img src="/camera.png" height="40" class="me-2" />
             </NuxtLink>
           </li>
         </ul>
@@ -64,11 +52,16 @@
 </template>
 
 <style scoped>
-#short-whyd { display: none; }
-
-@media (max-width: 992px) {
-    #short-whyd { display: inline-block; }
-    #long-whyd { display: none; }
+#short-whyd {
+  display: none;
 }
 
+@media (max-width: 992px) {
+  #short-whyd {
+    display: inline-block;
+  }
+  #long-whyd {
+    display: none;
+  }
+}
 </style>
