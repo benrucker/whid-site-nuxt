@@ -1,5 +1,10 @@
 <template>
-  <canvas id="kianCanvas" />
+  <canvas
+    id="kianCanvas"
+    ref="canvas"
+    @mousedown="handleMouseDown"
+    @mouseup="handleMouseUp"
+  />
 </template>
 
 <script>
@@ -238,6 +243,12 @@ export default {
     shouldShowBigGuy() {
       const time = Math.floor(this.clock.elapsedTime * 20)
       return !(time % 4 || time % 3 || time % 6 || time % 7)
+    },
+    handleMouseDown() {
+      this.$refs.canvas.classList.add('grabbing')
+    },
+    handleMouseUp() {
+      this.$refs.canvas.classList.remove('grabbing')
     }
   }
 }
@@ -250,5 +261,11 @@ canvas {
   border-radius: 15px;
 
   filter: drop-shadow(10px 10px 5px rgba(0, 0, 0, 0.3));
+
+  cursor: grab;
+}
+
+canvas.grabbing {
+  cursor: grabbing;
 }
 </style>
