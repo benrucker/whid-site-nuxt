@@ -9,6 +9,10 @@
     "prettyName": "cd SecBot",
     "path": "/root/whyd"
   },
+  "cd voice": {
+    "prettyName": "cd voice",
+    "path": "/root/whyd/SecBot"
+  },
   "help": {
     "prettyName": "help",
     "path": "/root/whyd",
@@ -16,24 +20,24 @@
   },
   "voice events": {
     "prettyName": "voice events",
-    "path": "/root/whyd/SecBot",
+    "path": "/root/whyd/SecBot/voice",
     "functionName": "SecBotVoiceEventsFunction"
   },
   "most active day": {
     "prettyName": "most active day",
-    "path": "/root/whyd/SecBot",
+    "path": "/root/whyd/SecBot/voice",
     "dependencies": ["voice events"],
     "functionName": "SecBotVoiceEventsMostActiveDayFunction"
   },
   "favorite voice channel": {
     "prettyName": "favorite voice channel",
-    "path": "/root/whyd/SecBot",
+    "path": "/root/whyd/SecBot/voice",
     "dependencies": ["voice events"],
     "functionName": "SecBotVoiceEventsFavoriteVoiceChannelFunction"
   },
   "mutes": {
     "prettyName": "mutes",
-    "path": "/root/whyd/SecBot",
+    "path": "/root/whyd/SecBot/voice",
     "dependencies": ["voice events"],
     "functionName": "SecBotVoiceEventsMutesFunction"
   },
@@ -64,6 +68,36 @@
     "path": "/root/whyd/SecBot",
     "dependencies": ["scores"],
     "functionName": "SecBotScoresAverage"
+  },
+  "messages": {
+    "prettyName": "Messages",
+    "path": "/root/whyd/SecBot",
+    "functionName": "SecBotMessages"
+  },
+  "edited + deleted messages": {
+    "prettyName": "Edited & Deleted Messages",
+    "path": "/root/whyd/SecBot",
+    "dependencies": ["messages"],
+    "functionName": "SecBotMessagesEditedDeleted"
+  },
+  "voice chat time": {
+    "prettyName": "Voice Chat Time",
+    "path": "/root/whyd/SecBot/voice",
+    "dependencies": ["voice events"],
+
+    "functionName": "SecBotVoiceStateTime"
+  },
+  "longest voice chat session": {
+    "prettyName": "Longest Voice Chat Session",
+    "path": "/root/whyd/SecBot/voice",
+    "dependencies": ["voice chat time"],
+    "functionName": "SecBotVoiceStateLongest"
+  },
+  "voice chat largest group": {
+    "prettyName": "Largest Group",
+    "path": "/root/whyd/SecBot/voice",
+    "dependencies": ["voice chat time"],
+    "functionName": "SecBotMostPeople"
   },
   "peas": {
     "prettyName": "🥫",

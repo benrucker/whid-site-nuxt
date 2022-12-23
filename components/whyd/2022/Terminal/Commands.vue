@@ -273,6 +273,8 @@ export default {
       return lines
     },
     SecBotMessages(stats) {
+      const numMessages =
+        stats.server['SecBot number of messages recorded'].count
       const firstSecBotMessage = stats.server['SecBot first recorded message']
       const firstMessageAuthor =
         stats.server.idsToNames[firstSecBotMessage.author]
@@ -282,7 +284,10 @@ export default {
       const lines = [
         { content: '{Messages | underline}' },
         {
-          content: `On {${firstMessageTimestamp} | bold} SecurityBot recorded it's first message in 'what have i done'. Its contents are as follows:`
+          conent: `Since joining 'what have i done', SecurityBot has seen and recorded {${numMessages} | bold} messages.`
+        },
+        {
+          content: `The earliest message was recorded on {${firstMessageTimestamp} | bold}. Its contents are as follows:`
         },
         {
           content: `{${firstMessageAuthor}: ${firstSecBotMessage.content} | bold}`
@@ -307,26 +312,90 @@ export default {
           content: `{ ${stats.user.name}: ${userFirstSecBotMessage.content} | bold}`
         })
       }
-    }, // ADD NUMBER OF TOTAL MESSAGES SEEN BY SECBOT TO THIS
-    SecBotEditedDeletedMessages(stats) {},
+
+      return lines
+    },
+    SecBotMessagesEditedDeleted(stats) {
+      const numEdited =
+        stats.server['SecBot number of edited messages recorded']['0']
+      const numDeleted =
+        stats.server['SecBot number of deleted messages recorded']['0']
+      const userDeleted =
+        stats.user['SecBot number deleted messages per member']
+
+      const lines = [
+        { content: `{Edited and Deleted Messages | underlined}` },
+        {
+          content: `When a message has been added to the database it cannot be removed. According to the records, {${numDeleted} | bold} messages were deleted, and another {${numEdited} | bold} were edited.`
+        }
+      ]
+
+      if (userDeleted === 0) {
+        lines.push({
+          content: `Of the messages deleted, {${stats.user.name}| bold} did not send a single one of them. `
+        })
+      } else {
+        lines.push({
+          content: `Of the messages deleted, {${stats.user.name} | bold} deleted {${userDeleted} | bold} of them.`
+        })
+      }
+
+      return lines
+    }, // Add positive/negative comments
     SecBotVoiceStateTime(stats) {
       // calculate minimum wage
       // user time + total man hours
-    },
+
+      const serverTotalTimeWatched = 55 // stats.server['hours watched by secbot']
+      const userTimeWatched = stats.user['hours watched by secbot']
+      const minimumWage = (userTimeWatched * 10.1).toFixed(2)
+
+      lines = [
+        { content: `{Time Watched in Voice Chat | underlined}` },
+        {
+          content: `{DISCLAIMER: SecurityBot's uptime has not been complete. This data analysis should not be treated as absolute and is only for speculative / entertainment purposes. | error bold}`
+        },
+        {
+          content: `SecurityBot watched users for a combined total of {${serverTotalTimeWatched} | bold} hours.`
+        },
+        {
+          content: `{${stats.user.name} | bold} was watched for {${userTimeWatched} | bold} of those hours hours.`
+        },
+        {
+          content: `If {${stats.user.name} | bold} was being paid Minimum hourly wage at Ohio rates ($10.10), they would have made {$${minimumWage} | bold} this year.`
+        }
+      ]
+
+      return lines
+    }, // correct Data names + round values out?
     SecBotVoiceStateLongest(stats) {
-      // longest user spent in vc
-      // single day where they were in VC the longest
-    },
-    MetaSecBotDevelopment() {
-      // describe how the scoring worked? including the initial method and how it was changed to be wackier after a few weeks while ben was drunk? (cheeto cheeto)
-      // include how scores loop around from 1600
-      // at 7am on april 1st Ethan and Ben met up to make sure that it worked, and it didnt so we needed to manually activate it.
-      // creation of Dennis
-      // CUMPEG
-      // format all of these like they are chat logs between Ben and Ethan?
-      // have some corrupted / jumbled text
-      // folder title: subpoena documents, backups,
-    }
+      const longestTimeInVC = 55
+      const dateLongestTimeInVC = Date.Now().toString() // CHANGE TO THE DATE FOR THE POINT ABOVE
+
+      const lines = [
+        { content: `{Longest Voice Streaks | underline}` },
+        {
+          content: `{${stats.user.name} | bold}'s longest time spent in VC continuously was {${longestTimeInVC} | bold} hours on {${dateLongestTimeInVC} | bold}. What was happening on that day?`
+        }
+      ]
+
+      return lines
+    }, // get data
+    SecBotMostPeople(stats) {
+      const peopleSpottedWith = ['person1', 'person2', '3', '4']
+      const mostPeopleTimestamp = Date.Now().toString()
+      const mostPeopleChannel = '#CHANNELNAME'
+
+      const lines = [
+        { content: `{Largest group in Voice Chat | underline}` },
+        {
+          content: `{${stats.user.name} | bold} was spotted with {${peopleSpottedWith.length} | bold} other people in {${mostPeopleChannel} | bold} on {${mostPeopleTimestamp} | bold}. Let's see who they with:`
+        },
+        { content: `{${peopleSpottedWith.join()} | bold}` }
+      ]
+
+      return lines
+    } // get data
   }
 }
 </script>
