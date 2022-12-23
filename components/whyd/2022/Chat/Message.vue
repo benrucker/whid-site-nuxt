@@ -15,7 +15,11 @@
     <div v-if="isFirstInGroup" class="author-name text-muted">
       {{ msg.author }}
     </div>
-    <div class="content">
+    <div
+      :class="`content ${
+        msg.type !== 'Text' && msg.hideBubble ? 'not-text' : ''
+      }`"
+    >
       <Whyd2022ChatBubble
         v-if="!msg.hideBubble"
         ref="bubble"
@@ -202,6 +206,11 @@ export default {
 
   color: var(--text-color);
   font-family: var(--text-style);
+}
+
+.message .content.not-text {
+  margin-left: 1em;
+  margin-right: 1em;
 }
 
 .message .content span {

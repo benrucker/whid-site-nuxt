@@ -2,15 +2,15 @@
   <div ref="usbotGraph" class="usbotGraph">
     <div
       class="graphContent"
-      title="Your political leaning, according to the content of your messages when processed thru INSERT ALGORITHM NAME HERE"
+      title="The average sentiment of your messages this year"
     >
       <h4 class="text-center mt-2">
         {{
           percentageFromLeft === 50
-            ? 'the middle is rare'
+            ? 'middle'
             : percentageFromLeft > 50
-            ? 'you are this year, liberal.'
-            : "conservatively that you'd agree"
+            ? 'happy'
+            : 'not happy'
         }}
       </h4>
       <div class="politicalSlider">

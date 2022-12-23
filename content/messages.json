@@ -500,7 +500,7 @@
       "content": "Unanimism:  As mentioned for the love of... a little pale stat"
     },
     {
-      "type": "ChartUserPoliticalBias",
+      "type": "ChartUserSentiment",
       "hideBubble": true
     },
     {
