@@ -336,4 +336,8 @@ function prefetchResources() {
     opacity: 1;
   }
 }
+
+[title] {
+  cursor: help;
+}
 </style>

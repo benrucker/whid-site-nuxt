@@ -133,8 +133,6 @@ export default {
 
   animation: bounce-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both;
 
-  cursor: pointer;
-
   overflow: clip;
 }
 
