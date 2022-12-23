@@ -79,7 +79,10 @@ export default {
         '/root',
         '/root/whyd',
         '/root/whyd/test',
-        '/root/whyd/SecBot'
+        '/root/whyd/SecBot',
+        '/root/whyd/SecBot/voice',
+        '/root/whyd/Leftovers', // needs button
+        '/root/dont_backups' // needs button
       ]),
       validCommands: undefined,
       stats: undefined,
