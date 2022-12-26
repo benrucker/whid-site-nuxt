@@ -61,6 +61,8 @@ export default {
       const VECountUser = Object.values(
         stats.user['SecBot voice event type counts']
       ).reduce((accumulator, currentValue) => accumulator + currentValue)
+
+      // stats.server["SecBot user with most VEs"]
       const VECountMax = 55 // count for most active user
       const maxUser = '#MAX' // display name for most active user
 
@@ -78,7 +80,7 @@ export default {
 
       if (VECountUser === VECountMax) {
         lines.push({
-          content: `User {${maxUser} | } had the highest Voice Event count with {${VECountUser} | bold}!`
+          content: `User {${maxUser} | bold} had the highest Voice Event count with {${VECountUser} | bold}!`
         })
       } else {
         lines.push({
@@ -88,7 +90,7 @@ export default {
 
       // add top 5 list either as addition to this one or another command that displays afterwards.
       return lines
-    },
+    }, // hook up max user and count
     SecBotVoiceEventsMostActiveDayFunction(stats) {
       const user = stats.user.name
       const MADUser = stats.user['SecBot most active voice event days'] // mostActiveDay and numEvents
@@ -190,7 +192,7 @@ export default {
       }
 
       return lines
-    },
+    }, // hook up end of first epoch score
     SecBotScoresHigh(stats) {
       const user = stats.user.name
       const userHighScore = stats.user['SecBot user max score'].score
