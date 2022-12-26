@@ -3,6 +3,7 @@
     "ls",
     "cd ..",
     "cd SecBot",
+    "cd voice",
     "help",
     "voice events",
     "most active day",
