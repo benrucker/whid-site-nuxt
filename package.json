@@ -50,7 +50,7 @@
   "prettier": {
     "singleQuote": true,
     "semi": false,
-    "trailingComma": "none",
+    "trailingComma": "all",
     "arrowParens": "always",
     "endOfLine": "lf",
     "printWidth": 80,
