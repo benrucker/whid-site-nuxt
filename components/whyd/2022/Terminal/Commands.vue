@@ -62,9 +62,10 @@ export default {
         stats.user['SecBot voice event type counts']
       ).reduce((accumulator, currentValue) => accumulator + currentValue)
 
-      // stats.server["SecBot user with most VEs"]
-      const VECountMax = 55 // count for most active user
-      const maxUser = '#MAX' // display name for most active user
+      const mUser = stats.server['SecBot user with most VEs']
+      const VECountMax =
+        stats.server.idsToNames[Object.values(mUser.member_id)[0]] // count for most active user
+      const maxUser = Object.values(mUser.observations)[0] // display name for most active user
 
       const lines = [
         {
@@ -88,9 +89,8 @@ export default {
         })
       }
 
-      // add top 5 list either as addition to this one or another command that displays afterwards.
       return lines
-    }, // hook up max user and count
+    }, // top user needs testing
     SecBotVoiceEventsMostActiveDayFunction(stats) {
       const user = stats.user.name
       const MADUser = stats.user['SecBot most active voice event days'] // mostActiveDay and numEvents
@@ -168,7 +168,7 @@ export default {
     },
     SecBotScores(stats) {
       const user = stats.user.name
-      const firstEpochScore = 55 // stats.user[""]
+      const firstEpochScore = stats.user['SecBot first epoch score'].score
       const finalScore = stats.user['SecBot user final score'].score
 
       const lines = [
@@ -192,7 +192,7 @@ export default {
       }
 
       return lines
-    }, // hook up end of first epoch score
+    },
     SecBotScoresHigh(stats) {
       const user = stats.user.name
       const userHighScore = stats.user['SecBot user max score'].score
@@ -345,11 +345,9 @@ export default {
       return lines
     }, // Add positive/negative comments
     SecBotVoiceStateTime(stats) {
-      // calculate minimum wage
-      // user time + total man hours
-
-      const serverTotalTimeWatched = 55 // stats.server['hours watched by secbot']
-      const userTimeWatched = stats.user['hours watched by secbot']
+      const serverTotalTimeWatched =
+        stats.server['SecBot total time of users watched'].toFixed(2)
+      const userTimeWatched = stats.user['SecBot hours watched']
       const minimumWage = (userTimeWatched * 10.1).toFixed(2)
 
       lines = [
@@ -369,20 +367,28 @@ export default {
       ]
 
       return lines
-    }, // correct Data names + round values out?
+    },
     SecBotVoiceStateLongest(stats) {
-      const longestTimeInVC = 55
-      const dateLongestTimeInVC = Date.Now().toString() // CHANGE TO THE DATE FOR THE POINT ABOVE
+      const lines = [{ content: `{Longest Voice Streaks | underline}` }]
 
-      const lines = [
-        { content: `{Longest Voice Streaks | underline}` },
-        {
-          content: `{${stats.user.name} | bold}'s longest time spent in VC continuously was {${longestTimeInVC} | bold} hours on {${dateLongestTimeInVC} | bold}. What was happening on that day?`
-        }
-      ]
+      const stat = JSON.parse(stats.user['SecBot Longest session'])
+      const longestTimeInVC = Number.parseFloat(stat.hours).toFixed(2)
+      let dateLongestTimeInVC = None
+      if (longestTimeInVC === 0) {
+        lines.push({
+          content: `SecurityBot has no records of ${stats.user.name} connected to any Voice Channels.`
+        })
+        return lines
+      }
+
+      dateLongestTimeInVC = new Date(stat.timestamp).toString()
+
+      lines.push({
+        content: `{${stats.user.name} | bold}'s longest time spent in VC continuously was {${longestTimeInVC} | bold} hours on {${dateLongestTimeInVC} | bold}. What was happening on that day?`
+      })
 
       return lines
-    }, // get data
+    }, // needs testing
     SecBotMostPeople(stats) {
       const peopleSpottedWith = ['person1', 'person2', '3', '4']
       const mostPeopleTimestamp = Date.Now().toString()
