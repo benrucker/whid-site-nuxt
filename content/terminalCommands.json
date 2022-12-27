@@ -5,9 +5,10 @@
   "cd ..": {
     "prettyName": "cd .."
   },
-  "cd SecBot": {
-    "prettyName": "cd SecBot",
-    "path": "/root/whyd"
+
+  "cd whyd": {
+    "prettyName": "cd whyd",
+    "path": "/root"
   },
   "cd voice": {
     "prettyName": "cd voice",
@@ -17,6 +18,21 @@
     "prettyName": "help",
     "path": "/root/whyd",
     "functionName": "helpTerminalFunction"
+  },
+  "peas": {
+    "prettyName": "🥫",
+    "path": "/root/whyd",
+    "functionName": "testFunction"
+  },
+  "nerd": {
+    "prettyName": "🤓",
+    "path": "/root/whyd",
+    "functionName": "testFunction"
+  },
+
+  "cd SecBot": {
+    "prettyName": "cd SecBot",
+    "path": "/root/whyd"
   },
   "voice events": {
     "prettyName": "voice events",
@@ -99,16 +115,6 @@
     "dependencies": ["voice chat time"],
     "functionName": "SecBotMostPeople"
   },
-  "peas": {
-    "prettyName": "🥫",
-    "path": "/root/whyd",
-    "functionName": "testFunction"
-  },
-  "nerd": {
-    "prettyName": "🤓",
-    "path": "/root/whyd",
-    "functionName": "testFunction"
-  },
 
   "test": {
     "prettyName": "proofOfConcept",
@@ -162,5 +168,30 @@
     "prettyName": "One",
     "path": "/root/whyd/test",
     "functionName": "testFunction"
+  },
+
+  "cd bdr": {
+    "prettyName": "cd bdr",
+    "path": "/root"
+  },
+  "thank you": {
+    "prettyName": "thank you",
+    "path": "/root/bdr",
+    "functionName": "BdrThanks"
+  },
+  "whyd2023": {
+    "prettyName": "whyd2023.txt",
+    "path": "/root/bdr",
+    "dependencies": ["thank you"],
+    "functionName": "BdrWhyd2023"
+  },
+
+  "cd ecf": {
+    "prettyName": "cd ecf",
+    "path": "/root"
+  },
+  "cd twcm": {
+    "prettyName": "cd twcm",
+    "path": "/root"
   }
 }

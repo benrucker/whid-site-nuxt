@@ -4,6 +4,8 @@
     "cd ..",
     "cd SecBot",
     "cd voice",
+    "cd whyd",
+    "cd bdr",
     "help",
     "voice events",
     "most active day",
