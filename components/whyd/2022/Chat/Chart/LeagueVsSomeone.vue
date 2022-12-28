@@ -59,39 +59,39 @@ export default {
     },
     leagueCount: {
       type: Number,
-      default: 0,
+      required: true,
     },
     otherCount: {
       type: Number,
-      default: 0,
+      required: true,
     },
     otherName: {
       type: String,
-      default: '',
+      required: true,
     },
     leaguers: {
       type: Array,
-      default: () => [],
+      required: true,
     },
     others: {
       type: Array,
-      default: () => [],
+      required: true,
     },
     minValue: {
       type: Number,
-      default: 0,
+      required: true,
     },
     maxValue: {
       type: Number,
-      default: 0,
+      required: true,
     },
     otherColor: {
       type: String,
-      default: 'black',
+      required: true,
     },
     otherCenterColor: {
       type: String,
-      default: 'black',
+      required: true,
     },
   },
   data() {
