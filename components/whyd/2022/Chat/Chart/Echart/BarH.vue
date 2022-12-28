@@ -9,7 +9,7 @@ import {
   LegendComponent,
   TitleComponent,
   ToolboxComponent,
-  TooltipComponent
+  TooltipComponent,
 } from 'echarts/components'
 import { use } from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
@@ -22,41 +22,43 @@ use([
   TooltipComponent,
   LegendComponent,
   ToolboxComponent,
-  GridComponent
+  GridComponent,
 ])
 
 export default {
   name: 'HelloWorld',
   components: {
-    VChart
+    VChart,
   },
   provide: {
-    [THEME_KEY]: 'dark'
+    [THEME_KEY]: 'dark',
   },
   props: {
     yAxis: {
       type: Array,
-      required: true
+      required: true,
     },
     xAxis: {
       type: Array,
-      required: true
+      required: true,
     },
     title: { type: String, default: '' },
     bgColor: { type: String, default: '' },
     color: { type: String, default: '' },
-    textColor: { type: String, default: '' }
+    textColor: { type: String, default: '' },
   },
   data() {
     return {
       option: {},
       lines: [],
-      labels: []
+      labels: [],
     }
   },
   mounted() {
-    window.addEventListener('resize', () => {
-      this.$refs.chart.resize()
+    this.$nextTick(() => {
+      window.addEventListener('resize', () => {
+        this.$refs.chart.resize()
+      })
     })
     this.$refs.chart.resize()
     this.option = {
@@ -65,42 +67,42 @@ export default {
         right: '4%',
         bottom: '0%',
         top: '0%',
-        containLabel: true
+        containLabel: true,
       },
       tooltip: {
         trigger: 'none',
         axisPointer: {
-          type: 'shadow'
+          type: 'shadow',
         },
-        backgroundColor: 'rgba(255, 255, 255, 0.7)'
+        backgroundColor: 'rgba(255, 255, 255, 0.7)',
       },
       yAxis: [
         {
           type: 'category',
           data: [...this.yAxis].reverse(),
           axisTick: {
-            show: false
+            show: false,
           },
           axisLabel: {
             show: false,
             inside: true,
-            verticalAlign: 'top'
-          }
-        }
+            verticalAlign: 'top',
+          },
+        },
       ],
       xAxis: [
         {
           type: 'value',
           axisLabel: {
-            show: false
+            show: false,
           },
           axisTick: {
-            show: false
+            show: false,
           },
           splitLine: {
-            show: false
-          }
-        }
+            show: false,
+          },
+        },
       ],
       series: [
         {
@@ -110,7 +112,7 @@ export default {
           barWidth: '80%',
           roundCap: true,
           itemStyle: {
-            borderRadius: [0, 5, 5, 0]
+            borderRadius: [0, 5, 5, 0],
           },
           z: -1,
           animationDelay: (idx) => {
@@ -118,18 +120,18 @@ export default {
           },
           animationDuration() {
             return 1000
-          }
-        }
+          },
+        },
       ],
       color: [this.color],
       backgroundColor: this.bgColor,
       textStyle: {
         color: this.textColor,
         fontSize: 36,
-        fontWeight: 'bold'
-      }
+        fontWeight: 'bold',
+      },
     }
-  }
+  },
 }
 </script>
 

@@ -50,19 +50,19 @@
 export default {
   data() {
     return {
-      percentageFromLeft: 50
+      percentageFromLeft: 50,
     }
   },
   watch: {
     percentageFromLeft(val) {
       this.$refs.usbotGraph.style.setProperty('--leftWidth', `${val}%`)
-    }
+    },
   },
   mounted() {
     setTimeout(() => {
       this.percentageFromLeft = 40
     })
-  }
+  },
 }
 </script>
 
@@ -156,6 +156,7 @@ export default {
 .lineGroup1 {
   width: var(--leftWidth);
   transition: var(--transition);
+  padding-right: 7.5px;
 
   --political-color: var(--political-color-1);
 }
@@ -165,7 +166,7 @@ export default {
   transition: var(--transition);
 
   flex-shrink: 1;
-  padding-left: 5px;
+  padding-left: 7.5px;
   --political-color: var(--political-color-2);
 }
 
