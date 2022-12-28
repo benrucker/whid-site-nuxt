@@ -11,7 +11,7 @@ export default {
   props: {
     stats: {
       type: Object,
-      default: () => ({}),
+      required: true,
     },
   },
   computed: {

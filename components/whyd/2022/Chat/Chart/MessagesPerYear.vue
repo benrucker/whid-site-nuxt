@@ -15,25 +15,25 @@ export default {
   props: {
     stats: {
       type: Object,
-      default: () => ({})
-    }
+      required: true,
+    },
   },
   data() {
     return {
-      years: ['2016', '2017', '2018', '2019', '2020', '2021', '2022']
+      years: ['2016', '2017', '2018', '2019', '2020', '2021', '2022'],
     }
   },
   computed: {
     msgCounts() {
       const msgCountsPastYears = Object.values(
-        this.stats.server.messagesInPastYears
+        this.stats.server.messagesInPastYears,
       )
       const msgCountsAllYears = msgCountsPastYears.concat(
-        this.stats.server.totalMessages
+        this.stats.server.totalMessages,
       )
       return msgCountsAllYears
-    }
-  }
+    },
+  },
 }
 </script>
 
