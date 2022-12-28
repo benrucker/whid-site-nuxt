@@ -21,7 +21,7 @@ export default {
   props: {
     content: {
       type: String,
-      default: '',
+      required: true,
     },
     stats: {
       type: Object,
