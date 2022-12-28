@@ -260,7 +260,7 @@ export default {
           .filter((key) => this.terminalCommands[key].path === this.path)
           .join(', ')
         this.emitNewLine({
-          content: `~${this.path}\n${list}\n--------------------------`
+          content: `{Current Directory | underline}\n~${this.path}\n{Availible Executables | underline}\n${list}\n`
         })
         return
       }

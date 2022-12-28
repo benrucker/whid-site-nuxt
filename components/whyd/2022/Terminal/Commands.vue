@@ -14,17 +14,17 @@ export default {
           content: '{whydOS v1.2 Database Terminal Interface | underline}'
         },
         {
-          content: `Commands can be executed by typing them in or by clicking the SmartButtons (patent pending) that are tuned to present the data optimized for your analytical experience.`
+          content: `Commands can be executed by typing them in or by clicking the SmartButtons™ (patent pending) that are tuned to present the data optimized for your analytical experience.`
         },
         {
           content: `{Directory of general System commands v.1 | underline}`
         },
         {
-          content: `'ls' - List executables in current directory\n'cd ..' - Navigate one directory up\n'cd [folder]' - Navigate to [folder]\n'dir' - Display working directory `
+          content: `'ls' - List executables in current directory\n'cd ..' - Navigate one directory up\n'cd [folder]' - Navigate to [folder]\n'dir' - Display current directory `
         },
         {
           content:
-            '{NOTICE: The Information accessible is highly sensitive and should not be published. | error}'
+            '{NOTICE: The Information stored on this system is highly sensitive and should not be published. | error}'
         },
         { content: '{In the case of Security Breach... | error}' },
         {
@@ -186,9 +186,11 @@ export default {
       ]
 
       if (firstEpochScore > finalScore) {
-        lines.push({ content: `[Negative Remark]` })
+        lines.push({ content: `Maybe ${user} could try harder in 2023.` })
       } else {
-        lines.push({ content: `[Positive Remark]` })
+        lines.push({
+          content: `May ${user} continue to be a paragon of agreeableness in 2023!`
+        })
       }
 
       return lines
@@ -403,7 +405,7 @@ export default {
       ]
 
       return lines
-    } // get data
+    } // get data & adding into the active buttons
   }
 }
 </script>
