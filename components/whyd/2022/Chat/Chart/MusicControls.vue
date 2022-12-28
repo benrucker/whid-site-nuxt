@@ -84,14 +84,14 @@ export default {
   props: {
     song: {
       type: String,
-      default: null
-    }
+      required: true,
+    },
   },
   data() {
     return {
       seeking: false,
       playing: false,
-      muted: false
+      muted: false,
     }
   },
   methods: {
@@ -140,8 +140,8 @@ export default {
     onUnmuteClick() {
       this.muted = false
       this.$refs.audio.muted = false
-    }
-  }
+    },
+  },
 }
 </script>
 
