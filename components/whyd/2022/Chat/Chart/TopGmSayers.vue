@@ -40,7 +40,10 @@
           data-bs-delay="500"
           :title="`${mysonReactions[id]} :myson: reactions`"
         >
-          <img :src="`/whyd/2022/emojis/myson.png`" class="reaction-emoji" />
+          <img
+            :src="`/whyd/2022/data/emojis/myson.png`"
+            class="reaction-emoji"
+          />
           <div class="reaction-count">
             {{ mysonReactions[id] }}
           </div>
@@ -66,7 +69,10 @@
           data-bs-delay="500"
           :title="`${mysonReactions[stats.user.id]} :myson: reactions`"
         >
-          <img :src="`/whyd/2022/emojis/myson.png`" class="reaction-emoji" />
+          <img
+            :src="`/whyd/2022/data/emojis/myson.png`"
+            class="reaction-emoji"
+          />
           <div class="reaction-count">
             {{ mysonReactions[stats.user.id] }}
           </div>
@@ -81,8 +87,8 @@ export default {
   props: {
     stats: {
       type: Object,
-      default: () => ({})
-    }
+      required: true,
+    },
   },
   computed: {
     countsById() {
@@ -100,8 +106,8 @@ export default {
     },
     mysonReactions() {
       return this.stats.server['List of users by myson reactions']
-    }
-  }
+    },
+  },
 }
 </script>
 

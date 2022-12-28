@@ -7,8 +7,8 @@ export default {
   props: {
     stats: {
       type: Object,
-      default: () => {}
-    }
+      required: true,
+    },
   },
   computed: {
     message() {
@@ -19,17 +19,17 @@ export default {
         authorAvatar: this.stats.server?.idsToAvatars[rawMessage?.author.id],
         authorColor: rawMessage?.author.color,
         attachments: rawMessage?.attachments.map(
-          (attachment) => attachment.url
+          (attachment) => attachment.url,
         ),
         content: rawMessage?.content,
         reactions: rawMessage?.reactions,
-        timestamp: rawMessage?.timestamp
+        timestamp: rawMessage?.timestamp,
       }
       return val
-    }
+    },
   },
   mounted() {},
-  methods: {}
+  methods: {},
 }
 </script>
 

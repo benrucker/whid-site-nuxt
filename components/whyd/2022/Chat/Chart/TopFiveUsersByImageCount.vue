@@ -42,8 +42,8 @@ export default {
   props: {
     stats: {
       type: Object,
-      default: () => ({})
-    }
+      required: true,
+    },
   },
   computed: {
     userIds() {
@@ -57,27 +57,27 @@ export default {
         this.stats.server['Top Five Users Images'] ?? {
           '173839815400357888': [
             'https://media.tenor.com/GIVLitDIxr8AAAAC/breaking-bad-walter-white.gif',
-            'https://media.tenor.com/S_to1tY3ixUAAAAC/breaking-bad-walter-white.gif'
+            'https://media.tenor.com/S_to1tY3ixUAAAAC/breaking-bad-walter-white.gif',
           ],
           '256553939800031233': [
             'https://media.tenor.com/GIVLitDIxr8AAAAC/breaking-bad-walter-white.gif',
-            'https://media.tenor.com/S_to1tY3ixUAAAAC/breaking-bad-walter-white.gif'
+            'https://media.tenor.com/S_to1tY3ixUAAAAC/breaking-bad-walter-white.gif',
           ],
           '175705032161886208': [
             'https://media.tenor.com/GIVLitDIxr8AAAAC/breaking-bad-walter-white.gif',
-            'https://media.tenor.com/S_to1tY3ixUAAAAC/breaking-bad-walter-white.gif'
+            'https://media.tenor.com/S_to1tY3ixUAAAAC/breaking-bad-walter-white.gif',
           ],
           '174672596275691521': [
             'https://media.tenor.com/GIVLitDIxr8AAAAC/breaking-bad-walter-white.gif',
-            'https://media.tenor.com/S_to1tY3ixUAAAAC/breaking-bad-walter-white.gif'
+            'https://media.tenor.com/S_to1tY3ixUAAAAC/breaking-bad-walter-white.gif',
           ],
           '161144318160011265': [
             'https://media.tenor.com/GIVLitDIxr8AAAAC/breaking-bad-walter-white.gif',
-            'https://media.tenor.com/S_to1tY3ixUAAAAC/breaking-bad-walter-white.gif'
-          ]
+            'https://media.tenor.com/S_to1tY3ixUAAAAC/breaking-bad-walter-white.gif',
+          ],
         }
       )
-    }
+    },
   },
   methods: {
     handleClick(id) {
@@ -85,10 +85,10 @@ export default {
         this.imageUrlsByUser[id]?.[
           (Math.random() * this.imageUrlsByUser[id].length) | 0
         ] ?? 'about:blank',
-        '_blank'
+        '_blank',
       )
-    }
-  }
+    },
+  },
 }
 </script>
 

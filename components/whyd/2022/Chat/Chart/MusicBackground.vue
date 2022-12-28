@@ -16,8 +16,8 @@ export default {
   props: {
     src: {
       type: String,
-      default: ''
-    }
+      required: true,
+    },
   },
   data() {
     return {
@@ -34,7 +34,7 @@ export default {
       dotsCurrentX: 0,
       dotsCurrentY: 0,
       dotsRaf: null,
-      lerpFraction: lerpEnter
+      lerpFraction: lerpEnter,
     }
   },
   mounted() {
@@ -67,7 +67,7 @@ export default {
         this.bgTargetY,
         this.rafBg,
         this.updateImg,
-        this.bgRef
+        this.bgRef,
       )
     },
     updateDots() {
@@ -78,7 +78,7 @@ export default {
         this.dotsTargetY,
         this.rafDots,
         this.updateDots,
-        this.dotsRef
+        this.dotsRef,
       )
     },
     updateThing(currentX, currentY, targetX, targetY, raf, method, ref) {
@@ -117,8 +117,8 @@ export default {
     },
     handleMouseEnter() {
       this.lerpFraction = lerpEnter
-    }
-  }
+    },
+  },
 }
 </script>
 

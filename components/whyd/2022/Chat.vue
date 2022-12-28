@@ -5,6 +5,7 @@
     ref="theOneAboveConversation"
     @click="onClick"
   >
+    <Whyd2022ChatPrefetcher />
     <div id="conversation" ref="conversation" class="container">
       <Whyd2022ChatMessage
         v-for="(msg, index) in displayed"
@@ -41,12 +42,12 @@ export default {
   props: {
     messages: {
       type: Array,
-      required: true
+      required: true,
     },
     stats: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
@@ -59,14 +60,14 @@ export default {
       showHint: true,
       showTyping: true,
       waitingToAutomaticallyAdvance: false,
-      scrollTo: true
+      scrollTo: true,
     }
   },
   computed: {
     typingIndicatorSide() {
       return this.getDefaultSide(
         this.messages[this.messagesPosition].author ??
-          this.displayed[this.messagesPosition - 1].author
+          this.displayed[this.messagesPosition - 1].author,
       )
     },
     typingIndicatorFirstInGroup() {
@@ -75,13 +76,12 @@ export default {
         this.displayed[this.messagesPosition - 1]?.author !==
           this.messages[this.messagesPosition].author
       )
-    }
+    },
   },
   mounted() {
     setTimeout(() => {
       if (this.debugShowAll) this.autoAdvance()
     }, 50)
-    prefetchResources()
   },
   methods: {
     onClick() {
@@ -109,7 +109,7 @@ export default {
         if (messageInfo.function) {
           messageInfo.content = this.runFunc(
             messageInfo.function,
-            messageInfo.content
+            messageInfo.content,
           )
         }
         messageInfo.author =
@@ -138,7 +138,7 @@ export default {
     scrollToLast() {
       this.$refs.afterLastMessage.scrollIntoView({
         behavior: 'smooth',
-        block: 'center'
+        block: 'center',
       })
     },
     getDefaultSide(author) {
@@ -150,7 +150,7 @@ export default {
         UsBot: 'left',
         NotSoBot: 'right',
         Perlymolt: 'left',
-        SecuityBot: 'left'
+        SecuityBot: 'left',
       }
       return sides[author]
     },
@@ -175,7 +175,7 @@ export default {
     },
     next(content) {
       this.waitingToAutomaticallyAdvance = true
-      this.autoAdvaceTimeout = setTimeout(this.advance, 500)
+      this.autoAdvanceTimeout = setTimeout(this.advance, 1000)
       return content
     },
     leagueOrApex(content) {
@@ -229,23 +229,8 @@ export default {
       }, 5000)
 
       return content
-    }
-  }
-}
-
-function prefetchResources() {
-  ;[
-    '/whyd/2022/bots/FredBoat.png',
-    '/whyd/2022/bots/JermaBot.png',
-    '/whyd/2022/bots/NotSoBot.png',
-    '/whyd/2022/bots/secuitybot.png',
-    '/whyd/2022/bots/PerlyMolt.png',
-    '/whyd/2022/bots/Shigure.png',
-    '/whyd/2022/bots/Unanimism.png',
-    '/whyd/2022/bots/UsBot.png',
-    'https://media.tenor.com/S_to1tY3ixUAAAAC/breaking-bad-walter-white.gif',
-    'https://media.tenor.com/GIVLitDIxr8AAAAC/breaking-bad-walter-white.gif'
-  ].forEach((url) => fetch(url))
+    },
+  },
 }
 </script>
 
@@ -337,7 +322,7 @@ function prefetchResources() {
   }
 }
 
-[title] {
+#conversation [title] {
   cursor: help;
 }
 </style>

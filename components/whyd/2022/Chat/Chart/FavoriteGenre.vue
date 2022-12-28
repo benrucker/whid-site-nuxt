@@ -2,7 +2,7 @@
   <Whyd2022ChatChartMusic
     :title="favoriteGenre"
     :subtitle="`classy 😏`"
-    bg-img="/whyd/2022/emojis/myson.png"
+    bg-img="/whyd/2022/data/emojis/myson.png"
   />
 </template>
 
@@ -11,13 +11,13 @@ export default {
   props: {
     stats: {
       type: Object,
-      default: () => ({})
-    }
+      required: true,
+    },
   },
   computed: {
     favoriteGenre() {
       return this.stats.server.favGenre ?? 'Neuro-edgy-ID-hyper-country'
-    }
-  }
+    },
+  },
 }
 </script>

@@ -21,11 +21,11 @@ export default {
   props: {
     content: {
       type: String,
-      default: '',
+      required: true,
     },
     stats: {
       type: Object,
-      default: () => ({}),
+      required: true,
     },
   },
   data() {
@@ -114,7 +114,7 @@ function parseStyling(data) {
 function parseEmoji(data) {
   const { text, styles } = parseStyling(data)
   const emojiName = text.slice(1, -1)
-  return { src: `/whyd/2022/emojis/${emojiName}.png`, emoji: true, styles }
+  return { src: `/whyd/2022/data/emojis/${emojiName}.png`, emoji: true, styles }
 }
 </script>
 

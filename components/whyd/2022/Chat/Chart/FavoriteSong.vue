@@ -12,14 +12,14 @@ export default {
   props: {
     stats: {
       type: Object,
-      default: () => ({})
-    }
+      required: true,
+    },
   },
   data() {
     return {
       rootRef: null,
-      bgRef: null
+      bgRef: null,
     }
-  }
+  },
 }
 </script>

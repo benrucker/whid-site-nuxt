@@ -2,7 +2,7 @@
   <div>
     <div v-show="doneParsing" ref="root1" class="usbotGraph real">
       <div class="usbotGraphHeader">yours is the most common words</div>
-      <div v-if="displayedWords?.length > 0" class="usbotGraphContent">
+      <div v-if="displayedWords[1]?.length > 0" class="usbotGraphContent">
         <div :ref="'1line'" class="line--1 line">
           <span
             v-for="(word, index) in displayedWords[1]"
@@ -68,9 +68,8 @@ export default {
   props: {
     stats: {
       type: Object,
-      required: false,
-      default: null
-    }
+      required: true,
+    },
   },
   data() {
     return {
@@ -82,7 +81,7 @@ export default {
       doneParsing: false,
       timeout: undefined,
       timeoutDelay: 300,
-      defaultSelectRects: undefined
+      defaultSelectRects: undefined,
     }
   },
   computed: {
@@ -95,9 +94,9 @@ export default {
     },
     wordsToCounts() {
       return Object.fromEntries(
-        this.wordsAndCounts.map(({ word, count }) => [word, count])
+        this.wordsAndCounts.map(({ word, count }) => [word, count]),
       )
-    }
+    },
   },
   mounted() {
     // console.log(JSON.parse(this.stats.user.mostUsedWords))
@@ -133,7 +132,7 @@ export default {
 
             this.$refs.root1.style.setProperty(
               `--line-${this.numLines}-padding`,
-              `${offset}px`
+              `${offset}px`,
             )
 
             this.numLines++
@@ -158,7 +157,7 @@ export default {
           })
         }
         this.displayedWords[this.numDisplayedLines].push(
-          this.calculatedWords[this.numDisplayedLines].shift()
+          this.calculatedWords[this.numDisplayedLines].shift(),
         )
         if (this.calculatedWords[this.numDisplayedLines].length === 0) {
           this.numDisplayedLines++
@@ -188,8 +187,8 @@ export default {
         textNode.getBoundingClientRect().bottom >
         this.$refs.root2.lastChild.height
       )
-    }
-  }
+    },
+  },
 }
 </script>
 

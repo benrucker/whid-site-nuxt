@@ -2,7 +2,7 @@
   <Whyd2022ChatChartMusic
     :title="`${intermediateSongCount} songs played`"
     :subtitle="`rookie numbers 😏`"
-    bg-img="/whyd/2022/emojis/ahegao1.png"
+    bg-img="/whyd/2022/data/emojis/ahegao1.png"
   />
 </template>
 
@@ -11,17 +11,17 @@ export default {
   props: {
     stats: {
       type: Object,
-      default: () => ({})
-    }
+      required: true,
+    },
   },
   data: () => ({
     numberUpper: 0,
-    intermediateSongCount: 0
+    intermediateSongCount: 0,
   }),
   computed: {
     songsPlayed() {
       return this.stats.server.songsPlayed ?? 500
-    }
+    },
   },
   mounted() {
     setTimeout(() => {
@@ -36,7 +36,7 @@ export default {
       } else {
         clearInterval(this.numberUpper)
       }
-    }
-  }
+    },
+  },
 }
 </script>

@@ -16,16 +16,15 @@ export default {
   data() {
     return {
       shouldShowIntroAnimation: undefined,
-      terminalRef: null
+      terminalRef: null,
     }
   },
   mounted() {
     this.shouldShowIntroAnimation =
       localStorage.getItem('shouldShowTerminalAnimation') === 'true'
     localStorage.setItem('hasVisitedTerminal', 'true')
-    // TODO ben: should we leave the animation always on?
-    // even when re-navigating back to the terminal later?
     localStorage.setItem('shouldShowTerminalAnimation', 'false')
+
     this.$nextTick(() => {
       this.terminalRef = this.$refs.terminal
     })
@@ -36,8 +35,8 @@ export default {
     },
     terminalMouseMove(e) {
       this.terminalRef.terminalMouseMove(e)
-    }
-  }
+    },
+  },
 }
 </script>
 

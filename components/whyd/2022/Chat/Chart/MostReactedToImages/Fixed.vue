@@ -10,8 +10,8 @@ export default {
   props: {
     stats: {
       type: Object,
-      default: () => {}
-    }
+      required: true,
+    },
   },
   computed: {
     messages() {
@@ -24,7 +24,7 @@ export default {
         .slice(0, 2)
       return [
         threeMostReactedImages[ids[0]],
-        threeMostReactedImages[ids[1]]
+        threeMostReactedImages[ids[1]],
       ].map((msg) => {
         return {
           authorName: msg.author.name,
@@ -33,11 +33,11 @@ export default {
           attachments: msg.attachments.map((attachment) => attachment.url),
           content: msg.content,
           reactions: msg.reactions,
-          timestamp: msg.timestamp
+          timestamp: msg.timestamp,
         }
       })
-    }
-  }
+    },
+  },
 }
 </script>
 
