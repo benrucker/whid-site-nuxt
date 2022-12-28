@@ -3,11 +3,15 @@
     <h2 class="title">Most used reactions!</h2>
     <div class="top-2">
       <div class="upvote">
-        <img src="/whyd/2022/emojis/upvote.png" alt="upvote" class="image" />
+        <img
+          src="/whyd/2022/data/emojis/upvote.png"
+          alt="upvote"
+          class="image"
+        />
         <span class="count">{{ upvoteCount }}</span>
       </div>
       <div class="downvote">
-        <img src="/whyd/2022/emojis/downvote.png" alt="downvote" />
+        <img src="/whyd/2022/data/emojis/downvote.png" alt="downvote" />
         <span class="count">{{ downvoteCount }}</span>
       </div>
     </div>
@@ -30,12 +34,12 @@ export default {
   props: {
     stats: {
       type: Object,
-      required: true
+      required: true,
     },
     imgUrl: {
       type: String,
-      default: undefined
-    }
+      default: undefined,
+    },
   },
   computed: {
     reactions() {
@@ -44,7 +48,7 @@ export default {
     otherReactions() {
       if (this.reactions == null) return []
       return Object.keys(this.reactions).filter(
-        (r) => r !== '627365768111194117' && r !== '627365780849426442'
+        (r) => r !== '627365768111194117' && r !== '627365780849426442',
       )
     },
     upvoteCount() {
@@ -54,8 +58,8 @@ export default {
     downvoteCount() {
       if (this.reactions == null) return 0
       return this.reactions['627365780849426442'].uses
-    }
-  }
+    },
+  },
 }
 </script>
 
