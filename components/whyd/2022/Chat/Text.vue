@@ -21,12 +21,12 @@ export default {
   props: {
     content: {
       type: String,
-      default: ''
+      default: '',
     },
     stats: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   data() {
     return {
@@ -46,15 +46,15 @@ export default {
           Object.values(this.stats.server['Most Upvoted User'])[0],
         serverMostDownvotedUser: () =>
           this.idToName(
-            Object.keys(this.stats.server['Most Downvoted User'])[0]
+            Object.keys(this.stats.server['Most Downvoted User'])[0],
           ),
         serverMostDownvotedUserCount: () =>
           Object.values(this.stats.server['Most Downvoted User'])[0],
         mostPopularRole: () =>
           Object.keys(this.stats.server.mostPopularRole)[0],
         mostPopularRoleCount: () =>
-          Object.values(this.stats.server.mostPopularRole)[0]
-      }
+          Object.values(this.stats.server.mostPopularRole)[0],
+      },
     }
   },
   mounted() {
@@ -75,8 +75,8 @@ export default {
   methods: {
     idToName(id) {
       return this.stats.server.idsToNames[id]
-    }
-  }
+    },
+  },
 }
 
 function parseValue(data, values) {
@@ -113,7 +113,7 @@ function parseStyling(data) {
 
 function parseEmoji(data) {
   const emojiName = data.slice(2, -2)
-  return { src: `/whyd/2022/emojis/${emojiName}.png`, emoji: true }
+  return { src: `/whyd/2022/data/emojis/${emojiName}.png`, emoji: true }
 }
 </script>
 
