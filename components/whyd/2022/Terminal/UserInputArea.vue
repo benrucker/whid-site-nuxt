@@ -36,6 +36,7 @@
       </button>
     </div>
     <input
+      v-show="isTextInputModeActive"
       id="terminalTextInput"
       ref="terminalTextInput"
       v-model="userInput"
@@ -57,6 +58,8 @@ const mode = {
   hybridInput: 'hybridInput',
   disabled: 'disabled'
 }
+
+const textInputModes = [mode.textInput, mode.hybridInput]
 
 export default {
   props: {},
@@ -122,6 +125,9 @@ export default {
           unlocked && !command.hasBeenRun && command.path === this.displayedPath
         )
       })
+    },
+    isTextInputModeActive() {
+      return textInputModes.includes(this.terminalMode)
     }
   },
   async mounted() {
