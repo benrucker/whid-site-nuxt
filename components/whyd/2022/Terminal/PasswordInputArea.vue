@@ -40,11 +40,15 @@ export default {
       attempts: 0,
       locked: false,
       // loggingIn: false,
-      stopLogo: false
+      stopLogo: false,
+      introAnimationTime: 12000,
     }
   },
   mounted() {
     this.focusPasswordInput()
+    if (localStorage.getItem('whyd22.hasLoggedIn') === 'true') {
+      this.introAnimationTime = 6000
+    }
   },
   methods: {
     focusPasswordInput() {
@@ -107,11 +111,12 @@ export default {
         this.stopLogo = true
       }, 6000)
       setTimeout(() => {
+        localStorage.setItem('whyd22.hasLoggedIn', 'true')
         this.$emit('logIn')
         // }, 120) // give .05 seconds
-      }, 12000) // give 5 seconds
-    }
-  }
+      }, this.introAnimationTime) // give 5 seconds
+    },
+  },
 }
 </script>
 
