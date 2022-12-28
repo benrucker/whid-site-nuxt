@@ -5,6 +5,7 @@
     ref="theOneAboveConversation"
     @click="onClick"
   >
+    <Whyd2022ChatPrefetcher />
     <div id="conversation" ref="conversation" class="container">
       <Whyd2022ChatMessage
         v-for="(msg, index) in displayed"
@@ -81,7 +82,6 @@ export default {
     setTimeout(() => {
       if (this.debugShowAll) this.autoAdvance()
     }, 50)
-    prefetchResources()
   },
   methods: {
     onClick() {
@@ -231,21 +231,6 @@ export default {
       return content
     },
   },
-}
-
-function prefetchResources() {
-  ;[
-    '/whyd/2022/bots/FredBoat.png',
-    '/whyd/2022/bots/JermaBot.png',
-    '/whyd/2022/bots/NotSoBot.png',
-    '/whyd/2022/bots/secuitybot.png',
-    '/whyd/2022/bots/PerlyMolt.png',
-    '/whyd/2022/bots/Shigure.png',
-    '/whyd/2022/bots/Unanimism.png',
-    '/whyd/2022/bots/UsBot.png',
-    'https://media.tenor.com/S_to1tY3ixUAAAAC/breaking-bad-walter-white.gif',
-    'https://media.tenor.com/GIVLitDIxr8AAAAC/breaking-bad-walter-white.gif',
-  ].forEach((url) => fetch(url))
 }
 </script>
 

@@ -3,7 +3,7 @@
     <div class="blurring duplicate clip-stutter">
       <Whyd2022ChatChartMostUsedReactionsReactFixed
         :stats="stats"
-        img-url="/whyd/2022/emojis/cheeto.png"
+        img-url="/whyd/2022/data/emojis/cheeto.png"
       />
     </div>
     <div class="blurring duplicate clip-glitch">
@@ -30,9 +30,9 @@ export default {
   props: {
     stats: {
       type: Object,
-      default: () => ({})
-    }
-  }
+      default: () => ({}),
+    },
+  },
 }
 </script>
 
