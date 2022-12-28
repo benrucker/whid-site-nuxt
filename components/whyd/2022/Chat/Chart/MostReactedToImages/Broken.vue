@@ -20,8 +20,8 @@ export default {
   props: {
     stats: {
       type: Object,
-      default: () => {}
-    }
+      required: true,
+    },
   },
 
   data() {
@@ -32,50 +32,50 @@ export default {
             emoji: {
               name: 'marioAndSonic',
               imageUrl:
-                'https://media.tenor.com/9z3rpvYfoDIAAAAd/sonic-and-mario-kiss.gif'
+                'https://media.tenor.com/9z3rpvYfoDIAAAAd/sonic-and-mario-kiss.gif',
             },
-            count: 20
+            count: 20,
           },
           {
             emoji: {
               name: 'marioAndSonic',
               imageUrl:
-                'https://media.tenor.com/9z3rpvYfoDIAAAAd/sonic-and-mario-kiss.gif'
+                'https://media.tenor.com/9z3rpvYfoDIAAAAd/sonic-and-mario-kiss.gif',
             },
-            count: 5
+            count: 5,
           },
           {
             emoji: {
               name: 'marioAndSonic',
               imageUrl:
-                'https://media.tenor.com/9z3rpvYfoDIAAAAd/sonic-and-mario-kiss.gif'
+                'https://media.tenor.com/9z3rpvYfoDIAAAAd/sonic-and-mario-kiss.gif',
             },
-            count: 1
+            count: 1,
           },
           {
             emoji: {
               name: 'marioAndSonic',
               imageUrl:
-                'https://media.tenor.com/9z3rpvYfoDIAAAAd/sonic-and-mario-kiss.gif'
+                'https://media.tenor.com/9z3rpvYfoDIAAAAd/sonic-and-mario-kiss.gif',
             },
-            count: 4
+            count: 4,
           },
           {
             emoji: {
               name: 'marioAndSonic',
               imageUrl:
-                'https://media.tenor.com/9z3rpvYfoDIAAAAd/sonic-and-mario-kiss.gif'
+                'https://media.tenor.com/9z3rpvYfoDIAAAAd/sonic-and-mario-kiss.gif',
             },
-            count: 5
-          }
+            count: 5,
+          },
         ],
         authorName: 'SergeiLNL',
         timestamp: '09/24/2022',
         authorAvatar:
           'https://cdn.discordapp.com/avatars/262799048430452746/45435ebe52b1cf8225d00861eb9045b7.png?size=1024',
         attachments: [
-          'https://media.tenor.com/9z3rpvYfoDIAAAAd/sonic-and-mario-kiss.gif'
-        ]
+          'https://media.tenor.com/9z3rpvYfoDIAAAAd/sonic-and-mario-kiss.gif',
+        ],
       },
       message2: {
         reactions: [
@@ -83,18 +83,18 @@ export default {
           { emoji: { name: 'cheeto' }, count: 5 },
           { emoji: { name: 'ahegao1' }, count: 1 },
           { emoji: { name: 'downvote' }, count: 4 },
-          { emoji: { name: 'downvote' }, count: 5 }
+          { emoji: { name: 'downvote' }, count: 5 },
         ],
         authorName: 'Mario & Sonic at the Olympic Winter Games',
         timestamp: '10/13/2009',
         authorAvatar:
           'https://media.tenor.com/9z3rpvYfoDIAAAAd/sonic-and-mario-kiss.gif',
         attachments: [
-          'https://media.tenor.com/9z3rpvYfoDIAAAAd/sonic-and-mario-kiss.gif'
-        ]
-      }
+          'https://media.tenor.com/9z3rpvYfoDIAAAAd/sonic-and-mario-kiss.gif',
+        ],
+      },
     }
-  }
+  },
 }
 </script>
 

@@ -25,7 +25,7 @@ export default {
     },
     stats: {
       type: Object,
-      default: () => ({}),
+      required: true,
     },
   },
   data() {

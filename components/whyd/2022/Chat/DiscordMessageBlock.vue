@@ -20,13 +20,13 @@ export default {
   props: {
     stats: {
       type: Object,
-      default: () => {}
+      required: true,
     },
     messages: {
       type: Array,
-      default: () => []
-    }
-  }
+      default: () => [],
+    },
+  },
 }
 </script>
 

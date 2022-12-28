@@ -55,44 +55,44 @@ export default {
   props: {
     stats: {
       type: Object,
-      default: () => ({})
+      required: true,
     },
     leagueCount: {
       type: Number,
-      default: 0
+      default: 0,
     },
     otherCount: {
       type: Number,
-      default: 0
+      default: 0,
     },
     otherName: {
       type: String,
-      default: ''
+      default: '',
     },
     leaguers: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     others: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     minValue: {
       type: Number,
-      default: 0
+      default: 0,
     },
     maxValue: {
       type: Number,
-      default: 0
+      default: 0,
     },
     otherColor: {
       type: String,
-      default: 'black'
+      default: 'black',
     },
     otherCenterColor: {
       type: String,
-      default: 'black'
-    }
+      default: 'black',
+    },
   },
   data() {
     return {
@@ -103,7 +103,7 @@ export default {
       intermediateOtherCount: 0,
       numberUpper: 0,
       minCount: 0,
-      maxCount: 0
+      maxCount: 0,
     }
   },
   mounted() {
@@ -137,11 +137,11 @@ export default {
     moveElementsIntoPlace() {
       this.minCount = Math.min(
         ...this.leaguers.map((leaguer) => leaguer.pings),
-        ...this.others.map((other) => other.pings)
+        ...this.others.map((other) => other.pings),
       )
       this.maxCount = Math.max(
         ...this.leaguers.map((leaguer) => leaguer.pings),
-        ...this.others.map((other) => other.pings)
+        ...this.others.map((other) => other.pings),
       )
 
       let larger, smaller, proportion, xDistanceSmaller, xDistanceLarger
@@ -170,11 +170,11 @@ export default {
 
       this.transformGraphElements(
         `translate3d(${xDistanceLarger}px, 0, ${maxZDist}px)`,
-        larger
+        larger,
       )
       this.transformGraphElements(
         `translate3d(${xDistanceSmaller}px, 0, ${zDistance}px)`,
-        smaller
+        smaller,
       )
     },
     transformGraphElements(translate, children) {
@@ -219,7 +219,7 @@ export default {
             `translate3d(${x}px, ${y}px, ${60 * proportionalScale}px) scale(${
               1 + proportionalScale
             })`,
-            'important'
+            'important',
           )
           avatar.style.setProperty('opacity', `1`)
         }
@@ -234,7 +234,7 @@ export default {
           const randZ = Math.random() * 10 - 5
           img.style.setProperty(
             'transform',
-            `translate3d(${randX}px, ${randY}px, ${randZ}px)`
+            `translate3d(${randX}px, ${randY}px, ${randZ}px)`,
           )
         }, delay)
       })
@@ -242,7 +242,7 @@ export default {
     moveCenterLine(leagueCount, otherCount) {
       const backgroundElement = this.$refs.canvas
       const percentage = Math.floor(
-        (leagueCount / (leagueCount + otherCount)) * 100
+        (leagueCount / (leagueCount + otherCount)) * 100,
       )
 
       backgroundElement.style.setProperty('--center', `${percentage}%`)
@@ -298,8 +298,8 @@ export default {
     },
     handleMouseUp() {
       this.moveElementsIntoPlace()
-    }
-  }
+    },
+  },
 }
 </script>
 

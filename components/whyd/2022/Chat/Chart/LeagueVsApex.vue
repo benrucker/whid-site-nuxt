@@ -19,8 +19,8 @@ export default {
   props: {
     stats: {
       type: Object,
-      default: () => ({})
-    }
+      required: true,
+    },
   },
   data() {
     return {
@@ -31,7 +31,7 @@ export default {
       minValue: 0,
       maxValue: 0,
       rightColor: '#d64d44',
-      rightCenterColor: 'rgb(65, 43, 39)'
+      rightCenterColor: 'rgb(65, 43, 39)',
     }
   },
   mounted() {
@@ -50,7 +50,7 @@ export default {
         return {
           name: this.stats.server.idsToNames[id],
           pings: count,
-          avatar: this.stats.server.idsToAvatars[id]
+          avatar: this.stats.server.idsToAvatars[id],
         }
       })
     this.apexers = Object.entries(apexPings)
@@ -59,14 +59,14 @@ export default {
         return {
           name: this.stats.server.idsToNames[id],
           pings: count,
-          avatar: this.stats.server.idsToAvatars[id]
+          avatar: this.stats.server.idsToAvatars[id],
         }
       })
 
     const otherCount = this.stats.server['Number of Game Pings'].allOther
     this.minValue = Math.min(this.leagueCount, otherCount, this.apexCount)
     this.maxValue = Math.max(this.leagueCount, otherCount, this.apexCount)
-  }
+  },
 }
 </script>
 

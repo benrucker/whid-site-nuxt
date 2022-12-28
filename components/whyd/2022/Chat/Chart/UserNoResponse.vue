@@ -38,14 +38,14 @@ export default {
   props: {
     stats: {
       type: Object,
-      default: () => {}
-    }
+      required: true,
+    },
   },
   computed: {
     noResponseCount() {
       return this.stats.user.noResponseCount ?? 546
-    }
-  }
+    },
+  },
 }
 </script>
 

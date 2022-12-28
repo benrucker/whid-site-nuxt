@@ -51,36 +51,36 @@ export default {
   props: {
     stats: {
       type: Object,
-      default: () => {}
+      required: true,
     },
     content: {
       type: String,
-      default: ''
+      default: '',
     },
     reactions: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     authorName: {
       type: String,
-      default: ''
+      default: '',
     },
     authorAvatar: {
       type: String,
-      default: ''
+      default: '',
     },
     authorColor: {
       type: String,
-      default: ''
+      default: '',
     },
     attachments: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     timestamp: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   methods: {
     parseTimestamp(timestamp) {
@@ -91,13 +91,13 @@ export default {
         new Date(date).toLocaleString('en-US', {
           month: 'numeric',
           day: 'numeric',
-          year: 'numeric'
+          year: 'numeric',
         }) +
         ' ' +
         new Date(date).toLocaleString('en-US', {
           hour: 'numeric',
           minute: 'numeric',
-          hour12: true
+          hour12: true,
         })
       )
     },
@@ -116,8 +116,8 @@ export default {
         const url = this.stats.server.emojiNameToFilename[emoji.name]
         return `/whyd/2022/data/emojis/${url}`
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
