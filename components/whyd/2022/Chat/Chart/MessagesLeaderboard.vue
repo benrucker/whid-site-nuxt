@@ -33,13 +33,13 @@ export default {
   props: {
     stats: {
       type: Object,
-      default: () => ({})
-    }
+      required: true,
+    },
   },
   data() {
     return {
       users: [],
-      counts: []
+      counts: [],
     }
   },
   mounted() {
@@ -48,7 +48,7 @@ export default {
     this.users = ids.map((id) => this.stats.server.idsToNames[id])
     this.counts = ids.map((x) => ranks[x])
   },
-  methods: {}
+  methods: {},
 }
 </script>
 

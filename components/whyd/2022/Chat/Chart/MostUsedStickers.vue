@@ -40,12 +40,12 @@ export default {
   props: {
     stats: {
       type: Object,
-      default: () => ({})
-    }
+      required: true,
+    },
   },
   data() {
     return {
-      updated: 0
+      updated: 0,
     }
   },
   computed: {
@@ -64,15 +64,15 @@ export default {
     maxUses() {
       return Object.values(this.stickers).reduce(
         (prev, { count }) => (count > prev ? count : prev),
-        0
+        0,
       )
     },
     minUses() {
       return Object.values(this.stickers).reduce(
         (prev, { count }) => (count < prev ? count : prev),
-        10000000000 // very intelligent min-finding starting number
+        10000000000, // very intelligent min-finding starting number
       )
-    }
+    },
   },
   watch: {
     updated(_) {
@@ -86,11 +86,11 @@ export default {
           25
         const stickerXPositionPercent = Math.max(
           -5,
-          Math.random() * 110 - stickerSize / 2
+          Math.random() * 110 - stickerSize / 2,
         )
         const stickerYPositionPercent = Math.min(
           100,
-          Math.random() * 100 - stickerSize / 2
+          Math.random() * 100 - stickerSize / 2,
         )
 
         stickerElement.style.height = `${stickerSize}px`
@@ -104,14 +104,14 @@ export default {
 
         index += 1
       }
-    }
+    },
   },
   methods: {
     handleClick(event) {
       setTimeout(() => this.updated++)
       event.preventDefault()
-    }
-  }
+    },
+  },
 }
 </script>
 

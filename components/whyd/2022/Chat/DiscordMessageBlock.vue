@@ -3,11 +3,11 @@
     <Whyd2022ChatDiscordMessage
       v-for="msg in messages"
       :key="`${msg.content}${msg.authorName}${msg.timestamp}`"
-      :content="msg.content"
+      :content="msg.content ?? ''"
       :reactions="msg.reactions"
       :author-name="msg.authorName"
       :author-avatar="msg.authorAvatar"
-      :author-color="msg.authorColor"
+      :author-color="msg.authorColor ?? ''"
       :attachments="msg.attachments"
       :timestamp="msg.timestamp"
       :stats="stats"
@@ -20,13 +20,13 @@ export default {
   props: {
     stats: {
       type: Object,
-      default: () => {}
+      required: true,
     },
     messages: {
       type: Array,
-      default: () => []
-    }
-  }
+      required: true,
+    },
+  },
 }
 </script>
 
