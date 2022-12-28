@@ -22,8 +22,8 @@ export default {
   props: {
     stats: {
       type: Object,
-      default: () => ({})
-    }
+      required: true,
+    },
   },
   data() {
     return {
@@ -31,7 +31,7 @@ export default {
       maxScale: 50,
       intervals: 0,
       renderFrame: 0,
-      resizeListener: new AbortController()
+      resizeListener: new AbortController(),
     }
   },
   computed: {
@@ -71,10 +71,10 @@ export default {
             (this.$refs.canvas.getBoundingClientRect().width - size),
           Math.random() *
             (this.$refs.canvas.getBoundingClientRect().height - size),
-          size
+          size,
         )
       })
-    }
+    },
   },
   mounted() {
     this.$nextTick(() => {
@@ -93,7 +93,7 @@ export default {
           this.emojiPlanets.forEach((planet) => {
             planet.squish()
           })
-        }, 500)
+        }, 500),
       ]
       this.renderFrame = requestAnimationFrame(this.render)
       this.prevTime = performance.now()
@@ -115,8 +115,8 @@ export default {
 
       requestAnimationFrame(this.render)
       this.prevTime = time
-    }
-  }
+    },
+  },
 }
 
 class Emoji {
@@ -138,7 +138,7 @@ class Emoji {
   draw() {
     this.emoji.style.setProperty(
       'transform',
-      `translate(${this.x}px, ${this.y}px) scale(${this.squishValue1}, ${this.squishValue2}) `
+      `translate(${this.x}px, ${this.y}px) scale(${this.squishValue1}, ${this.squishValue2}) `,
     )
   }
 

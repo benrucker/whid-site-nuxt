@@ -24,14 +24,14 @@ export default {
   props: {
     stats: {
       type: Object,
-      default: () => ({})
-    }
+      required: true,
+    },
   },
   data() {
     return {
       broken: true,
       fixing: false,
-      fixed: false
+      fixed: false,
     }
   },
   methods: {
@@ -58,8 +58,8 @@ export default {
           }, 1000)
         }, 500)
       }, 2000)
-    }
-  }
+    },
+  },
 }
 </script>
 

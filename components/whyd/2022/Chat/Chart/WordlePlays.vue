@@ -50,32 +50,32 @@ export default {
   props: {
     stats: {
       type: Object,
-      default: () => ({})
-    }
+      required: true,
+    },
   },
   data() {
     return {
       userData: {},
-      userIds: []
+      userIds: [],
     }
   },
   mounted() {
     this.userData = this.stats.server['Top 5 Users by Wordle Plays'] ?? {
       '174672596275691521': {
-        playCount: 123
+        playCount: 123,
       },
       '275002179763306517': {
-        playCount: 123
+        playCount: 123,
       },
       '175705032161886208': {
-        playCount: 123
+        playCount: 123,
       },
       '184078144003768321': {
-        playCount: 123
+        playCount: 123,
       },
       '439205512425504771': {
-        playCount: 123
-      }
+        playCount: 123,
+      },
     }
     this.userIds = Object.keys(this.userData)
 
@@ -90,10 +90,10 @@ export default {
         this.userData[id].images[
           (Math.random() * this.userData[id].images.length) | 0
         ],
-        '_blank'
+        '_blank',
       )
-    }
-  }
+    },
+  },
 }
 </script>
 

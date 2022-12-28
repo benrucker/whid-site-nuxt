@@ -10,14 +10,7 @@
 </template>
 
 <script>
-export default {
-  props: {
-    image: {
-      type: String,
-      default: ''
-    }
-  }
-}
+export default {}
 </script>
 
 <style scoped lang="scss">

@@ -20,8 +20,8 @@ export default {
   props: {
     stats: {
       type: Object,
-      default: () => ({})
-    }
+      required: true,
+    },
   },
   data() {
     return {
@@ -32,7 +32,7 @@ export default {
       minValue: 0,
       maxValue: 0,
       rightColor: '#444dd6',
-      rightCenterColor: 'rgb(39, 43, 65)'
+      rightCenterColor: 'rgb(39, 43, 65)',
     }
   },
   mounted() {
@@ -50,7 +50,7 @@ export default {
         return {
           name: this.stats.server.idsToNames[id],
           pings: count,
-          avatar: this.stats.server.idsToAvatars[id]
+          avatar: this.stats.server.idsToAvatars[id],
         }
       })
     this.others = Object.entries(otherPings)
@@ -59,10 +59,10 @@ export default {
         return {
           name: this.stats.server.idsToNames[id],
           pings: count,
-          avatar: this.stats.server.idsToAvatars[id]
+          avatar: this.stats.server.idsToAvatars[id],
         }
       })
-  }
+  },
 }
 </script>
 
