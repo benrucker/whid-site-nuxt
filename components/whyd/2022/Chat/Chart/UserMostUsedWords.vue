@@ -68,8 +68,7 @@ export default {
   props: {
     stats: {
       type: Object,
-      required: false,
-      default: null,
+      required: true,
     },
   },
   data() {
