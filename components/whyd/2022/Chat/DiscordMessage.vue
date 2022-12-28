@@ -55,31 +55,31 @@ export default {
     },
     content: {
       type: String,
-      default: '',
+      required: true,
     },
     reactions: {
       type: Array,
-      default: () => [],
+      required: true,
     },
     authorName: {
       type: String,
-      default: '',
+      required: true,
     },
     authorAvatar: {
       type: String,
-      default: '',
+      required: true,
     },
     authorColor: {
       type: String,
-      default: '',
+      required: true,
     },
     attachments: {
       type: Array,
-      default: () => [],
+      required: true,
     },
     timestamp: {
       type: String,
-      default: '',
+      required: true,
     },
   },
   methods: {
