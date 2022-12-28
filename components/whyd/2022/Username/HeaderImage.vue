@@ -16,7 +16,7 @@
       />
     </div>
     <div class="secbot-image">
-      <img ref="secbotLogo" src="/whyd/2022/header-images/secuityBot.png" />
+      <img ref="secbotLogo" src="/whyd/2022/header-images/secuitybot.png" />
     </div>
   </div>
 </template>
