@@ -26,7 +26,8 @@
   "help": {
     "prettyName": "help",
     "path": "/root/whyd",
-    "functionName": "helpTerminalFunction"
+    "functionName": "helpTerminalFunction",
+    "buttonStyle": "system-button"
   },
   "peas": {
     "prettyName": "🥫",
@@ -38,7 +39,12 @@
     "path": "/root/whyd",
     "functionName": "testFunction"
   },
-
+  "S": {
+    "prettyName": "S",
+    "path": "/root/bdr",
+    "buttonStyle": "danger-button",
+    "functionName": "CoolS"
+  },
   "cd SecBot": {
     "prettyName": "cd SecBot",
     "path": "/root/whyd",
