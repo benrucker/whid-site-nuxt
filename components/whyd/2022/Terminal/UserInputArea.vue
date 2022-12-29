@@ -29,6 +29,7 @@
         :key="button"
         type="button"
         class="option-button"
+        :class="terminalCommands[button].buttonStyle ?? ''"
         :value="button"
         @click="handleOptionButtonClick($event, button)"
       >
@@ -435,11 +436,52 @@ export default {
   position: absolute;
 }
 
-.red-text {
+/* .red-text {
   color: var(--error);
 }
 
 .red-text a {
   color: var(--error);
+} */
+
+.system-button {
+  background-color: hsl(212, 30%, 68%);
+  border: outset 2px hsl(212, 45%, 85%);
+}
+
+.nav-button {
+  background-color: hsl(22, 30%, 68%);
+  border: outset 2px hsl(22, 45%, 85%);
+}
+
+.danger-button {
+  background-color: hsl(350, 30%, 68%);
+  border: outset 2px hsl(350, 45%, 85%);
+}
+
+.whyd-button {
+  background: linear-gradient(
+    63deg,
+    hsl(186, 30%, 85%),
+    hsl(35, 30%, 85%),
+    hsl(335, 30%, 85%),
+    hsl(256, 30%, 85%)
+  );
+}
+
+.ethan-button {
+  background-color: hsl(186, 30%, 85%);
+}
+
+.ben-button {
+  background-color: hsl(35, 30%, 85%);
+}
+
+.tristan-button {
+  background-color: hsl(335, 30%, 85%);
+}
+
+.wyatt-button {
+  background-color: hsl(256, 30%, 85%);
 }
 </style>
