@@ -49,11 +49,15 @@ export default {
     glitch() {
       const logo = this.getRandomLogo()
       this.regularLogo.classList.remove('visible')
-      this.secbotLogo.classList.add('visible')
+
+      console.log(this.transitionDuration, this.flickerDuration)
 
       setTimeout(() => {
         logo.classList.add('visible')
-        this.secbotLogo.classList.remove('visible')
+        this.secbotLogo.classList.add('visible')
+        setTimeout(() => {
+          this.secbotLogo.classList.remove('visible')
+        }, this.transitionDuration)
       }, this.transitionDuration)
 
       setTimeout(() => {
@@ -135,9 +139,7 @@ img {
 }
 
 .secbot-image > img {
-  --transition-duration: 0.19s;
-  transition: opacity var(--transition-duration) step-end;
-
+  transition: none; /* overrides general img transition rule */
   animation: secbot-glitchiness var(--transition-duration) step-end infinite !important;
 }
 
