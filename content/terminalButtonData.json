@@ -1,6 +1,5 @@
 {
   "buttons": [
-    "ls",
     "cd ..",
     "cd SecBot",
     "cd voice",
@@ -10,6 +9,7 @@
     "cd ecf",
     "cd bdr",
     "cd twcm",
+    "ls",
     "help",
     "delete system31",
     "voice events",
@@ -39,6 +39,7 @@
     "9",
     "test",
     "nerd",
-    "peas"
+    "peas",
+    "S"
   ]
 }
