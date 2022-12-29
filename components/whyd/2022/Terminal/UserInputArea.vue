@@ -36,6 +36,7 @@
       </button>
     </div>
     <input
+      v-show="isTextInputModeActive"
       id="terminalTextInput"
       ref="terminalTextInput"
       v-model="userInput"
@@ -55,8 +56,10 @@ const mode = {
   buttonInput: 'buttonInput',
   textInput: 'textInput',
   hybridInput: 'hybridInput',
-  disabled: 'disabled'
+  disabled: 'disabled',
 }
+
+const textInputModes = [mode.textInput, mode.hybridInput]
 
 export default {
   props: {},
@@ -71,19 +74,26 @@ export default {
       userId: '#ID',
       isShowProceed: false,
       terminalLinesQueue: [
-        'This line should never appear. Ff it does, Ethan fucked up probably'
+        'This line should never appear. Ff it does, Ethan fucked up probably',
       ],
       path: '/root/whyd', // ['root', 'whyd'],
       validPaths: new Set([
         '/',
         '/root',
+        '/root/bdr',
+        '/root/ecf',
+        '/root/twcm',
         '/root/whyd',
         '/root/whyd/test',
-        '/root/whyd/SecBot'
+        '/root/whyd/SecBot',
+        '/root/whyd/SecBot/voice',
+        '/root/whyd/Leftovers', // needs button
+        '/root/dont_backups', // needs button
       ]),
       validCommands: undefined,
       stats: undefined,
-      uniqueLineId: 0
+      uniqueLineId: 0,
+      usedCommands: [],
     }
   },
   async fetch() {
@@ -119,7 +129,10 @@ export default {
           unlocked && !command.hasBeenRun && command.path === this.displayedPath
         )
       })
-    }
+    },
+    isTextInputModeActive() {
+      return textInputModes.includes(this.terminalMode)
+    },
   },
   async mounted() {
     // Initialize the terminal
@@ -138,31 +151,36 @@ export default {
     this.terminalLinesQueue.reverse()
 
     const paths = new Set(
-      Object.values(this.terminalCommands).map((command) => command.path)
+      Object.values(this.terminalCommands).map((command) => command.path),
     )
     this.validPaths = paths
 
     // Valid commands
-
     const prettyNames = Array.from(Object.values(this.terminalCommands)).map(
-      (e) => e.prettyName
+      (e) => e.prettyName,
     )
 
     this.validCommands = new Set(
-      prettyNames.concat(Array.from(Object.keys(this.terminalCommands)))
+      prettyNames.concat(Array.from(Object.keys(this.terminalCommands))),
     )
 
-    // Retrive the data
+    this.usedCommands =
+      JSON.parse(localStorage.getItem('whyd22.usedCommands')) ?? []
+    for (const command of this.usedCommands) {
+      if (this.terminalCommands[command] != null)
+        this.terminalCommands[command].hasBeenRun = true
+    }
 
+    // Retrive the data
     this.username = localStorage.getItem('username') ?? 'fops'
     this.userId = localStorage.getItem('userId') ?? '173839815400357888'
 
     const server = await fetch('/whyd/2022/data/server.json').then((r) =>
-      r.json()
+      r.json(),
     )
     const namesToIds = server.namesToIds
     const user = await fetch(
-      `/whyd/2022/data/${namesToIds[this.username]}.json`
+      `/whyd/2022/data/${namesToIds[this.username]}.json`,
     ).then((r) => r.json())
 
     this.stats = { server, user }
@@ -173,7 +191,7 @@ export default {
     emitNewLine(line) {
       this.$emit('addTextLine', {
         ...line,
-        id: this.getUniqueLineId()
+        id: this.getUniqueLineId(),
       })
     },
     getUniqueLineId() {
@@ -227,18 +245,26 @@ export default {
       this.focusInput(false)
     },
     processCommand(input) {
-      const processed = input.trim() // .toLowerCase() fuck you if you try to use caps in the terminal
+      let commandName = input.trim() // .toLowerCase() fuck you if you try to use caps in the terminal
 
-      if (this.validCommands.has(processed)) {
-        const command =
-          this.terminalCommands[input] ??
-          this.terminalCommands[
-            Object.entries(this.terminalCommands).find(
-              (e) => e[1].prettyName === processed
-            )[0]
-          ]
-        command.hasBeenRun = true
-        // const command = this.terminalCommands[input]
+      if (this.validCommands.has(commandName)) {
+        let command = this.terminalCommands[commandName]
+
+        if (command == null) {
+          commandName = Object.entries(this.terminalCommands).find(
+            (e) => e[1].prettyName === commandName,
+          )[0]
+          command = this.terminalCommands[commandName]
+
+          if (command == null) {
+            throw new Error(
+              'Illegal state: command is valid but not found in commands list',
+            )
+          }
+        }
+
+        this.markCommandAsUsed(command, commandName)
+
         const func = commands[command.functionName]
 
         if (typeof func === 'function') {
@@ -247,30 +273,35 @@ export default {
         }
       }
 
-      if (processed.startsWith('cd')) {
-        this.navigateTo(processed.replace('cd', '').trim())
+      if (commandName.startsWith('cd')) {
+        this.navigateTo(commandName.replace('cd', '').trim())
         return
       }
 
-      if (processed === 'ls') {
+      if (commandName === 'ls') {
         const list = Object.keys(this.terminalCommands)
           .filter((key) => this.terminalCommands[key].path === this.path)
           .join(', ')
         this.emitNewLine({
-          content: `~${this.path}\n${list}\n--------------------------`
+          content: `{Current Directory | underline}\n~${this.path}\n{Availible Executables | underline}\n${list}\n`,
         })
         return
       }
 
-      if (processed === 'dir') {
+      if (commandName === 'dir') {
         this.emitNewLine({
-          content: `~${this.path}`
+          content: `~${this.path}`,
         })
+        return
+      }
+
+      if (commandName === 'delete system31' && this.path === '/root') {
+        this.DeleteSystem31Function()
         return
       }
 
       this.emitNewLine({
-        content: `{Error: Command not found '${processed}' | error}`
+        content: `{Error: Command not found '${commandName}' | error}`,
       })
     },
     // #endregion
@@ -318,7 +349,7 @@ export default {
         this.emitNewLine({ content: this.displayedPath })
       } else {
         this.emitNewLine({
-          content: `{Error: Invalid Directory ${newPath} | error}`
+          content: `{Error: Invalid Directory ${newPath} | error}`,
         })
       }
     },
@@ -326,14 +357,51 @@ export default {
     logIn() {
       this.terminalMode = mode.hybridInput
       this.emitNewLine({
-        content: `Logged in as ${this.username}`
+        content: `Logged in as ${this.username}`,
       })
       this.emitNewLine({
-        content: `${this.path}/`
+        content: `${this.path}/`,
       })
       this.focusInput()
-    }
-  }
+    },
+    markCommandAsUsed(command, commandName) {
+      command.hasBeenRun = true
+      this.usedCommands.push(commandName)
+      localStorage.setItem(
+        'whyd22.usedCommands',
+        JSON.stringify(this.usedCommands),
+      )
+    },
+    setCommandsUnused() {
+      this.usedCommands = []
+
+      for (const command in Object.keys(this.terminalCommands)) {
+        if (typeof this.terminalCommands[command] !== 'object') {
+          // delete this.terminalCommands[commandName]
+          continue
+        }
+        this.terminalCommands[command].hasBeenRun = false
+      }
+
+      localStorage.removeItem('whyd22.usedCommands')
+    },
+    DeleteSystem31Function() {
+      this.terminalMode = mode.disabled
+      this.setCommandsUnused()
+      this.emitNewLine({
+        content: `{DELETING SYSTEM 31... | error bold underline}`,
+      })
+      setTimeout(() => {
+        this.emitNewLine({
+          content: `{Complete 🙂 | success} `,
+        })
+      }, 1000)
+      setTimeout(() => {
+        // const el = this.$el.querySelector('#terminal-white-background')
+        location.reload()
+      }, 1100)
+    },
+  },
 }
 </script>
 
