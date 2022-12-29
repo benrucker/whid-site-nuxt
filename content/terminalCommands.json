@@ -1,18 +1,27 @@
 {
   "ls": {
-    "prettyName": "ls"
+    "prettyName": "ls",
+    "buttonStyle": "system-button"
   },
   "cd ..": {
-    "prettyName": "cd .."
+    "prettyName": "cd ..",
+    "buttonStyle": "nav-button"
   },
 
   "cd whyd": {
     "prettyName": "cd whyd",
-    "path": "/root"
+    "path": "/root",
+    "buttonStyle": "whyd-button"
   },
   "cd voice": {
     "prettyName": "cd voice",
-    "path": "/root/whyd/SecBot"
+    "path": "/root/whyd/SecBot",
+    "buttonStyle": "nav-button"
+  },
+  "cd leftovers": {
+    "prettyName": "cd leftovers",
+    "path": "/root/whyd",
+    "buttonStyle": "nav-button"
   },
   "help": {
     "prettyName": "help",
@@ -32,7 +41,8 @@
 
   "cd SecBot": {
     "prettyName": "cd SecBot",
-    "path": "/root/whyd"
+    "path": "/root/whyd",
+    "buttonStyle": "nav-button"
   },
   "voice events": {
     "prettyName": "voice events",
@@ -172,13 +182,15 @@
 
   "delete system31": {
     "prettyName": "delete system31",
-    "path": "/root"
+    "path": "/root",
+    "buttonStyle": "danger-button"
+  },
+  "cd dont_backups": {
+    "prettyName": "cd dont_backups",
+    "path": "/root",
+    "buttonStyle": "nav-button"
   },
 
-  "cd bdr": {
-    "prettyName": "cd bdr",
-    "path": "/root"
-  },
   "thank you": {
     "prettyName": "thank you",
     "path": "/root/bdr",
@@ -193,10 +205,22 @@
 
   "cd ecf": {
     "prettyName": "cd ecf",
-    "path": "/root"
+    "path": "/root",
+    "buttonStyle": "ethan-button"
+  },
+  "cd bdr": {
+    "prettyName": "cd bdr",
+    "path": "/root",
+    "buttonStyle": "ben-button"
   },
   "cd twcm": {
     "prettyName": "cd twcm",
-    "path": "/root"
+    "path": "/root",
+    "buttonStyle": "tristan-button"
+  },
+  "cd wwk": {
+    "prettyName": "cd wwk",
+    "path": "/root",
+    "buttonStyle": "wyatt-button"
   }
 }
