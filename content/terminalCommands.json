@@ -170,6 +170,11 @@
     "functionName": "testFunction"
   },
 
+  "delete system31": {
+    "prettyName": "delete system31",
+    "path": "/root"
+  },
+
   "cd bdr": {
     "prettyName": "cd bdr",
     "path": "/root"
