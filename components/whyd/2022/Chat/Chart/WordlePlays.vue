@@ -23,21 +23,21 @@
         <li v-for="id in userIds" :key="id" class="entry">
           <img
             class="imgAvatar"
-            :src="userData[id].avatar"
-            :alt="userData[id].username"
+            :src="stats.server.idsToAvatars[id]"
+            :alt="stats.server.idsToNames[id]"
           />
-          <div>{{ userData[id].username }}</div>
-          <div>
-            <span title="Number of plays of wordle-like games">{{
-              userData[id].playCount
-            }}</span>
-            <span class="bar">|</span>
-            <span
-              :title="`Based on an average score of ${
-                userData[id].averageScore ?? 99
-              }%`"
-              >{{ userData[id].letterGrade ?? 'A+' }}</span
+          <div>{{ stats.server.idsToNames[id] }}</div>
+          <div class="score-area">
+            <div title="Number of plays of wordle-like games" class="numPlays">
+              {{ userData[id].numPlays }}
+            </div>
+            <div class="bar">|</div>
+            <div
+              :title="`Based on an average score of ${userData[id].finalPercent}%`"
+              class="grade"
             >
+              {{ userData[id].letterGrade ?? 'A+' }}
+            </div>
           </div>
         </li>
       </ol>
@@ -54,35 +54,15 @@ export default {
     },
   },
   data() {
-    return {
-      userData: {},
-      userIds: [],
-    }
+    return {}
   },
-  mounted() {
-    this.userData = this.stats.server['Top 5 Users by Wordle Plays'] ?? {
-      '174672596275691521': {
-        playCount: 123,
-      },
-      '275002179763306517': {
-        playCount: 123,
-      },
-      '175705032161886208': {
-        playCount: 123,
-      },
-      '184078144003768321': {
-        playCount: 123,
-      },
-      '439205512425504771': {
-        playCount: 123,
-      },
-    }
-    this.userIds = Object.keys(this.userData)
-
-    this.userIds.forEach((id) => {
-      this.userData[id].username = this.stats.server.idsToNames[id]
-      this.userData[id].avatar = this.stats.server.idsToAvatars[id]
-    })
+  computed: {
+    userData() {
+      return this.stats.server['Wordle Scores']
+    },
+    userIds() {
+      return Object.keys(this.userData).slice(0, 5)
+    },
   },
   methods: {
     handleClick(id) {
@@ -192,70 +172,45 @@ div .notSvg {
   filter: drop-shadow(10px 10px 5px rgba(0, 0, 0, 0.3));
 }
 
-.button {
-  background-color: #4caf50;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  opacity: 0.9;
-  border-radius: 10px;
-}
-
-.button:hover {
-  background-color: #3e8e41;
-}
-
-.reaction-bubble {
-  border-radius: 4px;
+.score-area {
   display: flex;
-  align-items: center;
-  justify-content: space-around;
-  background-color: hsla(223, 6.9%, 19.8%, 0.8);
-  border-radius: 7px;
-  border: 1px solid;
-  border-color: transparent;
-  /* width: 3.125em; */
-  padding: 0.075rem 0.375rem;
-  gap: 0.375rem;
-  margin-left: 0.25rem;
-  margin-bottom: 0.25rem;
-  /* cursor: pointer; */
-
-  color: hsl(216, 3.7%, 73.5%);
-  font-weight: 600;
-  text-align: center;
-  transition: none 0.1s ease;
-  transition-property: background-color, border-color;
+  justify-content: space-between;
+  width: 4em;
 }
 
-.reaction-bubble:hover {
-  color: #dcddde;
-  border-color: rgba(255, 255, 255, 0.2);
-  background-color: hsla(220, 7.7%, 22.9%, 0.8);
+.numPlays {
+  width: 2em;
 }
 
-.reaction-emoji {
-  max-width: 1rem;
-  max-height: 1rem;
+.bar {
+  width: 1em;
 }
 
-.reaction-count {
-  font-size: 0.875rem;
-  color: inherit;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  min-width: 9px;
+.grade {
+  text-align: start;
+  width: 1em;
+  padding-left: 10px;
 }
 
-.reaction-count:hover {
-  color: hsl(210, 2.9%, 86.7%);
+@media (max-width: 767px) {
+  .score-area {
+    display: flex;
+    justify-content: space-between;
+    width: 2em;
+  }
+
+  .numPlays {
+    width: 1.5em;
+  }
+
+  .bar {
+    width: 0.2em;
+  }
+
+  .grade {
+    text-align: start;
+    width: 0.5em;
+    padding-left: 10px;
+  }
 }
 </style>
