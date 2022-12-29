@@ -53,7 +53,7 @@ export default {
     return {
       title: 'whyd22',
       meta: [
-        ['theme-color', '#bbeebb'],
+        ['theme-color', this.stats.server.idsToColors[this.userId]],
         ['og:type', 'website'],
         ['og:site_name', 'what have you done 2022'],
         ['og:url', 'https://whid.live/whyd'],
