@@ -114,12 +114,23 @@
       "author": "Shigure"
     },
     {
-      "content": "...ooooo! I've never seen anyone with the {{userRareRole | role}} role! Let me take a closer look!",
-      "author": "Shigure"
+      "content": [
+        "...ooooo! I've never seen anyone with the {{userRareRole | role}} role! Let me take a closer look!",
+        "...ooooo! NOT RARE ROLE MESSAGE HERE You have the {{userRareRole | role}} role! That one might be my favorite!"
+      ],
+      "author": "Shigure",
+      "function": "chooseRoleFirstMessage"
     },
     {
-      "content": "Woah! You must be part of some secret club or something! Only {{userPeopleWithRareRole | number}} people have that one! Wear it like a badge of honor!!",
-      "author": "Shigure"
+      "content": [
+        "Woah! You must be part of some secret club or something! Only {{userPeopleWithRareRole | number}} people have that one! Wear it like a badge of honor!!",
+        "Woah! RARE ROLE MESSAGE HERE Only {{userPeopleWithRareRole | number}} people have that one! Wear it like a badge of honor!!",
+        "Woah! SLIGHTLY LESS RARE ROLES MESSAGE HERE Only {{userPeopleWithRareRole | number}} people have that one! Wear it like a badge of honor!!",
+        "Woah! KINDA NOT RARE ROLES MESSAGE HERE Only {{userPeopleWithRareRole | number}} people have that one! Wear it like a badge of honor!!",
+        "Woah! NOT RARE ROLE MESSAGE HERE {{userPeopleWithRareRole | number}} people have it!"
+      ],
+      "author": "Shigure",
+      "function": "chooseRoleSecondMessage"
     },
     {
       "content": "Shigure, if we could get back to the point here, I really don't want to waste any more of {{user | mention}}'s ti-.",
