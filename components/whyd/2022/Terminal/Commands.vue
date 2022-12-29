@@ -64,19 +64,18 @@ export default {
       ).reduce((accumulator, currentValue) => accumulator + currentValue)
 
       const mUser = stats.server['SecBot user with most VEs']
-      const VECountMax =
-        stats.server.idsToNames[Object.values(mUser.member_id)[0]] // count for most active user
-      const maxUser = Object.values(mUser.observations)[0] // display name for most active user
+      const maxUser = stats.server.idsToNames[Object.keys(mUser)[0]] // count for most active user
+      const VECountMax = Object.values(mUser)[0] // display name for most active user
 
       const lines = [
         {
           content: `{Voice Events | underline}`,
         },
         {
-          content: `SecurityBot observed {${VECountTotal} | bold} 'Voice Events' from it's initialization to the end of the year.`,
+          content: `SecurityBot observed {${VECountTotal} | bold} 'Voice Events' from its initialization to the end of the year.`,
         },
         {
-          content: `Voice Events include joining, leaving, moving channels as well as muting, deafening, turning on webcam as well as their opposites.`,
+          content: `Voice Events include joining, leaving, and moving channels. They also include muting/unmuting, deafening/undeafening, and turning on and off your webcam or stream.`,
         },
       ]
 
@@ -100,8 +99,12 @@ export default {
       const MADUserDate = date.toLocaleDateString('en-US', {
         dateStyle: 'long',
       })
-      const MADServerDate = '#DATE'
-      const MADServerNum = 55
+      const MADServer = stats.server['SecBot server max voice event day']
+      const dateServer = new Date(MADServer.timestamp)
+      const MADServerDate = dateServer.toLocaleDateString('en-US', {
+        dateStyle: 'long',
+      })
+      const MADServerNum = MADServer.count
 
       const lines = [
         {
@@ -128,8 +131,9 @@ export default {
       const joinsTotal = Math.trunc(
         stats.user['SecBot voice event type counts'].join,
       )
-      const favoriteChannelName = '#CHANNEL'
-      const favoriteChannelJoins = 55
+      const favoriteChannelStat = stats.user['SecBot favorite VC by joinsmoves']
+      const favoriteChannelName = favoriteChannelStat['favorite channel']
+      const favoriteChannelJoins = favoriteChannelStat['number of events']
 
       const lines = [
         { content: `{Favorite Voice Channel | underline}` },
@@ -289,7 +293,7 @@ export default {
       const lines = [
         { content: '{Messages | underline}' },
         {
-          conent: `Since joining 'what have i done', SecurityBot has seen and recorded {${numMessages} | bold} messages.`,
+          content: `Since joining 'what have i done', SecurityBot has seen and recorded {${numMessages} | bold} messages.`,
         },
         {
           content: `The earliest message was recorded on {${firstMessageTimestamp} | bold}. Its contents are as follows:`,
@@ -374,17 +378,16 @@ export default {
     SecBotVoiceStateLongest(stats) {
       const lines = [{ content: `{Longest Voice Streaks | underline}` }]
 
-      const stat = JSON.parse(stats.user['SecBot Longest session'])
-      const longestTimeInVC = Number.parseFloat(stat.hours).toFixed(2)
-      let dateLongestTimeInVC = None
+      const stat = stats.user['SecBot Longest session']
+      const longestTimeInVC = stat.hours.toFixed(2)
       if (longestTimeInVC === 0) {
         lines.push({
-          content: `SecurityBot has no records of ${stats.user.name} connected to any Voice Channels.`,
+          content: `SecurityBot has no records of ${stats.user.name} connected to any Voice Channels. Hopefully the database will be more populated with you in 2023.`,
         })
         return lines
       }
 
-      dateLongestTimeInVC = new Date(stat.timestamp).toString()
+      const dateLongestTimeInVC = new Date(stat.timestamp).toString()
 
       lines.push({
         content: `{${stats.user.name} | bold}'s longest time spent in VC continuously was {${longestTimeInVC} | bold} hours on {${dateLongestTimeInVC} | bold}. What was happening on that day?`,
@@ -394,7 +397,7 @@ export default {
     }, // needs testing
     SecBotMostPeople(stats) {
       const peopleSpottedWith = ['person1', 'person2', '3', '4']
-      const mostPeopleTimestamp = Date.Now().toString()
+      const mostPeopleTimestamp = Date.now().toString()
       const mostPeopleChannel = '#CHANNELNAME'
 
       const lines = [

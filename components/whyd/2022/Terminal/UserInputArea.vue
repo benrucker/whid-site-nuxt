@@ -80,6 +80,9 @@ export default {
       validPaths: new Set([
         '/',
         '/root',
+        '/root/bdr',
+        '/root/ecf',
+        '/root/twcm',
         '/root/whyd',
         '/root/whyd/test',
         '/root/whyd/SecBot',
@@ -292,6 +295,11 @@ export default {
         return
       }
 
+      if (commandName === 'delete system31' && this.path === '/root') {
+        this.DeleteSystem31Function()
+        return
+      }
+
       this.emitNewLine({
         content: `{Error: Command not found '${commandName}' | error}`,
       })
@@ -363,6 +371,35 @@ export default {
         'whyd22.usedCommands',
         JSON.stringify(this.usedCommands),
       )
+    },
+    setCommandsUnused() {
+      this.usedCommands = []
+
+      for (const command in Object.keys(this.terminalCommands)) {
+        if (typeof this.terminalCommands[command] !== 'object') {
+          // delete this.terminalCommands[commandName]
+          continue
+        }
+        this.terminalCommands[command].hasBeenRun = false
+      }
+
+      localStorage.removeItem('whyd22.usedCommands')
+    },
+    DeleteSystem31Function() {
+      this.terminalMode = mode.disabled
+      this.setCommandsUnused()
+      this.emitNewLine({
+        content: `{DELETING SYSTEM 31... | error bold underline}`,
+      })
+      setTimeout(() => {
+        this.emitNewLine({
+          content: `{Complete 🙂 | success} `,
+        })
+      }, 1000)
+      setTimeout(() => {
+        // const el = this.$el.querySelector('#terminal-white-background')
+        location.reload()
+      }, 1100)
     },
   },
 }
