@@ -4,13 +4,13 @@
       ><span
         v-if="token.text != null && token.text !== ''"
         :key="token.text"
-        :class="token.styles + ' text'"
+        :class="(token.styles ?? '') + ' text'"
         >{{ token.text }}</span
       ><span
         v-if="token.emoji"
         :key="token.src"
         class="emoji"
-        :class="token.styles"
+        :class="token.styles ?? ''"
         ><img :src="token.src" /></span
     ></template>
   </span>
@@ -25,7 +25,7 @@ export default {
     },
     stats: {
       type: Object,
-      required: true,
+      default: () => ({}),
     },
   },
   data() {
@@ -62,7 +62,7 @@ export default {
       if (token.startsWith('{{') && token.endsWith('}}')) {
         return parseValue(token, this.values)
       } else if (token.startsWith('{') && token.endsWith('}')) {
-        if (token.startsWith('{:') && token.endsWith(':}')) {
+        if (token.startsWith('{:')) {
           return parseEmoji(token)
         } else {
           return parseStyling(token)
@@ -112,8 +112,9 @@ function parseStyling(data) {
 }
 
 function parseEmoji(data) {
-  const emojiName = data.slice(2, -2)
-  return { src: `/whyd/2022/data/emojis/${emojiName}.png`, emoji: true }
+  const { text, styles } = parseStyling(data)
+  const emojiName = text.slice(1, -1)
+  return { src: `/whyd/2022/data/emojis/${emojiName}.png`, emoji: true, styles }
 }
 </script>
 
@@ -150,19 +151,16 @@ function parseEmoji(data) {
 }
 
 .parsed-text .emoji {
-  height: 19px;
-  width: 15px;
-  display: inline-flex;
-  align-items: center;
-  position: relative;
+  /* height: 100%; */
+  max-height: 100%;
+  max-width: 1em;
 }
 
 .parsed-text .emoji img {
-  max-height: 1.1em;
-  max-width: 1.1em;
-  top: calc(0.3em - 0.1em);
-  left: calc(0.05em - 0.1em);
-  position: absolute;
+  display: inline;
+  max-width: inherit;
+  max-height: inherit;
+  vertical-align: -10%;
 }
 
 .parsed-text .error {
@@ -180,5 +178,10 @@ function parseEmoji(data) {
 .parsed-text .tall {
   padding: 5px 0 5px 0;
   display: inline-block;
+}
+
+.parsed-text .terminal-emoji img {
+  vertical-align: -15%;
+  filter: sepia(0.6) brightness(0.9);
 }
 </style>

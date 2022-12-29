@@ -5,35 +5,55 @@
   "cd ..": {
     "prettyName": "cd .."
   },
-  "cd SecBot": {
-    "prettyName": "cd SecBot",
-    "path": "/root/whyd"
+
+  "cd whyd": {
+    "prettyName": "cd whyd",
+    "path": "/root"
+  },
+  "cd voice": {
+    "prettyName": "cd voice",
+    "path": "/root/whyd/SecBot"
   },
   "help": {
     "prettyName": "help",
     "path": "/root/whyd",
     "functionName": "helpTerminalFunction"
   },
+  "peas": {
+    "prettyName": "🥫",
+    "path": "/root/whyd",
+    "functionName": "testFunction"
+  },
+  "nerd": {
+    "prettyName": "🤓",
+    "path": "/root/whyd",
+    "functionName": "testFunction"
+  },
+
+  "cd SecBot": {
+    "prettyName": "cd SecBot",
+    "path": "/root/whyd"
+  },
   "voice events": {
     "prettyName": "voice events",
-    "path": "/root/whyd/SecBot",
+    "path": "/root/whyd/SecBot/voice",
     "functionName": "SecBotVoiceEventsFunction"
   },
   "most active day": {
     "prettyName": "most active day",
-    "path": "/root/whyd/SecBot",
+    "path": "/root/whyd/SecBot/voice",
     "dependencies": ["voice events"],
     "functionName": "SecBotVoiceEventsMostActiveDayFunction"
   },
   "favorite voice channel": {
     "prettyName": "favorite voice channel",
-    "path": "/root/whyd/SecBot",
+    "path": "/root/whyd/SecBot/voice",
     "dependencies": ["voice events"],
     "functionName": "SecBotVoiceEventsFavoriteVoiceChannelFunction"
   },
   "mutes": {
     "prettyName": "mutes",
-    "path": "/root/whyd/SecBot",
+    "path": "/root/whyd/SecBot/voice",
     "dependencies": ["voice events"],
     "functionName": "SecBotVoiceEventsMutesFunction"
   },
@@ -65,15 +85,35 @@
     "dependencies": ["scores"],
     "functionName": "SecBotScoresAverage"
   },
-  "peas": {
-    "prettyName": "🥫",
-    "path": "/root/whyd",
-    "functionName": "testFunction"
+  "messages": {
+    "prettyName": "Messages",
+    "path": "/root/whyd/SecBot",
+    "functionName": "SecBotMessages"
   },
-  "nerd": {
-    "prettyName": "🤓",
-    "path": "/root/whyd",
-    "functionName": "testFunction"
+  "edited + deleted messages": {
+    "prettyName": "Edited & Deleted Messages",
+    "path": "/root/whyd/SecBot",
+    "dependencies": ["messages"],
+    "functionName": "SecBotMessagesEditedDeleted"
+  },
+  "voice chat time": {
+    "prettyName": "Voice Chat Time",
+    "path": "/root/whyd/SecBot/voice",
+    "dependencies": ["voice events"],
+
+    "functionName": "SecBotVoiceStateTime"
+  },
+  "longest voice chat session": {
+    "prettyName": "Longest Voice Chat Session",
+    "path": "/root/whyd/SecBot/voice",
+    "dependencies": ["voice chat time"],
+    "functionName": "SecBotVoiceStateLongest"
+  },
+  "voice chat largest group": {
+    "prettyName": "Largest Group",
+    "path": "/root/whyd/SecBot/voice",
+    "dependencies": ["voice chat time"],
+    "functionName": "SecBotMostPeople"
   },
 
   "test": {
@@ -128,5 +168,35 @@
     "prettyName": "One",
     "path": "/root/whyd/test",
     "functionName": "testFunction"
+  },
+
+  "delete system31": {
+    "prettyName": "delete system31",
+    "path": "/root"
+  },
+
+  "cd bdr": {
+    "prettyName": "cd bdr",
+    "path": "/root"
+  },
+  "thank you": {
+    "prettyName": "thank you",
+    "path": "/root/bdr",
+    "functionName": "BdrThanks"
+  },
+  "whyd2023": {
+    "prettyName": "whyd2023.txt",
+    "path": "/root/bdr",
+    "dependencies": ["thank you"],
+    "functionName": "BdrWhyd2023"
+  },
+
+  "cd ecf": {
+    "prettyName": "cd ecf",
+    "path": "/root"
+  },
+  "cd twcm": {
+    "prettyName": "cd twcm",
+    "path": "/root"
   }
 }
