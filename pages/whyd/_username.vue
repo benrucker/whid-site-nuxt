@@ -66,18 +66,27 @@ export default {
           'og:image',
           `https://develop.whid.live/whyd/2022/data/embed_card/${this.userId}.png`,
         ],
-        // ['og:image:width', '770'],
-        // ['og:image:height', '530'],
-        // [
-        //   'og:image:alt',
-        //   `A collection of statistics for the whid member ${this.username}`,
-        // ],
+        ['og:image:width', '770'],
+        ['og:image:height', '530'],
+        [
+          'og:image:alt',
+          `A collection of statistics for the whid member ${this.username}`,
+        ],
+        ['twitter:card', 'summary_large_card'],
+        ['twitter:site', '@warkcf'],
+        ['twitter:creator', '@warkcf'],
       ].map(([name, content]) => {
-        return {
-          hid: name,
-          property: name,
-          content,
-        }
+        return name.startsWith('twitter')
+          ? {
+              hid: name,
+              name,
+              content,
+            }
+          : {
+              hid: name,
+              property: name,
+              content,
+            }
       }),
     }
   },
