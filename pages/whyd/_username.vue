@@ -6,15 +6,38 @@
 import Vue from 'vue'
 
 export default {
-  asyncData({ params }) {
+  async asyncData({ params, isDev }) {
+    const baseUrl = isDev
+      ? `http://localhost:3000`
+      : 'https://develop.whid.live'
+
+    const server = await fetch(`${baseUrl}/whyd/2022/data/server.json`).then(
+      (r) => r.json(),
+    )
+    const username = server.urlNamesToNames[params.username]
+    const userId = server.namesToIds[username]
+    const user = await fetch(
+      `${baseUrl}/whyd/2022/data/${server.namesToIds[username]}.json`,
+    ).then((r) => r.json())
+
+    const stats = { server, user }
+
+    Vue.set(stats.user, 'name', username)
+    Vue.set(stats.user, 'id', userId)
+
     return {
-      urlName: params.username
+      urlName: params.username,
+      username,
+      userId,
+      stats,
     }
   },
   data() {
     return {
       messages: undefined,
-      stats: undefined
+      stats: undefined,
+      username: undefined,
+      userId: undefined,
     }
   },
   async fetch() {
@@ -26,23 +49,41 @@ export default {
       }
     })
   },
-  async mounted() {
-    const server = await fetch('/whyd/2022/data/server.json').then((r) =>
-      r.json()
-    )
-    const username = server.urlNamesToNames[this.urlName]
-    const userId = server.namesToIds[username]
-    const user = await fetch(
-      `/whyd/2022/data/${server.namesToIds[username]}.json`
-    ).then((r) => r.json())
-
-    this.stats = { server, user }
-
-    Vue.set(this.stats.user, 'name', username)
-    Vue.set(this.stats.user, 'id', userId)
-
-    localStorage.setItem('username', username)
-    localStorage.setItem('userId', userId)
-  }
+  head() {
+    return {
+      title: 'whyd22',
+      meta: [
+        ['theme-color', '#beb'],
+        ['og:site_name', 'whid.live'],
+        ['og:url', 'https://whid.live/whyd'],
+        ['og:title', 'what have you done 2022'],
+        [
+          'og:image',
+          `https://develop.whid.live/whyd/2022/data/embed_card/${this.userId}.png`,
+        ],
+        ['og:image:width', '770'],
+        ['og:image:height', '530'],
+        [
+          'og:image:alt',
+          `A collection of statistics for the whid member ${this.username}`,
+        ],
+        [
+          'og:description',
+          `Find out what you did at [whid.live/whyd](https://develop.whid.live/whyd)!\n\nHere's a peek at what ${this.username} did:`,
+        ],
+        ['og:type', 'website'],
+      ].map(([name, content]) => {
+        return {
+          hid: name,
+          property: name,
+          content,
+        }
+      }),
+    }
+  },
+  mounted() {
+    localStorage.setItem('username', this.username)
+    localStorage.setItem('userId', this.userId)
+  },
 }
 </script>
