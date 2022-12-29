@@ -180,7 +180,7 @@ export default {
         { content: '{SecurityBot Scores | underline}' },
         {
           content:
-            'On April 1st, 2022 every user was generously given 750 social credit points.',
+            'On {April 1st, 2022 | bold} every user was generously given {750 | bold} social credit points.',
         },
         {
           content: `By the end of the first scoring period, {${user} | bold} had a score of {${firstEpochScore} | bold}.`,
