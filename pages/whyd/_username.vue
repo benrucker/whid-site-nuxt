@@ -58,20 +58,11 @@ export default {
         ['og:site_name', 'what have you done 2022'],
         ['og:url', 'https://whid.live/whyd'],
         ['og:title', 'Click here to see your personalized whyd22!'],
-        [
-          'og:description',
-          `Find out what you did at [whid.live/whyd](https://develop.whid.live/whyd)!\n\nHere's a peek at what ${this.username} did:`,
-        ],
+        ['og:description', `Here's a peek at what ${this.username} did:`],
         [
           'og:image',
           `https://develop.whid.live/whyd/2022/data/embed_card/${this.userId}.png`,
         ],
-        // ['og:image:width', '770'],
-        // ['og:image:height', '530'],
-        // [
-        //   'og:image:alt',
-        //   `A collection of statistics for the whid member ${this.username}`,
-        // ],
       ].map(([name, content]) => {
         return {
           hid: name,
