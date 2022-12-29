@@ -210,6 +210,54 @@ export default {
     chooseRandomOption(content) {
       return content[Math.floor(Math.random() * content.length)]
     },
+    chooseRoleFirstMessage(content) {
+      if (
+        this.stats.user.secret_clubs != null &&
+        JSON.parse(this.stats.user.secret_clubs).length > 0
+      ) {
+        return content[0]
+      } else if (
+        this.stats.user.rare_roles != null &&
+        JSON.parse(this.stats.user.rare_roles).length > 0
+      ) {
+        return content[0]
+      } else if (
+        this.stats.user.less_rare_roles != null &&
+        JSON.parse(this.stats.user.less_rare_roles).length > 0
+      ) {
+        return content[0]
+      } else if (this.stats.user.least_rare_roles) {
+        return content[1]
+      } else {
+        throw new Error(
+          'illegal state: backend did not provide a not-rare role for user',
+        )
+      }
+    },
+    chooseRoleSecondMessage(content) {
+      if (
+        this.stats.user.secret_clubs != null &&
+        JSON.parse(this.stats.user.secret_clubs).length > 0
+      ) {
+        return content[0]
+      } else if (
+        this.stats.user.rare_roles != null &&
+        JSON.parse(this.stats.user.rare_roles).length > 0
+      ) {
+        return content[1]
+      } else if (
+        this.stats.user.less_rare_roles != null &&
+        JSON.parse(this.stats.user.less_rare_roles).length > 0
+      ) {
+        return content[2]
+      } else if (this.stats.user.least_rare_role) {
+        return content[3]
+      } else {
+        throw new Error(
+          'illegal state: backend did not provide a not-rare role for user',
+        )
+      }
+    },
     beginEndAnimation() {
       this.debugShowAll = false
       this.disableAdvancing()
