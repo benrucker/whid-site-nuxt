@@ -54,6 +54,23 @@ export default {
           Object.keys(this.stats.server.mostPopularRole)[0],
         mostPopularRoleCount: () =>
           Object.values(this.stats.server.mostPopularRole)[0],
+        userRareRole: () => {
+          let roles
+          if (this.stats.user.secret_clubs != null) {
+            roles = JSON.parse(this.stats.user.secret_clubs)
+          } else if (this.stats.user.rare_roles != null) {
+            roles = JSON.parse(this.stats.user.rare_roles)
+          } else if (this.stats.user.less_rare_roles != null) {
+            roles = JSON.parse(this.stats.user.less_rare_roles)
+          } else if (this.stats.user.least_rare_role) {
+            roles = [JSON.parse(this.stats.user.least_rare_role)]
+          } else {
+            throw new Error(
+              'illegal state: backend did not provide a not-rare role for user',
+            )
+          }
+          return '@' + roles[Math.floor(Math.random() * roles.length)]
+        },
       },
     }
   },
