@@ -20,7 +20,7 @@ export default {
           content: `{Directory of general System commands v.1 | underline}`,
         },
         {
-          content: `'ls' - List executables in current directory\n'cd ..' - Navigate one directory up\n'cd [folder]' - Navigate to [folder]\n'dir' - Display current directory `,
+          content: `'ls'          - List executables in current directory\n'cd ..'       - Navigate one directory up\n'cd [folder]' - Navigate to [folder]\n'dir'         - Display current directory `,
         },
         {
           content:
@@ -354,13 +354,15 @@ export default {
     SecBotVoiceStateTime(stats) {
       const serverTotalTimeWatched =
         stats.server['SecBot total time of users watched'].toFixed(2)
-      const userTimeWatched = stats.user['SecBot hours watched']
+      const userTimeWatched = Number.parseFloat(
+        stats.user['SecBot hours watched'],
+      ).toFixed(2)
       const minimumWage = (userTimeWatched * 10.1).toFixed(2)
 
-      lines = [
-        { content: `{Time Watched in Voice Chat | underlined}` },
+      const lines = [
+        { content: `{Time Watched in Voice Chat | underline}` },
         {
-          content: `{DISCLAIMER: SecurityBot's uptime has not been complete. This data analysis should not be treated as absolute and is only for speculative / entertainment purposes. | error bold}`,
+          content: `{DISCLAIMER: SecurityBot's uptime has not been 100%. This data analysis should not be treated as absolute and is only for speculative / entertainment purposes. | error bold}`,
         },
         {
           content: `SecurityBot watched users for a combined total of {${serverTotalTimeWatched} | bold} hours.`,
@@ -396,20 +398,37 @@ export default {
       return lines
     }, // needs testing
     SecBotMostPeople(stats) {
-      const peopleSpottedWith = ['person1', 'person2', '3', '4']
-      const mostPeopleTimestamp = Date.now().toString()
-      const mostPeopleChannel = '#CHANNELNAME'
+      const sessionStat = stats?.user['SecBot largest session'] ?? {
+        count: 0,
+        members: [],
+        timestamp: '0',
+      }
+      const peopleSpottedWith = sessionStat.members.map((id) =>
+        stats.server.idsToNames(id),
+      )
+      const mostPeopleTimestamp = new Date(
+        sessionStat.timestamp,
+      ).toLocaleDateString('en-US', {
+        dateStyle: 'long',
+      })
 
       const lines = [
         { content: `{Largest group in Voice Chat | underline}` },
         {
-          content: `{${stats.user.name} | bold} was spotted with {${peopleSpottedWith.length} | bold} other people in {${mostPeopleChannel} | bold} on {${mostPeopleTimestamp} | bold}. Let's see who they with:`,
+          content: `{${stats.user.name} | bold} was spotted with {${peopleSpottedWith.length} | bold} other people on {${mostPeopleTimestamp} | bold}. Here's a list of who they were with:`,
         },
-        { content: `{${peopleSpottedWith.join()} | bold}` },
+        { content: `{${peopleSpottedWith.join(',')} | bold}` },
       ]
 
       return lines
-    }, // get data & adding into the active buttons
+    },
+    CoolS() {
+      return [
+        {
+          content: `    ____________\n   /            \\ \n  /              \\ \n /                \\ \n/                  \\ \n|         |        |\n|         |        |\n|         |        |\n|         |        |\n\\         |________|\n \\        \\ \n  \\        \\ \n   \\        \\ \n    \\        \\ \n    /\\        \\ \n   /  \\        \\ \n  /    \\        \\ \n /      \\        \\ \n/        \\        \\ \n|        |        |\n|        |        |\n|        |        |\n|        |        |\n\\                 /\n \\               /\n  \\             /\n   \\___________/`,
+        },
+      ]
+    },
     BdrThanks() {
       return [
         {
