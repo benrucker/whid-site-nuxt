@@ -67,7 +67,7 @@ export default {
           'og:image:alt',
           `A collection of statistics for the whid member ${this.username}`,
         ],
-        ['twitter:card', 'summary_large_card'],
+        ['twitter:card', 'summary_large_image'],
         ['twitter:site', '@warkcf'],
         ['twitter:creator', '@warkcf'],
       ].map(([name, content]) => {
