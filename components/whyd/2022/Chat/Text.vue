@@ -69,9 +69,14 @@ export default {
               'illegal state: backend did not provide a not-rare role for user',
             )
           }
-          return '@' + roles[Math.floor(Math.random() * roles.length)]
+          this.chosenRole = roles[Math.floor(Math.random() * roles.length)]
+          return '@' + this.chosenRole
+        },
+        userPeopleWithRareRole: () => {
+          return this.stats.server.roleCounts?.[this.chosenRole] ?? 'uhh idk'
         },
       },
+      chosenRole: '',
     }
   },
   mounted() {
