@@ -43,24 +43,24 @@ export default {
   props: {
     stats: {
       type: Object,
-      required: true
+      required: true,
     },
     index: {
       type: Number,
-      required: true
+      required: true,
     },
     msg: {
       type: Object,
-      required: true
+      required: true,
     },
     isFirstInGroup: {
       type: Boolean,
-      required: true
+      required: true,
     },
     isLastInGroup: {
       type: Boolean,
-      required: true
-    }
+      required: true,
+    },
   },
   mounted() {
     if (this.isFirstInGroup) {
@@ -81,7 +81,7 @@ export default {
 
           document.documentElement.style.setProperty(
             '--avatar-slide-distance',
-            `-${prevHeight + thisHeight + 6}px`
+            `-${prevHeight + thisHeight + 6}px`,
           )
         }
       })
@@ -97,8 +97,8 @@ export default {
     },
     handleGraphFixed() {
       this.$emit('graphFixed')
-    }
-  }
+    },
+  },
 }
 </script>
 
