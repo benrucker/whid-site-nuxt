@@ -24,48 +24,53 @@ export default {
   },
   data() {
     return {
-      leagueCount: 0,
-      apexCount: 0,
-      leaguers: [],
-      apexers: [],
-      minValue: 0,
-      maxValue: 0,
       rightColor: '#d64d44',
       rightCenterColor: 'rgb(65, 43, 39)',
     }
   },
-  mounted() {
-    this.leagueCount = this.stats.server['Number of Game Pings']['@leg']
-    this.apexCount =
-      this.stats.server['Number of Game Pings']['@gaysex legends']
-
-    const leaguePings =
-      this.stats.server['Number of pings from each user']['@leg']
-    const apexPings =
-      this.stats.server['Number of pings from each user']['@gaysex legends']
-
-    this.leaguers = Object.entries(leaguePings)
-      .filter(([_, count]) => count > 0)
-      .map(([id, count]) => {
-        return {
-          name: this.stats.server.idsToNames[id],
-          pings: count,
-          avatar: this.stats.server.idsToAvatars[id],
-        }
-      })
-    this.apexers = Object.entries(apexPings)
-      .filter(([_, count]) => count > 0)
-      .map(([id, count]) => {
-        return {
-          name: this.stats.server.idsToNames[id],
-          pings: count,
-          avatar: this.stats.server.idsToAvatars[id],
-        }
-      })
-
-    const otherCount = this.stats.server['Number of Game Pings'].allOther
-    this.minValue = Math.min(this.leagueCount, otherCount, this.apexCount)
-    this.maxValue = Math.max(this.leagueCount, otherCount, this.apexCount)
+  computed: {
+    leagueCount() {
+      return this.stats.server['Number of Game Pings']['@leg']
+    },
+    apexCount() {
+      return this.stats.server['Number of Game Pings']['@gaysex legends']
+    },
+    leaguePings() {
+      return this.stats.server['Number of pings from each user']['@leg']
+    },
+    apexPings() {
+      return this.stats.server['Number of pings from each user'][
+        '@gaysex legends'
+      ]
+    },
+    leaguers() {
+      return Object.entries(this.leaguePings)
+        .filter(([_, count]) => count > 0)
+        .map(([id, count]) => {
+          return {
+            name: this.stats.server.idsToNames[id],
+            pings: count,
+            avatar: this.stats.server.idsToAvatars[id],
+          }
+        })
+    },
+    apexers() {
+      return Object.entries(this.apexPings)
+        .filter(([_, count]) => count > 0)
+        .map(([id, count]) => {
+          return {
+            name: this.stats.server.idsToNames[id],
+            pings: count,
+            avatar: this.stats.server.idsToAvatars[id],
+          }
+        })
+    },
+    minValue() {
+      return Math.min(this.leagueCount, this.apexCount)
+    },
+    maxValue() {
+      return Math.max(this.leagueCount, this.apexCount)
+    },
   },
 }
 </script>
