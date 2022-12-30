@@ -34,6 +34,7 @@ export default {
       flickerCooldownMax: 5000,
       flickerCooldownMin: 1000,
       transitionDuration: 200,
+      glitchTimeout: undefined,
     }
   },
   mounted() {
@@ -44,6 +45,9 @@ export default {
 
       this.queueGlitch()
     })
+  },
+  beforeDestroy() {
+    clearTimeout(this.glitchTimeout)
   },
   methods: {
     glitch() {
@@ -79,7 +83,7 @@ export default {
         Math.random() * (this.flickerDurationMax - this.flickerDurationMin) +
         this.flickerDurationMin
 
-      setTimeout(this.glitch, this.flickerCooldown)
+      this.glitchTimeout = setTimeout(this.glitch, this.flickerCooldown)
     },
   },
 }
