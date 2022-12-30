@@ -6,10 +6,10 @@
   >
     <span class="avatar-wrapper">
       <img
-        v-if="isLastInGroup"
         :key="index"
+        ref="avatar"
         :src="`/whyd/2022/bots/${msg.author}.png`"
-        class="avatar"
+        class="avatar hide"
       />
     </span>
     <div v-if="isFirstInGroup" class="author-name text-muted">
@@ -72,22 +72,31 @@ export default {
   },
   methods: {
     interpolateAvatar() {
-      this.$nextTick(() => {
+      setTimeout(() => {
         const prevMessage = this.$el.previousElementSibling
+        const prevAvatar = prevMessage.querySelector('img.avatar')
 
-        if (prevMessage) {
-          const prevHeight = prevMessage.offsetHeight / 2
-          const thisHeight = this.$el.offsetHeight / 2
-
-          document.documentElement.style.setProperty(
-            '--avatar-slide-distance',
-            `-${prevHeight + thisHeight + 6}px`,
-          )
+        if (prevAvatar == null) {
+          console.warn('bailing out of sliding avatar')
+          return
         }
-      })
+
+        const prevHeight = prevMessage.offsetHeight / 2
+        const thisHeight = this.$el.offsetHeight / 2
+
+        document.documentElement.style.setProperty(
+          '--avatar-slide-distance',
+          `-${prevHeight + thisHeight + 6}px`,
+        )
+        this.$refs.avatar.classList.remove('hide')
+        this.$refs.avatar.classList.add('show')
+        prevAvatar.classList.remove('fade-in')
+        prevAvatar.classList.add('hide')
+      }, 50)
     },
     fadeAvatar() {
-      this.$el.classList.add('fade-in')
+      this.$refs.avatar.classList.add('fade-in')
+      // this.$refs.avatar.classList.remove('hide')
     },
     resetInterpolation() {
       document.documentElement.style.setProperty('--avatar-slide-distance', '0')
@@ -159,6 +168,7 @@ export default {
   font-weight: 500;
   font-size: 12px;
   opacity: 0.5;
+  animation: fade-in 0.5s ease-in-out both;
 }
 
 .right .author-name {
@@ -180,12 +190,20 @@ export default {
   width: 40px;
   height: 40px;
   top: -15px;
-  animation: slide-in 0.5s ease-in-out both;
+  animation: none;
   user-select: none;
 }
 
+.message .avatar.show {
+  animation: slide-in 0.5s ease-in-out both;
+}
+
+.message .avatar.hide {
+  opacity: 0;
+}
+
 .fade-in {
-  animation: fade-in 0.5s ease-in-out both;
+  animation: fade-in 0.5s ease-in-out both !important;
 }
 
 .message .content {
