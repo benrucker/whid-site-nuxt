@@ -1,5 +1,17 @@
 <template>
   <div v-if="isPrefetching">
+    <div
+      v-if="showComponents"
+      ref="components"
+      style="height: 0px; width: 0px; overflow: hidden"
+    >
+      <component
+        :is="`Whyd2022ChatChart${component}`"
+        v-for="component in components"
+        :key="component"
+        style="visibility: hidden; height: 0px; width: 0px"
+      />
+    </div>
     <link v-for="url in resources" :key="url" rel="prefetch" :href="url" />
   </div>
 </template>
@@ -391,7 +403,29 @@ export default {
         '/whyd/2022/data/emojis/yOoOoOoO.png',
         '/whyd/2022/data/emojis/you.png',
       ],
+      components: [
+        'WordlePlays',
+        'AllKian',
+        'BirthdayMessage',
+        'EmojisCloud',
+        'Music',
+        'LeagueVsAll',
+        'LeagueVsApex',
+        'LeagueVsSomeone',
+        'MessagesLeaderboard',
+        'MessagesPerYear',
+        'MostReactedToImages',
+        'MostUpvotedPost',
+        'MostUsedReactions',
+        'MostUsedStickers',
+        'TopFiveUsersByImageCount',
+        'TopGmSayers',
+        'UserMostUsedWords',
+        'UserNoResponse',
+        'UserSentiment',
+      ],
       isPrefetching: true,
+      showComponents: true,
     }
   },
   computed: {
@@ -404,11 +438,19 @@ export default {
         .concat(this.attachments)
     },
   },
+  errorCaptured: function (err) {
+    console.log('Caught error', err.message)
+    ++this.count
+    return false
+  },
   mounted() {
     // remove links after 2 min to save DOM space
     setTimeout(() => {
       this.isPrefetching = false
     }, 2 * 60 * 1000)
+    setTimeout(() => {
+      this.showComponents = false
+    }, 500)
   },
 }
 </script>
