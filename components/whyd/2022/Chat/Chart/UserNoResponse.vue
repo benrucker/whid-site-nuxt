@@ -43,7 +43,7 @@ export default {
   },
   computed: {
     noResponseCount() {
-      return this.stats.user.noResponseCount ?? 546
+      return this.stats.user['No response count'] ?? 0
     },
   },
 }
