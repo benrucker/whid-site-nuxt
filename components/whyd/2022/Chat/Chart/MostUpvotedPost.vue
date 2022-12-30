@@ -24,6 +24,7 @@ export default {
         content: rawMessage?.content,
         reactions: rawMessage?.reactions,
         timestamp: rawMessage?.timestamp,
+        url: rawMessage?.url,
       }
       return val
     },

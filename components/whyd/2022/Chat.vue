@@ -210,6 +210,18 @@ export default {
     chooseRandomOption(content) {
       return content[Math.floor(Math.random() * content.length)]
     },
+    chooseBirthdayMessage(content) {
+      if (this.stats.user.birthdayWishes != null) {
+        // eslint-disable-next-line vue/no-mutating-props
+        this.messages.splice(this.messagesPosition, 0, {
+          author: 'JermaBot',
+          type: 'ChartBirthdayMessage',
+          hideBubble: true,
+        })
+        return content[0]
+      }
+      return content[1]
+    },
     chooseRoleFirstMessage(content) {
       if (
         this.stats.user.secret_clubs != null &&
