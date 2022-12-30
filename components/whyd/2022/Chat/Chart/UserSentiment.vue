@@ -1,16 +1,24 @@
 <template>
-  <div ref="usbotGraph" class="usbotGraph">
+  <div
+    ref="usbotGraph"
+    class="usbotGraph"
+    :style="`--leftWidth: ${percentageFromLeft}%`"
+  >
     <div
       class="graphContent"
-      title="The average sentiment of your messages this year"
+      :title="`The average sentiment of your messages this year was ${stats.user.sentiment}`"
     >
       <h4 class="text-center mt-2">
         {{
-          percentageFromLeft === 50
-            ? 'middle'
+          percentageFromLeft == 50
+            ? 'true neutral'
+            : percentageFromLeft > 75
+            ? 'super happy for it!'
             : percentageFromLeft > 50
-            ? 'happy'
-            : 'not happy'
+            ? 'seems like, positive'
+            : percentageFromLeft > 25
+            ? 'a bit of negativity'
+            : 'negatively'
         }}
       </h4>
       <div class="politicalSlider">
@@ -48,20 +56,18 @@
 
 <script>
 export default {
-  data() {
-    return {
-      percentageFromLeft: 50,
-    }
-  },
-  watch: {
-    percentageFromLeft(val) {
-      this.$refs.usbotGraph.style.setProperty('--leftWidth', `${val}%`)
+  props: {
+    stats: {
+      type: Object,
+      required: true,
     },
   },
-  mounted() {
-    setTimeout(() => {
-      this.percentageFromLeft = 40
-    })
+  computed: {
+    percentageFromLeft() {
+      return (
+        (((Number.parseFloat(this.stats.user.sentiment) ?? 0) + 1) / 2) * 100
+      )
+    },
   },
 }
 </script>
