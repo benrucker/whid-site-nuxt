@@ -182,7 +182,7 @@ export default {
       return content
     },
     leagueOrApex(content) {
-      const roles = this.stats.user.manual.roles ?? []
+      const roles = this.stats.user?.manual?.roles ?? []
       if (roles.includes('leg') && roles.includes('gaysex legends')) {
         return content?.both
       } else if (roles.includes('leg')) {
@@ -250,9 +250,8 @@ export default {
         choices = [this.stats.user.least_rare_role]
         output = content[1]
       } else {
-        throw new Error(
-          'illegal state: backend did not provide a not-rare role for user',
-        )
+        output = content[2]
+        return output
       }
       // eslint-disable-next-line vue/no-mutating-props
       this.stats.user.featuredRole = this.chooseRandomOption(choices)
@@ -280,9 +279,7 @@ export default {
       } else if (this.stats.user.least_rare_role) {
         return content[3]
       } else {
-        throw new Error(
-          'illegal state: backend did not provide a not-rare role for user',
-        )
+        return content[4]
       }
     },
     beginEndAnimation() {

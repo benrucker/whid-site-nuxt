@@ -27,8 +27,8 @@
             :alt="stats.server.idsToNames[id]"
           />
           <div class="imgUsername">{{ stats.server.idsToNames[id] }}</div>
-          <div :title="imageCountByUser[id] + ' images sent'">
-            {{ imageCountByUser[id] }}
+          <div :title="imageInfoByUser[id].count + ' images sent'">
+            {{ imageInfoByUser[id].count }}
           </div>
           <div class="button" @click="handleClick(id)">wanna see one? 😏</div>
         </li>
@@ -46,44 +46,18 @@ export default {
     },
   },
   computed: {
-    userIds() {
-      return Array.from(Object.keys(this.imageCountByUser)).slice(0, 5) ?? []
-    },
-    imageCountByUser() {
+    imageInfoByUser() {
       return this.stats.server['Top Five Users By Images Sent']
     },
-    imageUrlsByUser() {
-      return (
-        this.stats.server['Top Five Users Images'] ?? {
-          '173839815400357888': [
-            'https://media.tenor.com/GIVLitDIxr8AAAAC/breaking-bad-walter-white.gif',
-            'https://media.tenor.com/S_to1tY3ixUAAAAC/breaking-bad-walter-white.gif',
-          ],
-          '256553939800031233': [
-            'https://media.tenor.com/GIVLitDIxr8AAAAC/breaking-bad-walter-white.gif',
-            'https://media.tenor.com/S_to1tY3ixUAAAAC/breaking-bad-walter-white.gif',
-          ],
-          '175705032161886208': [
-            'https://media.tenor.com/GIVLitDIxr8AAAAC/breaking-bad-walter-white.gif',
-            'https://media.tenor.com/S_to1tY3ixUAAAAC/breaking-bad-walter-white.gif',
-          ],
-          '174672596275691521': [
-            'https://media.tenor.com/GIVLitDIxr8AAAAC/breaking-bad-walter-white.gif',
-            'https://media.tenor.com/S_to1tY3ixUAAAAC/breaking-bad-walter-white.gif',
-          ],
-          '161144318160011265': [
-            'https://media.tenor.com/GIVLitDIxr8AAAAC/breaking-bad-walter-white.gif',
-            'https://media.tenor.com/S_to1tY3ixUAAAAC/breaking-bad-walter-white.gif',
-          ],
-        }
-      )
+    userIds() {
+      return Array.from(Object.keys(this.imageInfoByUser))
     },
   },
   methods: {
     handleClick(id) {
       window.open(
-        this.imageUrlsByUser[id]?.[
-          (Math.random() * this.imageUrlsByUser[id].length) | 0
+        this.imageInfoByUser[id].attachments[
+          (Math.random() * this.imageInfoByUser[id].attachments.length) | 0
         ] ?? 'about:blank',
         '_blank',
       )

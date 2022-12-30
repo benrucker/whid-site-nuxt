@@ -92,7 +92,7 @@ export default {
         this.$refs.avatar.classList.add('show')
         prevAvatar.classList.remove('fade-in')
         prevAvatar.classList.add('hide')
-      }, 50)
+      }, 100)
     },
     fadeAvatar() {
       this.$refs.avatar.classList.add('fade-in')
