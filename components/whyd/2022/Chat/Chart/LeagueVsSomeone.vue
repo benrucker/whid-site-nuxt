@@ -44,13 +44,6 @@
 </template>
 
 <script>
-// TODO does the number interpolation take the right amount of time?
-// TODO do any users overlap the side with fewer pings?
-// TODO define a max distance for the roel with more pings to move
-// TODO define the lower-bound for the role with fewer pings
-//        (base it subjectively off the lowest possible value that will pass in here)
-// TODO edit background colors
-
 export default {
   props: {
     stats: {
@@ -122,7 +115,7 @@ export default {
         this.avatarWiggler = setInterval(this.wiggleAvatars, 4000)
       }, 100)
       this.numberUpper = setInterval(this.numberUp, 16)
-    }, 1000) // TODO bring this back to 2000
+    }, 600)
 
     this.$nextTick(() => {
       this.rootRef = this.$refs.root

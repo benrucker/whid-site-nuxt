@@ -25,43 +25,51 @@ export default {
   },
   data() {
     return {
-      leagueCount: 0,
-      otherCount: 0,
-      leaguers: [],
-      others: [],
-      minValue: 0,
-      maxValue: 0,
       rightColor: '#444dd6',
       rightCenterColor: 'rgb(39, 43, 65)',
     }
   },
-  mounted() {
-    this.leagueCount = this.stats.server['Number of Game Pings']['@leg']
-    this.otherCount = this.stats.server['Number of Game Pings'].allOther
-
-    const leaguePings =
-      this.stats.server['Number of pings from each user']['@leg']
-    const otherPings =
-      this.stats.server['Number of pings from each user'].allOther
-
-    this.leaguers = Object.entries(leaguePings)
-      .filter(([_, count]) => count > 0)
-      .map(([id, count]) => {
-        return {
-          name: this.stats.server.idsToNames[id],
-          pings: count,
-          avatar: this.stats.server.idsToAvatars[id],
-        }
-      })
-    this.others = Object.entries(otherPings)
-      .filter(([_, count]) => count > 0)
-      .map(([id, count]) => {
-        return {
-          name: this.stats.server.idsToNames[id],
-          pings: count,
-          avatar: this.stats.server.idsToAvatars[id],
-        }
-      })
+  computed: {
+    leagueCount() {
+      return this.stats.server['Number of Game Pings']['@leg']
+    },
+    otherCount() {
+      return this.stats.server['Number of Game Pings'].allOther
+    },
+    leaguePings() {
+      return this.stats.server['Number of pings from each user']['@leg']
+    },
+    otherPings() {
+      return this.stats.server['Number of pings from each user'].allOther
+    },
+    leaguers() {
+      return Object.entries(this.leaguePings)
+        .filter(([_, count]) => count > 0)
+        .map(([id, count]) => {
+          return {
+            name: this.stats.server.idsToNames[id],
+            pings: count,
+            avatar: this.stats.server.idsToAvatars[id],
+          }
+        })
+    },
+    others() {
+      return Object.entries(this.otherPings)
+        .filter(([_, count]) => count > 0)
+        .map(([id, count]) => {
+          return {
+            name: this.stats.server.idsToNames[id],
+            pings: count,
+            avatar: this.stats.server.idsToAvatars[id],
+          }
+        })
+    },
+    minValue() {
+      return Math.min(this.leagueCount, this.otherCount)
+    },
+    maxValue() {
+      return Math.max(this.leagueCount, this.otherCount)
+    },
   },
 }
 </script>
