@@ -130,9 +130,9 @@ export default {
     this.mounted = true
     this.$nextTick(() => {
       window.addEventListener('resize', () => {
-        this.$refs.chart.resize()
+        this.$refs.chart?.resize()
       })
-      this.$refs.chart.resize()
+      this.$refs.chart?.resize()
     })
   },
 }
