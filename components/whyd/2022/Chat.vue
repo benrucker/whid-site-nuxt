@@ -175,7 +175,7 @@ export default {
     },
     next(content) {
       this.waitingToAutomaticallyAdvance = true
-      this.autoAdvanceTimeout = setTimeout(this.advance, 1000)
+      this.autoAdvanceTimeout = setTimeout(this.advance, 500)
       return content
     },
     leagueOrApex(content) {
@@ -223,28 +223,40 @@ export default {
       return content[1]
     },
     chooseRoleFirstMessage(content) {
+      let choices
+      let output
       if (
         this.stats.user.secret_clubs != null &&
         JSON.parse(this.stats.user.secret_clubs).length > 0
       ) {
-        return content[0]
+        choices = JSON.parse(this.stats.user.secret_clubs)
+        output = content[0]
       } else if (
         this.stats.user.rare_roles != null &&
         JSON.parse(this.stats.user.rare_roles).length > 0
       ) {
-        return content[0]
+        choices = JSON.parse(this.stats.user.rare_roles)
+        output = content[0]
       } else if (
         this.stats.user.less_rare_roles != null &&
         JSON.parse(this.stats.user.less_rare_roles).length > 0
       ) {
-        return content[0]
-      } else if (this.stats.user.least_rare_roles) {
-        return content[1]
+        choices = JSON.parse(this.stats.user.less_rare_roles)
+        output = content[0]
+      } else if (this.stats.user.least_rare_role) {
+        choices = [this.stats.user.least_rare_role]
+        output = content[1]
       } else {
         throw new Error(
           'illegal state: backend did not provide a not-rare role for user',
         )
       }
+      // eslint-disable-next-line vue/no-mutating-props
+      this.stats.user.featuredRole = this.chooseRandomOption(choices)
+      // eslint-disable-next-line vue/no-mutating-props
+      this.stats.user.featuredRoleCount =
+        this.stats.server.roleCounts[this.stats.user.featuredRole]
+      return output
     },
     chooseRoleSecondMessage(content) {
       if (
