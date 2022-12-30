@@ -403,8 +403,8 @@ export default {
         members: [],
         timestamp: '0',
       }
-      const peopleSpottedWith = sessionStat.members.map((id) =>
-        stats.server.idsToNames(id),
+      const peopleSpottedWith = sessionStat.members.map(
+        (id) => stats.server.idsToNames[id],
       )
       const mostPeopleTimestamp = new Date(
         sessionStat.timestamp,
@@ -461,9 +461,15 @@ export default {
     BdrWhyd2023() {
       return [
         {
-          content: 'no',
+          content: '{:fear: | terminal-emoji}',
+        },
+        {
+          content: "you'll have to wait and see {:benheh: | terminal-emoji}",
         },
       ]
+    },
+    BdrKian() {
+      return [{ content: '{{{Whyd2022TerminalEmbeddedKian}}}' }]
     },
   },
 }
