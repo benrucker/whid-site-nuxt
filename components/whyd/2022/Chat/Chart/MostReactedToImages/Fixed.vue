@@ -34,6 +34,7 @@ export default {
           content: msg.content,
           reactions: msg.reactions,
           timestamp: msg.timestamp,
+          url: msg.url,
         }
       })
     },
