@@ -1,5 +1,9 @@
 <template>
-  <Whyd2022ChatDiscordMessageBlock :messages="messages" :stats="stats" />
+  <Whyd2022ChatDiscordMessageBlock
+    class="birthday"
+    :messages="messages"
+    :stats="stats"
+  />
 </template>
 
 <script>
@@ -32,4 +36,8 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.birthday {
+  animation: fade-in 0.5s ease-in-out;
+}
+</style>

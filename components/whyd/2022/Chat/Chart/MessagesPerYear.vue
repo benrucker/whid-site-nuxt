@@ -1,6 +1,5 @@
 <template>
   <Whyd2022ChatChartEchartBar
-    v-if="msgCounts.length"
     :bg-color="'transparent'"
     :color="'#8677cb'"
     :text-color="'#fff'"
