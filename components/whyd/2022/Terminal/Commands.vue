@@ -461,7 +461,10 @@ export default {
     BdrWhyd2023() {
       return [
         {
-          content: 'no',
+          content: '{:fear: | terminal-emoji}',
+        },
+        {
+          content: "you'll have to wait and see {:benheh: | terminal-emoji}",
         },
       ]
     },
