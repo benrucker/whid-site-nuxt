@@ -76,6 +76,7 @@ export default {
         attachments: [
           'https://media.tenor.com/9z3rpvYfoDIAAAAd/sonic-and-mario-kiss.gif',
         ],
+        url: 'https://youtu.be/CqnU_sJ8V-E?t=293',
       },
       message2: {
         reactions: [
@@ -92,6 +93,7 @@ export default {
         attachments: [
           'https://media.tenor.com/9z3rpvYfoDIAAAAd/sonic-and-mario-kiss.gif',
         ],
+        url: 'https://en.wikipedia.org/wiki/Mario_%26_Sonic_at_the_Olympic_Winter_Games',
       },
     }
   },

@@ -10,6 +10,7 @@
       :author-color="msg.authorColor ?? ''"
       :attachments="msg.attachments"
       :timestamp="msg.timestamp"
+      :url="msg.url"
       :stats="stats"
     />
   </div>
