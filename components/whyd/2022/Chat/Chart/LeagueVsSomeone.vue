@@ -46,10 +46,6 @@
 <script>
 export default {
   props: {
-    stats: {
-      type: Object,
-      required: true,
-    },
     leagueCount: {
       type: Number,
       required: true,
