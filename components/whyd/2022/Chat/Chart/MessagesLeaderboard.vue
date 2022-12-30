@@ -1,5 +1,5 @@
 <template>
-  <div v-if="counts.length" class="messagesLeaderboard">
+  <div class="messagesLeaderboard">
     <div class="lb-title text-center">
       <h4>Who sent the most messages?</h4>
     </div>
@@ -28,6 +28,7 @@
     </div>
   </div>
 </template>
+
 <script>
 export default {
   props: {
@@ -36,17 +37,18 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      users: [],
-      counts: [],
-    }
-  },
-  mounted() {
-    const ranks = this.stats.server['Rank by Number of Messages per User']
-    const ids = Object.keys(ranks).slice(0, 5)
-    this.users = ids.map((id) => this.stats.server.idsToNames[id])
-    this.counts = ids.map((x) => ranks[x])
+  computed: {
+    ids() {
+      const ranks = this.stats.server['Rank by Number of Messages per User']
+      return Object.keys(ranks).slice(0, 5)
+    },
+    users() {
+      return this.ids.map((id) => this.stats.server.idsToNames[id])
+    },
+    counts() {
+      const ranks = this.stats.server['Rank by Number of Messages per User']
+      return this.ids.map((x) => ranks[x])
+    },
   },
   methods: {},
 }
