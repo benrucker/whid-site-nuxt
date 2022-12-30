@@ -6,6 +6,13 @@
         :key="token.text"
         :class="(token.styles ?? '') + ' text'"
         >{{ token.text }}</span
+      ><component
+        :is="token.component"
+        v-if="token.component != null && token.component !== ''"
+        :key="token.component"
+        :class="(token.styles ?? '') + ' component'"
+        :stats="stats"
+      ></component
       ><span
         v-if="token.emoji"
         :key="token.src"
@@ -66,7 +73,9 @@ export default {
   },
   mounted() {
     this.parsedContent = this.content.split(/(\{+.+?}+)/g).map((token) => {
-      if (token.startsWith('{{') && token.endsWith('}}')) {
+      if (token.startsWith('{{{') && token.endsWith('}}}')) {
+        return parseComponent(token)
+      } else if (token.startsWith('{{') && token.endsWith('}}')) {
         return parseValue(token, this.values)
       } else if (token.startsWith('{') && token.endsWith('}')) {
         if (token.startsWith('{:')) {
@@ -84,6 +93,12 @@ export default {
       return this.stats.server.idsToNames[id]
     },
   },
+}
+
+function parseComponent(data) {
+  const nameAndStyle = data.slice(3, -3)
+  const [valueName, styles] = nameAndStyle.split(' | ')
+  return { component: valueName, styles }
 }
 
 function parseValue(data, values) {
@@ -168,6 +183,9 @@ function parseEmoji(data) {
   max-width: inherit;
   max-height: inherit;
   vertical-align: -10%;
+}
+
+.parsed-text .component {
 }
 
 .parsed-text .error {

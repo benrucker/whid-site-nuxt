@@ -403,10 +403,10 @@ export default {
       setTimeout(() => {
         this.selfDestruct()
         // location.reload()
-      }, 1100)
+      }, 1500)
       setTimeout(() => {
         location.reload()
-      }, 1750)
+      }, 1950)
     },
   },
 }

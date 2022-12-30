@@ -191,6 +191,7 @@ export default {
   top: 50%;
   left: 50%;
   transform: scale(15, 10);
+  image-rendering: pixelated;
   position: absolute;
 
   animation: explosion-sprite 1s steps(18) forwards;

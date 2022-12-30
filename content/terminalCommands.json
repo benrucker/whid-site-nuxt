@@ -39,12 +39,6 @@
     "path": "/root/whyd",
     "functionName": "testFunction"
   },
-  "S": {
-    "prettyName": "S",
-    "path": "/root/bdr",
-    "buttonStyle": "danger-button",
-    "functionName": "CoolS"
-  },
   "cd SecBot": {
     "prettyName": "cd SecBot",
     "path": "/root/whyd",
@@ -197,33 +191,47 @@
     "buttonStyle": "nav-button"
   },
 
+  "cd ecf": {
+    "prettyName": "cd ecf",
+    "path": "/root",
+    "buttonStyle": "ethan-button"
+  },
+
+  "cd bdr": {
+    "prettyName": "cd bdr",
+    "path": "/root",
+    "buttonStyle": "ben-button"
+  },
   "thank you": {
     "prettyName": "thank you",
     "path": "/root/bdr",
     "functionName": "BdrThanks"
   },
   "whyd2023": {
-    "prettyName": "whyd2023.txt",
+    "prettyName": "whyd2023",
     "path": "/root/bdr",
     "dependencies": ["thank you"],
     "functionName": "BdrWhyd2023"
   },
+  "kian": {
+    "prettyName": "kian",
+    "path": "/root/bdr",
+    "dependencies": ["thank you"],
+    "functionName": "BdrKian"
+  },
+  "s": {
+    "prettyName": "s",
+    "path": "/root/bdr",
+    "buttonStyle": "danger-button",
+    "functionName": "CoolS"
+  },
 
-  "cd ecf": {
-    "prettyName": "cd ecf",
-    "path": "/root",
-    "buttonStyle": "ethan-button"
-  },
-  "cd bdr": {
-    "prettyName": "cd bdr",
-    "path": "/root",
-    "buttonStyle": "ben-button"
-  },
   "cd twcm": {
     "prettyName": "cd twcm",
     "path": "/root",
     "buttonStyle": "tristan-button"
   },
+
   "cd wwk": {
     "prettyName": "cd wwk",
     "path": "/root",
