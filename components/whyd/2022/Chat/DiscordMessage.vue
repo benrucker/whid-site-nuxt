@@ -1,5 +1,5 @@
 <template>
-  <div class="message">
+  <a class="message" :href="url" target="_blank" @click.stop>
     <div class="name-bar">
       <img class="d-msg-avatar" :src="authorAvatar" />
       <h2 class="name-ts">
@@ -43,7 +43,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </a>
 </template>
 
 <script>
@@ -78,6 +78,10 @@ export default {
       required: true,
     },
     timestamp: {
+      type: String,
+      required: true,
+    },
+    url: {
       type: String,
       required: true,
     },
@@ -133,6 +137,9 @@ export default {
   position: relative;
   flex-direction: column;
   align-items: flex-start;
+
+  display: block;
+  text-decoration: none;
 }
 
 .message:hover {
@@ -226,8 +233,8 @@ export default {
 }
 
 .message-content {
-  font-size: 1em;
-  min-height: 4px;
+  font-size: 0.9em;
+  line-height: 1.2em;
   color: #dcddde;
 }
 

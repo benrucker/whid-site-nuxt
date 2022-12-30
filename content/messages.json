@@ -42,12 +42,12 @@
       "author": "JermaBot"
     },
     {
-      "content": "I hope your birthday was all you'd wished for this year.",
-      "author": "JermaBot"
-    },
-    {
-      "content": "Specifically, you made note of wishing for {{userWish}}. Traditionally, you're not supposed to tell anybody what you wish for, but here's to hoping it came true!",
-      "author": "JermaBot"
+      "content": [
+        "I hope your birthday was all you'd wished for this year:",
+        "You didn't wish for anything... but here's to next year!"
+      ],
+      "author": "JermaBot",
+      "function": "chooseBirthdayMessage"
     },
     {
       "content": "How about I quickly roll up some leaderboard stats for you? Check these out:",
