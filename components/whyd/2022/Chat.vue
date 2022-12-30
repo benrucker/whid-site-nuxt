@@ -104,6 +104,7 @@ export default {
     advance() {
       this.showHint = false
       this.showTyping = false
+
       if (this.areMoreMessagesRemaining()) {
         const messageInfo = this.messages[this.messagesPosition++]
         if (messageInfo.function) {
@@ -119,10 +120,12 @@ export default {
         messageInfo.color =
           messageInfo.color ?? messageInfo.author.toLowerCase()
         this.displayed.push(messageInfo)
+
         if (this.scrollTo) {
           setTimeout(this.scrollToLast, 50)
         }
       }
+
       if (this.areMoreMessagesRemaining()) {
         setTimeout(() => {
           this.showHint = true
