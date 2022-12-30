@@ -219,6 +219,9 @@ export default {
     scrollToBottom() {
       this.$emit('scrollToBottom')
     },
+    selfDestruct() {
+      this.$emit('selfDestruct')
+    },
     // #endregion
     // #region User Input Control Functions
     submitTextCommand() {
@@ -398,9 +401,12 @@ export default {
         })
       }, 1000)
       setTimeout(() => {
-        // const el = this.$el.querySelector('#terminal-white-background')
-        location.reload()
+        this.selfDestruct()
+        // location.reload()
       }, 1100)
+      setTimeout(() => {
+        location.reload()
+      }, 1750)
     },
   },
 }

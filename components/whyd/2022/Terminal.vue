@@ -30,6 +30,7 @@
           ref="inputArea"
           @scrollToBottom="scrollToBottom"
           @addTextLine="addTextLine"
+          @selfDestruct="selfDestruct"
         />
       </div>
       <Whyd2022TerminalPasswordInputArea
@@ -52,7 +53,7 @@ export default {
       offsetY: 40,
       dragging: false,
       loggedIn: false,
-      inputAreaRef: undefined
+      inputAreaRef: undefined,
     }
   },
   computed: {
@@ -65,7 +66,7 @@ export default {
       }
 
       return this.inputAreaRef.getTerminalMode() === 'clickContinue'
-    }
+    },
   },
   mounted() {
     this.scrollToBottom()
@@ -87,6 +88,11 @@ export default {
         this.$refs.inputArea.$el.scrollIntoView({ block: 'start' })
       })
     },
+    selfDestruct() {
+      const el = document.createElement('div')
+      el.classList.add('secbot-explosion')
+      this.$refs.terminal.appendChild(el)
+    },
     focusInput() {
       this.$refs.inputArea.focusInput()
     },
@@ -104,7 +110,7 @@ export default {
       if (this.dragging) {
         this.moveTerminal(
           event.clientX - this.offsetX,
-          event.clientY - this.offsetY
+          event.clientY - this.offsetY,
         )
       }
     },
@@ -116,8 +122,8 @@ export default {
     terminalMouseUp() {
       // called externally
       this.dragging = false
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -178,23 +184,24 @@ export default {
   filter: sepia(0.6);
 }
 
-/* .error-text {
-  color: var(--error);
+.secbot-explosion {
+  background: url('/whyd/2022/explosion-sheet.png');
+  width: 71px;
+  height: 100px;
+  top: 50%;
+  left: 50%;
+  transform: scale(15, 10);
+  position: absolute;
+
+  animation: explosion-sprite 1s steps(18) forwards;
 }
 
-.italic-text {
-  font-style: italic;
+@keyframes explosion-sprite {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -1278px 0;
+  }
 }
-
-.confirmed-text {
-  color: var(--success);
-}
-
-.underlined-text {
-  text-decoration: underline;
-}
-
-.emphasized-text {
-  font-weight: bold;
-} */
 </style>
