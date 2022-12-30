@@ -116,7 +116,8 @@
     {
       "content": [
         "...ooooo! I've never seen anyone with the {{userRareRole | role}} role! Let me take a closer look!",
-        "...ooooo! NOT RARE ROLE MESSAGE HERE You have the {{userRareRole | role}} role! That one might be my favorite!"
+        "...ooooo! NOT RARE ROLE MESSAGE HERE You have the {{userRareRole | role}} role! That one might be my favorite!",
+        "...ooooo wait a minute!"
       ],
       "author": "Shigure",
       "function": "chooseRoleFirstMessage"
@@ -127,7 +128,7 @@
         "Woah! RARE ROLE MESSAGE HERE Only {{userPeopleWithRareRole | number}} people have that one! Wear it like a badge of honor!!",
         "Woah! SLIGHTLY LESS RARE ROLES MESSAGE HERE Only {{userPeopleWithRareRole | number}} people have that one! Wear it like a badge of honor!!",
         "Woah! KINDA NOT RARE ROLES MESSAGE HERE Only {{userPeopleWithRareRole | number}} people have that one! Wear it like a badge of honor!!",
-        "Woah! NOT RARE ROLE MESSAGE HERE {{userPeopleWithRareRole | number}} people have it!"
+        "You {don't | italic} have any roles! I didn't even know that was possible!"
       ],
       "author": "Shigure",
       "function": "chooseRoleSecondMessage"
