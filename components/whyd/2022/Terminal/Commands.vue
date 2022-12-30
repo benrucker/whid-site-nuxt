@@ -259,17 +259,23 @@ export default {
     },
     SecBotScoresAverage(stats) {
       const user = stats.user.name
-      const userAverage = stats.user['SecBot user average score'].score
-      const serverAverage = 55 // stats.server['']
+      const userAverage =
+        stats.user['SecBot user average score'].score.toFixed(2) ?? 750
+      const serverAverages = Object.values(
+        stats.server['SecBot server mean scores by epoch'].score,
+      )
+      const avg = (
+        serverAverages.reduce((a, b) => a + b) / serverAverages.length
+      ).toFixed(2)
 
       const lines = [
         { content: `{Average Scores | underline}` },
         {
-          content: `The average score of the entire server over the year was {${serverAverage} | bold}`,
+          content: `The average score of the entire server over the year was {${avg} | bold}`,
         },
       ]
 
-      if (userAverage >= serverAverage) {
+      if (userAverage >= avg) {
         lines.push({
           content: `{${user} | bold}'s average score of {${userAverage} | bold}, on average, was higher on average than the average, on average.`,
         })
