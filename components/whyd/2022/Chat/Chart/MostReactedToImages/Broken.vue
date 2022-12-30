@@ -101,9 +101,6 @@ export default {
 </script>
 
 <style scoped>
-.broken-reactions-root {
-}
-
 .gitching1 {
   animation: random-move 100s infinite step-start;
 }
