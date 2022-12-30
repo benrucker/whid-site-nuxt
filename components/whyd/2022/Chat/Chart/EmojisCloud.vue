@@ -77,9 +77,7 @@ export default {
     },
   },
   mounted() {
-    this.$nextTick(() => {
-      this.init()
-    })
+    this.init()
   },
   beforeDestroy() {
     this.intervals.forEach(clearInterval)
