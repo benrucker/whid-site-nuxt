@@ -322,7 +322,8 @@ export default {
   width: 400px;
   transform: perspective(400px) rotateX(0deg) rotateY(0deg);
   transform-style: preserve-3d;
-  box-shadow: 1.5rem 2.5rem 5rem 0.7rem rgba(0, 0, 0, 0.13);
+  box-shadow: 0px 10px 50px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -409,6 +410,7 @@ export default {
 }
 
 .image-div img {
+  /* avatars */
   transform: translate3d(0, 0, 0);
   transition: all 5s ease-in-out;
   transform-style: preserve-3d;
