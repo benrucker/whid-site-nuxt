@@ -136,7 +136,12 @@ function parseStyling(data) {
 function parseEmoji(data) {
   const { text, styles } = parseStyling(data)
   const emojiName = text.slice(1, -1)
-  return { src: `/whyd/2022/data/emojis/${emojiName}.png`, emoji: true, styles }
+  const extension = emojiName.includes('.') ? '' : '.png'
+  return {
+    src: `/whyd/2022/data/emojis/${emojiName}${extension}`,
+    emoji: true,
+    styles,
+  }
 }
 </script>
 
