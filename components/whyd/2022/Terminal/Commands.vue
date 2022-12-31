@@ -442,7 +442,7 @@ export default {
         {
           content: `{${stats.user.name} | bold} was spotted with {${peopleSpottedWith.length} | bold} other people on {${mostPeopleTimestamp} | bold}. Here's a list of who they were with:`,
         },
-        { content: `{${peopleSpottedWith.join(',')} | bold}` },
+        { content: `{${peopleSpottedWith.join(', ')} | bold}` },
       ]
 
       return lines
