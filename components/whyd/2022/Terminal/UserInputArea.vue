@@ -42,6 +42,8 @@
       v-model="userInput"
       type="text"
       @keyup.enter="handleTextInputEnter"
+      @keyup.up="handleTextInputUpArrow"
+      @keyup.down="handleTextInputDownArrow"
       @blur="justFocusInput"
     />
   </div>
@@ -95,6 +97,9 @@ export default {
       stats: undefined,
       uniqueLineId: 0,
       usedCommands: [],
+      commandHistory: [],
+      commandHistoryPosition: 0,
+      currentUserInput: undefined,
     }
   },
   async fetch() {
@@ -266,6 +271,26 @@ export default {
         this.handleContinueButtonClick()
       }
     },
+    handleTextInputUpArrow() {
+      if (this.commandHistoryPosition === this.commandHistory.length) {
+        this.currentUserInput = this.userInput
+      }
+
+      this.commandHistoryPosition = Math.max(0, this.commandHistoryPosition - 1)
+      this.userInput = this.commandHistory[this.commandHistoryPosition]
+    },
+    handleTextInputDownArrow() {
+      this.commandHistoryPosition = Math.min(
+        this.commandHistory.length,
+        this.commandHistoryPosition + 1,
+      )
+
+      if (this.commandHistoryPosition === this.commandHistory.length) {
+        this.userInput = this.currentUserInput
+      } else {
+        this.userInput = this.commandHistory[this.commandHistoryPosition]
+      }
+    },
     processCommand(input) {
       const commandName = input.trim().toLowerCase() // fuck you if you make the terminal case-sensitive
 
@@ -283,6 +308,7 @@ export default {
         const func = commands[command.functionName]
 
         if (typeof func === 'function') {
+          this.addToCommandHistory(commandName)
           this.executeCommandText(func(this.stats))
           return
         }
@@ -290,6 +316,7 @@ export default {
 
       if (commandName.startsWith('cd')) {
         this.navigateTo(commandName.replace('cd', '').trim())
+        this.addToCommandHistory(commandName)
         return
       }
 
@@ -300,6 +327,7 @@ export default {
         this.emitNewLine({
           content: `{Current Directory | underline}\n~${this.path}\n{Availible Executables | underline}\n${list}\n`,
         })
+        this.addToCommandHistory(commandName)
         return
       }
 
@@ -307,14 +335,17 @@ export default {
         this.emitNewLine({
           content: `~${this.path}`,
         })
+        this.addToCommandHistory(commandName)
         return
       }
 
       if (commandName === 'delete system31' && this.path === '/root') {
         this.DeleteSystem31Function()
+        this.addToCommandHistory(commandName)
         return
       }
 
+      addToCommandHistory(commandName)
       this.emitNewLine({
         content: `{Error: Command not found '${commandName}' | error}`,
       })
@@ -344,6 +375,11 @@ export default {
         command: undefined,
         commandName: undefined,
       }
+    },
+    addToCommandHistory(commandName) {
+      this.commandHistory.push(commandName)
+      this.commandHistoryPosition = this.commandHistory.length
+      this.currentUserInput = ''
     },
     // #endregion
     // #region hybridInput Control Functions
