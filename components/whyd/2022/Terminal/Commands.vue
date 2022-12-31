@@ -59,9 +59,14 @@ export default {
         stats.server['SecBot voice event type_counts'],
       ).reduce((accumulator, currentValue) => accumulator + currentValue)
 
-      const VECountUser = Object.values(
-        stats.user['SecBot voice event type counts'],
-      ).reduce((accumulator, currentValue) => accumulator + currentValue)
+      let VECountUser = stats.user['SecBot voice event type counts']
+      if (VECountUser) {
+        VECountUser = Object.values(VECountUser).reduce(
+          (accumulator, currentValue) => accumulator + currentValue,
+        )
+      } else {
+        VECountUser = 0
+      }
 
       const mUser = stats.server['SecBot user with most VEs']
       const maxUser = stats.server.idsToNames[Object.keys(mUser)[0]] // count for most active user
@@ -93,8 +98,7 @@ export default {
     }, // top user needs testing
     SecBotVoiceEventsMostActiveDayFunction(stats) {
       const user = stats.user.name
-      const MADUser = stats.user['SecBot most active voice event days'] // mostActiveDay and numEvents
-      // Date.today().toString("MMMM dS, yyyy") // "April 12th, 2008"
+      const MADUser = stats.user['SecBot most active voice event days'] ?? 0
       const date = new Date(MADUser.mostActiveDay)
       const MADUserDate = date.toLocaleDateString('en-US', {
         dateStyle: 'long',
@@ -129,10 +133,17 @@ export default {
       // compare number of joins and total time spent in a channel
       const user = stats.user.name
       const joinsTotal = Math.trunc(
-        stats.user['SecBot voice event type counts'].join,
+        stats.user['SecBot voice event type counts']?.join ?? 0,
       )
-      const favoriteChannelStat = stats.user['SecBot favorite VC by joinsmoves']
-      const favoriteChannelName = favoriteChannelStat['favorite channel']
+      const favoriteChannelStat = stats.user[
+        'SecBot favorite VC by joinsmoves'
+      ] ?? {
+        'favorite channel': '861750372611129354',
+        'number of events': 0,
+      }
+
+      const favoriteChannelName =
+        stats.server.channelIdsToNames[favoriteChannelStat['favorite channel']]
       const favoriteChannelJoins = favoriteChannelStat['number of events']
 
       const lines = [
@@ -150,8 +161,10 @@ export default {
     SecBotVoiceEventsMutesFunction(stats) {
       const vec = stats.user['SecBot voice event type counts']
       const user = stats.user.name
-      const selfMutes = Math.trunc(vec.mute)
-      const serverMutes = Math.trunc(vec['server mute'])
+      const mute = vec?.mute ?? 0
+      const serverMute = vec?.['server mute'] ?? 0
+      const selfMutes = Math.trunc(mute)
+      const serverMutes = Math.trunc(serverMute)
 
       const lines = [
         { content: `{Mutes | underline}` },
@@ -172,9 +185,10 @@ export default {
       return lines
     },
     SecBotScores(stats) {
-      const user = stats.user.name
-      const firstEpochScore = stats.user['SecBot first epoch score'].score
-      const finalScore = stats.user['SecBot user final score'].score
+      const user = stats.user?.name
+      const firstEpochScore =
+        stats.user['SecBot first epoch score']?.score ?? 750
+      const finalScore = stats.user?.['SecBot user final score']?.score ?? 750
 
       const lines = [
         { content: '{SecurityBot Scores | underline}' },
@@ -202,7 +216,7 @@ export default {
     },
     SecBotScoresHigh(stats) {
       const user = stats.user.name
-      const userHighScore = stats.user['SecBot user max score'].score
+      const userHighScore = stats.user['SecBot user max score']?.score ?? 750
       const serverHigh = stats.server['SecBot server high score']
       const serverHighScore = serverHigh.score
       const serverHighScoreUser = stats.server.idsToNames[serverHigh.member_id]
@@ -228,7 +242,7 @@ export default {
     },
     SecBotScoresLow(stats) {
       const user = stats.user.name
-      const userLowScore = stats.user['SecBot user min score'].score
+      const userLowScore = stats.user['SecBot user min score']?.score ?? 750
       const serverLow = stats.server['SecBot server low score']
       const serverLowScore = serverLow.score
       const serverLowScoreUser = stats.server.idsToNames[serverLow.member_id]
@@ -259,17 +273,24 @@ export default {
     },
     SecBotScoresAverage(stats) {
       const user = stats.user.name
-      const userAverage = stats.user['SecBot user average score'].score
-      const serverAverage = 55 // stats.server['']
+      const userAverage = (
+        stats.user['SecBot user average score']?.score ?? 750
+      ).toFixed(2)
+      const serverAverages = Object.values(
+        stats.server['SecBot server mean scores by epoch'].score,
+      )
+      const avg = (
+        serverAverages.reduce((a, b) => a + b) / serverAverages.length
+      ).toFixed(2)
 
       const lines = [
         { content: `{Average Scores | underline}` },
         {
-          content: `The average score of the entire server over the year was {${serverAverage} | bold}`,
+          content: `The average score of the entire server over the year was {${avg} | bold}`,
         },
       ]
 
-      if (userAverage >= serverAverage) {
+      if (userAverage >= avg) {
         lines.push({
           content: `{${user} | bold}'s average score of {${userAverage} | bold}, on average, was higher on average than the average, on average.`,
         })
@@ -299,7 +320,7 @@ export default {
           content: `The earliest message was recorded on {${firstMessageTimestamp} | bold}. Its contents are as follows:`,
         },
         {
-          content: `{${firstMessageAuthor}: ${firstSecBotMessage.content} | bold}`,
+          content: `{ ${firstMessageAuthor}: ${firstSecBotMessage.content} | bold}`,
         },
       ]
 
@@ -308,8 +329,9 @@ export default {
           content: `There's nothing special about being the first entry in a database, so there is no reason for celebration.`,
         })
       } else {
-        const userFirstSecBotMessage =
-          stats.user['SecBot first message in SecBot']
+        const userFirstSecBotMessage = stats.user[
+          'SecBot first message in SecBot'
+        ] ?? { content: '', timestamp: 0 }
         const userFirstTimestamp = new Date(
           userFirstSecBotMessage.timestamp,
         ).toGMTString()
@@ -330,10 +352,10 @@ export default {
       const numDeleted =
         stats.server['SecBot number of deleted messages recorded']['0']
       const userDeleted =
-        stats.user['SecBot number deleted messages per member']
+        stats.user['SecBot number deleted messages per member'] ?? 0
 
       const lines = [
-        { content: `{Edited and Deleted Messages | underlined}` },
+        { content: `{Edited and Deleted Messages | underline}` },
         {
           content: `When a message has been added to the database it cannot be removed. According to the records, {${numDeleted} | bold} messages were deleted, and another {${numEdited} | bold} were edited.`,
         },
@@ -341,7 +363,7 @@ export default {
 
       if (userDeleted === 0) {
         lines.push({
-          content: `Of the messages deleted, {${stats.user.name}| bold} did not send a single one of them. `,
+          content: `Of the messages deleted, {${stats.user.name} | bold} did not send a single one of them. `,
         })
       } else {
         lines.push({
@@ -355,7 +377,7 @@ export default {
       const serverTotalTimeWatched =
         stats.server['SecBot total time of users watched'].toFixed(2)
       const userTimeWatched = Number.parseFloat(
-        stats.user['SecBot hours watched'],
+        stats.user['SecBot hours watched'] ?? 0,
       ).toFixed(2)
       const minimumWage = (userTimeWatched * 10.1).toFixed(2)
 
@@ -380,7 +402,10 @@ export default {
     SecBotVoiceStateLongest(stats) {
       const lines = [{ content: `{Longest Voice Streaks | underline}` }]
 
-      const stat = stats.user['SecBot Longest session']
+      const stat = stats.user['SecBot Longest session'] ?? {
+        hours: 0,
+        timestamp: 0,
+      }
       const longestTimeInVC = stat.hours.toFixed(2)
       if (longestTimeInVC === 0) {
         lines.push({
@@ -398,10 +423,10 @@ export default {
       return lines
     }, // needs testing
     SecBotMostPeople(stats) {
-      const sessionStat = stats?.user['SecBot largest session'] ?? {
+      const sessionStat = stats.user['SecBot largest session'] ?? {
         count: 0,
         members: [],
-        timestamp: '0',
+        timestamp: 0,
       }
       const peopleSpottedWith = sessionStat.members.map(
         (id) => stats.server.idsToNames[id],
