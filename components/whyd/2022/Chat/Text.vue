@@ -210,6 +210,34 @@ function parseEmoji(data) {
   display: inline-block;
 }
 
+.parsed-text .ethan {
+  color: hsl(185, 100%, 75%);
+}
+
+.parsed-text .ben {
+  color: hsl(30, 100%, 75%);
+}
+
+.parsed-text .wyatt {
+  color: hsl(255, 100%, 75%);
+}
+
+.parsed-text .tristan {
+  color: hsl(335, 100%, 75%);
+}
+
+.parsed-text .josh {
+  color: hsl(50, 100%, 75%);
+}
+
+.parsed-text .brendan {
+  color: hsl(220, 100%, 75%);
+}
+
+.parsed-text .wrap {
+  white-space: normal;
+}
+
 .parsed-text .terminal-emoji img {
   vertical-align: -15%;
   filter: sepia(0.6) brightness(0.9);
