@@ -205,4 +205,41 @@ export default {
     background-position: -1278px 0;
   }
 }
+
+div#textViewport::-webkit-scrollbar {
+  height: 20px;
+  width: 10px;
+}
+div#textViewport::-webkit-scrollbar-button {
+  background-color: var(--outline) !important;
+  height: 0px;
+  width: 10px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 50%;
+}
+div#textViewport::-webkit-scrollbar-button:vertical:decrement {
+  background-image: url('/score/arrowup.png');
+}
+div#textViewport::-webkit-scrollbar-button:vertical:increment {
+  background-image: url('/score/arrowdown.png');
+}
+div#textViewport::-webkit-scrollbar-button:horizontal:decrement {
+  background-image: url('/score/arrowleft.png');
+}
+div#textViewport::-webkit-scrollbar-button:horizontal:increment {
+  background-image: url('/score/arrowright.png');
+}
+div#textViewport::-webkit-scrollbar-corner {
+  background-color: var(--outline) !important;
+}
+div#textViewport::-webkit-scrollbar-thumb {
+  border-radius: 0px !important;
+  background-color: var(--outline) !important;
+  border: 1px solid black !important;
+}
+div#textViewport::-webkit-scrollbar-track {
+  border-radius: 0 !important;
+  background-color: var(--background) !important;
+}
 </style>
