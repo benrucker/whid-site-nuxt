@@ -451,6 +451,7 @@ export default {
   border-style: outset;
   border-width: 2px;
   border-color: white;
+  border: outset 2px rgba(255, 255, 255, 0.75);
 }
 
 .blink {
@@ -479,7 +480,7 @@ export default {
 } */
 
 .system-button {
-  background-color: hsl(212, 30%, 68%);
+  background-color: hsl(212, 15%, 68%);
   border: outset 2px hsl(212, 45%, 85%);
 }
 
@@ -496,19 +497,20 @@ export default {
 .whyd-button {
   background: linear-gradient(
     63deg,
-    hsl(186, 30%, 85%),
-    hsl(35, 30%, 85%),
-    hsl(335, 30%, 85%),
-    hsl(256, 30%, 85%)
+    hsl(186, 28%, 85%),
+    hsl(35, 28%, 85%),
+    hsl(335, 28%, 85%),
+    hsl(256, 28%, 85%)
   );
+  border: outset 2px hsl(350, 0%, 95%);
 }
 
 .ethan-button {
-  background-color: hsl(186, 30%, 85%);
+  background-color: hsl(186, 29%, 80%);
 }
 
 .ben-button {
-  background-color: hsl(35, 30%, 85%);
+  background-color: hsl(31, 48%, 71%);
 }
 
 .tristan-button {
