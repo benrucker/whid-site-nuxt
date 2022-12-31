@@ -54,9 +54,6 @@ export default {
 
           setTimeout(() => {
             this.broken = false
-            this.$nextTick(() => {
-              this.$el.scrollIntoView({ behavior: 'smooth', block: 'center' })
-            })
             this.$emit('graphFixed')
           }, 1000)
         }, 500)

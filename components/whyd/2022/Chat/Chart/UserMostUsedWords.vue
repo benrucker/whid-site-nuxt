@@ -82,6 +82,7 @@ export default {
       timeout: undefined,
       timeoutDelay: 300,
       defaultSelectRects: undefined,
+      emptyLine: true,
     }
   },
   computed: {
@@ -110,14 +111,28 @@ export default {
     advance() {
       if (this.words.length > 0 && this.numLines <= 15) {
         this.calculatedWords[this.numLines].push(this.words.shift())
+
+        let pushed = 1
+
+        if (this.emptyLine)
+          for (let i = 1; i < this.numLines; i++) {
+            this.calculatedWords[this.numLines].push(this.words.shift())
+            pushed += 1
+          }
+
+        this.emptyLine = false
         requestAnimationFrame(() => {
           if (this.didBreakLine()) {
             if (this.didFallOffBottom()) {
-              this.calculatedWords[this.numLines].pop()
+              for (let j = 0; j < pushed; j++)
+                this.calculatedWords[this.numLines].pop()
               return
             }
 
-            const word = this.calculatedWords[this.numLines].pop()
+            let word = ''
+            for (let j = 0; j < pushed; j++)
+              word += this.calculatedWords[this.numLines].pop()
+
             // Vue.set is needed because Vue can't detect
             // when a property is added to an object
             Vue.set(this.calculatedWords, this.numLines + 1, [word])
@@ -136,6 +151,7 @@ export default {
             )
 
             this.numLines++
+            this.emptyLine = true
           }
           this.raf = requestAnimationFrame(this.advance)
         })

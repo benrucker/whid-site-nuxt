@@ -168,7 +168,7 @@ export default {
   font-weight: 500;
   font-size: 12px;
   opacity: 0.5;
-  animation: fade-in 0.5s ease-in-out both;
+  animation: fade-in 0.35s ease-in-out both;
 }
 
 .right .author-name {
@@ -200,6 +200,10 @@ export default {
 
 .message .avatar.hide {
   opacity: 0;
+}
+
+.message .avatar.fade-in {
+  animation: fade-in 0.2s ease-in-out both !important;
 }
 
 .fade-in {
