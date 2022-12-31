@@ -37,12 +37,12 @@
       </button>
     </div>
     <input
-      v-show="isTextInputModeActive"
       id="terminalTextInput"
       ref="terminalTextInput"
       v-model="userInput"
       type="text"
-      @keyup.enter="submitTextCommand"
+      @keyup.enter="handleTextInputEnter"
+      @blur="justFocusInput"
     />
   </div>
 </template>
@@ -135,6 +135,13 @@ export default {
       return textInputModes.includes(this.terminalMode)
     },
   },
+  watch: {
+    terminalMode(mode) {
+      if (textInputModes.includes(mode)) {
+        this.$refs.terminalTextInput.focus()
+      }
+    },
+  },
   async mounted() {
     // Initialize the terminal
     if (this.terminalMode === mode.clickContinue) {
@@ -207,7 +214,7 @@ export default {
         this.terminalMode === mode.textInput ||
         this.terminalMode === mode.hybridInput
       ) {
-        this.$refs.terminalTextInput.focus()
+        this.justFocusInput()
       } else if (
         proceed &&
         this.isShowProceed &&
@@ -215,6 +222,9 @@ export default {
       ) {
         this.handleContinueButtonClick()
       }
+    },
+    justFocusInput() {
+      this.$refs.terminalTextInput.focus()
     },
     scrollToBottom() {
       this.$emit('scrollToBottom')
@@ -247,6 +257,14 @@ export default {
       this.processCommand(commandKey)
       this.scrollToBottom()
       this.focusInput(false)
+    },
+    handleTextInputEnter() {
+      if (textInputModes.includes(this.terminalMode)) {
+        this.submitTextCommand()
+        this.justFocusInput()
+      } else if (this.terminalMode === mode.clickContinue) {
+        this.handleContinueButtonClick()
+      }
     },
     processCommand(input) {
       let commandName = input.trim() // .toLowerCase() fuck you if you try to use caps in the terminal
@@ -448,6 +466,8 @@ export default {
 #terminalTextInput {
   opacity: 0;
   position: absolute;
+  top: -100vh;
+  left: -100vw;
 }
 
 /* .red-text {
