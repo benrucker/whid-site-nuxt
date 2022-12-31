@@ -267,25 +267,18 @@ export default {
       }
     },
     processCommand(input) {
-      let commandName = input.trim() // .toLowerCase() fuck you if you try to use caps in the terminal
+      const commandName = input.trim().toLowerCase() // fuck you if you make the terminal case-sensitive
 
-      if (this.validCommands.has(commandName)) {
-        let command = this.terminalCommands[commandName]
+      if (this.isCommandValid(commandName)) {
+        const { command, correctCommandName } = this.getCommand(commandName)
 
         if (command == null) {
-          commandName = Object.entries(this.terminalCommands).find(
-            (e) => e[1].prettyName === commandName,
-          )[0]
-          command = this.terminalCommands[commandName]
-
-          if (command == null) {
-            throw new Error(
-              'Illegal state: command is valid but not found in commands list',
-            )
-          }
+          throw new Error(
+            'Illegal state: command is valid but not found in commands list',
+          )
         }
 
-        this.markCommandAsUsed(command, commandName)
+        this.markCommandAsUsed(command, correctCommandName)
 
         const func = commands[command.functionName]
 
@@ -325,6 +318,32 @@ export default {
       this.emitNewLine({
         content: `{Error: Command not found '${commandName}' | error}`,
       })
+    },
+    isCommandValid(commandName) {
+      return this.validCommands.some(
+        (validCommand) => validCommand.toLowerCase() === commandName,
+      )
+    },
+    getCommand(commandName) {
+      for (const [realCommandName, command] of Object.entries(
+        this.terminalCommands,
+      )) {
+        console.log(realCommandName, command)
+        if (
+          realCommandName.toLowerCase() === commandName ||
+          command.prettyName.toLowerCase() === commandName
+        ) {
+          return {
+            command,
+            commandName: realCommandName,
+          }
+        }
+      }
+
+      return {
+        command: undefined,
+        commandName: undefined,
+      }
     },
     // #endregion
     // #region hybridInput Control Functions
@@ -374,8 +393,15 @@ export default {
           ? this.path.split('/').slice(0, -1).join('/')
           : this.path + '/' + target
 
-      if (this.validPaths.has(newPath)) {
-        this.path = newPath
+      const destination = Array.from(this.validPaths).find(
+        (maybeDestination) => {
+          console.log(maybeDestination)
+          return maybeDestination?.toLowerCase() === newPath.toLowerCase()
+        },
+      )
+
+      if (destination) {
+        this.path = destination
         this.emitNewLine({ content: this.displayedPath })
       } else {
         this.emitNewLine({
