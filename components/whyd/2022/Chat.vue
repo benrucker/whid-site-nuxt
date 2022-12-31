@@ -328,7 +328,7 @@ export default {
   min-height: 2em;
   width: var(--convo-width);
   padding: 20px 0;
-  min-height: 80vh;
+  min-height: 100vh;
   user-select: none;
 }
 
