@@ -324,18 +324,26 @@ export default {
     // #endregion
     // #region clickContinue Control Functions
     handleContinueButtonClick() {
-      const line = this.terminalLinesQueue.pop()
-      this.emitNewLine(line)
       if (this.terminalLinesQueue.length <= 0) {
         this.isShowProceed = false
         this.terminalMode = mode.hybridInput
+        this.scrollToBottom()
+        return
       }
+
+      const line = this.terminalLinesQueue.pop()
+      this.emitNewLine(line)
+
       this.scrollToBottom()
     },
     executeCommandText(lines) {
       // takes a list of processed text lines and puts the terminal in clickContinue mode to read through them
-      lines.push({ content: '{End of Command | underline}' })
+      // lines.push({ content: '{End of Command | underline}' })
       this.terminalLinesQueue = lines.reverse()
+      lines[0] = {
+        ...lines[0],
+        content: lines[0].content.concat('\n{End of Command | underline}'),
+      }
       this.terminalMode = mode.clickContinue
       this.isShowProceed = true
       this.handleContinueButtonClick()
