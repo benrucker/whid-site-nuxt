@@ -15,8 +15,8 @@
           <img
             v-if="text.type === 'image'"
             :src="text.url"
-            width="120px"
-            height="100px"
+            :width="text?.width ?? '120px'"
+            :height="text?.height ?? '100px'"
             class="terminal-image"
           />
           <Whyd2022ChatText

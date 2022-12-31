@@ -196,6 +196,16 @@
     "path": "/root",
     "buttonStyle": "ethan-button"
   },
+  "reflection": {
+    "prettyName": "reflection",
+    "path": "/root/ecf",
+    "functionName": "EcfReflection"
+  },
+  "scrapped content": {
+    "prettyName": "scrapped content",
+    "path": "/root/ecf",
+    "functionName": "EcfScrapped"
+  },
 
   "cd bdr": {
     "prettyName": "cd bdr",
@@ -230,6 +240,18 @@
     "prettyName": "cd twcm",
     "path": "/root",
     "buttonStyle": "tristan-button"
+  },
+  "shred": {
+    "prettyName": "shred",
+    "path": "/root/twcm",
+    "functionName": "TwcmShred"
+  },
+  "more shred": {
+    "prettyName": "more shred",
+    "path": "/root/twcm",
+    "dependencies": ["shred"],
+    "functionName": "TwcmMoreShred",
+    "buttonStyle": "danger-button"
   },
 
   "cd wwk": {
