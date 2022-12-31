@@ -496,6 +496,63 @@ export default {
     BdrKian() {
       return [{ content: '{{{Whyd2022TerminalEmbeddedKian}}}' }]
     },
+    EcfReflection() {
+      return [
+        {
+          content: `I learned a {shitload | bold} in this project, between both securityBot and the Terminal here. `,
+        },
+        { content: `Believe it or not, this stuff is kinda complicated.` },
+        {
+          content: `It's definitely the largest project i've been able to be a part of.`,
+        },
+        {
+          content: `It really wouldn't have happened without Ben, who actually has the drive to say "we are actually going to do this".`,
+        },
+        {
+          content: `The 'subpoena documents' folder if you havn't read it has a bunch of exerpts from mostly real unedited text conversations between Ben and I (among others) talking about the projects this year. `,
+        },
+        {
+          content: `There's a bunch of files but I think they're like worth reading though, so I hope you do.`,
+        },
+      ]
+    },
+    EcfScrapped() {
+      return [
+        {
+          content: `Sadly not all of the stuff we though of ended up actually becoming a reality so here is some cut/scrapped content that didn't make it.`,
+        },
+        {
+          content: `- SecurityBot was going to randomly join VC and sit in silence for a few seconds before leaving.`,
+        },
+        {
+          content: `- SecurityBot was going to become SantaBot around christmas time and determine whether you were naughty or nice.`,
+        },
+        {
+          content: `- We were initially going to write a chatbot called DeNNIS that was going to guide you through the data this year, this idea eventually became the terminal.`,
+        },
+        {
+          content: `- We wanted to use a Machine Learning model to guess everyone's political ideology based on only their messages in here but the models weren't that easy to use`,
+        },
+        {
+          content: `- We were also going to make a 'Majors compass' that determined which majors you were most similar to, Ben did put a good amount of work into it but it didnt turn out they way we/he wanted.`,
+        },
+      ]
+    },
+    TwcmShred() {
+      return [{ content: `{:shred.gif: | terminal-emoji}` }]
+    },
+    TwcmMoreShred() {
+      return [
+        {
+          content: ``,
+          type: 'image',
+          height: '275px',
+          width: '500px',
+          url: '/whyd/2022/its-time-shred.gif',
+        },
+        { content: `${'{:shred.gif: | terminal-emoji}'.repeat(495)}` },
+      ]
+    },
   },
 }
 </script>
