@@ -91,7 +91,6 @@ export default {
         '/root/whyd/Leftovers', // needs button
         '/root/dont_backups', // needs button
       ]),
-      validCommands: undefined,
       stats: undefined,
       uniqueLineId: 0,
       usedCommands: [],
@@ -134,6 +133,18 @@ export default {
     isTextInputModeActive() {
       return textInputModes.includes(this.terminalMode)
     },
+    validCommands() {
+      const commandsInDirectory = Object.entries(this.terminalCommands).flatMap(
+        ([commandName, command]) => {
+          if (command.path === this.path) {
+            return [commandName, command.prettyName]
+          } else {
+            return []
+          }
+        },
+      )
+      return new Set(commandsInDirectory)
+    },
   },
   watch: {
     terminalMode(mode) {
@@ -162,15 +173,6 @@ export default {
       Object.values(this.terminalCommands).map((command) => command.path),
     )
     this.validPaths = paths
-
-    // Valid commands
-    const prettyNames = Array.from(Object.values(this.terminalCommands)).map(
-      (e) => e.prettyName,
-    )
-
-    this.validCommands = new Set(
-      prettyNames.concat(Array.from(Object.keys(this.terminalCommands))),
-    )
 
     this.usedCommands =
       JSON.parse(localStorage.getItem('whyd22.usedCommands')) ?? []
@@ -328,7 +330,6 @@ export default {
       for (const [realCommandName, command] of Object.entries(
         this.terminalCommands,
       )) {
-        console.log(realCommandName, command)
         if (
           realCommandName.toLowerCase() === commandName ||
           command.prettyName.toLowerCase() === commandName
@@ -395,7 +396,6 @@ export default {
 
       const destination = Array.from(this.validPaths).find(
         (maybeDestination) => {
-          console.log(maybeDestination)
           return maybeDestination?.toLowerCase() === newPath.toLowerCase()
         },
       )
