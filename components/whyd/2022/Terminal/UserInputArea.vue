@@ -37,7 +37,6 @@
       </button>
     </div>
     <input
-      v-show="isTextInputModeActive"
       id="terminalTextInput"
       ref="terminalTextInput"
       v-model="userInput"
@@ -133,6 +132,13 @@ export default {
     },
     isTextInputModeActive() {
       return textInputModes.includes(this.terminalMode)
+    },
+  },
+  watch: {
+    terminalMode(mode) {
+      if (textInputModes.includes(mode)) {
+        this.$refs.terminalTextInput.focus()
+      }
     },
   },
   async mounted() {
@@ -448,6 +454,8 @@ export default {
 #terminalTextInput {
   opacity: 0;
   position: absolute;
+  top: -100vh;
+  left: -100vw;
 }
 
 /* .red-text {
