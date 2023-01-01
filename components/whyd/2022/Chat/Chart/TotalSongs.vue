@@ -1,7 +1,7 @@
 <template>
   <Whyd2022ChatChartMusic
     :header="`${intermediateSongCount} songs played`"
-    bg-img="/whyd/2022/data/emojis/ahegao1.png"
+    bg-img="/whyd/2022/music/currents.png"
   />
 </template>
 
