@@ -134,6 +134,12 @@ export default {
   overflow: hidden;
 }
 
+#passwordTextInput {
+  position: absolute;
+  top: -100vh;
+  left: -100vw;
+}
+
 .login-graphic {
   position: absolute;
   height: 55%;
