@@ -297,7 +297,8 @@ export default {
       const commandName = input.trim().toLowerCase() // fuck you if you make the terminal case-sensitive
 
       if (this.isCommandValid(commandName)) {
-        const { command, correctCommandName } = this.getCommand(commandName)
+        const { command, commandName: correctCommandName } =
+          this.getCommand(commandName)
 
         if (command == null) {
           throw new Error(
