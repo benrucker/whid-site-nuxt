@@ -262,7 +262,7 @@
       "author": "Shigure"
     },
     {
-      "content": "{Now playing:  | italic}{{serverFavoriteSong | italic}}{! | italic}",
+      "content": "{Now playing: Favorite Song! | italic}",
       "author": "FredBoat",
       "function": "next"
     },
