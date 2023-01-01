@@ -25,7 +25,7 @@ export default {
         '/whyd/2022/bots/JermaBot.png',
         '/whyd/2022/bots/NotSoBot.png',
         '/whyd/2022/bots/secuitybot.png',
-        '/whyd/2022/bots/PerlyMolt.png',
+        '/whyd/2022/bots/Perlymolt.png',
         '/whyd/2022/bots/Shigure.png',
         '/whyd/2022/bots/Unanimism.png',
         '/whyd/2022/bots/UsBot.png',
