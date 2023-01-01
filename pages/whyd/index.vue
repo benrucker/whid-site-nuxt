@@ -59,20 +59,21 @@ export default {
     return {
       server: undefined,
       name: '',
-      usernames: undefined,
-      shouldShowTerminalButton: false
+      shouldShowTerminalButton: false,
     }
   },
   computed: {
     isNameValid() {
       return this.usernames.includes(this.name)
-    }
+    },
+    usernames() {
+      return Object.values(this.server.urlNamesToNames).reverse()
+    },
   },
   async mounted() {
     this.server = await fetch('/whyd/2022/data/server.json').then((val) =>
-      val.json()
+      val.json(),
     )
-    this.usernames = Object.values(this.server.urlNamesToNames)
     this.shouldShowTerminalButton =
       localStorage.getItem('hasVisitedTerminal') === 'true'
   },
@@ -89,7 +90,7 @@ export default {
     handleInputButtonPressed() {
       this.goToIfValidName(
         `/whyd/${this.server.namesToUrlNames[this.name]}`,
-        this.name
+        this.name,
       )
     },
     handleLastYearButtonPressed() {
@@ -97,7 +98,7 @@ export default {
     },
     handleTerminalButtonPressed() {
       this.goToIfValidName(`/whyd/terminal`, this.name)
-    }
-  }
+    },
+  },
 }
 </script>
