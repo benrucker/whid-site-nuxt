@@ -34,9 +34,15 @@ export default {
       ]
       return lines
     },
-    SecBotDMsFunction(_) {
-      const numWalter = 5
-      const differentWalterUsers = 3
+    SecBotDMsFunction(stats) {
+      const stat = stats.server['SecBot dms'] ?? {
+        totalCount: 53,
+        walterCount: 12,
+        users: 5,
+      }
+      const dmsCount = stat.totalCount
+      const numWalter = stat.count
+      const differentWalterUsers = stat.users
 
       const lines = [
         {
@@ -50,7 +56,7 @@ export default {
           url: 'https://media.tenor.com/S_to1tY3ixUAAAAd/breaking-bad-walter-white.gif',
         },
         {
-          content: `This image was sent {${numWalter} | bold} times by {${differentWalterUsers} | bold} users.`,
+          content: `SecurityBot was sent {${dmsCount} | bold} direct messages from {${differentWalterUsers} | bold} users. This image was sent {${numWalter} | bold} times.`,
         },
       ]
 
