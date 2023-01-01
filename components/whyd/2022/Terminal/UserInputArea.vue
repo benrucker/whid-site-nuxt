@@ -50,6 +50,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import commandsModule from '~/components/whyd/2022/Terminal/Commands'
 
 const commands = commandsModule.methods
@@ -101,21 +102,6 @@ export default {
       currentUserInput: undefined,
     }
   },
-  async fetch() {
-    this.terminalCommands = await this.$nuxt
-      .$content('terminalCommands')
-      .fetch()
-    for (const commandName in this.terminalCommands) {
-      if (typeof this.terminalCommands[commandName] !== 'object') {
-        delete this.terminalCommands[commandName]
-        continue
-      }
-      this.terminalCommands[commandName].hasBeenRun = false
-    }
-    this.buttonData = (
-      await this.$nuxt.$content('terminalButtonData').fetch()
-    ).buttons
-  },
   computed: {
     displayedPath() {
       return this.path
@@ -159,51 +145,63 @@ export default {
     },
   },
   async mounted() {
-    // Initialize the terminal
-    if (this.terminalMode === mode.clickContinue) {
-      this.isShowProceed = this.terminalLinesQueue.length > 0
-    } else if (
-      this.terminalMode === mode.textInput ||
-      this.terminalMode === mode.hybridInput
-    ) {
+    await this.initialize()
+  },
+  methods: {
+    async initialize() {
+      this.terminalCommands = await fetch(
+        `/whyd/2022/terminal/terminalCommands.json`,
+      ).then((r) => r.json())
+
+      for (const commandName in this.terminalCommands) {
+        if (typeof this.terminalCommands[commandName] !== 'object') {
+          delete this.terminalCommands[commandName]
+          continue
+        }
+        Vue.set(this.terminalCommands[commandName], 'hasBeenRun', false)
+      }
+      const { buttons } = await fetch(
+        `/whyd/2022/terminal/terminalButtonData.json`,
+      ).then((r) => r.json())
+      this.buttonData = buttons
+
+      // Initialize the terminal
       this.$nextTick(() => {
         this.focusInput()
         this.emitNewLine({ content: this.displayedPath })
       })
-    }
 
-    this.terminalLinesQueue.reverse()
+      this.terminalLinesQueue.reverse()
 
-    const paths = new Set(
-      Object.values(this.terminalCommands).map((command) => command.path),
-    )
-    this.validPaths = paths
+      const paths = new Set(
+        Object.values(this.terminalCommands).map((command) => command.path),
+      )
+      this.validPaths = paths
 
-    this.usedCommands =
-      JSON.parse(localStorage.getItem('whyd22.usedCommands')) ?? {}
-    this.username = localStorage.getItem('username') ?? 'fops'
-    this.userId = localStorage.getItem('userId') ?? '173839815400357888'
+      this.usedCommands =
+        JSON.parse(localStorage.getItem('whyd22.usedCommands')) ?? {}
+      this.username = localStorage.getItem('username') ?? 'fops'
+      this.userId = localStorage.getItem('userId') ?? '173839815400357888'
 
-    console.log(this.usedCommands)
-    for (const command of this.usedCommands[this.userId] ?? []) {
-      if (this.terminalCommands[command] != null)
-        this.terminalCommands[command].hasBeenRun = true
-    }
+      console.log(this.usedCommands)
+      for (const command of this.usedCommands[this.userId] ?? []) {
+        if (this.terminalCommands[command] != null)
+          Vue.set(this.terminalCommands[command], 'hasBeenRun', true)
+      }
 
-    // Retrive the data
-    const server = await fetch('/whyd/2022/data/server.json').then((r) =>
-      r.json(),
-    )
-    const namesToIds = server.namesToIds
-    const user = await fetch(
-      `/whyd/2022/data/${namesToIds[this.username]}.json`,
-    ).then((r) => r.json())
+      // Retrive the data
+      const server = await fetch('/whyd/2022/data/server.json').then((r) =>
+        r.json(),
+      )
+      const namesToIds = server.namesToIds
+      const user = await fetch(
+        `/whyd/2022/data/${namesToIds[this.username]}.json`,
+      ).then((r) => r.json())
 
-    this.stats = { server, user }
-    this.stats.user.name = this.username
-    this.stats.user.id = namesToIds[this.username]
-  },
-  methods: {
+      this.stats = { server, user }
+      this.stats.user.name = this.username
+      this.stats.user.id = namesToIds[this.username]
+    },
     emitNewLine(line) {
       this.$emit('addTextLine', {
         ...line,
@@ -232,7 +230,7 @@ export default {
       }
     },
     justFocusInput() {
-      this.$refs.terminalTextInput.focus()
+      this.$refs.terminalTextInput?.focus()
     },
     scrollToBottom() {
       this.$emit('scrollToBottom')
@@ -463,7 +461,7 @@ export default {
       this.focusInput()
     },
     markCommandAsUsed(command, commandName) {
-      command.hasBeenRun = true
+      Vue.set(command, 'hasBeenRun', true)
 
       if (this.usedCommands[this.userId] == null) {
         this.usedCommands[this.userId] = [commandName]
@@ -486,7 +484,7 @@ export default {
           // delete this.terminalCommands[commandName]
           continue
         }
-        this.terminalCommands[command].hasBeenRun = false
+        Vue.set(this.terminalCommands[command], 'hasBeenRun', false)
       }
 
       localStorage.removeItem('whyd22.usedCommands')
