@@ -57,12 +57,13 @@ export default {
     submitPasswordAttempt() {
       this.attempts++
       const inputText = this.userPasswordInput
-      this.$refs.passwordTextInput.disabled = true
+
       if (this.validPasswords.includes(inputText)) {
         this.correctPassword = true
         if (inputText === 'f') this.introAnimationTime = 100
         this.showLoggingIn()
       } else if (this.attempts === 3) {
+        this.$refs.passwordTextInput.disabled = true
         this.promptText = 'Too many attempts - Locking terminal...'
         this.locked = true
         setTimeout(() => {
@@ -131,6 +132,12 @@ export default {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+}
+
+#passwordTextInput {
+  position: absolute;
+  top: -100vh;
+  left: -100vw;
 }
 
 .login-graphic {
