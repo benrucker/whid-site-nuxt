@@ -125,7 +125,11 @@
     "dependencies": ["voice chat time"],
     "functionName": "SecBotMostPeople"
   },
-
+  "emoji's favorite person": {
+    "prettyName": "emoji's favorite person",
+    "path": "/root/whyd/leftovers",
+    "functionName": "LeftoversEmojiFavoritePerson"
+  },
   "test": {
     "prettyName": "proofOfConcept",
     "dependencies": ["1"],
