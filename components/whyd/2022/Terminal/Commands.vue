@@ -458,6 +458,41 @@ export default {
 
       return lines
     },
+    LeftoverChannelMessages(_) {
+      // const channels = stats.server["Number of Messages per Channel"]
+    },
+    LeftoversEmojiFavoritePerson(stats) {
+      // user IDs by emoji names
+      const EmojiFavoritePersonDict =
+        stats.server['leftovers emoji favorite person']
+
+      // the top 25 emoji names plus some extras
+      const emojis = Object.keys(
+        stats.server['Custom Emojis ranked by usage'],
+      ).concat('ethanass', 'yes', 'ford', 'markwood')
+
+      // emoji filenames
+      const emojiFilenames = emojis.map(
+        (e) => `${stats.server.emojiNameToFilename[e]}`,
+      )
+
+      const emojiPeoplePairs = emojiFilenames.map((emojiFilename, index) => {
+        const emojiName = emojis[index]
+        return `{:${emojiFilename}: | terminal-emoji} - ${
+          stats.server.idsToNames[EmojiFavoritePersonDict[`:${emojiName}:`]]
+        }`
+      })
+
+      const lines = [
+        { content: `{Leftovers - Emojis' Favorite Users | underline}` },
+        {
+          content: `The following list contains the most used custom emojis (and some other popular emojis), followed by the user that sent them the most.`,
+        },
+        { content: `${emojiPeoplePairs.join('\n')}`, block: true },
+      ]
+
+      return lines
+    },
     CoolS() {
       return [
         {
