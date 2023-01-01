@@ -64,4 +64,8 @@
     display: none;
   }
 }
+
+.navbar {
+  user-select: none;
+}
 </style>

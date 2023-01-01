@@ -39,7 +39,7 @@
 export default {
   data() {
     return {
-      animationBegin: false
+      animationBegin: false,
     }
   },
   mounted() {
@@ -48,7 +48,7 @@ export default {
 
       this.$nextTick(() => {
         const conversation = document.getElementById(
-          'the-one-above-conversation'
+          'the-one-above-conversation',
         )
         conversation.after(this.$refs.overlayStuff) // ref points to new location
         this.explode()
@@ -83,8 +83,8 @@ export default {
       }, 1000)
 
       setTimeout(this.explode, Math.random() * 500)
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -110,7 +110,9 @@ export default {
   height: 100px;
   position: absolute;
 
-  animation: explosion-sprite 1s steps(18) forwards;
+  animation: explosion-sprite 1s 1 steps(18) forwards;
+
+  image-rendering: pixelated;
 }
 
 .white-fade {

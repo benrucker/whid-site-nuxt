@@ -102,3 +102,15 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.whyd-button {
+  background: linear-gradient(
+    63deg,
+    hsl(186, 12%, 50%),
+    hsl(35, 12%, 50%),
+    hsl(335, 12%, 50%),
+    hsl(256, 12%, 50%)
+  );
+}
+</style>

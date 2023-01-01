@@ -469,7 +469,7 @@ export default {
       // the top 25 emoji names plus some extras
       const emojis = Object.keys(
         stats.server['Custom Emojis ranked by usage'],
-      ).concat('ethanass', 'yes', 'ford', 'markwood')
+      ).concat('ethanass', 'yes', 'ford', 'MARKWOOD')
 
       // emoji filenames
       const emojiFilenames = emojis.map(
