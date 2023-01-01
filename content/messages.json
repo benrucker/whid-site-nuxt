@@ -115,8 +115,9 @@
     },
     {
       "content": [
-        "...ooooo! I've never seen anyone with the {{userRareRole | role}} role! Let me take a closer look!",
-        "...ooooo! NOT RARE ROLE MESSAGE HERE You have the {{userRareRole | role}} role! That one might be my favorite!",
+        "...ooooooo!! I've never seen anyone with the {{userRareRole | role}} role! Let me take a closer look!",
+        "...ooooo! You have the {{userRareRole | role}} role? I love that one!",
+        "...ooooo! You have the {{userRareRole | role}} role! That one's a classic!!",
         "...ooooo wait a minute!"
       ],
       "author": "Shigure",
@@ -125,9 +126,9 @@
     {
       "content": [
         "Woah! You must be part of some secret club or something! Only {{userPeopleWithRareRole | number}} people have that one! Wear it like a badge of honor!!",
-        "Woah! RARE ROLE MESSAGE HERE Only {{userPeopleWithRareRole | number}} people have that one! Wear it like a badge of honor!!",
-        "Woah! SLIGHTLY LESS RARE ROLES MESSAGE HERE Only {{userPeopleWithRareRole | number}} people have that one! Wear it like a badge of honor!!",
-        "Woah! KINDA NOT RARE ROLES MESSAGE HERE Only {{userPeopleWithRareRole | number}} people have that one! Wear it like a badge of honor!!",
+        "Seems like you really know the ins and outs of this place to have a role like that, huh? I only know like {{userPeopleWithRareRole | number}} people with that one!",
+        "Not everyday you come across someone with that role! There are what, like, {{userPeopleWithRareRole | number}} of you? Respect!",
+        "Do all {{userPeopleWithRareRole | number}} of you guys hang out every day? That sounds SO cool!!",
         "You {don't | italic} have any roles! I didn't even know that was possible!"
       ],
       "author": "Shigure",
@@ -140,10 +141,10 @@
     },
     {
       "content": {
-        "league": "Wooooow! You like League of Legends?! I'm SOOOO sorry 😭",
-        "apex": "No way! You play Apex Legends?! You must have a lot of free time on your hands!",
-        "neither": "Wow! You've seriously never played Apex or League before? Congrats on your increased chance of finding a partner!",
-        "both": "...woah! You play both Apex and League? Snide remark!"
+        "apex": "You play Apex Legends, huh? I always took you for a movement player!",
+        "league": "Wooooow! You like League of Legends?! {:you:}😭",
+        "both": "Seems like you're a fan of both League {and | italic} Apex! Don't forget to go outside once in a while!",
+        "neither": "Not interested in League {or | italic} Apex, huh? Keep up the good work!"
       },
       "author": "Shigure",
       "function": "leagueOrApex"
@@ -162,6 +163,10 @@
       "hideBubble": true
     },
     {
+      "content": "Seems like that little civil war last year didn't go so well for the anti-leaguers…",
+      "author": "Shigure"
+    },
+    {
       "content": "Look, Shigure. These really are great stats, but I don't think trying to split the server between League and Apex is the best idea for our celebratio-",
       "author": "JermaBot",
       "function": "next"
@@ -174,6 +179,10 @@
       "author": "Shigure",
       "type": "ChartLeagueVsAll",
       "hideBubble": true
+    },
+    {
+      "content": "That's more like it!",
+      "author": "Shigure"
     },
     {
       "content": "...",
