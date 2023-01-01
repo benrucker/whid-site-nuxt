@@ -7,9 +7,7 @@ import Vue from 'vue'
 
 export default {
   async asyncData({ params, isDev }) {
-    const baseUrl = isDev
-      ? `http://localhost:3000`
-      : 'https://develop.whid.live'
+    const baseUrl = isDev ? `http://localhost:3000` : 'https://whid.live'
 
     const server = await fetch(`${baseUrl}/whyd/2022/data/server.json`).then(
       (r) => r.json(),
@@ -61,7 +59,7 @@ export default {
         ['og:description', `Here's a peek at what ${this.username} did:`],
         [
           'og:image',
-          `https://develop.whid.live/whyd/2022/data/embed_card/${this.userId}.png`,
+          `https://whid.live/whyd/2022/data/embed_card/${this.userId}.png`,
         ],
         [
           'og:image:alt',
