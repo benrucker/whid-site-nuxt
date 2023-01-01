@@ -17,7 +17,7 @@
       <span id="userPasswordInputDisplay" class="text-nowrap">{{
         '> ' + '*'.repeat(userPasswordInput.length)
       }}</span
-      ><a class="blink">_</a>
+      ><a v-if="!locked" class="blink">_</a>
     </div>
     <input
       id="passwordTextInput"
