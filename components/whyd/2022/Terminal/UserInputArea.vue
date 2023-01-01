@@ -324,7 +324,11 @@ export default {
 
       if (commandName === 'ls') {
         const list = Object.keys(this.terminalCommands)
-          .filter((key) => this.terminalCommands[key].path === this.path)
+          .filter(
+            (key) =>
+              this.terminalCommands[key].path === this.path &&
+              key !== 'BONUS.log',
+          )
           .join(', ')
         this.emitNewLine({
           content: `{Current Directory | underline}\n~${this.path}\n{Availible Executables | underline}\n${list}\n`,

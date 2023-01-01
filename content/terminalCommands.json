@@ -185,11 +185,6 @@
     "path": "/root",
     "buttonStyle": "danger-button"
   },
-  "cd subpoena documents": {
-    "prettyName": "cd subpoena documents",
-    "path": "/root",
-    "buttonStyle": "nav-button"
-  },
 
   "cd ecf": {
     "prettyName": "cd ecf",
@@ -241,6 +236,11 @@
     "path": "/root",
     "buttonStyle": "tristan-button"
   },
+  "note": {
+    "prettyName": "note",
+    "path": "/root/twcm",
+    "functionName": "TwcmNote"
+  },
   "shred": {
     "prettyName": "shred",
     "path": "/root/twcm",
@@ -253,10 +253,150 @@
     "functionName": "TwcmMoreShred",
     "buttonStyle": "danger-button"
   },
-
-  "cd wwk": {
-    "prettyName": "cd wwk",
+  "cd subpoena_documents": {
+    "prettyName": "cd subpoena_documents",
     "path": "/root",
-    "buttonStyle": "wyatt-button"
+    "buttonStyle": "nav-button"
+  },
+  "????21.log": {
+    "prettyName": "????21.log",
+    "path": "/root/subpoena_documents",
+    "functionName": "Document1"
+  },
+  "01??22.log": {
+    "prettyName": "01??22.log",
+    "path": "/root/subpoena_documents",
+    "functionName": "Document2"
+  },
+  "020222.log": {
+    "prettyName": "020222.log",
+    "path": "/root/subpoena_documents",
+    "functionName": "Document3",
+    "buttonStyle": "tristan-button"
+  },
+  "021722.log": {
+    "prettyName": "021722.log",
+    "path": "/root/subpoena_documents",
+    "functionName": "Document4"
+  },
+  "021822.log": {
+    "prettyName": "021822.log",
+    "path": "/root/subpoena_documents",
+    "functionName": "Document5"
+  },
+  "030122.log": {
+    "prettyName": "030122.log",
+    "path": "/root/subpoena_documents",
+    "functionName": "Document6",
+    "buttonStyle": "danger-button"
+  },
+  "030122J.log": {
+    "prettyName": "030122J.log",
+    "path": "/root/subpoena_documents",
+    "functionName": "Document7",
+    "buttonStyle": "danger-button"
+  },
+  "030322.log": {
+    "prettyName": "030322.log",
+    "path": "/root/subpoena_documents",
+    "functionName": "Document8"
+  },
+  "030522.log": {
+    "prettyName": "030522.log",
+    "path": "/root/subpoena_documents",
+    "functionName": "Document9"
+  },
+  "031522.log": {
+    "prettyName": "031522.log",
+    "path": "/root/subpoena_documents",
+    "functionName": "Document10"
+  },
+  "032822.log": {
+    "prettyName": "032822.log",
+    "path": "/root/subpoena_documents",
+    "functionName": "Document11",
+    "buttonStyle": "danger-button"
+  },
+  "033022.log": {
+    "prettyName": "033022.log",
+    "path": "/root/subpoena_documents",
+    "functionName": "Document12"
+  },
+  "033122a.log": {
+    "prettyName": "033122a.log",
+    "path": "/root/subpoena_documents",
+    "functionName": "Document13"
+  },
+  "033122b.log": {
+    "prettyName": "033122b.log",
+    "path": "/root/subpoena_documents",
+    "functionName": "Document14"
+  },
+  "033122c.log": {
+    "prettyName": "033122c.log",
+    "path": "/root/subpoena_documents",
+    "functionName": "Document15"
+  },
+  "033122d.log": {
+    "prettyName": "033122d.log",
+    "path": "/root/subpoena_documents",
+    "functionName": "Document16"
+  },
+  "040122a.log": {
+    "prettyName": "040122a.log",
+    "path": "/root/subpoena_documents",
+    "functionName": "Document17",
+    "buttonStyle": "danger-button"
+  },
+  "040122b.log": {
+    "prettyName": "040122b.log",
+    "path": "/root/subpoena_documents",
+    "functionName": "Document18",
+    "buttonStyle": "danger-button"
+  },
+  "041722.log": {
+    "prettyName": "041722.log",
+    "path": "/root/subpoena_documents",
+    "functionName": "Document19",
+    "buttonStyle": "danger-button"
+  },
+  "042422.log": {
+    "prettyName": "042422.log",
+    "path": "/root/subpoena_documents",
+    "functionName": "Document20",
+    "buttonStyle": "danger-button"
+  },
+  "062922.log": {
+    "prettyName": "062922.log",
+    "path": "/root/subpoena_documents",
+    "functionName": "Document21"
+  },
+  "BONUS.log": {
+    "prettyName": "BONUS.log",
+    "path": "/root/subpoena_documents",
+    "functionName": "DocumentBonus",
+    "dependencies": [
+      "????21.log",
+      "01??22.log",
+      "020222.log",
+      "021722.log",
+      "021822.log",
+      "030122.log",
+      "030122J.log",
+      "030322.log",
+      "030522.log",
+      "031522.log",
+      "032822.log",
+      "033022.log",
+      "033122a.log",
+      "033122b.log",
+      "033122c.log",
+      "033122d.log",
+      "040122a.log",
+      "040122b.log",
+      "041722.log",
+      "042422.log",
+      "062922.log"
+    ]
   }
 }
