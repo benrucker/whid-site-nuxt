@@ -238,6 +238,10 @@ function parseEmoji(data) {
   white-space: normal;
 }
 
+.parsed-text .block {
+  display: block;
+}
+
 .parsed-text .terminal-emoji img {
   vertical-align: -15%;
   filter: sepia(0.6) brightness(0.9);
