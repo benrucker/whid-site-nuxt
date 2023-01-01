@@ -200,10 +200,9 @@ export default {
         '/whyd/2022/data/stickers/a_6822391609cc5de095b15401a126c801.gif',
       ],
       attachments: [
-        '/whyd/2022/data/attachments/image0.jpg',
-        '/whyd/2022/data/attachments/Cat_Ear_Tristan.png',
-        '/whyd/2022/data/attachments/TristanBeloved.gif',
-        '/whyd/2022/data/attachments/Cat_Ear_Tristan.png',
+        '/whyd/2022/data/attachments/1004972602705596536/image0.jpg',
+        '/whyd/2022/data/attachments/978860666024779826/Cat_Ear_Tristan.png',
+        '/whyd/2022/data/attachments/1036742267546902610/TristanBeloved.gif',
       ],
       emojis: [
         '/whyd/2022/data/emojis/2_.gif',
