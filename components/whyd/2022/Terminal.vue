@@ -25,6 +25,11 @@
             :height="text?.height ?? '100px'"
             class="terminal-image"
           />
+          <Whyd2022ChatText
+            v-if="text.lastLineInCommand"
+            :key="`last${text.id}`"
+            content="{End of Command | underline block}"
+          />
         </div>
         <Whyd2022TerminalUserInputArea
           ref="inputArea"

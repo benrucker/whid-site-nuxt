@@ -420,19 +420,8 @@ export default {
       // lines.push({ content: '{End of Command | underline}' })
       this.terminalLinesQueue = lines.reverse()
 
-      if (lines[0].type === 'image') {
-        lines.splice(0, 0, {
-          content: '\n{End of Command | underline}',
-          block: true,
-        })
-      } else {
-        lines[0] = {
-          ...lines[0],
-          content: lines[0].content.concat(
-            '\n{End of Command | underline block}',
-          ),
-        }
-      }
+      lines[0].lastLineInCommand = true
+
       this.terminalMode = mode.clickContinue
       this.isShowProceed = true
       this.handleContinueButtonClick()
