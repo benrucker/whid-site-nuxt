@@ -95,7 +95,7 @@ export default {
       ]),
       stats: undefined,
       uniqueLineId: 0,
-      usedCommands: [],
+      usedCommands: {},
       commandHistory: [],
       commandHistoryPosition: 0,
       currentUserInput: undefined,
@@ -180,16 +180,17 @@ export default {
     this.validPaths = paths
 
     this.usedCommands =
-      JSON.parse(localStorage.getItem('whyd22.usedCommands')) ?? []
-    for (const command of this.usedCommands) {
+      JSON.parse(localStorage.getItem('whyd22.usedCommands')) ?? {}
+    this.username = localStorage.getItem('username') ?? 'fops'
+    this.userId = localStorage.getItem('userId') ?? '173839815400357888'
+
+    console.log(this.usedCommands)
+    for (const command of this.usedCommands[this.userId] ?? []) {
       if (this.terminalCommands[command] != null)
         this.terminalCommands[command].hasBeenRun = true
     }
 
     // Retrive the data
-    this.username = localStorage.getItem('username') ?? 'fops'
-    this.userId = localStorage.getItem('userId') ?? '173839815400357888'
-
     const server = await fetch('/whyd/2022/data/server.json').then((r) =>
       r.json(),
     )
@@ -463,14 +464,22 @@ export default {
     },
     markCommandAsUsed(command, commandName) {
       command.hasBeenRun = true
-      this.usedCommands.push(commandName)
+
+      if (this.usedCommands[this.userId] == null) {
+        this.usedCommands[this.userId] = [commandName]
+      } else {
+        this.usedCommands[this.userId] = Array.from(
+          new Set(this.usedCommands[this.userId].concat([commandName])),
+        )
+      }
+
       localStorage.setItem(
         'whyd22.usedCommands',
         JSON.stringify(this.usedCommands),
       )
     },
     setCommandsUnused() {
-      this.usedCommands = []
+      this.usedCommands = {}
 
       for (const command in Object.keys(this.terminalCommands)) {
         if (typeof this.terminalCommands[command] !== 'object') {
