@@ -109,7 +109,7 @@ export default {
       // messing up the reference
       if (!this.$refs.audio) return
       this.$refs.seekSlider.max = Math.floor(this.$refs.audio.duration)
-      this.$refs.audio.volume = 0.5
+      this.$refs.audio.volume = 0.1
     },
     onSeekSliderChange() {
       if (!this.$refs.audio) return

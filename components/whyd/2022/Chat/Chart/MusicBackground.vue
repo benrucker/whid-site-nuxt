@@ -137,10 +137,10 @@ export default {
 
 .bgimg {
   filter: blur(10px) brightness(0.7);
-  width: 150%;
+  width: 110%;
   position: absolute;
   top: -25%;
-  left: -25%;
+  left: -5%;
 }
 
 .dots-parent {

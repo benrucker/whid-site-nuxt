@@ -101,11 +101,13 @@ export default {
   justify-content: center;
   animation: fade-out-explosion 1s forwards step-end;
   pointer-events: none;
+
+  image-rendering: pixelated;
 }
 
 .explosion img {
-  width: 100%;
-  height: 100%;
+  width: 150%;
+  height: 150%;
 }
 
 @keyframes hand-fly-in {
