@@ -5,7 +5,8 @@
         terminalMode === mode.textInput || terminalMode === mode.hybridInput
       "
       id="userInputDisplay"
-      >> {{ userInput }}<a ref="blinkingUnderscore" class="blink">_</a></span
+      >> {{ userInput
+      }}<span ref="blinkingUnderscore" class="cursor blink">_</span></span
     >
     <span
       v-if="isShowProceed && terminalMode === mode.clickContinue"
@@ -13,7 +14,7 @@
       @click="handleContinueButtonClick"
     >
       >
-      <span class="blink" style="text-decoration: underline"
+      <span class="fade-in-and-out" style="text-decoration: underline"
         >Click to continue</span
       >
     </span>
@@ -520,8 +521,16 @@ export default {
   border: outset 2px rgba(255, 255, 255, 0.75);
 }
 
+.cursor {
+  text-decoration: underline;
+}
+
 .blink {
-  animation: blinker 1s linear infinite;
+  animation: blinker 1.05s step-start infinite;
+}
+
+.fade-in-and-out {
+  animation: blinker 1.25s ease-in-out infinite;
 }
 
 @keyframes blinker {

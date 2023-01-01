@@ -171,7 +171,7 @@ export default {
 }
 
 .blink {
-  animation: blinker 1s linear infinite;
+  animation: blinker 1.05s step-start infinite;
 }
 
 @keyframes blinker {
