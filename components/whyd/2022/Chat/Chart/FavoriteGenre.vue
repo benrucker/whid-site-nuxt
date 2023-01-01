@@ -1,8 +1,8 @@
 <template>
   <Whyd2022ChatChartMusic
-    :title="favoriteGenre"
-    :subtitle="`classy 😏`"
-    bg-img="/whyd/2022/data/emojis/myson.png"
+    :header="favoriteGenre"
+    :subtitle="`${favoriteGenreCount} songs played`"
+    bg-img="/whyd/2022/music/electro-art.jpg"
   />
 </template>
 
@@ -16,7 +16,10 @@ export default {
   },
   computed: {
     favoriteGenre() {
-      return this.stats.server.favGenre ?? 'Neuro-edgy-ID-hyper-country'
+      return Object.keys(this.stats.server['favorite genre of music'])[0]
+    },
+    favoriteGenreCount() {
+      return Object.values(this.stats.server['favorite genre of music'])[0]
     },
   },
 }
