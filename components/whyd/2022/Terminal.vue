@@ -15,8 +15,8 @@
           <Whyd2022ChatText
             v-for="(line, idx) of text.content.split('\n')"
             :key="idx"
-            style="display: block"
             :content="line"
+            :class="text.block ? 'block' : ''"
           />
           <img
             v-if="text.type === 'image'"
@@ -178,6 +178,10 @@ export default {
   color: var(--primary);
   width: 50px;
   height: 50px;
+}
+
+.block {
+  display: block;
 }
 
 .terminal-image {

@@ -332,6 +332,7 @@ export default {
           .join(', ')
         this.emitNewLine({
           content: `{Current Directory | underline}\n~${this.path}\n{Availible Executables | underline}\n${list}\n`,
+          block: true,
         })
         this.addToCommandHistory(commandName)
         return
@@ -351,7 +352,7 @@ export default {
         return
       }
 
-      addToCommandHistory(commandName)
+      this.addToCommandHistory(commandName)
       this.emitNewLine({
         content: `{Error: Command not found '${commandName}' | error}`,
       })
@@ -418,9 +419,19 @@ export default {
       // takes a list of processed text lines and puts the terminal in clickContinue mode to read through them
       // lines.push({ content: '{End of Command | underline}' })
       this.terminalLinesQueue = lines.reverse()
-      lines[0] = {
-        ...lines[0],
-        content: lines[0].content.concat('\n{End of Command | underline}'),
+
+      if (lines[0].type === 'image') {
+        lines.splice(0, 0, {
+          content: '\n{End of Command | underline}',
+          block: true,
+        })
+      } else {
+        lines[0] = {
+          ...lines[0],
+          content: lines[0].content.concat(
+            '\n{End of Command | underline block}',
+          ),
+        }
       }
       this.terminalMode = mode.clickContinue
       this.isShowProceed = true
