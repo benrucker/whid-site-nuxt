@@ -14,9 +14,12 @@
             v-for="leaguer of leaguers"
             :id="leaguer.name"
             :key="leaguer.name"
-            :class="'image-div'"
+            class="image-div"
           >
-            <img :src="leaguer.avatar" />
+            <img
+              :src="leaguer.avatar"
+              :title="`${leaguer.name} pinged league ${leaguer.pings} times`"
+            />
           </div>
           <h4 :ref="'league'" class="role league">@league</h4>
           <p :ref="'intermediateLeagueCount'" class="count">
@@ -25,12 +28,17 @@
         </div>
         <div id="right" ref="right">
           <div
-            v-for="apexer of others"
-            :id="apexer.name"
-            :key="apexer.name"
-            :class="'image-div'"
+            v-for="other of others"
+            :id="other.name"
+            :key="other.name"
+            class="image-div"
           >
-            <img :src="apexer.avatar" />
+            <img
+              :src="other.avatar"
+              :title="`${other.name} pinged ${otherName.replace('\n', ' ')} ${
+                other.pings
+              } times`"
+            />
           </div>
           <h4 :ref="'apex'" class="role apex">@{{ otherName }}</h4>
           <p :ref="'intermediateOtherCount'" class="count">
@@ -412,6 +420,8 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
+
+  pointer-events: all;
 }
 
 canvas {
