@@ -16,7 +16,18 @@
       </div>
     </div>
     <div class="bottom-row">
-      <div v-for="reaction in otherReactions" :key="reaction" class="reaction">
+      <div
+        v-for="reaction in otherReactions"
+        :key="reaction"
+        :class="`reaction ${
+          reactions[reaction].name === 'YOOOOOO' ? '' : 'noTitle'
+        }`"
+        :title="
+          reactions[reaction].name === 'YOOOOOO'
+            ? `According to SecBot, ~70% of these were Trent himself`
+            : ''
+        "
+      >
         <img
           :src="
             imgUrl ?? `/whyd/2022/data/emojis/${reactions[reaction].name}.png`
@@ -122,6 +133,10 @@ export default {
 .bottom-row .reaction img {
   max-height: 2em;
   max-width: 2em;
+}
+
+.bottom-row .reaction.noTitle {
+  cursor: default !important;
 }
 
 .bottom-row .reaction .count {
