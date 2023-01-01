@@ -163,6 +163,10 @@ export default {
   filter: sepia(0.6);
 }
 
+.block {
+  display: block;
+}
+
 #textViewport p {
   margin-bottom: 0.25em;
 }
