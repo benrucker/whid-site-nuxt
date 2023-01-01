@@ -11,7 +11,7 @@
         :src="`/whyd/2022/data/emojis/${emojiNameToFilename[emoji]}`"
         class="cloud-emoji"
         :alt="emoji"
-        :title="emoji"
+        :title="`${emoji} - ${ranks[emoji]?.toLocaleString()} uses`"
       />
     </div>
   </div>
