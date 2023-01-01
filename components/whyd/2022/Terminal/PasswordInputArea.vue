@@ -60,6 +60,7 @@ export default {
       this.$refs.passwordTextInput.disabled = true
       if (this.validPasswords.includes(inputText)) {
         this.correctPassword = true
+        if (inputText === 'f') this.introAnimationTime = 100
         this.showLoggingIn()
       } else if (this.attempts === 3) {
         this.promptText = 'Too many attempts - Locking terminal...'
