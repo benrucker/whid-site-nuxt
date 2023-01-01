@@ -504,7 +504,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .button-region {
   margin-top: 0.5em;
 }
