@@ -1,7 +1,6 @@
 <template>
   <Whyd2022ChatChartMusic
-    :title="`${intermediateSongCount} songs played`"
-    :subtitle="`rookie numbers 😏`"
+    :header="`${intermediateSongCount} songs played`"
     bg-img="/whyd/2022/data/emojis/ahegao1.png"
   />
 </template>
@@ -20,13 +19,12 @@ export default {
   }),
   computed: {
     songsPlayed() {
-      return this.stats.server.songsPlayed ?? 500
+      return this.stats.server['# songs played'] ?? 500
     },
   },
   mounted() {
     setTimeout(() => {
-      // TODO check if this interval delay is still good with the real number
-      this.numberUpper = setInterval(this.numberUp, 16)
+      this.numberUpper = setInterval(this.numberUp, 4)
     }, 1000)
   },
   methods: {

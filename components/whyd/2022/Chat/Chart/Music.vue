@@ -8,8 +8,9 @@
   >
     <Whyd2022ChatChartMusicBackground ref="bg" :src="bgImg" />
     <div class="text">
-      <h2>{{ title }}</h2>
-      <h4 class="text-muted">{{ subtitle }}</h4>
+      <h2 v-if="title" :title="title">{{ header }}</h2>
+      <h2 v-else>{{ header }}</h2>
+      <h4 class="subtitle">{{ subtitle }}</h4>
     </div>
     <Whyd2022ChatChartMusicControls v-if="song" :song="song" />
   </div>
@@ -20,26 +21,30 @@ export default {
   props: {
     subtitle: {
       type: String,
-      default: ''
+      default: '',
     },
-    title: {
+    header: {
       type: String,
-      default: ''
+      default: '',
     },
     bgImg: {
       type: String,
-      default: ''
+      default: '',
     },
     song: {
       type: String,
-      default: null
-    }
+      default: null,
+    },
+    title: {
+      type: String,
+      default: '',
+    },
   },
 
   data() {
     return {
       rootRef: null,
-      bgRef: null
+      bgRef: null,
     }
   },
   mounted() {
@@ -57,8 +62,8 @@ export default {
     },
     handleMouseEnter() {
       this.bgRef.handleMouseEnter()
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -90,5 +95,9 @@ export default {
   justify-content: center;
   row-gap: 0;
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.favorite-song .subtitle {
+  color: rgba(255, 255, 255, 0.62);
 }
 </style>

@@ -1,9 +1,10 @@
 <template>
   <Whyd2022ChatChartMusic
-    title="talkxture"
-    subtitle="what has ben done?"
-    bg-img="/whyd/2022/music/album.png"
-    song="/whyd/2022/music/song.wav"
+    :header="favoriteSong.title"
+    :subtitle="favoriteSong.artist"
+    bg-img="/whyd/2022/music/yijianmei.jpg"
+    song="/whyd/2022/music/yijianmei.mp3"
+    :title="`Played at least ${favoriteSong.plays} times!`"
   />
 </template>
 
@@ -15,11 +16,10 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      rootRef: null,
-      bgRef: null,
-    }
+  computed: {
+    favoriteSong() {
+      return this.stats.server['most played song']
+    },
   },
 }
 </script>
