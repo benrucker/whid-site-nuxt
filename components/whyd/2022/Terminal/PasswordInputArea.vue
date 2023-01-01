@@ -121,7 +121,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .pass-view {
   position: absolute;
   top: 1.75em;
