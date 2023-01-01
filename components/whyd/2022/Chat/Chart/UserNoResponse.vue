@@ -1,7 +1,7 @@
 <template>
   <div class="usbotGraph">
     <div class="graphContent">
-      <h4>you got the lack of response</h4>
+      <h4>you got a lack of response</h4>
       <div class="number">
         <span class="value">{{ noResponseCount }}</span>
         <div class="usbotGraphLines">
