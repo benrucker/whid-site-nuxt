@@ -41,7 +41,7 @@ export default {
         users: 5,
       }
       const dmsCount = stat.totalCount
-      const numWalter = stat.count
+      const numWalter = stat.walterCount
       const differentWalterUsers = stat.users
 
       const lines = [
@@ -149,12 +149,11 @@ export default {
       const favoriteChannelStat = stats.user[
         'SecBot favorite VC by joinsmoves'
       ] ?? {
-        'favorite channel': '861750372611129354',
+        'favorite channel': 'quam dispemser',
         'number of events': 0,
       }
 
-      const favoriteChannelName =
-        stats.server.channelIdsToNames[favoriteChannelStat['favorite channel']]
+      const favoriteChannelName = favoriteChannelStat['favorite channel']
       const favoriteChannelJoins = favoriteChannelStat['number of events']
 
       const lines = [
@@ -197,8 +196,7 @@ export default {
     },
     SecBotScores(stats) {
       const user = stats.user?.name
-      const firstEpochScore =
-        stats.user['SecBot first epoch score']?.score ?? 750
+      const firstEpochScore = stats.user['SecBot first epoch score'] ?? 750
       const finalScore = stats.user?.['SecBot user final score']?.score ?? 750
 
       const lines = [
@@ -208,7 +206,7 @@ export default {
             'On {April 1st, 2022 | bold} every user was generously given {750 | bold} social credit points.',
         },
         {
-          content: `By the end of the first scoring period, {${user} | bold} had a score of {${firstEpochScore} | bold}.`,
+          content: `By the end of the first scoring period they participated in, {${user} | bold} had a score of {${firstEpochScore} | bold}.`,
         },
         {
           content: `As of the final grading period of the year, {${user} | bold} had a score of {${finalScore} | bold}.`,
@@ -458,9 +456,6 @@ export default {
 
       return lines
     },
-    LeftoverChannelMessages(_) {
-      // const channels = stats.server["Number of Messages per Channel"]
-    },
     LeftoversEmojiFavoritePerson(stats) {
       // user IDs by emoji names
       const EmojiFavoritePersonDict =
@@ -469,7 +464,7 @@ export default {
       // the top 25 emoji names plus some extras
       const emojis = Object.keys(
         stats.server['Custom Emojis ranked by usage'],
-      ).concat('ethanass', 'yes', 'ford', 'MARKWOOD')
+      ).concat('ethanass', 'yes', 'ford', 'markwood')
 
       // emoji filenames
       const emojiFilenames = emojis.map(
@@ -497,6 +492,7 @@ export default {
       return [
         {
           content: `    ____________\n   /            \\ \n  /              \\ \n /                \\ \n/                  \\ \n|         |        |\n|         |        |\n|         |        |\n|         |        |\n\\         |________|\n \\        \\ \n  \\        \\ \n   \\        \\ \n    \\        \\ \n    /\\        \\ \n   /  \\        \\ \n  /    \\        \\ \n /      \\        \\ \n/        \\        \\ \n|        |        |\n|        |        |\n|        |        |\n|        |        |\n\\                 /\n \\               /\n  \\             /\n   \\___________/`,
+          block: true,
         },
       ]
     },
