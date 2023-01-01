@@ -34,9 +34,15 @@ export default {
       ]
       return lines
     },
-    SecBotDMsFunction(_) {
-      const numWalter = 5
-      const differentWalterUsers = 3
+    SecBotDMsFunction(stats) {
+      const stat = stats.server['SecBot dms'] ?? {
+        totalCount: 53,
+        walterCount: 12,
+        users: 5,
+      }
+      const dmsCount = stat.totalCount
+      const numWalter = stat.count
+      const differentWalterUsers = stat.users
 
       const lines = [
         {
@@ -50,7 +56,7 @@ export default {
           url: 'https://media.tenor.com/S_to1tY3ixUAAAAd/breaking-bad-walter-white.gif',
         },
         {
-          content: `This image was sent {${numWalter} | bold} times by {${differentWalterUsers} | bold} users.`,
+          content: `SecurityBot was sent {${dmsCount} | bold} direct messages from {${differentWalterUsers} | bold} users. This image was sent {${numWalter} | bold} times.`,
         },
       ]
 
@@ -448,6 +454,41 @@ export default {
           content: `{${stats.user.name} | bold} was spotted with {${peopleSpottedWith.length} | bold} other people on {${mostPeopleTimestamp} | bold}. Here's a list of who they were with:`,
         },
         { content: `{${peopleSpottedWith.join(', ')} | bold}` },
+      ]
+
+      return lines
+    },
+    LeftoverChannelMessages(_) {
+      // const channels = stats.server["Number of Messages per Channel"]
+    },
+    LeftoversEmojiFavoritePerson(stats) {
+      // user IDs by emoji names
+      const EmojiFavoritePersonDict =
+        stats.server['leftovers emoji favorite person']
+
+      // the top 25 emoji names plus some extras
+      const emojis = Object.keys(
+        stats.server['Custom Emojis ranked by usage'],
+      ).concat('ethanass', 'yes', 'ford', 'markwood')
+
+      // emoji filenames
+      const emojiFilenames = emojis.map(
+        (e) => `${stats.server.emojiNameToFilename[e]}`,
+      )
+
+      const emojiPeoplePairs = emojiFilenames.map((emojiFilename, index) => {
+        const emojiName = emojis[index]
+        return `{:${emojiFilename}: | terminal-emoji} - ${
+          stats.server.idsToNames[EmojiFavoritePersonDict[`:${emojiName}:`]]
+        }`
+      })
+
+      const lines = [
+        { content: `{Leftovers - Emojis' Favorite Users | underline}` },
+        {
+          content: `The following list contains the most used custom emojis (and some other popular emojis), followed by the user that sent them the most.`,
+        },
+        { content: `${emojiPeoplePairs.join('\n')}`, block: true },
       ]
 
       return lines
