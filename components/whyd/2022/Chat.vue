@@ -239,18 +239,18 @@ export default {
         JSON.parse(this.stats.user.rare_roles).length > 0
       ) {
         choices = JSON.parse(this.stats.user.rare_roles)
-        output = content[0]
+        output = content[1]
       } else if (
         this.stats.user.less_rare_roles != null &&
         JSON.parse(this.stats.user.less_rare_roles).length > 0
       ) {
         choices = JSON.parse(this.stats.user.less_rare_roles)
-        output = content[0]
+        output = content[1]
       } else if (this.stats.user.least_rare_role) {
         choices = [this.stats.user.least_rare_role]
-        output = content[1]
-      } else {
         output = content[2]
+      } else {
+        output = content[3]
         return output
       }
       // eslint-disable-next-line vue/no-mutating-props
