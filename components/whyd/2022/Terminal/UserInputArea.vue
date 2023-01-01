@@ -537,14 +537,6 @@ export default {
   left: -100vw;
 }
 
-/* .red-text {
-  color: var(--error);
-}
-
-.red-text a {
-  color: var(--error);
-} */
-
 .system-button {
   background-color: hsl(212, 15%, 68%);
   border: outset 2px hsl(212, 45%, 85%);
