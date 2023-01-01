@@ -72,7 +72,7 @@ export default {
         authorName: 'SergeiLNL',
         timestamp: '09/24/2022',
         authorAvatar:
-          'https://cdn.discordapp.com/avatars/262799048430452746/45435ebe52b1cf8225d00861eb9045b7.png?size=1024',
+          '/whyd/2022/data/avatars/5eb8586673b97b054662a6eb7e7f79a1.png',
         attachments: [
           'https://media.tenor.com/9z3rpvYfoDIAAAAd/sonic-and-mario-kiss.gif',
         ],
