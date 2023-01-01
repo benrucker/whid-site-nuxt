@@ -21,6 +21,7 @@ export default {
         },
         {
           content: `'ls'          - List executables in current directory\n'cd ..'       - Navigate one directory up\n'cd [folder]' - Navigate to [folder]\n'dir'         - Display current directory `,
+          block: true,
         },
         {
           content:
@@ -43,9 +44,13 @@ export default {
             '{@secuityBot4891#1995 Direct Message logs... | underline}\n',
         },
         {
-          content: `This image was sent {${numWalter} | bold} times by {${differentWalterUsers} | bold} users.`,
+          content: '',
           type: 'image',
+          block: true,
           url: 'https://media.tenor.com/S_to1tY3ixUAAAAd/breaking-bad-walter-white.gif',
+        },
+        {
+          content: `This image was sent {${numWalter} | bold} times by {${differentWalterUsers} | bold} users.`,
         },
       ]
 
@@ -784,8 +789,8 @@ export default {
         {
           content: `{> | ethan}`,
           type: 'image',
-          height: '169px',
-          width: '550px',
+          height: '', // automatically determine height
+          width: '500px',
           url: '/whyd/2022/xkdc.png',
         },
         { content: `{> True | ben }` },
@@ -836,7 +841,7 @@ export default {
           width: '363px',
           url: '/whyd/2022/gitcommit.png',
         },
-        { content: `{> | ethan}{:imstuff.webp: | terminal-emoji}` },
+        { content: `{>  | ethan}{:imstuff.webp: | terminal-emoji}` },
         { content: `{> I love writing helpful commit messages | ethan }` },
       ]
     },
@@ -1040,7 +1045,7 @@ export default {
         { content: `{  Us Bot: Error: specified user does not exist | josh}` },
         { content: `{>  | ethan}{:fear: | terminal-emoji}` },
         {
-          content: `{Mr Sloan: I feel like its because I misspelled 'secuity' | josh}`,
+          content: `{  Mr Sloan: I feel like its because I misspelled 'secuity' | josh}`,
         },
         { content: `{> wait | ethan}` },
         { content: `{> Wtf | ethan}` },
