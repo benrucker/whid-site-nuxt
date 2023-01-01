@@ -127,16 +127,7 @@ export default {
 }
 </script>
 
-<style>
-:root {
-  --primary: #c7c1a7;
-  --secondary: #eec584;
-  --outline: #b6a083;
-  --background: #171214;
-  --error: rgb(205 48 48);
-  --success: rgb(77, 177, 77);
-}
-
+<style scoped>
 .outer {
   width: 600px;
   height: 400px;
@@ -163,47 +154,12 @@ export default {
   flex: 1;
 }
 
-.pass-view {
-  position: absolute;
-  top: 1.75em;
-  width: 99%;
-  height: 92%;
-}
-
-#textViewport p {
-  margin-bottom: 0.25em;
-}
-
-.redo {
-  color: var(--primary);
-  width: 50px;
-  height: 50px;
-}
-
 .terminal-image {
   filter: sepia(0.6);
 }
 
-.secbot-explosion {
-  background: url('/whyd/2022/explosion-sheet.png');
-  width: 71px;
-  height: 100px;
-  top: 50%;
-  left: 50%;
-  transform: scale(15, 10);
-  image-rendering: pixelated;
-  position: absolute;
-
-  animation: explosion-sprite 1s steps(18) forwards;
-}
-
-@keyframes explosion-sprite {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: -1278px 0;
-  }
+#textViewport p {
+  margin-bottom: 0.25em;
 }
 
 div#textViewport::-webkit-scrollbar {
@@ -241,5 +197,38 @@ div#textViewport::-webkit-scrollbar-thumb {
 div#textViewport::-webkit-scrollbar-track {
   border-radius: 0 !important;
   background-color: var(--background) !important;
+}
+</style>
+
+<style>
+#page {
+  --primary: #c7c1a7;
+  --secondary: #eec584;
+  --outline: #b6a083;
+  --background: #171214;
+  --error: rgb(205 48 48);
+  --success: rgb(77, 177, 77);
+}
+
+.secbot-explosion {
+  background: url('/whyd/2022/explosion-sheet.png');
+  width: 71px;
+  height: 100px;
+  top: 50%;
+  left: 50%;
+  transform: scale(15, 10);
+  image-rendering: pixelated;
+  position: absolute;
+
+  animation: explosion-sprite 1s steps(18) forwards;
+}
+
+@keyframes explosion-sprite {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -1278px 0;
+  }
 }
 </style>
