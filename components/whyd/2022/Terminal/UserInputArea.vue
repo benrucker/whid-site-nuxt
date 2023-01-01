@@ -504,7 +504,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .button-region {
   margin-top: 0.5em;
 }
@@ -536,14 +536,6 @@ export default {
   top: -100vh;
   left: -100vw;
 }
-
-/* .red-text {
-  color: var(--error);
-}
-
-.red-text a {
-  color: var(--error);
-} */
 
 .system-button {
   background-color: hsl(212, 15%, 68%);
