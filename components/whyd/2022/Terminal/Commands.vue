@@ -538,6 +538,41 @@ export default {
         },
       ]
     },
+    TwcmNote() {
+      return [
+        { content: `Yo.` },
+        {
+          content: `> I feel like I don't often get to tell you guys how much I'm indebted to your friendship. The people in this server have transformed from an unaware idiot into a slightly-more aware idiot with incredible influences.`,
+        },
+        {
+          content: `> I brag about each of you guys to my parents and coworkers all the time because of how caring, respectful, and real we all are to each other.`,
+        },
+        {
+          content: `> Every once in a while I get to sit back and reflect on what a unique and beautiful group of people I have to call my friends, and what ditch I could have ended up in if I had never got to know any of you.`,
+        },
+        {
+          content: `> I really can't articulate how much I love all of you to death and back. I joke about how I would take a bullet for everyone on the server, but with how much you guys have changed me for the better, how could I not. `,
+        },
+        {
+          content: `> If Vegas is truly making me live on borrowed time, I could die happy knowing it would be a bit for the greatest group of dudes on earth.`,
+        },
+        {
+          content: `> Shoutouts to Ben and Ethan for talking me out of my shell and getting me on this project,`,
+        },
+        {
+          content: `  Shoutout to the Haroth gang for believing in the creative side I didn't think I had,`,
+        },
+        {
+          content: `  Shoutout to the late squad for keeping my sleep schedule ruined,`,
+        },
+        { content: `  Shoutouts to you for caring enough to read this,` },
+        {
+          content: `  And here's to seeing how far this boat of spit and duct-tape can take us.`,
+        },
+        { content: `> I love you guys,` },
+        { content: `{- Tristan | tristan} {:shred.gif: | terminal-emoji}` },
+      ]
+    },
     TwcmShred() {
       return [{ content: `{:shred.gif: | terminal-emoji}` }]
     },
@@ -551,6 +586,505 @@ export default {
           url: '/whyd/2022/its-time-shred.gif',
         },
         { content: `${'{:shred.gif: | terminal-emoji}'.repeat(495)}` },
+      ]
+    },
+    Document1() {
+      return [
+        { content: `{Sometime in 2021... | underline}` },
+        {
+          content: `{> Idea for April fools day next year: social credit scores | ethan}`,
+        },
+        { content: `{> what if we [REDACTED] | ben }` },
+        { content: `{> lmao | wyatt }` },
+        { content: `{>  | tristan }{:crackSoldier.webp: | terminal-emoji}` },
+      ]
+    },
+    Document2() {
+      return [
+        { content: `{January 2022... | underline }` },
+        { content: `{> What are we gonna do for april fools again | ethan }` },
+        { content: `{> Social credit scores or [REDACTED] | ben }` },
+        {
+          content: `{> [REDACTED]??? Okay no lets just do social credit scores | ethan }`,
+        },
+        {
+          content: `{> planning meeting soon | ben } {:benheh: | terminal-emoji} `,
+        },
+      ]
+    },
+    Document3() {
+      return [
+        { content: `{February 2, 2022 | underline }` },
+        { content: `{> any availibility today for working session 0? | ben }` },
+        {
+          content: `{> Tristan will be awake at like 2 if I had to guess | ethan }`,
+        },
+        { content: `{> Didn't he have class? | ben }` },
+        { content: `{> He goes back to bed afterwards | ethan }` },
+        { content: `{>  | ben }{:nairoDisbelief: | terminal-emoji }` },
+        { content: `{> He's on that bicameral sleep schedule | ethan }` },
+        {
+          content: `{> | ben }`,
+          type: 'image',
+          url: 'https://media.tenor.com/17TCRYBps5IAAAAC/i-dont-get-it-dont-get-it.gif',
+          width: 480,
+          height: 270,
+        },
+        { content: `{> He's on that bisexual sleep schedule | ethan }` },
+        {
+          content: `{  This is only relevant because its where the concept of the 'bisexual sleep schedule' originated | italic }`,
+        },
+      ]
+    },
+    Document4() {
+      return [
+        { content: `{February 17th, 2022 | underline}` },
+        { content: `{> okay the api is up | ben }` },
+        {
+          content: `{> I just went in and added event listeners for all the needed events, now I need to go in and add the handlers for everything | ethan }`,
+        },
+        {
+          content: `{> also I changed the name of the bot github repo lol | ethan }`,
+        },
+        { content: `{> covert operations | ethan }` },
+        { content: `{> good call lol | ben }` },
+        {
+          content: `{> I wonder why UC offers a grad level class on oppression. Huh. | ben }`,
+        },
+      ]
+    },
+    Document5() {
+      return [
+        { content: `{February 18th, 2022 | underline }` },
+        {
+          content: `{> test token for authentication is currently 'fidlersphatass' | ben }`,
+        },
+        { content: `{>  | ethan }{:ethanass: | terminal-emoji}` },
+        {
+          content: `{> also the website is actually broken as I incorporate the DB schemas into the code | ben}`,
+        },
+        { content: `{> todo fix later | ben}` },
+      ]
+    },
+    Document6() {
+      return [
+        { content: `{March 1, 2022 | underline }` },
+        {
+          content: `{> hey @/everyone, I've been noticing some targeted harassment towards people (definitely not trent) recently, so I installed a security camera in the server to try and dissuade bullying and the sorts, hope you're having a good day | ben}`,
+        },
+        { content: `{> so what is the plan | wyatt }` },
+        { content: `{> The plan is in 3 parts:  | ben}` },
+        {
+          content: `{> 1. develop a discord bot, an API, a database, and a website | ben}`,
+        },
+        {
+          content: `{> 2. Glue the parts together to form a social credit score system | ben}`,
+        },
+        {
+          content: `{> 3. Release everyone's social credit scores on April fool's day | ben}`,
+        },
+        { content: `{> Oh god | wyatt}` },
+        { content: `{> how do you determine social credit | wyatt}` },
+        {
+          content: `{> | ethan }`,
+          type: 'image',
+          url: '/whyd/2022/data/stickers/905986304339234946.png',
+          width: 200,
+          height: 200,
+        },
+        {
+          content: `{> through a long list of arbitrary and convoluted rules | ben }`,
+        },
+        {
+          content: `{> basically, it will be impossible for anyone to guess how their score will move week-to-week | ben }`,
+        },
+        {
+          content: `{> but each action they take will either add or subtract from their starting score | ben }`,
+        },
+        {
+          content: `{  At this point everyone in #do started telling eachother to fuck themselves | italic }`,
+        },
+        {
+          content: `{  It's worth noting that at this point SecurityBot had literally ZERO FEATURES other than just saying that it was watching someone, so it was really funny to see people try to “use” it. Also, Wyatt had no idea what was happening which made it even better. | italic}`,
+        },
+      ]
+    },
+    Document7() {
+      return [
+        { content: `{March 1, 2022 J | underline }` },
+        {
+          content: `{  Josh figured he would attempt to figure out how SecurityBot worked, despite it not having any features yet. | italic }`,
+        },
+        {
+          content: `{> wait is this a bot that you cloned from a repo and added to the server? See when a discord bot changes its subheading (Watching ____) it's global | josh }`,
+        },
+        { content: `{> He did it | ben}` },
+        { content: `{> He found the fatal flaw | ben}` },
+        { content: `{> Thankfully I can deploy our cover | ben }` },
+        {
+          content: `{> am bored and this is a fun little game to me, whats its key. | josh }`,
+        },
+        { content: `{> ? | ben }` },
+        { content: `{> [] ! ? $help | josh}` },
+        { content: `{> (He means prefix) | ethan}` },
+        { content: `{> it doesnt have one | ben}` },
+        {
+          content: `{> So its a data collection thing, im guessing for use in the whidapi? | josh}`,
+        },
+        {
+          content: `{  He has immediately figured out what SecurityBot is | italic}`,
+        },
+        {
+          content: `{> well I don't have a database or anything | ben } {(true at the time) | italic}{ so if that's the case then its doing a bad job. | ben}`,
+        },
+        { content: `{> mmmmmm | josh}` },
+        {
+          content: `{> If you cant tell im trying to figure out what it does without asking directly | josh}`,
+        },
+        {
+          content: `{> I wish you the best of luck in figuring out what it does | ben }`,
+        },
+        {
+          content: `{> I think this means that he fell for the fake repo title I gave it | ethan}`,
+        },
+        {
+          content: `{  'CS4198 - Advanced Methods in Classifying Actors' | italic }`,
+        },
+        { content: `{> he is barking up a barren tree | ben }` },
+        {
+          content: `{> Brendan: He's seeing if "it's going to ban him." for being an asshole to Chris | brendan}`,
+        },
+        {
+          content: `{> @Ginger Asian FUCK YOU, I hate your soul rat busterd | josh }`,
+        },
+        { content: `{> Fuck you chis | josh }` },
+        { content: `{> You pile of shite | josh}` },
+        { content: `{> Worthless crab | josh}` },
+        { content: `{> Get the fuck outa here | josh}` },
+        {
+          content: `{> What I'm seeing is that this project is a resounding success already | ethan}`,
+        },
+        { content: `{> with a sample size of Josh, I would concur | ben}` },
+        { content: `{> Worthless crab | ethan}` },
+        {
+          content: `{> if someone realizes that 4891 is an anagram for 1984 can I change it to 4892 and gaslight them | ethan }`,
+        },
+        { content: `{> kian has brains tho. I assumed he saw it | ben}` },
+        {
+          content: `{  The first thing Kian said when SecBot joined was “1984”, I wonder if he truly knew. | italic }`,
+        },
+      ]
+    },
+    Document8() {
+      return [
+        { content: `{March 3, 2022 | underline }` },
+        {
+          content: `{> Uh oh will I have to uneacape data that I receive? | ben }`,
+        },
+        {
+          content: `{> | ethan}`,
+          type: 'image',
+          height: '169px',
+          width: '550px',
+          url: '/whyd/2022/xkdc.png',
+        },
+        { content: `{> True | ben }` },
+        {
+          content: `{> I think the only spot where that could be an issue is in the json parsing, which is handled by my library | ben }`,
+        },
+        {
+          content: `{> we have some pretty good black hat QA engineers among our ranks | ethan }`,
+        },
+        {
+          content: `  Lu actually tried to do the whole DROP TABLES thing and it didnt work 😎`,
+        },
+      ]
+    },
+    Document9() {
+      return [
+        { content: `{March 4, 2022 | underline }` },
+        {
+          content: `{> a friend of mine raised a good point, each person's credit score should give them a role that segregates them on the sidebar. | ethan }`,
+        },
+        {
+          content: `{> part of the april fools day thing could be sunsetting the 'minors' role. | ethan }`,
+        },
+        {
+          content: `{> This idea is hilarious and a much larger con than expected lol. | ben }`,
+        },
+        {
+          content: `{> yeah we would need to think or new role names that are just good/bad enough for people to hate them / become tribal over them | ethan }`,
+        },
+        {
+          content: `{> then have all of them shuffled the next week | ethan }`,
+        },
+        {
+          content: `{> like I feel like the new role names need to be not good at all | ethan }`,
+        },
+        {
+          content: `{> let's have a discussion about this tomorrow, too good of an opportunity to pass up. | ben }`,
+        },
+      ]
+    },
+    Document10() {
+      return [
+        { content: `{March 15, 2022 | underline }` },
+        {
+          content: `{> | ben }`,
+          type: 'image',
+          height: '112px',
+          width: '363px',
+          url: '/whyd/2022/gitcommit.png',
+        },
+        { content: `{> | ethan}{:imstuff.webp: | terminal-emoji}` },
+        { content: `{> I love writing helpful commit messages | ethan }` },
+      ]
+    },
+    Document11() {
+      return [
+        { content: `{March 28, 2022 | underline }` },
+        { content: `{> here's new api token | ben }` },
+        {
+          content: `{> MIIEpgIBAAKCAQEA32KNsdfffddfuR3WiuychbFvtGn... | ben wrap }`,
+        },
+        {
+          content: `{...Lyam6KC3gsU3ZMkJ/yZ0TOY18fSex40+d4TM/JZxRY... | ben wrap}`,
+        },
+        {
+          content: `{...GRt2oaZJDINPd6wOXM/rvF3NZXu68ezGA6LHmfUO4kvJw | ben wrap}`,
+        },
+        {
+          content: `{> WTF | ethan }`,
+          type: 'image',
+          height: '41px',
+          width: '132px',
+          url: '/whyd/2022/toy18fsex.png',
+        },
+        {
+          content: `{>  | ben}{:fear: | terminal-emoji} {:booba: | terminal-emoji}`,
+        },
+        { content: `{> absolutely unbelievable | ethan}` },
+        {
+          content: `{> doesnt even matter because that is the wrong one | ben}`,
+        },
+        { content: `{> pour one out for toy18fsex | ethan }` },
+        {
+          content: `{> IIEpQIBAAKCAvoHVWsgtQz1RVaDXr7hZYAUbefHVk9oNi... | ben wrap}`,
+        },
+        {
+          content: `{...s5tfPCUMPegODuBHptgeW9A3MDwliT+iFG+wOicNCR4WSVE | ben wrap}`,
+        },
+        {
+          content: `{> how | ethan }`,
+          type: 'image',
+          height: '19px',
+          width: '52px',
+          url: '/whyd/2022/cumpeg.png',
+        },
+        { content: `{> well, this one is working | ethan }` },
+        { content: `{> thank cumpeg | ben}` },
+      ]
+    },
+    Document12() {
+      return [
+        { content: `{March 30, 2022 | underline }` },
+        {
+          content: `{> @here pls vote on which set of role names you think would be best | ben }`,
+        },
+        { content: `{> gamers, gaming, games | ben }` },
+        { content: `{> women, boys, (something else) | ben}` },
+        { content: `{> fucks, doesn't fuck, doesn't know what sex is | ben}` },
+        { content: `{> snord, harold, cheeto | ben }` },
+        { content: `{> gigachad, chad, (something else) | ben}` },
+        { content: `{> kaiser, normal person, same person | ben}` },
+        { content: `{> kaiser, john, librarians | ben}` },
+        { content: `{> gold, silver, bronze | ben}` },
+        { content: `{> gold, sivler, blongs | ben}` },
+        { content: `{> we gon go w blongs cause footblong | ben}` },
+        {
+          content: `{ "fucks, doesnt fuck, doesnt know what sex is" actually got 2nd place | italic }`,
+        },
+      ]
+    },
+    Document13() {
+      return [
+        { content: `{March 31, 2022 @ 2:07pm | underline }` },
+        {
+          content: `{> go ahead and change the channel names, seems like they're hidden correctly | ben }`,
+        },
+        { content: `{> could be gold-general or gold-garage | ethan }` },
+        { content: `{> Blong-basement | ethan }` },
+        {
+          content: `{> basement is hilarious, both that and box give off lower-class vibes so both are good | ben }`,
+        },
+        {
+          content: `{> @eljefe do you like "blong-box" or "blong-basement" more | ethan }`,
+        },
+        { content: `{> For what | wyatt}` },
+        { content: `{> But blong box sounds better | wyatt }` },
+      ]
+    },
+    Document14() {
+      return [
+        { content: `{March 31, 2022 @ 6:30pm | underline}` },
+        { content: `{> I cant wait for race war tomorrow | wyatt }` },
+        { content: `{> *class war | wyatt }` },
+        { content: `{> next april fools: straight up racism | ben }` },
+        { content: `{  4/1/23. start preparing. | italic}` },
+      ]
+    },
+    Document15() {
+      return [
+        { content: `{March 31, 2022 @ 9:00pm | underline }` },
+        { content: `{> tomorrow's schedule | ben}` },
+        { content: `{> 6:00am - william closes #do | ben}` },
+        {
+          content: `{> 6:30am - bot automatically runs, activates the roles+channels, and sends an announcement to #do | ben}`,
+        },
+        { content: `{> ???am - morning chaos ensues | ben}` },
+        {
+          content: `{> 10:00am - the majors make our own post explaning the situation | ben}`,
+        },
+        { content: `{> 10:01am and on - profit | ben}` },
+        { content: `{> dennis pranger, we call him DP | ethan }` },
+        {
+          content: `{> email hasn't replied, where the hell could he be | ben}`,
+        },
+        { content: `{> has anyone emailed him | ethan}` },
+        { content: `{> me | ben}` },
+        { content: `{> dennis pranger rap incoming though? | ben}` },
+        { content: `{> yeah dennis, academy khan like ghengis | ethan}` },
+        { content: `{> they a menace, runnin a con outta venice | ben}` },
+        { content: `{> new lore? | ben}` },
+      ]
+    },
+    Document16() {
+      return [
+        { content: `{March 31, 2022 @ 11:05pm | underline}` },
+        { content: `{> the scoring has been scheduled | ben}` },
+        { content: `{> im so nervous haha | ethan}` },
+        { content: `{> teehee 😳 | ben}` },
+        { content: `{> all the hard work boutta pay off | ben}` },
+        { content: `{> you said you're waking up at 7:30 right? | ben}` },
+        { content: `{> yeah | ethan}` },
+        { content: `{> you need me to move SecBot to the top? | ethan}` },
+        { content: `{> Nah I got it | ben}` },
+        { content: `{> Bandrew | ben}` },
+        { content: `{> lol | ethan}` },
+        { content: `{> Gn | ethan}` },
+        { content: `{> bandrew foreskin @ig | ben}` },
+        { content: `{> blanderson | ethan}` },
+        {
+          content: `{  I decided like 3 hours ago that 'blandrew' would be a funny name. ben is now informing me that jacob told me to change my name. | italic}`,
+        },
+      ]
+    },
+    Document17() {
+      return [
+        { content: `{April 1, 2022 @ 7am | underline}` },
+        { content: `{> immediately I dont anything | ethan}` },
+        { content: `{> Im gonna snooze my aparm a few times | ethan}` },
+        { content: `{> Not even a webhook message? | ethan}` },
+        {
+          content: `{  What was supposed to happen was ben's website sends a message in whid, which SecBot sees and uses to change everyone's roles. | italic }`,
+        },
+        { content: `{  30 minutes pass | italic }` },
+        {
+          content: `{> the thing ran but it didnt try to send the scores | ben}`,
+        },
+        { content: `{> im running it again | ben}` },
+        {
+          content: `{  Ben and I then hopped on discord and made sure that it actually worked. I skipped my morning class to make sure that we would be able to actually get it out. | italic }`,
+        },
+      ]
+    },
+    Document18() {
+      return [
+        { content: `{April 1, 2022 @ 11:30am | underline }` },
+        { content: `{> we can def have a phase 2 meeting soon | ben}` },
+        {
+          content: `{> Fizz Khalifa got gold by going literally nothing 😭 | ethan}`,
+        },
+      ]
+    },
+    Document19() {
+      return [
+        { content: `{April 17, 2022 | underline}` },
+        {
+          content: `{> wanna invert all of the scoring for 1 week then create a new algorithm | ethan}`,
+        },
+        { content: `{> yeah we should def shake it up | ben}` },
+        {
+          content: `{> I think it would be fun to increase the point values for everything, positive or negative, and make scores wrap around back to 0 at some point so people's score just go all over the place. | ben }`,
+        },
+        {
+          content: `{> time to drunkenly change the scoring system in time for this week's scores | ben}`,
+        },
+
+        {
+          content: `{  After tristan got the score of 2200, we finally implemented the scores to cap at 1600; after that it would wrap back around to 0. Also if you went lower than 0 you would shoot up to 1600, that might explain some strange score changes that you would have had. | italic}`,
+        },
+        {
+          content: `{  Also at this point sending cheeto would deduct 1000 points. | italic}`,
+        },
+        { content: `{> @Von can I get a cheeto cheeto? | ben}` },
+        {
+          content: `{  Von:  | josh}{:cheeto: | terminal-emoji} {:cheeto: | terminal-emoji}`,
+        },
+      ]
+    },
+    Document20() {
+      return [
+        { content: `{April 17, 2022 | underline}` },
+        { content: `{  Mr Sloan: us.get securityBot4891 | josh}` },
+        { content: `{  Us Bot: Error: specified user does not exist | josh}` },
+        { content: `{>  | ethan}{:fear: | terminal-emoji}` },
+        {
+          content: `{Mr Sloan: I feel like its because I misspelled 'secuity' | josh}`,
+        },
+        { content: `{> wait | ethan}` },
+        { content: `{> Wtf | ethan}` },
+        { content: `{> How have I never realized this | ethan}` },
+        { content: `{> dude no way | ben}` },
+        { content: `{> How has nobody noticed this for months? | ben}` },
+        { content: `{> IDK | ethan}` },
+        {
+          content: `{> Did you not notice either? | ethan}`,
+        },
+        { content: `{> @brendan did you notice and not tell me? | ethan}` },
+        { content: `{> I didnt notice | ben}` },
+        {
+          content: `{  Brendan: I think I told you awhile ago and you didnt care | brendan}`,
+        },
+        { content: `{> sounds about right | ethan}` },
+      ]
+    },
+    Document21() {
+      return [
+        { content: `{> June 29, 2022 | underline }` },
+        {
+          content: `{> So is Dennis canonically “missing” by this point? Or have they successfully returned from Georgia? | ben}`,
+        },
+        { content: `{> idk | ethan}` },
+      ]
+    },
+    DocumentBonus() {
+      return [
+        { content: `{wow, you got through all of these. | italic}` },
+        {
+          content: `{These are excerpts from conversations that we had while working on SecBot & what have you done but mostly SecBot. | italic }`,
+        },
+        {
+          content: `{When I finished writing putting all of these down I realized it was quite a bit. many a great time were had were had working on this project. | italic}`,
+        },
+        { content: `{Oh! | italic}` },
+        {
+          content: `{Since you went through and read all of these or spam-clicked though like 2 weeks later after I mention that there is a secret with a reward in it that no one found yet; | italic }`,
+        },
+        {
+          content: `@me (ethan) discreetly and tell me that you found the "TERMINAL SECRET ENDING" <- all caps important and I will give you a free custom one-of-a-kind role. Supplies are limited!`,
+        },
+        { content: `Thanks for reading!` },
       ]
     },
   },
