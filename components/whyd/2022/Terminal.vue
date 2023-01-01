@@ -12,18 +12,18 @@
         @click="focusInput"
       >
         <div v-for="text in displayedTerminalContent" :key="text.id">
+          <Whyd2022ChatText
+            v-for="(line, idx) of text.content.split('\n')"
+            :key="idx"
+            style="display: block"
+            :content="line"
+          />
           <img
             v-if="text.type === 'image'"
             :src="text.url"
             :width="text?.width ?? '120px'"
             :height="text?.height ?? '100px'"
             class="terminal-image"
-          />
-          <Whyd2022ChatText
-            v-for="(line, idx) of text.content.split('\n')"
-            :key="idx"
-            style="display: block"
-            :content="line"
           />
         </div>
         <Whyd2022TerminalUserInputArea
