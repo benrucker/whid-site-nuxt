@@ -42,7 +42,11 @@
           <th>Date</th>
           <th>Score</th>
         </tr>
-        <tr v-for="(score, index) in sortedScores" :key="index">
+        <tr
+          v-for="(score, index) in sortedScores"
+          :key="index"
+          class="score-row"
+        >
           <td>{{ score.date }}</td>
           <td>{{ score.score }}</td>
         </tr>
@@ -283,5 +287,11 @@ table#history th {
 
 table#history {
   border-collapse: collapse;
+}
+
+th,
+.score-row > td {
+  padding-right: 5px;
+  padding-left: 5px;
 }
 </style>
