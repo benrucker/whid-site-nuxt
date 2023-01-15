@@ -34,6 +34,8 @@
 
     <h3>Your score History:</h3>
 
+    <svg v-show="shouldShowGraph" id="scoreline"></svg>
+
     <table id="history">
       <tbody v-if="!usernameError">
         <tr>
@@ -47,7 +49,6 @@
       </tbody>
     </table>
 
-    <svg id="scoreline"></svg>
     <script src="https://d3js.org/d3.v7.min.js"></script>
   </div>
 </template>
@@ -68,6 +69,9 @@ export default {
       return this.scores.sort((a, b) => {
         return new Date(b.date) - new Date(a.date)
       })
+    },
+    shouldShowGraph() {
+      return this.scores.length > 0
     },
   },
   watch: {
