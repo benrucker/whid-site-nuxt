@@ -3,22 +3,45 @@
 </template>
 
 <style>
+@media (min-width: 768px) {
+  .score-parent {
+    width: 850px !important;
+  }
+}
+
+.fakepage {
+  overflow: scroll;
+  height: 80vh;
+  border: 10px inset rgba(128, 128, 128, 0.6);
+}
+
 .a {
   color: #0645ad;
+  margin-right: 5px;
 }
 
 .a:hover {
-  color: rgb(85, 26, 139);
+  filter: brightness(1.5) saturate(1.5);
   cursor: pointer;
+}
+
+.a.current-page {
+  color: rgb(85, 26, 139);
 }
 
 #body {
   background-color: antiquewhite;
-  font-family: "Times New Roman", Times, serif;
+  font-family: 'Times New Roman', Times, serif;
   padding-left: 5%;
   width: 120%;
   color: black;
   overflow: scroll;
+}
+
+@media (min-width: 768px) {
+  #body {
+    width: 120%;
+  }
 }
 
 #navbar {
@@ -40,14 +63,13 @@
 }
 
 text {
-  font-family: "Times New Roman", Times, serif;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 div#body::-webkit-scrollbar {
   width: 20px;
   height: 20px;
 }
-
 
 div#body::-webkit-scrollbar-button {
   background-color: #c0c0c0 !important;
@@ -61,16 +83,16 @@ div#body::-webkit-scrollbar-button {
   background-size: 50%;
 }
 div#body::-webkit-scrollbar-button:vertical:decrement {
-  background-image: url("/score/arrowup.png");
+  background-image: url('/score/arrowup.png');
 }
 div#body::-webkit-scrollbar-button:vertical:increment {
-  background-image: url("/score/arrowdown.png");
+  background-image: url('/score/arrowdown.png');
 }
 div#body::-webkit-scrollbar-button:horizontal:decrement {
-  background-image: url("/score/arrowleft.png");
+  background-image: url('/score/arrowleft.png');
 }
 div#body::-webkit-scrollbar-button:horizontal:increment {
-  background-image: url("/score/arrowright.png");
+  background-image: url('/score/arrowright.png');
 }
 div#body::-webkit-scrollbar-corner {
   background-color: #c0c0c0 !important;

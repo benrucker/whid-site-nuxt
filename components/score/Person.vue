@@ -1,23 +1,21 @@
 <template>
-  <div id="body" class="fake-webpage w-75">
+  <div id="body">
     <div id="navbar">
       <div id="links">
-        <span
-          class="a link"
-          href="scoreboard.html"
-          @click="changeWindow"
-        >Scoreboard</span>
-        <span class="a link" href="score.html">Your Score</span>
+        <span class="a link" href="scoreboard.html" @click="changeWindow"
+          >Scoreboard</span
+        >
+        <span class="a link current-page" href="score.html">Your Score</span>
       </div>
       <div id="logo">
         your logo here:
-        <img src="/score/whid.png" alt="google logo">
+        <img src="/score/whid.png" alt="google logo" />
       </div>
     </div>
 
-    <hr>
-    <br>
-    <br>
+    <hr />
+    <br />
+    <br />
 
     <div v-if="usernameError" id="usernameNotFound">
       <i>username not found!</i>
@@ -30,8 +28,8 @@
         type="text"
         name="name"
         placeholder="Enter your name"
-      >
-      <input type="submit" value="Submit">
+      />
+      <input type="submit" value="Submit" />
     </form>
 
     <h3>Your score History:</h3>
@@ -49,38 +47,39 @@
       </tbody>
     </table>
 
-    <svg id="scoreline" />
-    <script src="https://d3js.org/d3.v7.min.js" />
+    <svg id="scoreline"></svg>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
   </div>
 </template>
 
 <script>
 export default {
   layout: 'score',
-  data () {
+  data() {
     return {
       scores: [],
       usernameError: false,
-      username: ''
+      username: '',
     }
   },
   computed: {
-    sortedScores () {
+    sortedScores() {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       return this.scores.sort((a, b) => {
         return new Date(b.date) - new Date(a.date)
       })
-    }
+    },
   },
   watch: {
-    sortedScores (theScores) {
+    sortedScores(theScores) {
       showGraph(JSON.parse(JSON.stringify(theScores)))
-    }
+    },
   },
   methods: {
-    changeWindow () {
+    changeWindow() {
       this.$emit('changeWindow', 'scoreBoard')
     },
-    async processUsername () {
+    async processUsername() {
       this.scores = await this.getData(this.username)
       if (this.scores.length === 0) {
         this.usernameError = true
@@ -88,9 +87,9 @@ export default {
         this.usernameError = false
       }
     },
-    async getData (username) {
+    async getData(username) {
       const response = await fetch(
-        'https://api.whid.live/member/name/' + username + '/scores'
+        'https://api.whid.live/member/name/' + username + '/scores',
       )
       if (!response.ok) {
         return []
@@ -99,14 +98,14 @@ export default {
       return data.map((d) => {
         return {
           score: d.score,
-          date: d.date
+          date: d.date,
         }
       })
-    }
-  }
+    },
+  },
 }
 
-function showGraph (data) {
+function showGraph(data) {
   // clear content of #scoreline
   document.getElementById('scoreline').innerHTML = ''
 
@@ -120,9 +119,9 @@ function showGraph (data) {
       parentElement: '#scoreline',
       containerHeight: 300,
       containerWidth: 800,
-      yParameter: d => d.score
+      yParameter: (d) => d.score,
     },
-    data
+    data,
   )
 
   MedianLine.svg
@@ -145,14 +144,14 @@ function showGraph (data) {
 }
 
 class Line {
-  constructor (_config, _data) {
+  constructor(_config, _data) {
     this.config = {
       parentElement: _config.parentElement,
       containerWidth: _config.containerWidth || 500,
       containerHeight: _config.containerHeight || 300,
       margin: _config.margin || { top: 50, bottom: 30, right: 50, left: 50 },
       tooltipPadding: _config.tooltipPadding || 15,
-      yParameter: _config.yParameter
+      yParameter: _config.yParameter,
     }
 
     this.data = _data
@@ -161,7 +160,7 @@ class Line {
     this.initVis()
   }
 
-  initVis () {
+  initVis() {
     const vis = this
     // width and height of the visualization
     vis.width =
@@ -173,15 +172,15 @@ class Line {
       vis.config.margin.top -
       vis.config.margin.bottom
 
-    vis.xValue = d => d.date
+    vis.xValue = (d) => d.date
     vis.yValue = vis.config.yParameter
 
     // scales setup
     vis.xScale = d3
       .scaleLinear()
       .domain([
-        d3.max(vis.data, d => d.date.getTime() + 1.8e7),
-        d3.min(vis.data, d => d.date.getTime() - 1.8e7)
+        d3.max(vis.data, (d) => d.date.getTime() + 1.8e7),
+        d3.min(vis.data, (d) => d.date.getTime() - 1.8e7),
       ])
       .range([vis.width, 0])
 
@@ -201,13 +200,13 @@ class Line {
       .append('g')
       .attr(
         'transform',
-        `translate(${vis.config.margin.left},${vis.config.margin.top})`
+        `translate(${vis.config.margin.left},${vis.config.margin.top})`,
       )
 
     // Initialize Axes
     vis.xAxis = d3
       .axisBottom(vis.xScale)
-      .tickValues(vis.data.map(d => d.date))
+      .tickValues(vis.data.map((d) => d.date))
       .tickFormat(d3.timeFormat('%Y %b %d'))
     vis.yAxis = d3.axisLeft(vis.yScale)
 
@@ -233,21 +232,21 @@ class Line {
       .text('time')
   }
 
-  updateVis () {
+  updateVis() {
     const vis = this
 
-    vis.xValue = d => d.date
+    vis.xValue = (d) => d.date
     vis.yValue = vis.config.yParameter
 
     vis.line = d3
       .line()
-      .x(d => vis.xScale(vis.xValue(d)))
-      .y(d => vis.yScale(vis.yValue(d)))
+      .x((d) => vis.xScale(vis.xValue(d)))
+      .y((d) => vis.yScale(vis.yValue(d)))
 
     vis.renderVis()
   }
 
-  renderVis () {
+  renderVis() {
     const vis = this
 
     vis.chart

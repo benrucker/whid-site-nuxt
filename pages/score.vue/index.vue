@@ -1,9 +1,13 @@
 <template>
-  <div class="container justify-content-center d-flex">
-    <br>
-    <br>
-    <br>
-    <component :is="window" class="mt-5 fakepage" @changeWindow="changeWindow" />
+  <div class="container-md justify-content-center d-flex score-parent">
+    <br />
+    <br />
+    <br />
+    <component
+      :is="window"
+      class="mt-5 fakepage"
+      @changeWindow="changeWindow"
+    />
   </div>
 </template>
 
@@ -14,25 +18,17 @@ import ScorePerson from '@/components/score/Person.vue'
 export default {
   components: {
     ScoreBoard,
-    ScorePerson
+    ScorePerson,
   },
-  data () {
+  data() {
     return {
-      window: 'scoreBoard'
+      window: 'scoreBoard',
     }
   },
   methods: {
-    changeWindow (window) {
+    changeWindow(window) {
       this.window = window
-    }
-  }
+    },
+  },
 }
 </script>
-
-<style>
-.fakepage {
-    overflow: scroll;
-    height: 80vh;
-    border: 10px inset rgba(128, 128, 128, 0.6);
-}
-</style>
