@@ -64,7 +64,10 @@
           <div v-if="seasons[activeSeason]">
             <div class="row">
               <VideoCard
-                v-for="episode in seasons[activeSeason]['episodes']"
+                v-for="episode in sortEpisodes(
+                  seasons[activeSeason].episodes,
+                  activeSeason,
+                )"
                 :key="episode['title']"
                 class="col-md-6 col-lg-3 my-3 mt-1"
                 :video-link="video(episode)"
@@ -94,7 +97,7 @@ export default {
       seasons: {},
       showAlert: false,
       featured: null,
-      featuredDesc: ''
+      featuredDesc: '',
     }
   },
   async fetch() {
@@ -123,8 +126,11 @@ export default {
     },
     watchFeatured() {
       return constructWatchURL(this.featured)
-    }
-  }
+    },
+    sortEpisodes(episodes, season) {
+      return sortEpisodes(episodes, season)
+    },
+  },
 }
 
 class VideoIDError extends Error {
@@ -155,7 +161,7 @@ function getFeaturedVideoData(catalog) {
   return [
     catalog.featured.season,
     catalog.featured.id,
-    catalog.featured.description
+    catalog.featured.description,
   ]
 }
 
@@ -167,6 +173,13 @@ function getVideoDataFromID(catalog, season, id) {
 
 function getEpisodesFromSeason(catalog, season) {
   return catalog.seasons[season].episodes
+}
+
+function sortEpisodes(episodes, seasonName) {
+  if (seasonName === 'extra') {
+    return episodes.toReversed()
+  }
+  return episodes
 }
 
 function getEpisodeFromList(episodes, epid) {
