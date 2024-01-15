@@ -1,8 +1,8 @@
 {
   "featured": {
     "season": "s2",
-    "id": "3",
-    "description": "The whid majors forgot to make an April Fool’s joke in the server this year, so the minors made one for them (3 months late).\n\nAll hell breaks loose in the Metaverse, as the minors bring you a special majorless dub of Yu-Gi-Oh!"
+    "id": "4",
+    "description": "\"I'm not fucking planning another episode of what have i dubbed.\"\n- Jacob Charles Mallory 2022\n\nAnd then he did anyway."
   },
   "seasons": {
     "s1": {
@@ -239,11 +239,35 @@
           "id": "3",
           "parts": [
             {
-              "members": "Part 1: Bee, Ben Hay, Chris, Gabe, Jackson, Jacob, Josh, Juan, Kelly, Kyle, Maska, Markwood, Sergei, Trent",
+              "members": "Bee, Ben Hay, Chris, Gabe, Jackson, Jacob, Josh, Juan, Kelly, Kyle, Maska, Markwood, Sergei, Trent",
               "timestamp": "2:43"
             }
           ],
           "description": "The whid majors forgot to make an April Fool’s joke in the server this year, so the minors made one for them (3 months late).\n\nAll hell breaks loose in the Metaverse, as the minors bring you a special majorless dub of Yu-Gi-Oh!"
+        },
+        {
+          "title": "4. Jacob's Zpecial Zauce",
+          "releaseDate": "1/14/2024",
+          "id": "4",
+          "parts": [
+            {
+              "members": "Jackson, Tristan, Josh, Juan, Gabe",
+              "timestamp": "2:16"
+            },
+            {
+              "members": "Ethan, Kyle, Markwood, Lyn, Kevin",
+              "timestamp": "6:28"
+            },
+            {
+              "members": "Trent, Wyatt, Ben HJay, James, Kian",
+              "timestamp": "13:14"
+            },
+            {
+              "members": "Jacob, Ben Rucker, Sergei, Chris, Maska",
+              "timestamp": "20:20"
+            }
+          ],
+          "description": "\"I'm not fucking planning another episode of what have i dubbed.\"\n- Jacob Charles Mallory 2022\n\nAnd then he did anyway."
         }
       ]
     },
