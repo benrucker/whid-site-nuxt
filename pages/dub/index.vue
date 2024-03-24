@@ -37,12 +37,12 @@
           <div
             class="btn-group mx-auto"
             role="group"
-            aria-label="Basic radio toggle button group"
+            aria-label="Change seasons"
           >
             <template v-for="season in Object.keys(seasons)">
               <input
                 :id="season"
-                :key="season"
+                :key="season.id"
                 v-model="activeSeason"
                 type="radio"
                 class="btn-check"
@@ -93,11 +93,12 @@ export default {
   data() {
     return {
       catalog: null,
-      activeSeason: 's1',
+      activeSeason: undefined,
       seasons: {},
       showAlert: false,
       featured: null,
       featuredDesc: '',
+      scrollPosition: 0,
     }
   },
   async fetch() {
@@ -107,7 +108,23 @@ export default {
     this.showAlert = this.$nuxt.context.query.error
     ;[this.featured, this.featuredDesc] = getFeaturedVideo(this.catalog)
   },
-  async mounted() {},
+  watch: {
+    activeSeason(newValue) {
+      localStorage.setItem('activeSeason', newValue)
+    },
+    scrollPosition(newValue) {
+      localStorage.setItem('scrollPosition', newValue)
+    },
+  },
+  mounted() {
+    this.activeSeason = localStorage.getItem('activeSeason') ?? 's1'
+    setTimeout(() => {
+      window.scrollTo({ top: localStorage.getItem('scrollPosition') })
+      setInterval(() => {
+        this.scrollPosition = window.scrollY
+      }, 50)
+    }, 100)
+  },
   methods: {
     title(episode) {
       return episode.title
