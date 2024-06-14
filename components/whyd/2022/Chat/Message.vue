@@ -64,51 +64,54 @@ export default {
   },
   mounted() {
     if (this.isFirstInGroup) {
-      this.resetInterpolation()
-      this.fadeAvatar()
+      this.resetInterpolation();
+      this.fadeAvatar();
     } else {
-      this.interpolateAvatar()
+      this.interpolateAvatar();
     }
   },
   methods: {
     interpolateAvatar() {
       setTimeout(() => {
-        const prevMessage = this.$el.previousElementSibling
-        const prevAvatar = prevMessage.querySelector('img.avatar')
+        const prevMessage = this.$el.previousElementSibling;
+        const prevAvatar = prevMessage.querySelector('img.avatar');
 
         if (prevAvatar == null) {
-          console.warn('bailing out of sliding avatar')
-          return
+          console.warn('bailing out of sliding avatar');
+          return;
         }
 
-        const prevHeight = prevMessage.offsetHeight / 2
-        const thisHeight = this.$el.offsetHeight / 2
+        const prevHeight = prevMessage.offsetHeight / 2;
+        const thisHeight = this.$el.offsetHeight / 2;
 
         document.documentElement.style.setProperty(
           '--avatar-slide-distance',
           `-${prevHeight + thisHeight + 6}px`,
-        )
-        this.$refs.avatar.classList.remove('hide')
-        this.$refs.avatar.classList.add('show')
-        prevAvatar.classList.remove('fade-in')
-        prevAvatar.classList.add('hide')
-      }, 100)
+        );
+        this.$refs.avatar.classList.remove('hide');
+        this.$refs.avatar.classList.add('show');
+        prevAvatar.classList.remove('fade-in');
+        prevAvatar.classList.add('hide');
+      }, 100);
     },
     fadeAvatar() {
-      this.$refs.avatar.classList.add('fade-in')
+      this.$refs.avatar.classList.add('fade-in');
       // this.$refs.avatar.classList.remove('hide')
     },
     resetInterpolation() {
-      document.documentElement.style.setProperty('--avatar-slide-distance', '0')
+      document.documentElement.style.setProperty(
+        '--avatar-slide-distance',
+        '0',
+      );
     },
     propogateEvent(event) {
-      this.$refs.component[event]()
+      this.$refs.component[event]();
     },
     handleGraphFixed() {
-      this.$emit('graphFixed')
+      this.$emit('graphFixed');
     },
   },
-}
+};
 </script>
 
 <style>

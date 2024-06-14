@@ -46,73 +46,73 @@ export default {
   data() {
     return {
       updated: 0,
-    }
+    };
   },
   computed: {
     stickers() {
-      const allStickers = this.stats.server['List of stickers by uses']
+      const allStickers = this.stats.server['List of stickers by uses'];
       const array = Object.entries(allStickers).map(([key, value]) => {
-        return { ...value, id: key }
-      })
+        return { ...value, id: key };
+      });
       array.sort((a, b) => {
-        return b.count - a.count
-      })
+        return b.count - a.count;
+      });
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      this.updated++
-      return array.slice(0, 10)
+      this.updated++;
+      return array.slice(0, 10);
     },
     maxUses() {
       return Object.values(this.stickers).reduce(
         (prev, { count }) => (count > prev ? count : prev),
         0,
-      )
+      );
     },
     minUses() {
       return Object.values(this.stickers).reduce(
         (prev, { count }) => (count < prev ? count : prev),
         10000000000, // very intelligent min-finding starting number
-      )
+      );
     },
   },
   watch: {
     updated(_) {
-      let index = 0
+      let index = 0;
       for (const stickerInfo of this.stickers) {
-        const stickerId = stickerInfo.id
-        const stickerElement = this.$refs[stickerId][0]
+        const stickerId = stickerInfo.id;
+        const stickerElement = this.$refs[stickerId][0];
         const stickerSize =
           ((stickerInfo.count - this.minUses) / (this.maxUses - this.minUses)) *
             150 +
-          25
+          25;
         const stickerXPositionPercent = Math.max(
           -5,
           Math.random() * 110 - stickerSize / 2,
-        )
+        );
         const stickerYPositionPercent = Math.min(
           100,
           Math.random() * 100 - stickerSize / 2,
-        )
+        );
 
-        stickerElement.style.height = `${stickerSize}px`
+        stickerElement.style.height = `${stickerSize}px`;
         stickerElement.style.transform = `scale(100) rotate(${
           Math.random() * 120 - 60
-        }deg)`
-        stickerElement.style.animationDelay = `${index * 0.25}s`
+        }deg)`;
+        stickerElement.style.animationDelay = `${index * 0.25}s`;
 
-        stickerElement.style.top = `${stickerYPositionPercent}%`
-        stickerElement.style.left = `${stickerXPositionPercent}%`
+        stickerElement.style.top = `${stickerYPositionPercent}%`;
+        stickerElement.style.left = `${stickerXPositionPercent}%`;
 
-        index += 1
+        index += 1;
       }
     },
   },
   methods: {
     handleClick(event) {
-      setTimeout(() => this.updated++)
-      event.preventDefault()
+      setTimeout(() => this.updated++);
+      event.preventDefault();
     },
   },
-}
+};
 </script>
 
 <style scoped>

@@ -11,17 +11,17 @@
 <script>
 export default {
   data() {
-    return {}
+    return {};
   },
   methods: {
     async init(urlPrefix) {
       const yearCounts = await fetch(`${urlPrefix}/msgPerYear.json`).then(
-        (res) => res.json()
-      )
-      const years = ['2016', '2017', '2018', '2019', '2020', '2021']
-      const msgCounts = Object.values(yearCounts)
-      this.$refs.yearBarChart.init(years, msgCounts)
-    }
-  }
-}
+        (res) => res.json(),
+      );
+      const years = ['2016', '2017', '2018', '2019', '2020', '2021'];
+      const msgCounts = Object.values(yearCounts);
+      this.$refs.yearBarChart.init(years, msgCounts);
+    },
+  },
+};
 </script>

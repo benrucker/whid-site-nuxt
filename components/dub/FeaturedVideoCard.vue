@@ -7,7 +7,7 @@
     <div class="row g-0">
       <div class="col-lg-6">
         <div class="ratio ratio-16x9">
-          <img :src="thumbnailLink" alt="..." style="max-width: inherit">
+          <img :src="thumbnailLink" alt="..." style="max-width: inherit" />
         </div>
       </div>
       <div class="col-lg-6">
@@ -26,26 +26,26 @@ export default {
   props: {
     videoLink: {
       type: String,
-      default: ''
+      default: '',
     },
     thumbnailLink: {
       type: String,
-      default: ''
+      default: '',
     },
     title: {
       type: String,
-      default: ''
+      default: '',
     },
     releaseDate: {
       type: String,
-      default: ''
+      default: '',
     },
     description: {
       type: String,
-      default: ''
-    }
-  }
-}
+      default: '',
+    },
+  },
+};
 </script>
 
 <style>

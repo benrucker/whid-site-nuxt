@@ -5,18 +5,22 @@
       :key="user.name"
       class="row close align-items-center"
     >
-      <span :class="'col-2 rank text-center fade fadein-' + (i + 5)">{{ i + 1 }}</span>
+      <span :class="'col-2 rank text-center fade fadein-' + (i + 5)">{{
+        i + 1
+      }}</span>
       <span :class="'col-6 name fade fadein-' + (i + 10)">{{ user }}</span>
       <span :class="'col-4 count text-center fade fadein-' + i">{{
         counts[i]
       }}</span>
     </div>
-    <br>
-    <br>
-    <br>
+    <br />
+    <br />
+    <br />
     <div class="row">
       <span class="col-8" />
-      <span class="col-4 unit text-muted text-center fade fadein-15">messages sent</span>
+      <span class="col-4 unit text-muted text-center fade fadein-15"
+        >messages sent</span
+      >
     </div>
   </div>
 </template>
@@ -26,27 +30,27 @@ export default {
   props: {
     urlPrefix: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
-  data () {
+  data() {
     return {
-      users: []
-    }
+      users: [],
+    };
   },
-  async mounted () {
-    const data = await fetch(`${this.urlPrefix}/mostMessages.json`).then(res =>
-      res.json()
-    )
-    this.users = Object.values(data.name).slice(0, 5)
+  async mounted() {
+    const data = await fetch(`${this.urlPrefix}/mostMessages.json`).then(
+      (res) => res.json(),
+    );
+    this.users = Object.values(data.name).slice(0, 5);
     this.counts = Object.values(data.totalMessages)
       .slice(0, 5)
-      .map(x => x.toLocaleString())
+      .map((x) => x.toLocaleString());
   },
   methods: {
-    async init (urlPrefix) {}
-  }
-}
+    async init(urlPrefix) {},
+  },
+};
 </script>
 
 <style scoped>
@@ -71,30 +75,64 @@ div {
 }
 
 .unit {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 
 .fade {
-  animation: 0.5s fadein 0.0s ease-in-out forwards;
+  animation: 0.5s fadein 0s ease-in-out forwards;
 }
 
-.fadein-0  {animation-delay: 0.0s;}
-.fadein-1  {animation-delay: 0.5s;}
-.fadein-2  {animation-delay: 1.0s;}
-.fadein-3  {animation-delay: 1.5s;}
-.fadein-4  {animation-delay: 2.0s;}
-.fadein-5  {animation-delay: 2.5s;}
-.fadein-6  {animation-delay: 3.0s;}
-.fadein-7  {animation-delay: 3.5s;}
-.fadein-8  {animation-delay: 4.0s;}
-.fadein-9  {animation-delay: 4.5s;}
-.fadein-10 {animation-delay: 5.0s;}
-.fadein-11 {animation-delay: 5.5s;}
-.fadein-12 {animation-delay: 6.0s;}
-.fadein-13 {animation-delay: 6.5s;}
-.fadein-14 {animation-delay: 7.0s;}
-.fadein-15 {animation-delay: 7.5s;}
-.fadein-16 {animation-delay: 8.0s;}
+.fadein-0 {
+  animation-delay: 0s;
+}
+.fadein-1 {
+  animation-delay: 0.5s;
+}
+.fadein-2 {
+  animation-delay: 1s;
+}
+.fadein-3 {
+  animation-delay: 1.5s;
+}
+.fadein-4 {
+  animation-delay: 2s;
+}
+.fadein-5 {
+  animation-delay: 2.5s;
+}
+.fadein-6 {
+  animation-delay: 3s;
+}
+.fadein-7 {
+  animation-delay: 3.5s;
+}
+.fadein-8 {
+  animation-delay: 4s;
+}
+.fadein-9 {
+  animation-delay: 4.5s;
+}
+.fadein-10 {
+  animation-delay: 5s;
+}
+.fadein-11 {
+  animation-delay: 5.5s;
+}
+.fadein-12 {
+  animation-delay: 6s;
+}
+.fadein-13 {
+  animation-delay: 6.5s;
+}
+.fadein-14 {
+  animation-delay: 7s;
+}
+.fadein-15 {
+  animation-delay: 7.5s;
+}
+.fadein-16 {
+  animation-delay: 8s;
+}
 
 @keyframes fadein {
   from {

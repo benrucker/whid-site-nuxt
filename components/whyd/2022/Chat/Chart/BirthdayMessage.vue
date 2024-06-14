@@ -16,7 +16,7 @@ export default {
   },
   computed: {
     messages() {
-      const wishes = this.stats.user.birthdayWishes
+      const wishes = this.stats.user.birthdayWishes;
       return Object.values(wishes)
         .filter((msg) => msg != null)
         .map((msg) => {
@@ -29,11 +29,11 @@ export default {
             reactions: msg.reactions,
             timestamp: msg.timestamp,
             url: msg.url,
-          }
-        })
+          };
+        });
     },
   },
-}
+};
 </script>
 
 <style scoped>

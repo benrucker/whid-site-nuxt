@@ -26,14 +26,14 @@ export default {
   props: {
     side: {
       type: String,
-      required: true
+      required: true,
     },
     isFirstInGroup: {
       type: Boolean,
-      required: true
-    }
-  }
-}
+      required: true,
+    },
+  },
+};
 </script>
 
 <style scoped>

@@ -19,22 +19,22 @@ export default {
   }),
   computed: {
     songsPlayed() {
-      return this.stats.server['# songs played'] ?? 500
+      return this.stats.server['# songs played'] ?? 500;
     },
   },
   mounted() {
     setTimeout(() => {
-      this.numberUpper = setInterval(this.numberUp, 4)
-    }, 1000)
+      this.numberUpper = setInterval(this.numberUp, 4);
+    }, 1000);
   },
   methods: {
     numberUp() {
       if (this.intermediateSongCount < this.songsPlayed) {
-        this.intermediateSongCount++
+        this.intermediateSongCount++;
       } else {
-        clearInterval(this.numberUpper)
+        clearInterval(this.numberUpper);
       }
     },
   },
-}
+};
 </script>

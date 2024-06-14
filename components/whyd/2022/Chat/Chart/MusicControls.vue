@@ -92,57 +92,57 @@ export default {
       seeking: false,
       playing: false,
       muted: false,
-    }
+    };
   },
   methods: {
     onPlay() {
-      this.playing = true
+      this.playing = true;
     },
     onPause() {
-      this.playing = false
+      this.playing = false;
     },
     onEnded() {
-      this.playing = false
+      this.playing = false;
     },
     onLoadedMetadata() {
       // null check guards against async component remounting
       // messing up the reference
-      if (!this.$refs.audio) return
-      this.$refs.seekSlider.max = Math.floor(this.$refs.audio.duration)
-      this.$refs.audio.volume = 0.1
+      if (!this.$refs.audio) return;
+      this.$refs.seekSlider.max = Math.floor(this.$refs.audio.duration);
+      this.$refs.audio.volume = 0.1;
     },
     onSeekSliderChange() {
-      if (!this.$refs.audio) return
-      this.$refs.audio.currentTime = this.$refs.seekSlider.value
+      if (!this.$refs.audio) return;
+      this.$refs.audio.currentTime = this.$refs.seekSlider.value;
     },
     onTimeUpdate() {
-      if (!this.$refs.audio) return
+      if (!this.$refs.audio) return;
       if (!this.seeking) {
-        this.$refs.seekSlider.value = Math.floor(this.$refs.audio.currentTime)
+        this.$refs.seekSlider.value = Math.floor(this.$refs.audio.currentTime);
       }
     },
     onSeekSliderMouseDown() {
-      this.seeking = true
+      this.seeking = true;
     },
     onSeekSliderMouseUp() {
-      this.seeking = false
+      this.seeking = false;
     },
     onPlayClick() {
-      this.$refs.audio.play()
+      this.$refs.audio.play();
     },
     onPauseClick() {
-      this.$refs.audio.pause()
+      this.$refs.audio.pause();
     },
     onMuteClick() {
-      this.muted = true
-      this.$refs.audio.muted = true
+      this.muted = true;
+      this.$refs.audio.muted = true;
     },
     onUnmuteClick() {
-      this.muted = false
-      this.$refs.audio.muted = false
+      this.muted = false;
+      this.$refs.audio.muted = false;
     },
   },
-}
+};
 </script>
 
 <style scoped>

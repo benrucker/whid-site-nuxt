@@ -17,28 +17,28 @@ export default {
   props: {
     urlPrefix: {
       type: String,
-      default: ''
+      default: '',
     },
     id: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   data() {
     return {
       emoji: '',
-      count: ''
-    }
+      count: '',
+    };
   },
   async mounted() {},
   methods: {
     async init(id, urlPrefix) {
       const data = await fetch(`${urlPrefix}/user/${id}/favEmoji.json`).then(
-        (res) => res.json()
-      )
-      this.count = data.countOfMostSentEmoji
-      this.emoji = data.mostSentEmoji
-    }
-  }
-}
+        (res) => res.json(),
+      );
+      this.count = data.countOfMostSentEmoji;
+      this.emoji = data.mostSentEmoji;
+    },
+  },
+};
 </script>

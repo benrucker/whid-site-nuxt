@@ -39,19 +39,19 @@ export default {
   },
   computed: {
     ids() {
-      const ranks = this.stats.server['Rank by Number of Messages per User']
-      return Object.keys(ranks).slice(0, 5)
+      const ranks = this.stats.server['Rank by Number of Messages per User'];
+      return Object.keys(ranks).slice(0, 5);
     },
     users() {
-      return this.ids.map((id) => this.stats.server.idsToNames[id])
+      return this.ids.map((id) => this.stats.server.idsToNames[id]);
     },
     counts() {
-      const ranks = this.stats.server['Rank by Number of Messages per User']
-      return this.ids.map((x) => ranks[x])
+      const ranks = this.stats.server['Rank by Number of Messages per User'];
+      return this.ids.map((x) => ranks[x]);
     },
   },
   methods: {},
-}
+};
 </script>
 
 <style>

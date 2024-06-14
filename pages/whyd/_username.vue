@@ -3,32 +3,32 @@
 </template>
 
 <script>
-import Vue from 'vue'
+import Vue from 'vue';
 
 export default {
   async asyncData({ params, isDev }) {
-    const baseUrl = isDev ? `http://localhost:3000` : 'https://whid.live'
+    const baseUrl = isDev ? `http://localhost:3000` : 'https://whid.live';
 
     const server = await fetch(`${baseUrl}/whyd/2022/data/server.json`).then(
       (r) => r.json(),
-    )
-    const username = server.urlNamesToNames[params.username]
-    const userId = server.namesToIds[username]
+    );
+    const username = server.urlNamesToNames[params.username];
+    const userId = server.namesToIds[username];
     const user = await fetch(
       `${baseUrl}/whyd/2022/data/${server.namesToIds[username]}.json`,
-    ).then((r) => r.json())
+    ).then((r) => r.json());
 
-    const stats = { server, user }
+    const stats = { server, user };
 
-    Vue.set(stats.user, 'name', username)
-    Vue.set(stats.user, 'id', userId)
+    Vue.set(stats.user, 'name', username);
+    Vue.set(stats.user, 'id', userId);
 
     return {
       urlName: params.username,
       username,
       userId,
       stats,
-    }
+    };
   },
   data() {
     return {
@@ -36,16 +36,16 @@ export default {
       stats: undefined,
       username: undefined,
       userId: undefined,
-    }
+    };
   },
   async fetch() {
-    this.messages = (await this.$nuxt.$content('messages').fetch()).messages
+    this.messages = (await this.$nuxt.$content('messages').fetch()).messages;
     this.messages.forEach((v, i) => {
-      v.id = i
+      v.id = i;
       if (v.author == null) {
-        v.author = this.messages[i - 1].author
+        v.author = this.messages[i - 1].author;
       }
-    })
+    });
   },
   head() {
     return {
@@ -79,13 +79,13 @@ export default {
               hid: name,
               property: name,
               content,
-            }
+            };
       }),
-    }
+    };
   },
   mounted() {
-    localStorage.setItem('username', this.username)
-    localStorage.setItem('userId', this.userId)
+    localStorage.setItem('username', this.username);
+    localStorage.setItem('userId', this.userId);
   },
-}
+};
 </script>

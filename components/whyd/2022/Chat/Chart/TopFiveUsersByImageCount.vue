@@ -47,10 +47,10 @@ export default {
   },
   computed: {
     imageInfoByUser() {
-      return this.stats.server['Top Five Users By Images Sent']
+      return this.stats.server['Top Five Users By Images Sent'];
     },
     userIds() {
-      return Array.from(Object.keys(this.imageInfoByUser))
+      return Array.from(Object.keys(this.imageInfoByUser));
     },
   },
   methods: {
@@ -60,10 +60,10 @@ export default {
           (Math.random() * this.imageInfoByUser[id].attachments.length) | 0
         ] ?? 'about:blank',
         '_blank',
-      )
+      );
     },
   },
-}
+};
 </script>
 
 <style scoped>

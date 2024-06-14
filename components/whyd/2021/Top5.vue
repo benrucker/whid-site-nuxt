@@ -30,11 +30,11 @@ export default {
     counts: [],
     unit: '',
     emojis: false,
-    urlPrefix: ''
+    urlPrefix: '',
   },
   async mounted() {},
-  methods: {}
-}
+  methods: {},
+};
 </script>
 
 <style scoped>

@@ -61,88 +61,89 @@ export default {
       showTyping: true,
       waitingToAutomaticallyAdvance: false,
       scrollTo: true,
-    }
+    };
   },
   computed: {
     typingIndicatorSide() {
       return this.getDefaultSide(
         this.messages[this.messagesPosition].author ??
           this.displayed[this.messagesPosition - 1].author,
-      )
+      );
     },
     typingIndicatorFirstInGroup() {
       return (
         this.messages[this.messagesPosition].author != null &&
         this.displayed[this.messagesPosition - 1]?.author !==
           this.messages[this.messagesPosition].author
-      )
+      );
     },
   },
   mounted() {
     setTimeout(() => {
-      if (this.debugShowAll) this.autoAdvance()
-    }, 50)
+      if (this.debugShowAll) this.autoAdvance();
+    }, 50);
   },
   methods: {
     onClick() {
       if (this.waitingToAutomaticallyAdvance) {
-        clearTimeout(this.autoAdvanceTimeout)
-        this.waitingToAutomaticallyAdvance = false
+        clearTimeout(this.autoAdvanceTimeout);
+        this.waitingToAutomaticallyAdvance = false;
       } else if (this.advancingIsDisabled) {
-        return
+        return;
       }
-      this.advance()
+      this.advance();
     },
     autoAdvance() {
-      this.advance()
+      this.advance();
       if (this.areMoreMessagesRemaining() && this.debugShowAllLimit-- > 0) {
-        setTimeout(this.autoAdvance)
+        setTimeout(this.autoAdvance);
       } else {
-        setTimeout(this.scrollToLast, 2000)
+        setTimeout(this.scrollToLast, 2000);
       }
     },
     advance() {
-      this.showHint = false
-      this.showTyping = false
+      this.showHint = false;
+      this.showTyping = false;
 
       if (this.areMoreMessagesRemaining()) {
-        const messageInfo = this.messages[this.messagesPosition++]
+        const messageInfo = this.messages[this.messagesPosition++];
         if (messageInfo.function) {
           messageInfo.content = this.runFunc(
             messageInfo.function,
             messageInfo.content,
-          )
+          );
         }
         messageInfo.author =
-          messageInfo.author ?? this.displayed[this.displayed.length - 1].author
+          messageInfo.author ??
+          this.displayed[this.displayed.length - 1].author;
         messageInfo.side =
-          messageInfo.side ?? this.getDefaultSide(messageInfo.author)
+          messageInfo.side ?? this.getDefaultSide(messageInfo.author);
         messageInfo.color =
-          messageInfo.color ?? messageInfo.author.toLowerCase()
-        this.displayed.push(messageInfo)
+          messageInfo.color ?? messageInfo.author.toLowerCase();
+        this.displayed.push(messageInfo);
 
         if (this.scrollTo) {
-          setTimeout(this.scrollToLast, 50)
+          setTimeout(this.scrollToLast, 50);
         }
       }
 
       if (this.areMoreMessagesRemaining()) {
         setTimeout(() => {
-          this.showHint = true
-        }, 100)
+          this.showHint = true;
+        }, 100);
         setTimeout(() => {
-          this.showTyping = true
-        }, 100)
+          this.showTyping = true;
+        }, 100);
       }
     },
     areMoreMessagesRemaining() {
-      return this.messagesPosition < this.messages.length
+      return this.messagesPosition < this.messages.length;
     },
     scrollToLast() {
       this.$refs.afterLastMessage.scrollIntoView({
         behavior: 'smooth',
         block: 'center',
-      })
+      });
     },
     getDefaultSide(author) {
       const sides = {
@@ -154,64 +155,64 @@ export default {
         NotSoBot: 'right',
         Perlymolt: 'left',
         SecuityBot: 'left',
-      }
-      return sides[author]
+      };
+      return sides[author];
     },
     disableScrollTo() {
-      this.scrollTo = false
+      this.scrollTo = false;
     },
     disableAdvancing() {
-      if (!this.debugShowAll) this.advancingIsDisabled = true
+      if (!this.debugShowAll) this.advancingIsDisabled = true;
     },
     enableAdvancing() {
-      if (!this.debugShowAll) this.advancingIsDisabled = false
+      if (!this.debugShowAll) this.advancingIsDisabled = false;
     },
     runFunc(name, content) {
-      const func = this[name]
+      const func = this[name];
       if (typeof func !== 'function') {
-        return `Function ${name} not found`
+        return `Function ${name} not found`;
       }
-      return func(content)
+      return func(content);
     },
     testFunctionText() {
-      return 'text!'
+      return 'text!';
     },
     next(content) {
-      this.waitingToAutomaticallyAdvance = true
-      this.autoAdvanceTimeout = setTimeout(this.advance, 500)
-      return content
+      this.waitingToAutomaticallyAdvance = true;
+      this.autoAdvanceTimeout = setTimeout(this.advance, 500);
+      return content;
     },
     leagueOrApex(content) {
-      const roles = this.stats.user?.manual?.roles ?? []
+      const roles = this.stats.user?.manual?.roles ?? [];
       if (roles.includes('leg') && roles.includes('gaysex legends')) {
-        return content?.both
+        return content?.both;
       } else if (roles.includes('leg')) {
-        return content?.league
+        return content?.league;
       } else if (roles.includes('gaysex legends')) {
-        return content?.apex
+        return content?.apex;
       } else {
-        return content?.neither
+        return content?.neither;
       }
     },
     fixMostReactedToImages(content) {
       // the [0] is needed for some reason
-      this.disableAdvancing()
-      this.$refs.ChartMostReactedToImages[0].propogateEvent('fix')
-      return content
+      this.disableAdvancing();
+      this.$refs.ChartMostReactedToImages[0].propogateEvent('fix');
+      return content;
     },
     fixReactionsGraph(content) {
-      this.disableAdvancing()
-      this.$refs.ChartMostUsedReactions[0].propogateEvent('fix')
-      return content
+      this.disableAdvancing();
+      this.$refs.ChartMostUsedReactions[0].propogateEvent('fix');
+      return content;
     },
     handleGraphFixed() {
-      this.enableAdvancing()
+      this.enableAdvancing();
     },
     chooseRandomIp(content) {
-      return this.chooseRandomOption(content.ips) + ' ' + content.suffix
+      return this.chooseRandomOption(content.ips) + ' ' + content.suffix;
     },
     chooseRandomOption(content) {
-      return content[Math.floor(Math.random() * content.length)]
+      return content[Math.floor(Math.random() * content.length)];
     },
     chooseBirthdayMessage(content) {
       if (this.stats.user.birthdayWishes != null) {
@@ -220,90 +221,90 @@ export default {
           author: 'JermaBot',
           type: 'ChartBirthdayMessage',
           hideBubble: true,
-        })
-        return content[0]
+        });
+        return content[0];
       }
-      return content[1]
+      return content[1];
     },
     chooseRoleFirstMessage(content) {
-      let choices
-      let output
+      let choices;
+      let output;
       if (
         this.stats.user.secret_clubs != null &&
         JSON.parse(this.stats.user.secret_clubs).length > 0
       ) {
-        choices = JSON.parse(this.stats.user.secret_clubs)
-        output = content[0]
+        choices = JSON.parse(this.stats.user.secret_clubs);
+        output = content[0];
       } else if (
         this.stats.user.rare_roles != null &&
         JSON.parse(this.stats.user.rare_roles).length > 0
       ) {
-        choices = JSON.parse(this.stats.user.rare_roles)
-        output = content[1]
+        choices = JSON.parse(this.stats.user.rare_roles);
+        output = content[1];
       } else if (
         this.stats.user.less_rare_roles != null &&
         JSON.parse(this.stats.user.less_rare_roles).length > 0
       ) {
-        choices = JSON.parse(this.stats.user.less_rare_roles)
-        output = content[1]
+        choices = JSON.parse(this.stats.user.less_rare_roles);
+        output = content[1];
       } else if (this.stats.user.least_rare_role) {
-        choices = [this.stats.user.least_rare_role]
-        output = content[2]
+        choices = [this.stats.user.least_rare_role];
+        output = content[2];
       } else {
-        output = content[3]
-        return output
+        output = content[3];
+        return output;
       }
       // eslint-disable-next-line vue/no-mutating-props
-      this.stats.user.featuredRole = this.chooseRandomOption(choices)
+      this.stats.user.featuredRole = this.chooseRandomOption(choices);
       // eslint-disable-next-line vue/no-mutating-props
       this.stats.user.featuredRoleCount =
-        this.stats.server.roleCounts[this.stats.user.featuredRole]
-      return output
+        this.stats.server.roleCounts[this.stats.user.featuredRole];
+      return output;
     },
     chooseRoleSecondMessage(content) {
       if (
         this.stats.user.secret_clubs != null &&
         JSON.parse(this.stats.user.secret_clubs).length > 0
       ) {
-        return content[0]
+        return content[0];
       } else if (
         this.stats.user.rare_roles != null &&
         JSON.parse(this.stats.user.rare_roles).length > 0
       ) {
-        return content[1]
+        return content[1];
       } else if (
         this.stats.user.less_rare_roles != null &&
         JSON.parse(this.stats.user.less_rare_roles).length > 0
       ) {
-        return content[2]
+        return content[2];
       } else if (this.stats.user.least_rare_role) {
-        return content[3]
+        return content[3];
       } else {
-        return content[4]
+        return content[4];
       }
     },
     beginEndAnimation() {
-      this.debugShowAll = false
-      this.disableAdvancing()
-      localStorage.setItem('shouldShowTerminalAnimation', 'true')
+      this.debugShowAll = false;
+      this.disableAdvancing();
+      localStorage.setItem('shouldShowTerminalAnimation', 'true');
       setTimeout(() => {
-        this.$refs.theOneAboveConversation.classList.add('breaking')
-        this.$refs.conversation.classList.add('breaking')
+        this.$refs.theOneAboveConversation.classList.add('breaking');
+        this.$refs.conversation.classList.add('breaking');
         setTimeout(() => {
-          setInterval(this.advance, 1500)
-        }, 1500)
-      }, 1000)
-      return ''
+          setInterval(this.advance, 1500);
+        }, 1500);
+      }, 1000);
+      return '';
     },
     lastMessageSent(content) {
       setTimeout(async () => {
-        await this.$router.push(`/whyd/terminal`)
-      }, 5000)
+        await this.$router.push(`/whyd/terminal`);
+      }, 5000);
 
-      return content
+      return content;
     },
   },
-}
+};
 </script>
 
 <style>

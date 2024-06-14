@@ -19,35 +19,35 @@ export default {
   props: {
     urlPrefix: {
       type: String,
-      default: ''
+      default: '',
     },
     id: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   data() {
     return {
       content: '',
-      attachments: []
-    }
+      attachments: [],
+    };
   },
   computed: {},
   async mounted() {},
   methods: {
     async init(id, urlPrefix) {
       const firstMsg = await fetch(
-        `${urlPrefix}/user/${id}/firstMessage.json`
+        `${urlPrefix}/user/${id}/firstMessage.json`,
       ).then((res) => {
-        return res.json()
-      })
-      console.log(firstMsg)
-      this.content = firstMsg.content
-      this.attachments = firstMsg.attachments
-      console.log(this.attachments)
-    }
-  }
-}
+        return res.json();
+      });
+      console.log(firstMsg);
+      this.content = firstMsg.content;
+      this.attachments = firstMsg.attachments;
+      console.log(this.attachments);
+    },
+  },
+};
 </script>
 
 <style scoped>

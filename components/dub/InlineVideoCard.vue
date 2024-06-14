@@ -36,28 +36,28 @@ export default {
   props: {
     videoLink: {
       type: String,
-      default: ''
+      default: '',
     },
     videoPlayerLink: {
       type: String,
-      default: ''
+      default: '',
     },
     thumbnailLink: {
       type: String,
-      default: ''
+      default: '',
     },
     title: {
       type: String,
-      default: ''
+      default: '',
     },
     releaseDate: {
       type: String,
-      default: ''
+      default: '',
     },
     description: {
       type: String,
-      default: ''
-    }
-  }
-}
+      default: '',
+    },
+  },
+};
 </script>

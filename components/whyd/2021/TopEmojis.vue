@@ -15,31 +15,31 @@ export default {
   props: {
     urlPrefix: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   data() {
     return {
       users: [],
-      counts: []
-    }
+      counts: [],
+    };
   },
   async mounted() {
     const data = await fetch(`${this.urlPrefix}/serverEmojis.json`).then(
-      (res) => res.json()
-    )
-    data["(':shred:',)"] += data["(':trueshred:',)"]
-    delete data["(':trueshred:',)"]
+      (res) => res.json(),
+    );
+    data["(':shred:',)"] += data["(':trueshred:',)"];
+    delete data["(':trueshred:',)"];
 
-    const sorted = []
+    const sorted = [];
     for (const emoji in data) {
-      sorted.push([emoji, data[emoji]])
+      sorted.push([emoji, data[emoji]]);
     }
-    sorted.sort((a, b) => b[1] - a[1])
+    sorted.sort((a, b) => b[1] - a[1]);
 
-    this.users = sorted.slice(0, 5).map((x) => x[0].replace(/\(|\)|,|\'/g, ''))
-    this.counts = sorted.slice(0, 5).map((x) => x[1].toLocaleString())
+    this.users = sorted.slice(0, 5).map((x) => x[0].replace(/\(|\)|,|\'/g, ''));
+    this.counts = sorted.slice(0, 5).map((x) => x[1].toLocaleString());
   },
-  methods: {}
-}
+  methods: {},
+};
 </script>

@@ -12,8 +12,8 @@ export default {
   },
   computed: {
     message() {
-      if (this.stats == null) return {}
-      const rawMessage = this.stats.server['Most Upvoted Post']
+      if (this.stats == null) return {};
+      const rawMessage = this.stats.server['Most Upvoted Post'];
       const val = {
         authorName: rawMessage?.author.name,
         authorAvatar: this.stats.server?.idsToAvatars[rawMessage?.author.id],
@@ -25,13 +25,13 @@ export default {
         reactions: rawMessage?.reactions,
         timestamp: rawMessage?.timestamp,
         url: rawMessage?.url,
-      }
-      return val
+      };
+      return val;
     },
   },
   mounted() {},
   methods: {},
-}
+};
 </script>
 
 <style scoped></style>

@@ -19,12 +19,12 @@
 <script>
 export default {
   props: {
-    urlPrefix: ''
+    urlPrefix: '',
   },
   data() {
     return {
-      count: 0
-    }
+      count: 0,
+    };
   },
   async mounted() {},
   methods: {
@@ -32,17 +32,17 @@ export default {
       this.count = await fetch(`${urlPrefix}/user/${id}/goodMorning.json`).then(
         (res) => {
           if (res.status === 404) {
-            return 0
+            return 0;
           }
-          return res.json()
-        }
-      )
+          return res.json();
+        },
+      );
       if (this.count) {
-        this.count = this.count['0']
+        this.count = this.count['0'];
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped>

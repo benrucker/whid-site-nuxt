@@ -21,27 +21,27 @@ export default {
     return {
       title: '',
       preposition: '',
-      timeRange: ''
-    }
+      timeRange: '',
+    };
   },
   async mounted() {},
   methods: {
     async init(id, urlPrefix) {
       const data = await fetch(`${urlPrefix}/user/${id}/sign.json`).then(
-        (res) => res.json()
-      )
+        (res) => res.json(),
+      );
       this.title = `${/^[AEIOU]/.test(data.maxSign) ? 'an' : 'a'} ${
         data.maxSign
-      }`
-      delete data.maxSign
+      }`;
+      delete data.maxSign;
 
-      const signs = Object.keys(data)
-      const counts = Object.values(data)
+      const signs = Object.keys(data);
+      const counts = Object.values(data);
 
-      this.$refs.astroChart.init(signs, counts)
-    }
-  }
-}
+      this.$refs.astroChart.init(signs, counts);
+    },
+  },
+};
 </script>
 
 <style scoped></style>

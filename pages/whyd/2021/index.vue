@@ -36,20 +36,20 @@ export default {
   data() {
     return {
       names: {},
-      name: ''
-    }
+      name: '',
+    };
   },
   async mounted() {
     this.names = await fetch('/whyd/2021/data/nameToName.json').then((res) =>
-      res.json()
-    )
+      res.json(),
+    );
   },
   methods: {
     inputButtonPressed() {
       if (Object.keys(this.names).includes(this.name)) {
-        this.$router.push(`/whyd/2021/${this.names[this.name]}`)
+        this.$router.push(`/whyd/2021/${this.names[this.name]}`);
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>

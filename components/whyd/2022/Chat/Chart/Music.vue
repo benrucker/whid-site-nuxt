@@ -45,26 +45,26 @@ export default {
     return {
       rootRef: null,
       bgRef: null,
-    }
+    };
   },
   mounted() {
     this.$nextTick(() => {
-      this.rootRef = this.$refs.root
-      this.bgRef = this.$refs.bg
-    })
+      this.rootRef = this.$refs.root;
+      this.bgRef = this.$refs.bg;
+    });
   },
   methods: {
     onClick(event) {
-      event.preventDefault()
+      event.preventDefault();
     },
     handleTransformPanel(event) {
-      this.bgRef.handleTransformPanel(event)
+      this.bgRef.handleTransformPanel(event);
     },
     handleMouseEnter() {
-      this.bgRef.handleMouseEnter()
+      this.bgRef.handleMouseEnter();
     },
   },
-}
+};
 </script>
 
 <style scoped>

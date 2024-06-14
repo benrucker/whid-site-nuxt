@@ -62,86 +62,86 @@ export default {
         mostPopularRoleCount: () =>
           Object.values(this.stats.server.mostPopularRole)[0],
         userRareRole: () => {
-          return '@' + this.stats.user.featuredRole
+          return '@' + this.stats.user.featuredRole;
         },
         userPeopleWithRareRole: () => {
-          return this.stats.user.featuredRoleCount ?? 'uhhh idk'
+          return this.stats.user.featuredRoleCount ?? 'uhhh idk';
         },
       },
       chosenRole: '',
-    }
+    };
   },
   mounted() {
     this.parsedContent = this.content.split(/(\{+.+?}+)/g).map((token) => {
       if (token.startsWith('{{{') && token.endsWith('}}}')) {
-        return parseComponent(token)
+        return parseComponent(token);
       } else if (token.startsWith('{{') && token.endsWith('}}')) {
-        return parseValue(token, this.values)
+        return parseValue(token, this.values);
       } else if (token.startsWith('{') && token.endsWith('}')) {
         if (token.startsWith('{:')) {
-          return parseEmoji(token)
+          return parseEmoji(token);
         } else {
-          return parseStyling(token)
+          return parseStyling(token);
         }
       } else {
-        return { text: token }
+        return { text: token };
       }
-    })
+    });
   },
   methods: {
     idToName(id) {
-      return this.stats.server.idsToNames[id]
+      return this.stats.server.idsToNames[id];
     },
   },
-}
+};
 
 function parseComponent(data) {
-  const nameAndStyle = data.slice(3, -3)
-  const [valueName, styles] = nameAndStyle.split(' | ')
-  return { component: valueName, styles }
+  const nameAndStyle = data.slice(3, -3);
+  const [valueName, styles] = nameAndStyle.split(' | ');
+  return { component: valueName, styles };
 }
 
 function parseValue(data, values) {
-  const nameAndStyle = data.slice(2, -2)
-  const [valueName, styles] = nameAndStyle.split(' | ')
-  return { text: getValue(values, valueName), styles }
+  const nameAndStyle = data.slice(2, -2);
+  const [valueName, styles] = nameAndStyle.split(' | ');
+  return { text: getValue(values, valueName), styles };
 }
 
 function getValue(values, valueName) {
   if (valueName in values) {
-    const value = values[valueName]()
+    const value = values[valueName]();
     if (typeof value === 'number') {
-      return value.toLocaleString()
+      return value.toLocaleString();
       // eslint-disable-next-line eqeqeq
     } else if (Number.parseInt(value) == value) {
-      return Number.parseInt(value).toLocaleString()
+      return Number.parseInt(value).toLocaleString();
       // eslint-disable-next-line eqeqeq
     } else if (Number.parseFloat(value) == value) {
-      return Number.parseFloat(value).toLocaleString()
+      return Number.parseFloat(value).toLocaleString();
     } else {
-      return value
+      return value;
     }
   } else {
-    console.warn(`Value ${valueName} not found`)
-    return valueName
+    console.warn(`Value ${valueName} not found`);
+    return valueName;
   }
 }
 
 function parseStyling(data) {
-  const textAndStyle = data.slice(1, -1)
-  const [text, styles] = textAndStyle.split(' | ')
-  return { text, styles }
+  const textAndStyle = data.slice(1, -1);
+  const [text, styles] = textAndStyle.split(' | ');
+  return { text, styles };
 }
 
 function parseEmoji(data) {
-  const { text, styles } = parseStyling(data)
-  const emojiName = text.slice(1, -1)
-  const extension = emojiName.includes('.') ? '' : '.png'
+  const { text, styles } = parseStyling(data);
+  const emojiName = text.slice(1, -1);
+  const extension = emojiName.includes('.') ? '' : '.png';
   return {
     src: `/whyd/2022/data/emojis/${emojiName}${extension}`,
     emoji: true,
     styles,
-  }
+  };
 }
 </script>
 

@@ -33,45 +33,45 @@ export default {
     return {
       title: '',
       exists: false,
-      count: 0
-    }
+      count: 0,
+    };
   },
   async mounted() {},
   methods: {
     async init(id, urlPrefix) {
       const data = await fetch(
-        `${urlPrefix}/user/${id}/trailblazing.json`
+        `${urlPrefix}/user/${id}/trailblazing.json`,
       ).then((res) => {
         if (res.status === 404) {
-          this.exists = false
-          return false
+          this.exists = false;
+          return false;
         }
-        this.exists = true
-        return res.json()
-      })
+        this.exists = true;
+        return res.json();
+      });
       if (!data) {
-        return false
+        return false;
       }
 
-      this.count = data.count
-      const rank = data.rank
+      this.count = data.count;
+      const rank = data.rank;
 
       const serverData = await fetch(`${urlPrefix}/trailblazeTimes.json`).then(
-        (res) => res.json()
-      )
+        (res) => res.json(),
+      );
 
       const labels = Object.keys(serverData).map((key) => {
-        const high = key.split(', ')[1].split('.')[0]
-        let low = key.split(', ')[0].split('.')[0].split('(')[1]
-        low = low.startsWith('-') ? 0 : low
-        return `${low}-${high}`
-      })
-      const counts = Object.values(serverData)
+        const high = key.split(', ')[1].split('.')[0];
+        let low = key.split(', ')[0].split('.')[0].split('(')[1];
+        low = low.startsWith('-') ? 0 : low;
+        return `${low}-${high}`;
+      });
+      const counts = Object.values(serverData);
 
-      this.$refs.hist.init(labels, counts)
-    }
-  }
-}
+      this.$refs.hist.init(labels, counts);
+    },
+  },
+};
 </script>
 
 <style scoped>

@@ -2,7 +2,7 @@
   <a :href="videoLink" class="text-reset text-decoration-none">
     <div class="card">
       <div class="ratio ratio-16x9">
-        <img :src="thumbnailLink" class="card-img-top" :alt="title">
+        <img :src="thumbnailLink" class="card-img-top" :alt="title" />
       </div>
       <div id="gallery-card" class="card-body">
         <h5 class="card-title text-truncate pb-1 mb-0">
@@ -21,20 +21,20 @@ export default {
   props: {
     videoLink: {
       type: String,
-      default: ''
+      default: '',
     },
     thumbnailLink: {
       type: String,
-      default: ''
+      default: '',
     },
     title: {
       type: String,
-      default: ''
+      default: '',
     },
     releaseDate: {
       type: String,
-      default: ''
-    }
-  }
-}
+      default: '',
+    },
+  },
+};
 </script>

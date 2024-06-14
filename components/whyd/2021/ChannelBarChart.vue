@@ -11,13 +11,13 @@
 <script>
 export default {
   data() {
-    return {}
+    return {};
   },
   methods: {
     async init(urlPrefix) {
       const channelCounts = await fetch(
-        `${urlPrefix}/messagesByChannel.json`
-      ).then((res) => res.json())
+        `${urlPrefix}/messagesByChannel.json`,
+      ).then((res) => res.json());
       const channels = [
         'dont',
         'japan',
@@ -37,12 +37,12 @@ export default {
         'politics',
         'spam',
         'the-real-us',
-        'lowlights'
-      ]
-      const axis = channels.reverse()
-      const msgCounts = channels.map((x) => channelCounts[x])
-      this.$refs.channelBarChart.init(axis, msgCounts)
-    }
-  }
-}
+        'lowlights',
+      ];
+      const axis = channels.reverse();
+      const msgCounts = channels.map((x) => channelCounts[x]);
+      this.$refs.channelBarChart.init(axis, msgCounts);
+    },
+  },
+};
 </script>

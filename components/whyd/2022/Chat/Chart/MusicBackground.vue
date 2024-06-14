@@ -9,8 +9,8 @@
 </template>
 
 <script>
-const lerpEnter = 0.2
-const lerpWithin = 1
+const lerpEnter = 0.2;
+const lerpWithin = 1;
 
 export default {
   props: {
@@ -35,32 +35,32 @@ export default {
       dotsCurrentY: 0,
       dotsRaf: null,
       lerpFraction: lerpEnter,
-    }
+    };
   },
   mounted() {
     this.$nextTick(() => {
-      this.rootRef = this.$refs.root
-      this.bgRef = this.$refs.bg
-      this.dotsRef = this.$refs.dots
-    })
+      this.rootRef = this.$refs.root;
+      this.bgRef = this.$refs.bg;
+      this.dotsRef = this.$refs.dots;
+    });
   },
   methods: {
     moveImg(x, y) {
       if (this.bgRaf == null) {
-        this.bgRaf = window.requestAnimationFrame(this.updateImg)
+        this.bgRaf = window.requestAnimationFrame(this.updateImg);
       }
-      this.bgTargetX = x
-      this.bgTargetY = y
+      this.bgTargetX = x;
+      this.bgTargetY = y;
     },
     moveDots(x, y) {
       if (this.dotsRaf == null) {
-        this.dotsRaf = window.requestAnimationFrame(this.updateDots)
+        this.dotsRaf = window.requestAnimationFrame(this.updateDots);
       }
-      this.dotsTargetX = x
-      this.dotsTargetY = y
+      this.dotsTargetX = x;
+      this.dotsTargetY = y;
     },
     updateImg() {
-      ;[this.bgCurrentX, this.bgCurrentY, this.bgRaf] = this.updateThing(
+      [this.bgCurrentX, this.bgCurrentY, this.bgRaf] = this.updateThing(
         this.bgCurrentX,
         this.bgCurrentY,
         this.bgTargetX,
@@ -68,10 +68,10 @@ export default {
         this.rafBg,
         this.updateImg,
         this.bgRef,
-      )
+      );
     },
     updateDots() {
-      ;[this.dotsCurrentX, this.dotsCurrentY, this.dotsRaf] = this.updateThing(
+      [this.dotsCurrentX, this.dotsCurrentY, this.dotsRaf] = this.updateThing(
         this.dotsCurrentX,
         this.dotsCurrentY,
         this.dotsTargetX,
@@ -79,47 +79,48 @@ export default {
         this.rafDots,
         this.updateDots,
         this.dotsRef,
-      )
+      );
     },
     updateThing(currentX, currentY, targetX, targetY, raf, method, ref) {
-      currentX = (targetX - currentX) * this.lerpFraction + currentX
-      currentY = (targetY - currentY) * this.lerpFraction + currentY
+      currentX = (targetX - currentX) * this.lerpFraction + currentX;
+      currentY = (targetY - currentY) * this.lerpFraction + currentY;
 
       ref.style.transform =
-        'translate(' + currentX * 10 + 'px, ' + currentY * 10 + 'px)'
+        'translate(' + currentX * 10 + 'px, ' + currentY * 10 + 'px)';
 
       if (
         Math.abs(currentX - targetX) > 0.01 ||
         Math.abs(currentY - targetY) > 0.01
       ) {
-        raf = window.requestAnimationFrame(method)
+        raf = window.requestAnimationFrame(method);
       } else {
-        this.lerpFraction = lerpWithin
-        raf = null
+        this.lerpFraction = lerpWithin;
+        raf = null;
       }
 
-      return [currentX, currentY, raf]
+      return [currentX, currentY, raf];
     },
     handleTransformPanel(event) {
-      const mouseX = event.clientX
-      const mouseY = event.clientY
+      const mouseX = event.clientX;
+      const mouseY = event.clientY;
 
-      const rootRect = this.rootRef.getBoundingClientRect()
+      const rootRect = this.rootRef.getBoundingClientRect();
 
-      const rootCenterX = rootRect.left + rootRect.width / 2
-      const rootCenterY = rootRect.top + rootRect.height / 2
+      const rootCenterX = rootRect.left + rootRect.width / 2;
+      const rootCenterY = rootRect.top + rootRect.height / 2;
 
-      const percentX = -(mouseX - rootCenterX) / (this.rootRef.clientWidth / 2)
-      const percentY = -(mouseY - rootCenterY) / (this.rootRef.clientHeight / 2)
+      const percentX = -(mouseX - rootCenterX) / (this.rootRef.clientWidth / 2);
+      const percentY =
+        -(mouseY - rootCenterY) / (this.rootRef.clientHeight / 2);
 
-      this.moveImg(percentX, percentY)
-      this.moveDots(percentX / 3, percentY / 3)
+      this.moveImg(percentX, percentY);
+      this.moveDots(percentX / 3, percentY / 3);
     },
     handleMouseEnter() {
-      this.lerpFraction = lerpEnter
+      this.lerpFraction = lerpEnter;
     },
   },
-}
+};
 </script>
 
 <style scoped>

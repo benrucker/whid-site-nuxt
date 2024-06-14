@@ -21,38 +21,38 @@ export default {
     return {
       title: '',
       count: 0,
-      percentage: 0
-    }
+      percentage: 0,
+    };
   },
   async mounted() {},
   methods: {
     async init(id, urlPrefix) {
       const data = await fetch(
-        `${urlPrefix}/user/${id}/editProportion.json`
-      ).then((res) => res.json())
-      const totalMessages = data.total
-      const editedMessages = data.edited
-      const editRatio = data.editRatio
-      const uneditedMessages = totalMessages - editedMessages
+        `${urlPrefix}/user/${id}/editProportion.json`,
+      ).then((res) => res.json());
+      const totalMessages = data.total;
+      const editedMessages = data.edited;
+      const editRatio = data.editRatio;
+      const uneditedMessages = totalMessages - editedMessages;
 
-      this.percentage = (editRatio * 100).toFixed(2)
+      this.percentage = (editRatio * 100).toFixed(2);
       this.title =
         editRatio > 0.03
           ? "you're a bit more indecisive than everyone else"
-          : 'you say what you mean, and mean what you say'
+          : 'you say what you mean, and mean what you say';
 
-      const colors = ['#f3df4c', '#4c60f3']
+      const colors = ['#f3df4c', '#4c60f3'];
 
       this.$refs.pie.init(
         [
           { name: 'Unedited', value: uneditedMessages },
-          { name: 'Edited', value: editedMessages }
+          { name: 'Edited', value: editedMessages },
         ],
-        colors
-      )
-    }
-  }
-}
+        colors,
+      );
+    },
+  },
+};
 </script>
 
 <style scoped>

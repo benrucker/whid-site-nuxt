@@ -3,18 +3,18 @@
 </template>
 
 <script>
-import { use } from 'echarts/core'
-import { CanvasRenderer } from 'echarts/renderers'
-import { PieChart } from 'echarts/charts'
+import { use } from 'echarts/core';
+import { CanvasRenderer } from 'echarts/renderers';
+import { PieChart } from 'echarts/charts';
 import {
   TitleComponent,
   TooltipComponent,
   LegendComponent,
   ToolboxComponent,
   GridComponent,
-  VisualMapComponent
-} from 'echarts/components'
-import VChart, { THEME_KEY } from 'vue-echarts'
+  VisualMapComponent,
+} from 'echarts/components';
+import VChart, { THEME_KEY } from 'vue-echarts';
 
 use([
   CanvasRenderer,
@@ -24,40 +24,41 @@ use([
   LegendComponent,
   ToolboxComponent,
   GridComponent,
-  VisualMapComponent
-])
+  VisualMapComponent,
+]);
 
 export default {
   name: 'HelloWorld',
   components: {
-    VChart
+    VChart,
   },
   provide: {
-    [THEME_KEY]: 'light'
+    [THEME_KEY]: 'light',
   },
   props: {
     title: '',
     bgColor: '',
-    colors: []
+    colors: [],
   },
-  data () {
+  data() {
     return {
       option: {},
       lines: [],
-      labels: []
-    }
+      labels: [],
+    };
   },
-  mounted () {
+  mounted() {
     window.onresize = () => {
-      this.$refs.chart.resize()
-    }
+      this.$refs.chart.resize();
+    };
   },
   methods: {
-    init (data, colors) {
+    init(data, colors) {
       this.option = {
         tooltip: {
           trigger: 'item',
-          formatter: params => params.value.toLocaleString() + ' (' + params.percent + '%)'
+          formatter: (params) =>
+            params.value.toLocaleString() + ' (' + params.percent + '%)',
         },
         series: [
           {
@@ -71,34 +72,34 @@ export default {
             color: colors,
             labelLine: {
               lineStyle: {
-                color: 'rgba(0, 0, 0, 0.3)'
+                color: 'rgba(0, 0, 0, 0.3)',
               },
               smooth: 0.2,
               length: 10,
-              length2: 20
+              length2: 20,
             },
             itemStyle: {
               shadowBlur: 50,
-              shadowColor: 'rgba(0, 0, 0, 0.1)'
+              shadowColor: 'rgba(0, 0, 0, 0.1)',
             },
             animationType: 'scale',
             animationEasing: 'elasticOut',
-            animationDelay (idx) {
-              return Math.random() * 200 * idx
-            }
-          }
+            animationDelay(idx) {
+              return Math.random() * 200 * idx;
+            },
+          },
         ],
         color: colors,
         backgroundColor: this.bgColor,
         textStyle: {
           color: 'black',
           fontSize: 24,
-          fontWeight: 'bold'
-        }
-      }
-    }
-  }
-}
+          fontWeight: 'bold',
+        },
+      };
+    },
+  },
+};
 </script>
 
 <style scoped>

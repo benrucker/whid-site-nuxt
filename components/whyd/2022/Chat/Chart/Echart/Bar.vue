@@ -3,17 +3,17 @@
 </template>
 
 <script>
-import { BarChart } from 'echarts/charts'
+import { BarChart } from 'echarts/charts';
 import {
   GridComponent,
   LegendComponent,
   TitleComponent,
   ToolboxComponent,
   TooltipComponent,
-} from 'echarts/components'
-import { use } from 'echarts/core'
-import { CanvasRenderer } from 'echarts/renderers'
-import VChart, { THEME_KEY } from 'vue-echarts'
+} from 'echarts/components';
+import { use } from 'echarts/core';
+import { CanvasRenderer } from 'echarts/renderers';
+import VChart, { THEME_KEY } from 'vue-echarts';
 
 use([
   CanvasRenderer,
@@ -23,7 +23,7 @@ use([
   LegendComponent,
   ToolboxComponent,
   GridComponent,
-])
+]);
 
 export default {
   name: 'HelloWorld',
@@ -50,7 +50,7 @@ export default {
   data() {
     return {
       mounted: false,
-    }
+    };
   },
   computed: {
     option() {
@@ -94,10 +94,10 @@ export default {
               borderRadius: [5, 5, 0, 0],
             },
             animationDelay(idx) {
-              return idx * 200
+              return idx * 200;
             },
             animationDuration() {
-              return 500
+              return 500;
             },
           },
         ],
@@ -108,19 +108,19 @@ export default {
           fontSize: 36,
           fontWeight: 'bold',
         },
-      }
+      };
     },
   },
   mounted() {
-    this.mounted = true
+    this.mounted = true;
     this.$nextTick(() => {
       window.addEventListener('resize', () => {
-        this.$refs.chart?.resize()
-      })
-      this.$refs.chart?.resize()
-    })
+        this.$refs.chart?.resize();
+      });
+      this.$refs.chart?.resize();
+    });
   },
-}
+};
 </script>
 
 <style scoped>

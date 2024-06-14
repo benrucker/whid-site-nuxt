@@ -88,7 +88,7 @@ export default {
   },
   methods: {
     parseTimestamp(timestamp) {
-      const date = Date.parse(timestamp)
+      const date = Date.parse(timestamp);
       // returns date in the format:
       // 11/26/2022 2:48 PM
       return (
@@ -103,20 +103,20 @@ export default {
           minute: 'numeric',
           hour12: true,
         })
-      )
+      );
     },
     getUrlFor(emoji) {
-      if (emoji == null) return ''
+      if (emoji == null) return '';
 
       if (emoji.imageUrl?.includes('twemoji')) {
-        return emoji.imageUrl
+        return emoji.imageUrl;
       } else {
-        const url = this.stats.server.emojiNameToFilename[emoji.name]
-        return `/whyd/2022/data/emojis/${url}`
+        const url = this.stats.server.emojiNameToFilename[emoji.name];
+        return `/whyd/2022/data/emojis/${url}`;
       }
     },
   },
-}
+};
 </script>
 
 <style scoped>

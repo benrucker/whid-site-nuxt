@@ -6,7 +6,7 @@ export default {
         {
           content: '{test command invoked | italic}',
         },
-      ]
+      ];
     },
     helpTerminalFunction(_) {
       const lines = [
@@ -31,18 +31,18 @@ export default {
         {
           content: '{[TODO: Security Breach Contingency Plan] | error}',
         },
-      ]
-      return lines
+      ];
+      return lines;
     },
     SecBotDMsFunction(stats) {
       const stat = stats.server['SecBot dms'] ?? {
         totalCount: 53,
         walterCount: 12,
         users: 5,
-      }
-      const dmsCount = stat.totalCount
-      const numWalter = stat.walterCount
-      const differentWalterUsers = stat.users
+      };
+      const dmsCount = stat.totalCount;
+      const numWalter = stat.walterCount;
+      const differentWalterUsers = stat.users;
 
       const lines = [
         {
@@ -58,30 +58,30 @@ export default {
         {
           content: `SecurityBot was sent {${dmsCount} | bold} direct messages from {${differentWalterUsers} | bold} users. This image was sent {${numWalter} | bold} times.`,
         },
-      ]
+      ];
 
-      return lines
+      return lines;
     },
     SecBotVoiceEventsFunction(stats) {
-      const user = stats.user.name
+      const user = stats.user.name;
 
       // let VECountTotal = 55
       const VECountTotal = Object.values(
         stats.server['SecBot voice event type_counts'],
-      ).reduce((accumulator, currentValue) => accumulator + currentValue)
+      ).reduce((accumulator, currentValue) => accumulator + currentValue);
 
-      let VECountUser = stats.user['SecBot voice event type counts']
+      let VECountUser = stats.user['SecBot voice event type counts'];
       if (VECountUser) {
         VECountUser = Object.values(VECountUser).reduce(
           (accumulator, currentValue) => accumulator + currentValue,
-        )
+        );
       } else {
-        VECountUser = 0
+        VECountUser = 0;
       }
 
-      const mUser = stats.server['SecBot user with most VEs']
-      const maxUser = stats.server.idsToNames[Object.keys(mUser)[0]] // count for most active user
-      const VECountMax = Object.values(mUser)[0] // display name for most active user
+      const mUser = stats.server['SecBot user with most VEs'];
+      const maxUser = stats.server.idsToNames[Object.keys(mUser)[0]]; // count for most active user
+      const VECountMax = Object.values(mUser)[0]; // display name for most active user
 
       const lines = [
         {
@@ -93,33 +93,33 @@ export default {
         {
           content: `Voice Events include joining, leaving, and moving channels. They also include muting/unmuting, deafening/undeafening, and turning on and off your webcam or stream.`,
         },
-      ]
+      ];
 
       if (VECountUser === VECountMax) {
         lines.push({
           content: `User {${maxUser} | bold} had the highest Voice Event count with {${VECountUser} | bold}!`,
-        })
+        });
       } else {
         lines.push({
           content: `User {${user} | bold} had a Voice Event count of {${VECountUser} | bold} compared to {${maxUser} | bold} with the highest count of {${VECountMax} | bold}!`,
-        })
+        });
       }
 
-      return lines
+      return lines;
     }, // top user needs testing
     SecBotVoiceEventsMostActiveDayFunction(stats) {
-      const user = stats.user.name
-      const MADUser = stats.user['SecBot most active voice event days'] ?? 0
-      const date = new Date(MADUser.mostActiveDay)
+      const user = stats.user.name;
+      const MADUser = stats.user['SecBot most active voice event days'] ?? 0;
+      const date = new Date(MADUser.mostActiveDay);
       const MADUserDate = date.toLocaleDateString('en-US', {
         dateStyle: 'long',
-      })
-      const MADServer = stats.server['SecBot server max voice event day']
-      const dateServer = new Date(MADServer.timestamp)
+      });
+      const MADServer = stats.server['SecBot server max voice event day'];
+      const dateServer = new Date(MADServer.timestamp);
       const MADServerDate = dateServer.toLocaleDateString('en-US', {
         dateStyle: 'long',
-      })
-      const MADServerNum = MADServer.count
+      });
+      const MADServerNum = MADServer.count;
 
       const lines = [
         {
@@ -135,26 +135,26 @@ export default {
           content:
             'SecurityBot did not note any outstanding events occurring on that day... Additional analysis required.',
         },
-      ]
+      ];
 
-      return lines
+      return lines;
     },
     SecBotVoiceEventsFavoriteVoiceChannelFunction(stats) {
       // very subject to change when data relating to actual time in VCs is computed;
       // compare number of joins and total time spent in a channel
-      const user = stats.user.name
+      const user = stats.user.name;
       const joinsTotal = Math.trunc(
         stats.user['SecBot voice event type counts']?.join ?? 0,
-      )
+      );
       const favoriteChannelStat = stats.user[
         'SecBot favorite VC by joinsmoves'
       ] ?? {
         'favorite channel': 'quam dispemser',
         'number of events': 0,
-      }
+      };
 
-      const favoriteChannelName = favoriteChannelStat['favorite channel']
-      const favoriteChannelJoins = favoriteChannelStat['number of events']
+      const favoriteChannelName = favoriteChannelStat['favorite channel'];
+      const favoriteChannelJoins = favoriteChannelStat['number of events'];
 
       const lines = [
         { content: `{Favorite Voice Channel | underline}` },
@@ -164,40 +164,40 @@ export default {
         {
           content: `{${user} | bold}'s favorite channel was {${favoriteChannelName} | bold} which they joined {${favoriteChannelJoins} | bold} times.`,
         },
-      ]
+      ];
 
-      return lines
+      return lines;
     },
     SecBotVoiceEventsMutesFunction(stats) {
-      const vec = stats.user['SecBot voice event type counts']
-      const user = stats.user.name
-      const mute = vec?.mute ?? 0
-      const serverMute = vec?.['server mute'] ?? 0
-      const selfMutes = Math.trunc(mute)
-      const serverMutes = Math.trunc(serverMute)
+      const vec = stats.user['SecBot voice event type counts'];
+      const user = stats.user.name;
+      const mute = vec?.mute ?? 0;
+      const serverMute = vec?.['server mute'] ?? 0;
+      const selfMutes = Math.trunc(mute);
+      const serverMutes = Math.trunc(serverMute);
 
       const lines = [
         { content: `{Mutes | underline}` },
         {
           content: `{${user} | bold} muted themselves {${selfMutes} | bold} times.`,
         },
-      ]
+      ];
 
       if (serverMutes > 0) {
         lines.push({
           content: `Additionally, {${user} | bold} was server muted {${serverMutes} | bold} times.\n Shameful. Or not. There is no context.`,
-        })
+        });
       } else {
         lines.push({
           content: `Additionally, {${user} | bold} avoided being server muted according to records.`,
-        })
+        });
       }
-      return lines
+      return lines;
     },
     SecBotScores(stats) {
-      const user = stats.user?.name
-      const firstEpochScore = stats.user['SecBot first epoch score'] ?? 750
-      const finalScore = stats.user?.['SecBot user final score']?.score ?? 750
+      const user = stats.user?.name;
+      const firstEpochScore = stats.user['SecBot first epoch score'] ?? 750;
+      const finalScore = stats.user?.['SecBot user final score']?.score ?? 750;
 
       const lines = [
         { content: '{SecurityBot Scores | underline}' },
@@ -211,114 +211,114 @@ export default {
         {
           content: `As of the final grading period of the year, {${user} | bold} had a score of {${finalScore} | bold}.`,
         },
-      ]
+      ];
 
       if (firstEpochScore > finalScore) {
-        lines.push({ content: `Maybe ${user} could try harder in 2023.` })
+        lines.push({ content: `Maybe ${user} could try harder in 2023.` });
       } else {
         lines.push({
           content: `May ${user} continue to be a paragon of agreeableness in 2023!`,
-        })
+        });
       }
 
-      return lines
+      return lines;
     },
     SecBotScoresHigh(stats) {
-      const user = stats.user.name
-      const userHighScore = stats.user['SecBot user max score']?.score ?? 750
-      const serverHigh = stats.server['SecBot server high score']
-      const serverHighScore = serverHigh.score
-      const serverHighScoreUser = stats.server.idsToNames[serverHigh.member_id]
+      const user = stats.user.name;
+      const userHighScore = stats.user['SecBot user max score']?.score ?? 750;
+      const serverHigh = stats.server['SecBot server high score'];
+      const serverHighScore = serverHigh.score;
+      const serverHighScoreUser = stats.server.idsToNames[serverHigh.member_id];
 
       const lines = [
         { content: '{High Score | underline}' },
         {
           content: `{${user} | bold} had a high score of {${userHighScore} | bold}`,
         },
-      ]
+      ];
 
       if (userHighScore === serverHighScore) {
         lines.push({
           content: `Looks like this was the highest score recorded of all users! Please contact the majors to claim a voucher that can be redeemed for one (1) sound to be added to JermaBot!\nPlease continue to be agreeable into the new year.`,
-        })
+        });
       } else {
         lines.push({
           content: `Compared to the apex score of {${serverHighScore} | bold} achived by {${serverHighScoreUser} | bold}, their score can be improved. They should consider improving their agreeability in the new year.`,
-        })
+        });
       }
 
-      return lines
+      return lines;
     },
     SecBotScoresLow(stats) {
-      const user = stats.user.name
-      const userLowScore = stats.user['SecBot user min score']?.score ?? 750
-      const serverLow = stats.server['SecBot server low score']
-      const serverLowScore = serverLow.score
-      const serverLowScoreUser = stats.server.idsToNames[serverLow.member_id]
+      const user = stats.user.name;
+      const userLowScore = stats.user['SecBot user min score']?.score ?? 750;
+      const serverLow = stats.server['SecBot server low score'];
+      const serverLowScore = serverLow.score;
+      const serverLowScoreUser = stats.server.idsToNames[serverLow.member_id];
 
       const lines = [
         { content: `{Low Score | underline}` },
         {
           content: `{${user} | bold}'s lowest score was {${userLowScore} | bold}.`,
         },
-      ]
+      ];
 
       if (userLowScore === 750) {
         lines.push({
           content: `If the records are correct, {${user} | bold}'d score never dropped below their starting value, this behavior does not go unnoticed.'`,
-        })
+        });
       }
 
       if (userLowScore === serverLowScore) {
         lines.push({
           content: `Incidently, this was the lowest score recorded since SecurityBot's inception on 4/1/22. The associated behavior that resulted in this score has hopefully been corrected.`,
-        })
+        });
       } else {
         lines.push({
           content: `Even this score can be made to look impressive compared to the lowest recorded score of {${serverLowScore} | bold} by {${serverLowScoreUser} | bold}.`,
-        })
+        });
       }
-      return lines
+      return lines;
     },
     SecBotScoresAverage(stats) {
-      const user = stats.user.name
+      const user = stats.user.name;
       const userAverage = (
         stats.user['SecBot user average score']?.score ?? 750
-      ).toFixed(2)
+      ).toFixed(2);
       const serverAverages = Object.values(
         stats.server['SecBot server mean scores by epoch'].score,
-      )
+      );
       const avg = (
         serverAverages.reduce((a, b) => a + b) / serverAverages.length
-      ).toFixed(2)
+      ).toFixed(2);
 
       const lines = [
         { content: `{Average Scores | underline}` },
         {
           content: `The average score of the entire server over the year was {${avg} | bold}`,
         },
-      ]
+      ];
 
       if (userAverage >= avg) {
         lines.push({
           content: `{${user} | bold}'s average score of {${userAverage} | bold}, on average, was higher on average than the average, on average.`,
-        })
+        });
       } else {
         lines.push({
           content: `{${user} | bold}'s average score of {${userAverage} | bold}, on average left a lot to be desired, on average.`,
-        })
+        });
       }
 
-      return lines
+      return lines;
     },
     SecBotMessages(stats) {
       const numMessages =
-        stats.server['SecBot number of messages recorded'].count
-      const firstSecBotMessage = stats.server['SecBot first recorded message']
+        stats.server['SecBot number of messages recorded'].count;
+      const firstSecBotMessage = stats.server['SecBot first recorded message'];
       const firstMessageAuthor =
-        stats.server.idsToNames[firstSecBotMessage.author]
-      const date = new Date(firstSecBotMessage.timestamp)
-      const firstMessageTimestamp = date.toGMTString()
+        stats.server.idsToNames[firstSecBotMessage.author];
+      const date = new Date(firstSecBotMessage.timestamp);
+      const firstMessageTimestamp = date.toGMTString();
 
       const lines = [
         { content: '{Messages | underline}' },
@@ -331,64 +331,64 @@ export default {
         {
           content: `{ ${firstMessageAuthor}: ${firstSecBotMessage.content} | bold}`,
         },
-      ]
+      ];
 
       if (firstSecBotMessage.author === stats.user.id) {
         lines.push({
           content: `There's nothing special about being the first entry in a database, so there is no reason for celebration.`,
-        })
+        });
       } else {
         const userFirstSecBotMessage = stats.user[
           'SecBot first message in SecBot'
-        ] ?? { content: '', timestamp: 0 }
+        ] ?? { content: '', timestamp: 0 };
         const userFirstTimestamp = new Date(
           userFirstSecBotMessage.timestamp,
-        ).toGMTString()
+        ).toGMTString();
 
         lines.push({
           content: `{${stats.user.name} | bold}'s first message was added to the database on {${userFirstTimestamp} | bold} with the following content:`,
-        })
+        });
         lines.push({
           content: `{ ${stats.user.name}: ${userFirstSecBotMessage.content} | bold}`,
-        })
+        });
       }
 
-      return lines
+      return lines;
     },
     SecBotMessagesEditedDeleted(stats) {
       const numEdited =
-        stats.server['SecBot number of edited messages recorded']['0']
+        stats.server['SecBot number of edited messages recorded']['0'];
       const numDeleted =
-        stats.server['SecBot number of deleted messages recorded']['0']
+        stats.server['SecBot number of deleted messages recorded']['0'];
       const userDeleted =
-        stats.user['SecBot number deleted messages per member'] ?? 0
+        stats.user['SecBot number deleted messages per member'] ?? 0;
 
       const lines = [
         { content: `{Edited and Deleted Messages | underline}` },
         {
           content: `When a message has been added to the database it cannot be removed. According to the records, {${numDeleted} | bold} messages were deleted, and another {${numEdited} | bold} were edited.`,
         },
-      ]
+      ];
 
       if (userDeleted === 0) {
         lines.push({
           content: `Of the messages deleted, {${stats.user.name} | bold} did not send a single one of them. `,
-        })
+        });
       } else {
         lines.push({
           content: `Of the messages deleted, {${stats.user.name} | bold} deleted {${userDeleted} | bold} of them.`,
-        })
+        });
       }
 
-      return lines
+      return lines;
     }, // Add positive/negative comments
     SecBotVoiceStateTime(stats) {
       const serverTotalTimeWatched =
-        stats.server['SecBot total time of users watched'].toFixed(2)
+        stats.server['SecBot total time of users watched'].toFixed(2);
       const userTimeWatched = Number.parseFloat(
         stats.user['SecBot hours watched'] ?? 0,
-      ).toFixed(2)
-      const minimumWage = (userTimeWatched * 10.1).toFixed(2)
+      ).toFixed(2);
+      const minimumWage = (userTimeWatched * 10.1).toFixed(2);
 
       const lines = [
         { content: `{Time Watched in Voice Chat | underline}` },
@@ -404,47 +404,47 @@ export default {
         {
           content: `If {${stats.user.name} | bold} was being paid Minimum hourly wage at Ohio rates ($10.10), they would have made {$${minimumWage} | bold} this year.`,
         },
-      ]
+      ];
 
-      return lines
+      return lines;
     },
     SecBotVoiceStateLongest(stats) {
-      const lines = [{ content: `{Longest Voice Streaks | underline}` }]
+      const lines = [{ content: `{Longest Voice Streaks | underline}` }];
 
       const stat = stats.user['SecBot Longest session'] ?? {
         hours: 0,
         timestamp: 0,
-      }
-      const longestTimeInVC = stat.hours.toFixed(2)
+      };
+      const longestTimeInVC = stat.hours.toFixed(2);
       if (longestTimeInVC === 0) {
         lines.push({
           content: `SecurityBot has no records of ${stats.user.name} connected to any Voice Channels. Hopefully the database will be more populated with you in 2023.`,
-        })
-        return lines
+        });
+        return lines;
       }
 
-      const dateLongestTimeInVC = new Date(stat.timestamp).toString()
+      const dateLongestTimeInVC = new Date(stat.timestamp).toString();
 
       lines.push({
         content: `{${stats.user.name} | bold}'s longest time spent in VC continuously was {${longestTimeInVC} | bold} hours on {${dateLongestTimeInVC} | bold}. What was happening on that day?`,
-      })
+      });
 
-      return lines
+      return lines;
     }, // needs testing
     SecBotMostPeople(stats) {
       const sessionStat = stats.user['SecBot largest session'] ?? {
         count: 0,
         members: [],
         timestamp: 0,
-      }
+      };
       const peopleSpottedWith = sessionStat.members.map(
         (id) => stats.server.idsToNames[id],
-      )
+      );
       const mostPeopleTimestamp = new Date(
         sessionStat.timestamp,
       ).toLocaleDateString('en-US', {
         dateStyle: 'long',
-      })
+      });
 
       const lines = [
         { content: `{Largest group in Voice Chat | underline}` },
@@ -452,31 +452,31 @@ export default {
           content: `{${stats.user.name} | bold} was spotted with {${peopleSpottedWith.length} | bold} other people on {${mostPeopleTimestamp} | bold}. Here's a list of who they were with:`,
         },
         { content: `{${peopleSpottedWith.join(', ')} | bold}` },
-      ]
+      ];
 
-      return lines
+      return lines;
     },
     LeftoversEmojiFavoritePerson(stats) {
       // user IDs by emoji names
       const EmojiFavoritePersonDict =
-        stats.server['leftovers emoji favorite person']
+        stats.server['leftovers emoji favorite person'];
 
       // the top 25 emoji names plus some extras
       const emojis = Object.keys(
         stats.server['Custom Emojis ranked by usage'],
-      ).concat('ethanass', 'yes', 'ford', 'markwood')
+      ).concat('ethanass', 'yes', 'ford', 'markwood');
 
       // emoji filenames
       const emojiFilenames = emojis.map(
         (e) => `${stats.server.emojiNameToFilename[e]}`,
-      )
+      );
 
       const emojiPeoplePairs = emojiFilenames.map((emojiFilename, index) => {
-        const emojiName = emojis[index]
+        const emojiName = emojis[index];
         return `{:${emojiFilename}: | terminal-emoji} - ${
           stats.server.idsToNames[EmojiFavoritePersonDict[`:${emojiName}:`]]
-        }`
-      })
+        }`;
+      });
 
       const lines = [
         { content: `{Leftovers - Emojis' Favorite Users | underline}` },
@@ -484,9 +484,9 @@ export default {
           content: `The following list contains the most used custom emojis (and some other popular emojis), followed by the user that sent them the most.`,
         },
         { content: `${emojiPeoplePairs.join('\n')}`, block: true },
-      ]
+      ];
 
-      return lines
+      return lines;
     },
     CoolS() {
       return [
@@ -494,7 +494,7 @@ export default {
           content: `    ____________\n   /            \\ \n  /              \\ \n /                \\ \n/                  \\ \n|         |        |\n|         |        |\n|         |        |\n|         |        |\n\\         |________|\n \\        \\ \n  \\        \\ \n   \\        \\ \n    \\        \\ \n    /\\        \\ \n   /  \\        \\ \n  /    \\        \\ \n /      \\        \\ \n/        \\        \\ \n|        |        |\n|        |        |\n|        |        |\n|        |        |\n\\                 /\n \\               /\n  \\             /\n   \\___________/`,
           block: true,
         },
-      ]
+      ];
     },
     BdrThanks() {
       return [
@@ -523,7 +523,7 @@ export default {
           content:
             'so ty again, and I hope you have a great 2023 {:cheeto: | terminal-emoji}',
         },
-      ]
+      ];
     },
     BdrWhyd2023() {
       return [
@@ -533,10 +533,10 @@ export default {
         {
           content: "you'll have to wait and see {:benheh: | terminal-emoji}",
         },
-      ]
+      ];
     },
     BdrKian() {
-      return [{ content: '{{{Whyd2022TerminalEmbeddedKian}}}' }]
+      return [{ content: '{{{Whyd2022TerminalEmbeddedKian}}}' }];
     },
     EcfReflection() {
       return [
@@ -556,7 +556,7 @@ export default {
         {
           content: `There's a bunch of files but I think they're like worth reading though, so I hope you do.`,
         },
-      ]
+      ];
     },
     EcfScrapped() {
       return [
@@ -578,7 +578,7 @@ export default {
         {
           content: `- We were also going to make a 'Majors compass' that determined which majors you were most similar to, Ben did put a good amount of work into it but it didnt turn out they way we/he wanted.`,
         },
-      ]
+      ];
     },
     TwcmNote() {
       return [
@@ -613,10 +613,10 @@ export default {
         },
         { content: `> I love you guys,` },
         { content: `{- Tristan | tristan} {:shred.gif: | terminal-emoji}` },
-      ]
+      ];
     },
     TwcmShred() {
-      return [{ content: `{:shred.gif: | terminal-emoji}` }]
+      return [{ content: `{:shred.gif: | terminal-emoji}` }];
     },
     TwcmMoreShred() {
       return [
@@ -628,7 +628,7 @@ export default {
           url: '/whyd/2022/its-time-shred.gif',
         },
         { content: `${'{:shred.gif: | terminal-emoji}'.repeat(495)}` },
-      ]
+      ];
     },
     Document1() {
       return [
@@ -639,7 +639,7 @@ export default {
         { content: `{> what if we [REDACTED] | ben }` },
         { content: `{> lmao | wyatt }` },
         { content: `{>  | tristan }{:crackSoldier.webp: | terminal-emoji}` },
-      ]
+      ];
     },
     Document2() {
       return [
@@ -652,7 +652,7 @@ export default {
         {
           content: `{> planning meeting soon | ben } {:benheh: | terminal-emoji} `,
         },
-      ]
+      ];
     },
     Document3() {
       return [
@@ -676,7 +676,7 @@ export default {
         {
           content: `{  This is only relevant because its where the concept of the 'bisexual sleep schedule' originated | italic }`,
         },
-      ]
+      ];
     },
     Document4() {
       return [
@@ -693,7 +693,7 @@ export default {
         {
           content: `{> I wonder why UC offers a grad level class on oppression. Huh. | ben }`,
         },
-      ]
+      ];
     },
     Document5() {
       return [
@@ -706,7 +706,7 @@ export default {
           content: `{> also the website is actually broken as I incorporate the DB schemas into the code | ben}`,
         },
         { content: `{> todo fix later | ben}` },
-      ]
+      ];
     },
     Document6() {
       return [
@@ -749,7 +749,7 @@ export default {
         {
           content: `{  It's worth noting that at this point SecurityBot had literally ZERO FEATURES other than just saying that it was watching someone, so it was really funny to see people try to “use” it. Also, Wyatt had no idea what was happening which made it even better. | italic}`,
         },
-      ]
+      ];
     },
     Document7() {
       return [
@@ -815,7 +815,7 @@ export default {
         {
           content: `{  The first thing Kian said when SecBot joined was “1984”, I wonder if he truly knew. | italic }`,
         },
-      ]
+      ];
     },
     Document8() {
       return [
@@ -840,7 +840,7 @@ export default {
         {
           content: `  Lu actually tried to do the whole DROP TABLES thing and it didnt work 😎`,
         },
-      ]
+      ];
     },
     Document9() {
       return [
@@ -866,7 +866,7 @@ export default {
         {
           content: `{> let's have a discussion about this tomorrow, too good of an opportunity to pass up. | ben }`,
         },
-      ]
+      ];
     },
     Document10() {
       return [
@@ -880,7 +880,7 @@ export default {
         },
         { content: `{>  | ethan}{:imstuff.webp: | terminal-emoji}` },
         { content: `{> I love writing helpful commit messages | ethan }` },
-      ]
+      ];
     },
     Document11() {
       return [
@@ -925,7 +925,7 @@ export default {
         },
         { content: `{> well, this one is working | ethan }` },
         { content: `{> thank cumpeg | ben}` },
-      ]
+      ];
     },
     Document12() {
       return [
@@ -946,7 +946,7 @@ export default {
         {
           content: `{ "fucks, doesnt fuck, doesnt know what sex is" actually got 2nd place | italic }`,
         },
-      ]
+      ];
     },
     Document13() {
       return [
@@ -964,7 +964,7 @@ export default {
         },
         { content: `{> For what | wyatt}` },
         { content: `{> But blong box sounds better | wyatt }` },
-      ]
+      ];
     },
     Document14() {
       return [
@@ -973,7 +973,7 @@ export default {
         { content: `{> *class war | wyatt }` },
         { content: `{> next april fools: straight up racism | ben }` },
         { content: `{  4/1/23. start preparing. | italic}` },
-      ]
+      ];
     },
     Document15() {
       return [
@@ -998,7 +998,7 @@ export default {
         { content: `{> yeah dennis, academy khan like ghengis | ethan}` },
         { content: `{> they a menace, runnin a con outta venice | ben}` },
         { content: `{> new lore? | ben}` },
-      ]
+      ];
     },
     Document16() {
       return [
@@ -1019,7 +1019,7 @@ export default {
         {
           content: `{  I decided like 3 hours ago that 'blandrew' would be a funny name. ben is now informing me that jacob told me to change my name. | italic}`,
         },
-      ]
+      ];
     },
     Document17() {
       return [
@@ -1038,7 +1038,7 @@ export default {
         {
           content: `{  Ben and I then hopped on discord and made sure that it actually worked. I skipped my morning class to make sure that we would be able to actually get it out. | italic }`,
         },
-      ]
+      ];
     },
     Document18() {
       return [
@@ -1047,7 +1047,7 @@ export default {
         {
           content: `{> Fizz Khalifa got gold by going literally nothing 😭 | ethan}`,
         },
-      ]
+      ];
     },
     Document19() {
       return [
@@ -1073,7 +1073,7 @@ export default {
         {
           content: `{  Von:  | josh}{:cheeto: | terminal-emoji} {:cheeto: | terminal-emoji}`,
         },
-      ]
+      ];
     },
     Document20() {
       return [
@@ -1099,7 +1099,7 @@ export default {
           content: `{  Brendan: I think I told you awhile ago and you didnt care | brendan}`,
         },
         { content: `{> sounds about right | ethan}` },
-      ]
+      ];
     },
     Document21() {
       return [
@@ -1108,7 +1108,7 @@ export default {
           content: `{> So is Dennis canonically “missing” by this point? Or have they successfully returned from Georgia? | ben}`,
         },
         { content: `{> idk | ethan}` },
-      ]
+      ];
     },
     DocumentBonus() {
       return [
@@ -1127,8 +1127,8 @@ export default {
           content: `@me (ethan) discreetly and tell me that you found the "TERMINAL SECRET ENDING" <- all caps important and I will give you a free custom one-of-a-kind role. Supplies are limited!`,
         },
         { content: `Thanks for reading!` },
-      ]
+      ];
     },
   },
-}
+};
 </script>

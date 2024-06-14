@@ -42,84 +42,84 @@ export default {
       // loggingIn: false,
       stopLogo: false,
       introAnimationTime: 12000,
-    }
+    };
   },
   mounted() {
-    this.focusPasswordInput()
+    this.focusPasswordInput();
     if (localStorage.getItem('whyd22.hasLoggedIn') === 'true') {
-      this.introAnimationTime = 6000
+      this.introAnimationTime = 6000;
     }
   },
   methods: {
     focusPasswordInput() {
-      this.$refs.passwordTextInput.focus()
+      this.$refs.passwordTextInput.focus();
     },
     submitPasswordAttempt() {
-      this.attempts++
-      const inputText = this.userPasswordInput
+      this.attempts++;
+      const inputText = this.userPasswordInput;
 
       if (this.validPasswords.includes(inputText)) {
-        this.correctPassword = true
-        if (inputText === 'f') this.introAnimationTime = 100
-        this.showLoggingIn()
+        this.correctPassword = true;
+        if (inputText === 'f') this.introAnimationTime = 100;
+        this.showLoggingIn();
       } else if (this.attempts === 3) {
-        this.$refs.passwordTextInput.disabled = true
-        this.promptText = 'Too many attempts - Locking terminal...'
-        this.locked = true
+        this.$refs.passwordTextInput.disabled = true;
+        this.promptText = 'Too many attempts - Locking terminal...';
+        this.locked = true;
         setTimeout(() => {
-          this.promptText = '(Just Kidding)'
-          this.locked = false
-          this.$refs.passwordTextInput.disabled = false
-        }, 5000)
+          this.promptText = '(Just Kidding)';
+          this.locked = false;
+          this.$refs.passwordTextInput.disabled = false;
+        }, 5000);
       } else if (this.attempts > 1) {
-        this.promptText = `Incorrect (${this.attempts})`
+        this.promptText = `Incorrect (${this.attempts})`;
       } else {
-        this.promptText = 'Incorrect'
+        this.promptText = 'Incorrect';
       }
 
-      this.userPasswordInput = ''
+      this.userPasswordInput = '';
       if (!this.locked) {
-        this.$refs.passwordTextInput.disabled = this.locked
+        this.$refs.passwordTextInput.disabled = this.locked;
       }
     },
     showLoggingIn() {
-      this.promptText = 'Logging in...'
-      this.loggingIn = true
+      this.promptText = 'Logging in...';
+      this.loggingIn = true;
       setTimeout(() => {
-        this.promptText = 'Compiling SecuityBot data...'
-      }, 1500)
+        this.promptText = 'Compiling SecuityBot data...';
+      }, 1500);
       setTimeout(() => {
-        this.promptText = 'Proofreading username...'
-      }, 2000)
+        this.promptText = 'Proofreading username...';
+      }, 2000);
       setTimeout(() => {
-        this.promptText = 'Triangulating your location...'
-      }, 2500)
+        this.promptText = 'Triangulating your location...';
+      }, 2500);
       setTimeout(() => {
-        this.promptText = 'Counting cheetos...'
-      }, 3000)
+        this.promptText = 'Counting cheetos...';
+      }, 3000);
       setTimeout(() => {
-        this.promptText = 'Scoring users...'
-      }, 3500)
+        this.promptText = 'Scoring users...';
+      }, 3500);
       setTimeout(() => {
-        this.promptText = 'Performing Complex Calculations...'
-      }, 4000)
+        this.promptText = 'Performing Complex Calculations...';
+      }, 4000);
       setTimeout(() => {
-        this.promptText = 'Emailing Dennis...'
-      }, 4500)
+        this.promptText = 'Emailing Dennis...';
+      }, 4500);
       setTimeout(() => {
-        this.promptText = 'Looking at the graphic...'
-      }, 5000)
+        this.promptText = 'Looking at the graphic...';
+      }, 5000);
       setTimeout(() => {
-        this.stopLogo = true
-      }, 6000)
+        this.stopLogo = true;
+      }, 6000);
       setTimeout(() => {
-        localStorage.setItem('whyd22.hasLoggedIn', 'true')
-        this.$emit('logIn')
+        localStorage.setItem('whyd22.hasLoggedIn', 'true');
+        this.$emit('logIn');
         // }, 120) // give .05 seconds
-      }, this.introAnimationTime) // give 5 seconds
+      }, this.introAnimationTime); // give 5 seconds
     },
   },
-}
+};
 </script>
 
 <style scoped>

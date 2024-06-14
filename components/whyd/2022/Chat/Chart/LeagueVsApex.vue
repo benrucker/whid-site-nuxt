@@ -26,22 +26,22 @@ export default {
     return {
       rightColor: '#d64d44',
       rightCenterColor: 'rgb(65, 43, 39)',
-    }
+    };
   },
   computed: {
     leagueCount() {
-      return this.stats.server['Number of Game Pings']['@leg']
+      return this.stats.server['Number of Game Pings']['@leg'];
     },
     apexCount() {
-      return this.stats.server['Number of Game Pings']['@gaysex legends']
+      return this.stats.server['Number of Game Pings']['@gaysex legends'];
     },
     leaguePings() {
-      return this.stats.server['Number of pings from each user']['@leg']
+      return this.stats.server['Number of pings from each user']['@leg'];
     },
     apexPings() {
       return this.stats.server['Number of pings from each user'][
         '@gaysex legends'
-      ]
+      ];
     },
     leaguers() {
       return Object.entries(this.leaguePings)
@@ -51,8 +51,8 @@ export default {
             name: this.stats.server.idsToNames[id],
             pings: count,
             avatar: this.stats.server.idsToAvatars[id],
-          }
-        })
+          };
+        });
     },
     apexers() {
       return Object.entries(this.apexPings)
@@ -62,17 +62,17 @@ export default {
             name: this.stats.server.idsToNames[id],
             pings: count,
             avatar: this.stats.server.idsToAvatars[id],
-          }
-        })
+          };
+        });
     },
     minValue() {
-      return Math.min(this.leagueCount, this.apexCount)
+      return Math.min(this.leagueCount, this.apexCount);
     },
     maxValue() {
-      return Math.max(this.leagueCount, this.apexCount)
+      return Math.max(this.leagueCount, this.apexCount);
     },
   },
-}
+};
 </script>
 
 <style scoped>

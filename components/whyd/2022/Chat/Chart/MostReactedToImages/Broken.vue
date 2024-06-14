@@ -95,9 +95,9 @@ export default {
         ],
         url: 'https://en.wikipedia.org/wiki/Mario_%26_Sonic_at_the_Olympic_Winter_Games',
       },
-    }
+    };
   },
-}
+};
 </script>
 
 <style scoped>

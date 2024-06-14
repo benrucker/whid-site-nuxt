@@ -33,8 +33,8 @@ export default {
     return {
       title: '',
       exists: false,
-      count: 0
-    }
+      count: 0,
+    };
   },
   async mounted() {},
   methods: {
@@ -42,36 +42,36 @@ export default {
       const data = await fetch(`${urlPrefix}/user/${id}/teammate.json`).then(
         (res) => {
           if (res.status === 404) {
-            this.exists = false
-            return false
+            this.exists = false;
+            return false;
           }
-          this.exists = true
-          return res.json()
-        }
-      )
+          this.exists = true;
+          return res.json();
+        },
+      );
       if (!this.exists) {
-        return
+        return;
       }
 
-      this.count = data.count
-      const rank = data.rank
+      this.count = data.count;
+      const rank = data.rank;
 
       const serverData = await fetch(`${urlPrefix}/teammateTimes.json`).then(
-        (res) => res.json()
-      )
+        (res) => res.json(),
+      );
 
       const labels = Object.keys(serverData).map((key) => {
-        const high = key.split(', ')[1].split('.')[0]
-        let low = key.split(', ')[0].split('.')[0].split('(')[1]
-        low = low.startsWith('-') ? 0 : low
-        return `${low}-${high}`
-      })
-      const counts = Object.values(serverData)
+        const high = key.split(', ')[1].split('.')[0];
+        let low = key.split(', ')[0].split('.')[0].split('(')[1];
+        low = low.startsWith('-') ? 0 : low;
+        return `${low}-${high}`;
+      });
+      const counts = Object.values(serverData);
 
-      this.$refs.hist.init(labels, counts)
-    }
-  }
-}
+      this.$refs.hist.init(labels, counts);
+    },
+  },
+};
 </script>
 
 <style scoped>

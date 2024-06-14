@@ -7,11 +7,7 @@
     <div class="row g-0">
       <div class="col-lg-6">
         <div class="ratio ratio-16x9">
-          <img
-            :src="thumbnailLink"
-            alt="..."
-            style="max-width: inherit"
-          >
+          <img :src="thumbnailLink" alt="..." style="max-width: inherit" />
         </div>
       </div>
       <div class="col-lg-6">
@@ -19,9 +15,7 @@
           <h4 class="card-title">
             {{ title }}
           </h4>
-          <h6 class="card-text text-muted">
-            Released {{ releaseDate }}
-          </h6>
+          <h6 class="card-text text-muted">Released {{ releaseDate }}</h6>
           <p class="mt-4 mb-0">
             {{ description }}
           </p>
@@ -38,7 +32,7 @@ export default {
     thumbnailLink: String,
     title: String,
     releaseDate: String,
-    description: String
-  }
-}
+    description: String,
+  },
+};
 </script>

@@ -33,16 +33,16 @@ export default {
   props: {
     urlPrefix: {
       type: String,
-      default: ''
+      default: '',
     },
     id: {
       type: String,
-      default: ''
+      default: '',
     },
     nextBg: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   data() {
     return {
@@ -58,30 +58,30 @@ export default {
         'September',
         'October',
         'November',
-        'December'
+        'December',
       ],
       monthCounts: [],
       word: '',
-      month: ''
-    }
+      month: '',
+    };
   },
   async mounted() {},
   methods: {
     async init() {
       const data = await fetch(
-        `${this.urlPrefix}/user/${this.id}/monthCounts.json`
-      ).then((res) => res.json())
-      this.monthCounts = Object.values(data)
+        `${this.urlPrefix}/user/${this.id}/monthCounts.json`,
+      ).then((res) => res.json());
+      this.monthCounts = Object.values(data);
       const favData = await fetch(
-        `${this.urlPrefix}/user/${this.id}/favMonth.json`
-      ).then((res) => res.json())
-      this.month = favData.maxMonth
-      this.word = favData.word
+        `${this.urlPrefix}/user/${this.id}/favMonth.json`,
+      ).then((res) => res.json());
+      this.month = favData.maxMonth;
+      this.word = favData.word;
 
-      this.$refs.monthsChart.init(this.months, this.monthCounts)
-    }
-  }
-}
+      this.$refs.monthsChart.init(this.months, this.monthCounts);
+    },
+  },
+};
 </script>
 
 <style scoped>

@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import ScoreBoard from '@/components/score/Board.vue'
-import ScorePerson from '@/components/score/Person.vue'
+import ScoreBoard from '@/components/score/Board.vue';
+import ScorePerson from '@/components/score/Person.vue';
 
 export default {
   components: {
@@ -23,12 +23,12 @@ export default {
   data() {
     return {
       window: 'scoreBoard',
-    }
+    };
   },
   methods: {
     changeWindow(window) {
-      this.window = window
+      this.window = window;
     },
   },
-}
+};
 </script>

@@ -16,11 +16,11 @@ export default {
   },
   computed: {
     favoriteGenre() {
-      return Object.keys(this.stats.server['favorite genre of music'])[0]
+      return Object.keys(this.stats.server['favorite genre of music'])[0];
     },
     favoriteGenreCount() {
-      return Object.values(this.stats.server['favorite genre of music'])[0]
+      return Object.values(this.stats.server['favorite genre of music'])[0];
     },
   },
-}
+};
 </script>

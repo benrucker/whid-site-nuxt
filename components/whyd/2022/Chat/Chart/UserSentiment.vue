@@ -66,10 +66,10 @@ export default {
     percentageFromLeft() {
       return (
         (((Number.parseFloat(this.stats.user.sentiment) ?? 0) + 1) / 2) * 100
-      )
+      );
     },
   },
-}
+};
 </script>
 
 <style scoped>

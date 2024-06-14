@@ -232,47 +232,47 @@ export default {
   // eslint-disable-next-line require-await
   async asyncData({ params }) {
     return {
-      username: params.username
-    }
+      username: params.username,
+    };
   },
   data() {
     return {
       msgPercentile: -1,
       id: '',
-      urlPrefix: '/whyd/2021/data'
-    }
+      urlPrefix: '/whyd/2021/data',
+    };
   },
   async fetch() {},
   async mounted() {
     this.id = await fetch(`${this.urlPrefix}/nameToId.json`)
       .then((res) => res.json())
-      .then((json) => json[this.username])
-    await this.$refs.wordCloud.init(this.id, this.urlPrefix)
-    await this.$refs.yearBarChart.init(this.urlPrefix)
-    await this.$refs.pieChart.init(this.id, this.urlPrefix)
-    this.msgPercentile = this.$refs.pieChart.userPercentile
-    await this.$refs.channelBarChart.init(this.urlPrefix)
-    await this.$refs.months.init(this.id, this.urlPrefix)
+      .then((json) => json[this.username]);
+    await this.$refs.wordCloud.init(this.id, this.urlPrefix);
+    await this.$refs.yearBarChart.init(this.urlPrefix);
+    await this.$refs.pieChart.init(this.id, this.urlPrefix);
+    this.msgPercentile = this.$refs.pieChart.userPercentile;
+    await this.$refs.channelBarChart.init(this.urlPrefix);
+    await this.$refs.months.init(this.id, this.urlPrefix);
 
-    await this.$refs.timeOfDay.init(this.id, this.urlPrefix)
-    await this.$refs.favoriteChannel.init(this.id, this.urlPrefix)
-    await this.$refs.trailblazer.init(this.id, this.urlPrefix)
-    await this.$refs.teammate.init(this.id, this.urlPrefix)
-    await this.$refs.decisiveness.init(this.id, this.urlPrefix)
-    await this.$refs.astrologicalSign.init(this.id, this.urlPrefix)
+    await this.$refs.timeOfDay.init(this.id, this.urlPrefix);
+    await this.$refs.favoriteChannel.init(this.id, this.urlPrefix);
+    await this.$refs.trailblazer.init(this.id, this.urlPrefix);
+    await this.$refs.teammate.init(this.id, this.urlPrefix);
+    await this.$refs.decisiveness.init(this.id, this.urlPrefix);
+    await this.$refs.astrologicalSign.init(this.id, this.urlPrefix);
 
-    await this.$refs.loveSquare.init(this.id, this.urlPrefix)
+    await this.$refs.loveSquare.init(this.id, this.urlPrefix);
 
-    await this.$refs.favoriteEmoji.init(this.id, this.urlPrefix)
-    await this.$refs.favoriteWord.init(this.id, this.urlPrefix)
+    await this.$refs.favoriteEmoji.init(this.id, this.urlPrefix);
+    await this.$refs.favoriteWord.init(this.id, this.urlPrefix);
 
-    await this.$refs.firstMsg.init(this.id, this.urlPrefix)
-    await this.$refs.specialAccolades.init(this.id, this.urlPrefix)
+    await this.$refs.firstMsg.init(this.id, this.urlPrefix);
+    await this.$refs.specialAccolades.init(this.id, this.urlPrefix);
 
-    await this.$refs.goodMorning.init(this.id, this.urlPrefix)
+    await this.$refs.goodMorning.init(this.id, this.urlPrefix);
   },
-  methods: {}
-}
+  methods: {},
+};
 </script>
 
 <style>

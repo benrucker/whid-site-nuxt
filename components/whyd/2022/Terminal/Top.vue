@@ -19,32 +19,32 @@ export default {
   data() {
     return {
       timesCloseAttempted: 0,
-      topRef: null
-    }
+      topRef: null,
+    };
   },
   mounted() {
     this.$nextTick(() => {
-      this.topRef = this.$refs.top
-    })
+      this.topRef = this.$refs.top;
+    });
   },
   methods: {
     toggleTerminalVisibility() {
       if (this.timesCloseAttempted === 10) {
-        this.$emit('hideTerminal')
+        this.$emit('hideTerminal');
       } else {
-        alert('The Terminal cannot be closed at this time.')
+        alert('The Terminal cannot be closed at this time.');
       }
-      this.timesCloseAttempted++
+      this.timesCloseAttempted++;
     },
     terminalMouseDown(event) {
       this.$emit(
         'clicked',
         event.clientX - this.topRef.getBoundingClientRect().left,
-        event.clientY - this.topRef.getBoundingClientRect().top
-      )
-    }
-  }
-}
+        event.clientY - this.topRef.getBoundingClientRect().top,
+      );
+    },
+  },
+};
 </script>
 
 <style>

@@ -99,79 +99,79 @@ export default {
       featured: null,
       featuredDesc: '',
       scrollPosition: 0,
-    }
+    };
   },
   async fetch() {
-    this.catalog = await this.$nuxt.$content('catalog').fetch()
-    addSeasonToEpisodes(this.catalog)
-    this.seasons = getSeasons(this.catalog)
-    this.showAlert = this.$nuxt.context.query.error
-    ;[this.featured, this.featuredDesc] = getFeaturedVideo(this.catalog)
+    this.catalog = await this.$nuxt.$content('catalog').fetch();
+    addSeasonToEpisodes(this.catalog);
+    this.seasons = getSeasons(this.catalog);
+    this.showAlert = this.$nuxt.context.query.error;
+    [this.featured, this.featuredDesc] = getFeaturedVideo(this.catalog);
   },
   watch: {
     activeSeason(newValue) {
-      localStorage.setItem('activeSeason', newValue)
+      localStorage.setItem('activeSeason', newValue);
     },
     scrollPosition(newValue) {
-      localStorage.setItem('scrollPosition', newValue)
+      localStorage.setItem('scrollPosition', newValue);
     },
   },
   mounted() {
-    this.activeSeason = localStorage.getItem('activeSeason') ?? 's1'
+    this.activeSeason = localStorage.getItem('activeSeason') ?? 's1';
     setTimeout(() => {
-      window.scrollTo({ top: localStorage.getItem('scrollPosition') })
+      window.scrollTo({ top: localStorage.getItem('scrollPosition') });
       setInterval(() => {
-        this.scrollPosition = window.scrollY
-      }, 50)
-    }, 100)
+        this.scrollPosition = window.scrollY;
+      }, 50);
+    }, 100);
   },
   methods: {
     title(episode) {
-      return episode.title
+      return episode.title;
     },
     date(episode) {
-      return constructDate(episode)
+      return constructDate(episode);
     },
     thumbnail(episode) {
-      return constructThumbnailURL(episode)
+      return constructThumbnailURL(episode);
     },
     video(episode) {
-      return constructWatchURL(episode)
+      return constructWatchURL(episode);
     },
     thumbnailFeatured() {
-      return constructThumbnailURL(this.featured)
+      return constructThumbnailURL(this.featured);
     },
     watchFeatured() {
-      return constructWatchURL(this.featured)
+      return constructWatchURL(this.featured);
     },
     sortEpisodes(episodes, season) {
-      return sortEpisodes(episodes, season)
+      return sortEpisodes(episodes, season);
     },
   },
-}
+};
 
 class VideoIDError extends Error {
   constructor(message) {
-    super(message)
-    this.name = 'VideoIDError'
+    super(message);
+    this.name = 'VideoIDError';
   }
 }
 
 function addSeasonToEpisodes(catalog) {
   for (const seasonID in catalog.seasons) {
-    const season = catalog.seasons[seasonID]
-    season.episodes.map((x) => (x.season = seasonID))
+    const season = catalog.seasons[seasonID];
+    season.episodes.map((x) => (x.season = seasonID));
   }
 }
 
 function getSeasons(catalog) {
-  return catalog.seasons
+  return catalog.seasons;
 }
 
 function getFeaturedVideo(catalog) {
-  const [season, id, desc] = getFeaturedVideoData(catalog)
-  const data = getVideoDataFromID(catalog, season, id)
-  return [data, desc]
+  const [season, id, desc] = getFeaturedVideoData(catalog);
+  const data = getVideoDataFromID(catalog, season, id);
+  return [data, desc];
 }
 
 function getFeaturedVideoData(catalog) {
@@ -179,44 +179,44 @@ function getFeaturedVideoData(catalog) {
     catalog.featured.season,
     catalog.featured.id,
     catalog.featured.description,
-  ]
+  ];
 }
 
 function getVideoDataFromID(catalog, season, id) {
-  const episodes = getEpisodesFromSeason(catalog, season)
-  const episode = getEpisodeFromList(episodes, id)
-  return episode
+  const episodes = getEpisodesFromSeason(catalog, season);
+  const episode = getEpisodeFromList(episodes, id);
+  return episode;
 }
 
 function getEpisodesFromSeason(catalog, season) {
-  return catalog.seasons[season].episodes
+  return catalog.seasons[season].episodes;
 }
 
 function sortEpisodes(episodes, seasonName) {
   if (seasonName === 'extra') {
-    return episodes.toReversed()
+    return episodes.toReversed();
   }
-  return episodes
+  return episodes;
 }
 
 function getEpisodeFromList(episodes, epid) {
   for (const episode of episodes) {
     if (episode.id === epid) {
-      return episode
+      return episode;
     }
   }
-  throw new VideoIDError('Video ID not found in catalog')
+  throw new VideoIDError('Video ID not found in catalog');
 }
 
 function constructWatchURL(ep) {
-  return '/dub/' + ep.season + '/' + ep.id + ''
+  return '/dub/' + ep.season + '/' + ep.id + '';
 }
 
 function constructThumbnailURL(ep) {
-  return 'https://12b3.pw/whid/thumbnails/' + ep.season + '/' + ep.id + '.png'
+  return 'https://12b3.pw/whid/thumbnails/' + ep.season + '/' + ep.id + '.png';
 }
 
 function constructDate(ep) {
-  return ep.releaseDate
+  return ep.releaseDate;
 }
 </script>

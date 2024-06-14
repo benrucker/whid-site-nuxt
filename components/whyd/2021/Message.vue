@@ -9,9 +9,9 @@
       class="attachment"
     >
       <video v-if="attachment.url.endsWith('.mp4')" controls>
-        <source :src="attachment.url">
+        <source :src="attachment.url" />
       </video>
-      <img v-else :src="attachment.url">
+      <img v-else :src="attachment.url" />
     </div>
   </div>
 </template>
@@ -20,12 +20,14 @@
 export default {
   props: {
     content: '',
-    attachments: [{
-      id: '',
-      url: ''
-    }]
-  }
-}
+    attachments: [
+      {
+        id: '',
+        url: '',
+      },
+    ],
+  },
+};
 </script>
 
 <style scoped>

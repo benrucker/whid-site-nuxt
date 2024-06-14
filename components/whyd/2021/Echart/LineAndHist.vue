@@ -3,17 +3,17 @@
 </template>
 
 <script>
-import { use } from 'echarts/core'
-import { CanvasRenderer } from 'echarts/renderers'
-import { LineChart } from 'echarts/charts'
+import { use } from 'echarts/core';
+import { CanvasRenderer } from 'echarts/renderers';
+import { LineChart } from 'echarts/charts';
 import {
   TitleComponent,
   TooltipComponent,
   LegendComponent,
   ToolboxComponent,
-  GridComponent
-} from 'echarts/components'
-import VChart, { THEME_KEY } from 'vue-echarts'
+  GridComponent,
+} from 'echarts/components';
+import VChart, { THEME_KEY } from 'vue-echarts';
 
 use([
   CanvasRenderer,
@@ -22,16 +22,16 @@ use([
   TooltipComponent,
   LegendComponent,
   ToolboxComponent,
-  GridComponent
-])
+  GridComponent,
+]);
 
 export default {
   name: 'HelloWorld',
   components: {
-    VChart
+    VChart,
   },
   provide: {
-    [THEME_KEY]: 'dark'
+    [THEME_KEY]: 'dark',
   },
   props: {
     data: [],
@@ -39,35 +39,35 @@ export default {
     title: '',
     bgColor: '',
     color: '',
-    textColor: ''
+    textColor: '',
   },
-  data () {
+  data() {
     return {
       option: {},
       lines: [],
-      labels: []
-    }
+      labels: [],
+    };
   },
-  mounted () {
+  mounted() {
     window.onresize = () => {
-      this.$refs.chart.resize()
-    }
+      this.$refs.chart.resize();
+    };
   },
   methods: {
-    init (xAxis, data) {
+    init(xAxis, data) {
       this.option = {
         grid: {
           left: '3%',
           right: '4%',
           bottom: '3%',
-          containLabel: true
+          containLabel: true,
         },
         tooltip: {
           trigger: 'axis',
           axisPointer: {
-            type: 'shadow'
+            type: 'shadow',
           },
-          formatter: '{b}: {c}'
+          formatter: '{b}: {c}',
         },
         xAxis: [
           {
@@ -76,18 +76,18 @@ export default {
             splitLine: {
               show: false,
               lineStyle: {
-                color: '#fff'
-              }
-            }
-          }
+                color: '#fff',
+              },
+            },
+          },
         ],
         yAxis: [
           {
             type: 'value',
             splitLine: {
-              show: false
-            }
-          }
+              show: false,
+            },
+          },
         ],
         series: [
           {
@@ -96,12 +96,12 @@ export default {
             data,
             smooth: true,
             lineStyle: {
-              width: 4
+              width: 4,
             },
             itemStyle: {
               borderWidth: 5,
-              borderColor: this.color
-            }
+              borderColor: this.color,
+            },
           },
           {
             type: 'bar',
@@ -109,24 +109,24 @@ export default {
             barWidth: '99.3%',
             itemStyle: {
               color: this.color,
-              opacity: 0.5
+              opacity: 0.5,
             },
             tooltip: {
-              show: false
-            }
-          }
+              show: false,
+            },
+          },
         ],
         color: [this.color],
         backgroundColor: this.bgColor,
         textStyle: {
           color: this.textColor,
           fontSize: 36,
-          fontWeight: 'bold'
-        }
-      }
-    }
-  }
-}
+          fontWeight: 'bold',
+        },
+      };
+    },
+  },
+};
 </script>
 
 <style scoped>

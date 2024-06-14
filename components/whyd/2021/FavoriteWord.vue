@@ -1,8 +1,9 @@
 <template>
   <div>
     <h1>
-      your favorite word this year was <b>{{ word }}</b>.<br>I know this cause you used it <b>{{ count }}</b>
-      {{ count == 1 ? "time" : "times" }}.
+      your favorite word this year was <b>{{ word }}</b
+      >.<br />I know this cause you used it <b>{{ count }}</b>
+      {{ count == 1 ? 'time' : 'times' }}.
     </h1>
   </div>
 </template>
@@ -12,26 +13,28 @@ export default {
   props: {
     urlPrefix: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
-  data () {
+  data() {
     return {
       word: '',
-      count: ''
-    }
+      count: '',
+    };
   },
-  async mounted () {},
+  async mounted() {},
   methods: {
-    async init (id, urlPrefix) {
+    async init(id, urlPrefix) {
       const data = await fetch(
-        `${urlPrefix}/user/${id}/mostUsedWordsNoStop.json`
-      ).then(res => res.json())
-      const sorted = Object.values(data).sort((a, b) => b[1] - a[1])
-      if (!sorted) { return }
-      this.word = sorted[0][0]
-      this.count = sorted[0][1]
-    }
-  }
-}
+        `${urlPrefix}/user/${id}/mostUsedWordsNoStop.json`,
+      ).then((res) => res.json());
+      const sorted = Object.values(data).sort((a, b) => b[1] - a[1]);
+      if (!sorted) {
+        return;
+      }
+      this.word = sorted[0][0];
+      this.count = sorted[0][1];
+    },
+  },
+};
 </script>

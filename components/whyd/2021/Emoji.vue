@@ -13,7 +13,7 @@
       "
       :src="processedEmoji"
       @click="removeSpoiler"
-    >
+    />
   </span>
   <span v-else>{{ emoji }}</span>
 </template>
@@ -23,54 +23,60 @@ export default {
   props: {
     urlPrefix: {
       type: String,
-      default: ''
+      default: '',
     },
     emoji: {
       type: String,
-      default: ''
+      default: '',
     },
     big: {
       type: Boolean,
-      default: false
+      default: false,
     },
     spoiler: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
-  data () {
+  data() {
     return {
       // processedEmoji: this.emoji,
-    }
+    };
   },
   computed: {
-    processedEmoji () {
+    processedEmoji() {
       if (this.emoji.startsWith(':')) {
-        let output = `/whyd/2021/emojis/${this.emoji.replaceAll(':', '')}`
-        const animated = [':shred:', ':hoedown:', ':trueshred:']
-        const svgs = [':eyes:', ':lion:', ':microbe:', ':pushpin:', ':warning:']
+        let output = `/whyd/2021/emojis/${this.emoji.replaceAll(':', '')}`;
+        const animated = [':shred:', ':hoedown:', ':trueshred:'];
+        const svgs = [
+          ':eyes:',
+          ':lion:',
+          ':microbe:',
+          ':pushpin:',
+          ':warning:',
+        ];
 
         if (animated.includes(this.emoji)) {
-          output += '.gif'
+          output += '.gif';
         } else if (svgs.includes(this.emoji)) {
-          output += '.svg'
+          output += '.svg';
         } else {
-          output += '.png'
+          output += '.png';
         }
-        return output
+        return output;
       } else {
-        return false
+        return false;
       }
-    }
+    },
   },
-  async mounted () {},
+  async mounted() {},
   methods: {
-    removeSpoiler () {
-      this.$refs.emoji.classList.remove('spoilerEmoji')
-      this.$refs.spoilerBg.classList.remove('spoiler')
-    }
-  }
-}
+    removeSpoiler() {
+      this.$refs.emoji.classList.remove('spoilerEmoji');
+      this.$refs.spoilerBg.classList.remove('spoiler');
+    },
+  },
+};
 </script>
 
 <style>

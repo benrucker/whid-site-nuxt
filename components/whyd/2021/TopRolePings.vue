@@ -9,24 +9,24 @@ export default {
   props: {
     urlPrefix: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   data() {
     return {
       users: [],
-      counts: []
-    }
+      counts: [],
+    };
   },
   async mounted() {
     const data = await fetch(`${this.urlPrefix}/roleMentions.json`).then(
-      (res) => res.json()
-    )
-    this.users = Object.keys(data).slice(0, 5)
+      (res) => res.json(),
+    );
+    this.users = Object.keys(data).slice(0, 5);
     this.counts = Object.values(data)
       .slice(0, 5)
-      .map((x) => x.toLocaleString())
+      .map((x) => x.toLocaleString());
   },
-  methods: {}
-}
+  methods: {},
+};
 </script>

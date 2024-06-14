@@ -28,39 +28,39 @@ export default {
   props: {
     urlPrefix: {
       type: String,
-      default: ''
+      default: '',
     },
     id: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   data() {
     return {
-      channelAccolades: []
-    }
+      channelAccolades: [],
+    };
   },
   computed: {},
   async mounted() {},
   methods: {
     async init(id, urlPrefix) {
       const firstInChannels = await fetch(
-        `${urlPrefix}/user/${id}/firstMessageInChannels.json`
+        `${urlPrefix}/user/${id}/firstMessageInChannels.json`,
       ).then((res) => {
         if (res.status === 404) {
-          return false
+          return false;
         }
-        return res.json()
-      })
-      console.log(firstInChannels)
+        return res.json();
+      });
+      console.log(firstInChannels);
       if (firstInChannels) {
-        this.channelAccolades = firstInChannels
+        this.channelAccolades = firstInChannels;
       } else {
-        this.channelAccolades = false
+        this.channelAccolades = false;
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped>

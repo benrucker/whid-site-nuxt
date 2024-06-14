@@ -54,24 +54,24 @@ export default {
   },
   computed: {
     reactions() {
-      return this.stats.server.mostUsedReactions
+      return this.stats.server.mostUsedReactions;
     },
     otherReactions() {
-      if (this.reactions == null) return []
+      if (this.reactions == null) return [];
       return Object.keys(this.reactions).filter(
         (r) => r !== '627365768111194117' && r !== '627365780849426442',
-      )
+      );
     },
     upvoteCount() {
-      if (this.reactions == null) return 0
-      return this.reactions['627365768111194117'].uses
+      if (this.reactions == null) return 0;
+      return this.reactions['627365768111194117'].uses;
     },
     downvoteCount() {
-      if (this.reactions == null) return 0
-      return this.reactions['627365780849426442'].uses
+      if (this.reactions == null) return 0;
+      return this.reactions['627365780849426442'].uses;
     },
   },
-}
+};
 </script>
 
 <style scoped>

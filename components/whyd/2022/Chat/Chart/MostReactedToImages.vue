@@ -32,35 +32,35 @@ export default {
       broken: true,
       fixing: false,
       fixed: false,
-    }
+    };
   },
   methods: {
     fix() {
       setTimeout(() => {
-        this.$el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        this.$el.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
         setTimeout(() => {
           // play slappy hand animation
-          this.fixing = true
+          this.fixing = true;
           setTimeout(() => {
-            this.fixing = false
-            this.fixed = true
-          }, 1000)
+            this.fixing = false;
+            this.fixed = true;
+          }, 1000);
 
           // play explosion gif
 
           setTimeout(() => {
-            this.broken = false
+            this.broken = false;
             setTimeout(() => {
-              this.$el.scrollIntoView({ behavior: 'smooth', block: 'center' })
-            }, 100)
-            this.$emit('graphFixed')
-          }, 1000)
-        }, 500)
-      }, 2000)
+              this.$el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+            this.$emit('graphFixed');
+          }, 1000);
+        }, 500);
+      }, 2000);
     },
   },
-}
+};
 </script>
 
 <style scoped>

@@ -40,52 +40,52 @@ export default {
   data() {
     return {
       animationBegin: false,
-    }
+    };
   },
   mounted() {
     setTimeout(() => {
-      this.animationBegin = true
+      this.animationBegin = true;
 
       this.$nextTick(() => {
         const conversation = document.getElementById(
           'the-one-above-conversation',
-        )
-        conversation.after(this.$refs.overlayStuff) // ref points to new location
-        this.explode()
+        );
+        conversation.after(this.$refs.overlayStuff); // ref points to new location
+        this.explode();
 
-        const whiteFade = document.createElement('div')
-        whiteFade.classList.add('white-fade')
-        this.$refs.overlayStuff.after(whiteFade)
-      })
-    }, 1000)
+        const whiteFade = document.createElement('div');
+        whiteFade.classList.add('white-fade');
+        this.$refs.overlayStuff.after(whiteFade);
+      });
+    }, 1000);
   },
   beforeDestroy() {
-    this.$refs.overlayStuff.nextSibling.remove()
-    this.$refs.overlayStuff.remove()
+    this.$refs.overlayStuff.nextSibling.remove();
+    this.$refs.overlayStuff.remove();
   },
   methods: {
     explode() {
-      const el = document.createElement('div')
+      const el = document.createElement('div');
       // el.src = `/whyd/2022/explosion-fast.gif?${Math.random()}`
-      el.classList.add('secbot-explosion')
-      const leftOffset = Math.random() * 100
-      el.style.left = `${leftOffset}%`
+      el.classList.add('secbot-explosion');
+      const leftOffset = Math.random() * 100;
+      el.style.left = `${leftOffset}%`;
 
-      const topOffset = Math.random() * 100
-      el.style.top = `${topOffset}%`
+      const topOffset = Math.random() * 100;
+      el.style.top = `${topOffset}%`;
 
-      const scale = Math.random() * 2 + 1
-      el.style.transform = `scale(${scale})`
+      const scale = Math.random() * 2 + 1;
+      el.style.transform = `scale(${scale})`;
 
-      this.$refs.overlayStuff.appendChild(el)
+      this.$refs.overlayStuff.appendChild(el);
       setTimeout(() => {
-        el.remove()
-      }, 1000)
+        el.remove();
+      }, 1000);
 
-      setTimeout(this.explode, Math.random() * 500)
+      setTimeout(this.explode, Math.random() * 500);
     },
   },
-}
+};
 </script>
 
 <style>

@@ -92,23 +92,23 @@ export default {
   },
   computed: {
     countsById() {
-      return this.stats.server['List of users by gms']
+      return this.stats.server['List of users by gms'];
     },
     rankOfUser() {
-      const position = Object.keys(this.countsById).indexOf(this.stats.user.id)
+      const position = Object.keys(this.countsById).indexOf(this.stats.user.id);
       if (position === -1) {
-        return '??'
+        return '??';
       }
-      return position + 1
+      return position + 1;
     },
     userIds() {
-      return Array.from(Object.keys(this.countsById))?.slice(0, 5) ?? []
+      return Array.from(Object.keys(this.countsById))?.slice(0, 5) ?? [];
     },
     mysonReactions() {
-      return this.stats.server['List of users by myson reactions']
+      return this.stats.server['List of users by myson reactions'];
     },
   },
-}
+};
 </script>
 
 <style scoped>

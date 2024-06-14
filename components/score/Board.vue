@@ -46,10 +46,10 @@ export default {
   data() {
     return {
       scores: [],
-    }
+    };
   },
   async fetch() {
-    this.scores = await this.getData()
+    this.scores = await this.getData();
   },
   head() {
     return {
@@ -74,35 +74,35 @@ export default {
           hid: name,
           property: name,
           content,
-        }
+        };
       }),
-    }
+    };
   },
   computed: {
     sortedScores() {
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      return this.scores.sort((a, b) => b.score - a.score)
+      return this.scores.sort((a, b) => b.score - a.score);
     },
   },
   methods: {
     changeWindow() {
-      this.$emit('changeWindow', 'scorePerson')
+      this.$emit('changeWindow', 'scorePerson');
     },
     async getData() {
-      const response = await fetch('https://api.whid.live/scores/named/latest')
-      console.log(response)
-      const data = response.ok ? await response.json() : []
-      console.log(data)
-      data.sort((a, b) => b.score - a.score)
+      const response = await fetch('https://api.whid.live/scores/named/latest');
+      console.log(response);
+      const data = response.ok ? await response.json() : [];
+      console.log(data);
+      data.sort((a, b) => b.score - a.score);
       return data.map((d) => {
         return {
           name: d.name,
           score: d.score,
-        }
-      })
+        };
+      });
     },
   },
-}
+};
 </script>
 
 <style scoped>

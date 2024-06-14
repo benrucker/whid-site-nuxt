@@ -14,18 +14,18 @@ export default {
   props: {
     msgId: {
       type: Number,
-      required: true
+      required: true,
     },
     color: {
       type: String,
-      required: true
+      required: true,
     },
     isLastInGroup: {
       type: Boolean,
-      required: true
-    }
-  }
-}
+      required: true,
+    },
+  },
+};
 </script>
 
 <style>

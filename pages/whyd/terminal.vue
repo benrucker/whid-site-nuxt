@@ -17,27 +17,27 @@ export default {
     return {
       shouldShowIntroAnimation: undefined,
       terminalRef: null,
-    }
+    };
   },
   mounted() {
     this.shouldShowIntroAnimation =
-      localStorage.getItem('shouldShowTerminalAnimation') === 'true'
-    localStorage.setItem('hasVisitedTerminal', 'true')
-    localStorage.setItem('shouldShowTerminalAnimation', 'false')
+      localStorage.getItem('shouldShowTerminalAnimation') === 'true';
+    localStorage.setItem('hasVisitedTerminal', 'true');
+    localStorage.setItem('shouldShowTerminalAnimation', 'false');
 
     this.$nextTick(() => {
-      this.terminalRef = this.$refs.terminal
-    })
+      this.terminalRef = this.$refs.terminal;
+    });
   },
   methods: {
     terminalMouseUp() {
-      this.$refs.terminal.terminalMouseUp()
+      this.$refs.terminal.terminalMouseUp();
     },
     terminalMouseMove(e) {
-      this.terminalRef.terminalMouseMove(e)
+      this.terminalRef.terminalMouseMove(e);
     },
   },
-}
+};
 </script>
 
 <style scoped>

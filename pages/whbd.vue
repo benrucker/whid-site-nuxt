@@ -6,8 +6,8 @@
 
 <script>
 export default {
-  layout: 'blank'
-}
+  layout: 'blank',
+};
 </script>
 
 <style scoped>

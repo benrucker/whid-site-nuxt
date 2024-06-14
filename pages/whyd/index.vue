@@ -60,47 +60,47 @@ export default {
       server: undefined,
       name: '',
       shouldShowTerminalButton: false,
-    }
+    };
   },
   computed: {
     isNameValid() {
-      return this.usernames.includes(this.name)
+      return this.usernames.includes(this.name);
     },
     usernames() {
-      return Object.values(this.server.urlNamesToNames).reverse()
+      return Object.values(this.server.urlNamesToNames).reverse();
     },
   },
   async mounted() {
     this.server = await fetch('/whyd/2022/data/server.json').then((val) =>
       val.json(),
-    )
+    );
     this.shouldShowTerminalButton =
-      localStorage.getItem('hasVisitedTerminal') === 'true'
+      localStorage.getItem('hasVisitedTerminal') === 'true';
   },
   methods: {
     goToIfValidName(path, name) {
       if (this.isNameValid) {
-        const userId = this.server.namesToIds[name]
+        const userId = this.server.namesToIds[name];
 
-        localStorage.setItem('username', name)
-        localStorage.setItem('userId', userId)
-        this.$router.push(path)
+        localStorage.setItem('username', name);
+        localStorage.setItem('userId', userId);
+        this.$router.push(path);
       }
     },
     handleInputButtonPressed() {
       this.goToIfValidName(
         `/whyd/${this.server.namesToUrlNames[this.name]}`,
         this.name,
-      )
+      );
     },
     handleLastYearButtonPressed() {
-      this.$router.push('/whyd/2021')
+      this.$router.push('/whyd/2021');
     },
     handleTerminalButtonPressed() {
-      this.goToIfValidName(`/whyd/terminal`, this.name)
+      this.goToIfValidName(`/whyd/terminal`, this.name);
     },
   },
-}
+};
 </script>
 
 <style scoped>

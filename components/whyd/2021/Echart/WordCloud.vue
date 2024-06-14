@@ -4,42 +4,42 @@
 
 <script>
 // import * as echarts from "echarts";
-import VChart, { THEME_KEY } from 'vue-echarts'
+import VChart, { THEME_KEY } from 'vue-echarts';
 
 if (process.browser) {
-  require('echarts-wordcloud')
+  require('echarts-wordcloud');
 }
 
 export default {
   name: 'HelloWorld',
   components: {
-    VChart
+    VChart,
   },
   provide: {
-    [THEME_KEY]: 'dark'
+    [THEME_KEY]: 'dark',
   },
   props: {
     words: [],
     sizeMin: 0,
     sizeMax: 0,
-    gridSize: 0
+    gridSize: 0,
   },
   data() {
     return {
       option: {},
       lines: [],
-      labels: []
-    }
+      labels: [],
+    };
   },
   mounted() {
     window.onresize = () => {
-      this.$refs.chart.resize()
-    }
+      this.$refs.chart.resize();
+    };
   },
   methods: {
     init() {
-      const maskImage = new Image()
-      maskImage.src = '/whyd/2021/2021.png'
+      const maskImage = new Image();
+      maskImage.src = '/whyd/2021/2021.png';
       maskImage.onload = () => {
         this.option = {
           title: {},
@@ -66,25 +66,25 @@ export default {
               textStyle: {
                 fontFamily: 'sans-serif',
                 fontWeight: 'bold',
-                color: 'white'
+                color: 'white',
               },
               emphasis: {
                 focus: 'self',
 
                 textStyle: {
                   textShadowBlur: 10,
-                  textShadowColor: '#333'
-                }
+                  textShadowColor: '#333',
+                },
               },
 
-              data: this.words
-            }
-          ]
-        }
-      }
-    }
-  }
-}
+              data: this.words,
+            },
+          ],
+        };
+      };
+    },
+  },
+};
 </script>
 
 <style scoped>

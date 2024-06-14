@@ -35,58 +35,60 @@ export default {
       flickerCooldownMin: 1000,
       transitionDuration: 200,
       glitchTimeout: undefined,
-    }
+    };
   },
   mounted() {
     this.$nextTick(() => {
-      this.otherLogos = document.querySelectorAll('.fun-logos img')
-      this.regularLogo = this.$refs.logo
-      this.secbotLogo = this.$refs.secbotLogo
+      this.otherLogos = document.querySelectorAll('.fun-logos img');
+      this.regularLogo = this.$refs.logo;
+      this.secbotLogo = this.$refs.secbotLogo;
 
-      this.queueGlitch()
-    })
+      this.queueGlitch();
+    });
   },
   beforeDestroy() {
-    clearTimeout(this.glitchTimeout)
+    clearTimeout(this.glitchTimeout);
   },
   methods: {
     glitch() {
-      const logo = this.getRandomLogo()
-      this.regularLogo.classList.remove('visible')
+      const logo = this.getRandomLogo();
+      this.regularLogo.classList.remove('visible');
 
-      console.log(this.transitionDuration, this.flickerDuration)
+      console.log(this.transitionDuration, this.flickerDuration);
 
       setTimeout(() => {
-        logo.classList.add('visible')
-        this.secbotLogo.classList.add('visible')
+        logo.classList.add('visible');
+        this.secbotLogo.classList.add('visible');
         setTimeout(() => {
-          this.secbotLogo.classList.remove('visible')
-        }, this.transitionDuration)
-      }, this.transitionDuration)
+          this.secbotLogo.classList.remove('visible');
+        }, this.transitionDuration);
+      }, this.transitionDuration);
 
       setTimeout(() => {
-        logo.classList.remove('visible')
-        this.regularLogo.classList.add('visible')
-      }, this.transitionDuration + this.flickerDuration)
+        logo.classList.remove('visible');
+        this.regularLogo.classList.add('visible');
+      }, this.transitionDuration + this.flickerDuration);
 
-      this.queueGlitch()
+      this.queueGlitch();
     },
     getRandomLogo() {
-      return this.otherLogos[Math.floor(Math.random() * this.otherLogos.length)]
+      return this.otherLogos[
+        Math.floor(Math.random() * this.otherLogos.length)
+      ];
     },
     queueGlitch() {
       this.flickerCooldown =
         Math.random() * (this.flickerCooldownMax - this.flickerCooldownMin) +
-        this.flickerCooldownMin
+        this.flickerCooldownMin;
 
       this.flickerDuration =
         Math.random() * (this.flickerDurationMax - this.flickerDurationMin) +
-        this.flickerDurationMin
+        this.flickerDurationMin;
 
-      this.glitchTimeout = setTimeout(this.glitch, this.flickerCooldown)
+      this.glitchTimeout = setTimeout(this.glitch, this.flickerCooldown);
     },
   },
-}
+};
 </script>
 
 <style scoped lang="scss">

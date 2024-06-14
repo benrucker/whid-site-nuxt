@@ -59,56 +59,56 @@ export default {
       dragging: false,
       loggedIn: false,
       inputAreaRef: undefined,
-    }
+    };
   },
   computed: {
     displayedTerminalContent() {
-      return this.terminalContent.slice(-50)
+      return this.terminalContent.slice(-50);
     },
     isTerminalClickContinue() {
       if (this.inputAreaRef == null) {
-        return false
+        return false;
       }
 
-      return this.inputAreaRef.getTerminalMode() === 'clickContinue'
+      return this.inputAreaRef.getTerminalMode() === 'clickContinue';
     },
   },
   mounted() {
-    this.scrollToBottom()
-    this.terminalContent = []
+    this.scrollToBottom();
+    this.terminalContent = [];
 
     this.$nextTick(() => {
-      this.inputAreaRef = this.$refs.inputArea
-    })
+      this.inputAreaRef = this.$refs.inputArea;
+    });
   },
   methods: {
     hideTerminal() {
-      this.isShowTerminal = !this.isShowTerminal
+      this.isShowTerminal = !this.isShowTerminal;
     },
     addTextLine(line) {
-      this.terminalContent.push(line)
+      this.terminalContent.push(line);
     },
     scrollToBottom() {
       this.$nextTick(() => {
-        this.$refs.inputArea.$el.scrollIntoView({ block: 'start' })
-      })
+        this.$refs.inputArea.$el.scrollIntoView({ block: 'start' });
+      });
     },
     selfDestruct() {
-      const el = document.createElement('div')
-      el.classList.add('secbot-explosion')
-      this.$refs.terminal.appendChild(el)
+      const el = document.createElement('div');
+      el.classList.add('secbot-explosion');
+      this.$refs.terminal.appendChild(el);
     },
     focusInput() {
-      this.$refs.inputArea.focusInput()
+      this.$refs.inputArea.focusInput();
     },
     logIn() {
-      this.loggedIn = true
-      this.$refs.inputArea.logIn()
+      this.loggedIn = true;
+      this.$refs.inputArea.logIn();
     },
     moveTerminal(x, y) {
-      const terminal = this.$refs.terminal
-      terminal.style.left = x + 'px'
-      terminal.style.top = y + 'px'
+      const terminal = this.$refs.terminal;
+      terminal.style.left = x + 'px';
+      terminal.style.top = y + 'px';
     },
     terminalMouseMove(event) {
       // called externally
@@ -116,20 +116,20 @@ export default {
         this.moveTerminal(
           event.clientX - this.offsetX,
           event.clientY - this.offsetY,
-        )
+        );
       }
     },
     terminalMouseDown(offsetX, offsetY) {
-      this.dragging = true
-      this.offsetX = offsetX
-      this.offsetY = offsetY
+      this.dragging = true;
+      this.offsetX = offsetX;
+      this.offsetY = offsetY;
     },
     terminalMouseUp() {
       // called externally
-      this.dragging = false
+      this.dragging = false;
     },
   },
-}
+};
 </script>
 
 <style scoped>

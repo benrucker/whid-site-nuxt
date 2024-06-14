@@ -3,17 +3,17 @@
 </template>
 
 <script>
-import { use } from 'echarts/core'
-import { CanvasRenderer } from 'echarts/renderers'
-import { BarChart } from 'echarts/charts'
+import { use } from 'echarts/core';
+import { CanvasRenderer } from 'echarts/renderers';
+import { BarChart } from 'echarts/charts';
 import {
   TitleComponent,
   TooltipComponent,
   LegendComponent,
   ToolboxComponent,
-  GridComponent
-} from 'echarts/components'
-import VChart, { THEME_KEY } from 'vue-echarts'
+  GridComponent,
+} from 'echarts/components';
+import VChart, { THEME_KEY } from 'vue-echarts';
 
 use([
   CanvasRenderer,
@@ -22,16 +22,16 @@ use([
   TooltipComponent,
   LegendComponent,
   ToolboxComponent,
-  GridComponent
-])
+  GridComponent,
+]);
 
 export default {
   name: 'HelloWorld',
   components: {
-    VChart
+    VChart,
   },
   provide: {
-    [THEME_KEY]: 'dark'
+    [THEME_KEY]: 'dark',
   },
   props: {
     data: [],
@@ -39,34 +39,34 @@ export default {
     title: '',
     bgColor: '',
     color: '',
-    textColor: ''
+    textColor: '',
   },
-  data () {
+  data() {
     return {
       option: {},
       lines: [],
-      labels: []
-    }
+      labels: [],
+    };
   },
-  mounted () {
+  mounted() {
     window.onresize = () => {
-      this.$refs.chart.resize()
-    }
+      this.$refs.chart.resize();
+    };
   },
   methods: {
-    init (xAxis, data) {
+    init(xAxis, data) {
       this.option = {
         grid: {
           left: '3%',
           right: '4%',
           bottom: '3%',
-          containLabel: true
+          containLabel: true,
         },
         tooltip: {
           trigger: 'axis',
           axisPointer: {
-            type: 'shadow'
-          }
+            type: 'shadow',
+          },
         },
         xAxis: [
           {
@@ -74,13 +74,13 @@ export default {
             data: xAxis,
             axisTick: {
               // alignWithLabel: true,
-            }
-          }
+            },
+          },
         ],
         yAxis: [
           {
-            type: 'value'
-          }
+            type: 'value',
+          },
         ],
         series: [
           {
@@ -90,24 +90,24 @@ export default {
             barWidth: '60%',
             roundCap: true,
             itemStyle: {
-              borderRadius: [10, 10, 0, 0]
+              borderRadius: [10, 10, 0, 0],
             },
-            animationDelay (idx) {
-              return idx * 100
-            }
-          }
+            animationDelay(idx) {
+              return idx * 100;
+            },
+          },
         ],
         color: [this.color],
         backgroundColor: this.bgColor,
         textStyle: {
           color: this.textColor,
           fontSize: 36,
-          fontWeight: 'bold'
-        }
-      }
-    }
-  }
-}
+          fontWeight: 'bold',
+        },
+      };
+    },
+  },
+};
 </script>
 
 <style scoped>

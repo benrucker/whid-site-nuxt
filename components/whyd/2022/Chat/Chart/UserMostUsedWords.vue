@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import Vue from 'vue'
+import Vue from 'vue';
 
 export default {
   props: {
@@ -83,129 +83,129 @@ export default {
       timeoutDelay: 300,
       defaultSelectRects: undefined,
       emptyLine: true,
-    }
+    };
   },
   computed: {
     wordsAndCounts() {
-      if (this.stats == null) return null
-      return JSON.parse(this.stats.user.mostUsedWords)
+      if (this.stats == null) return null;
+      return JSON.parse(this.stats.user.mostUsedWords);
     },
     words() {
-      return this.wordsAndCounts?.map(({ word, _ }) => word)
+      return this.wordsAndCounts?.map(({ word, _ }) => word);
     },
     wordsToCounts() {
       return Object.fromEntries(
         this.wordsAndCounts.map(({ word, count }) => [word, count]),
-      )
+      );
     },
   },
   mounted() {
     // console.log(JSON.parse(this.stats.user.mostUsedWords))
-    this.raf = requestAnimationFrame(this.advance)
+    this.raf = requestAnimationFrame(this.advance);
   },
   destroyed() {
-    cancelAnimationFrame(this.raf)
-    clearTimeout(this.timeout)
+    cancelAnimationFrame(this.raf);
+    clearTimeout(this.timeout);
   },
   methods: {
     advance() {
       if (this.words.length > 0 && this.numLines <= 15) {
-        this.calculatedWords[this.numLines].push(this.words.shift())
+        this.calculatedWords[this.numLines].push(this.words.shift());
 
-        let pushed = 1
+        let pushed = 1;
 
         if (this.emptyLine)
           for (let i = 1; i < this.numLines; i++) {
-            this.calculatedWords[this.numLines].push(this.words.shift())
-            pushed += 1
+            this.calculatedWords[this.numLines].push(this.words.shift());
+            pushed += 1;
           }
 
-        this.emptyLine = false
+        this.emptyLine = false;
         requestAnimationFrame(() => {
           if (this.didBreakLine()) {
             if (this.didFallOffBottom()) {
               for (let j = 0; j < pushed; j++)
-                this.calculatedWords[this.numLines].pop()
-              return
+                this.calculatedWords[this.numLines].pop();
+              return;
             }
 
-            let word = ''
+            let word = '';
             for (let j = 0; j < pushed; j++)
-              word += this.calculatedWords[this.numLines].pop()
+              word += this.calculatedWords[this.numLines].pop();
 
             // Vue.set is needed because Vue can't detect
             // when a property is added to an object
-            Vue.set(this.calculatedWords, this.numLines + 1, [word])
+            Vue.set(this.calculatedWords, this.numLines + 1, [word]);
 
             // for this line, get the offset between the first letter and the edge of the line
-            const line = this.$refs[this.numLines + 'hidden'][0]
-            const absolutePosition = line.getBoundingClientRect().left
+            const line = this.$refs[this.numLines + 'hidden'][0];
+            const absolutePosition = line.getBoundingClientRect().left;
             const firstLetterPosition = line
               .querySelector('span')
-              .getBoundingClientRect().left
-            const offset = firstLetterPosition - absolutePosition
+              .getBoundingClientRect().left;
+            const offset = firstLetterPosition - absolutePosition;
 
             this.$refs.root1.style.setProperty(
               `--line-${this.numLines}-padding`,
               `${offset}px`,
-            )
+            );
 
-            this.numLines++
-            this.emptyLine = true
+            this.numLines++;
+            this.emptyLine = true;
           }
-          this.raf = requestAnimationFrame(this.advance)
-        })
+          this.raf = requestAnimationFrame(this.advance);
+        });
       } else {
-        this.doneParsing = true
-        this.timeout = setTimeout(this.display)
+        this.doneParsing = true;
+        this.timeout = setTimeout(this.display);
       }
     },
     display() {
-      this.timeoutDelay -= 10
+      this.timeoutDelay -= 10;
       // move words from calculatedWords to displayedWords one at a time
       if (this.numDisplayedLines <= this.numLines) {
         if (this.displayedWords[this.numDisplayedLines] === undefined) {
-          Vue.set(this.displayedWords, this.numDisplayedLines, [])
+          Vue.set(this.displayedWords, this.numDisplayedLines, []);
           requestAnimationFrame(() => {
-            const line = this.$refs[this.numDisplayedLines + 'line']
-            if (line?.style != null) line.style.opacity = 1
-            else if (line != null) line[0].style.opacity = 1
-          })
+            const line = this.$refs[this.numDisplayedLines + 'line'];
+            if (line?.style != null) line.style.opacity = 1;
+            else if (line != null) line[0].style.opacity = 1;
+          });
         }
         this.displayedWords[this.numDisplayedLines].push(
           this.calculatedWords[this.numDisplayedLines].shift(),
-        )
+        );
         if (this.calculatedWords[this.numDisplayedLines].length === 0) {
-          this.numDisplayedLines++
+          this.numDisplayedLines++;
         }
-        this.timeout = setTimeout(this.display, this.timeoutDelay)
+        this.timeout = setTimeout(this.display, this.timeoutDelay);
       }
     },
     didBreakLine() {
-      const textNode = this.$refs.root2.lastChild.lastChild.lastChild
-      const range = document.createRange()
-      range.selectNode(textNode)
+      const textNode = this.$refs.root2.lastChild.lastChild.lastChild;
+      const range = document.createRange();
+      range.selectNode(textNode);
 
-      const numSelectRects = range.getClientRects().length
+      const numSelectRects = range.getClientRects().length;
 
       if (this.defaultSelectRects == null) {
         // store a baseline to compare when our line breaks
-        this.defaultSelectRects = numSelectRects
+        this.defaultSelectRects = numSelectRects;
       }
 
-      return numSelectRects > this.defaultSelectRects
+      return numSelectRects > this.defaultSelectRects;
     },
     didFallOffBottom() {
-      const textNode = this.$refs.root2.lastChild.lastChild
-      const range = document.createRange()
-      range.selectNode(textNode)
+      const textNode = this.$refs.root2.lastChild.lastChild;
+      const range = document.createRange();
+      range.selectNode(textNode);
       return (
         textNode.getBoundingClientRect().bottom >
         this.$refs.root2.lastChild.height
-      )
+      );
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

@@ -18,8 +18,8 @@ export default {
   },
   computed: {
     favoriteSong() {
-      return this.stats.server['most played song']
+      return this.stats.server['most played song'];
     },
   },
-}
+};
 </script>

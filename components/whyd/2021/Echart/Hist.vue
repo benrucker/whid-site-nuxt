@@ -3,17 +3,17 @@
 </template>
 
 <script>
-import { use } from 'echarts/core'
-import { CanvasRenderer } from 'echarts/renderers'
-import { LineChart } from 'echarts/charts'
+import { use } from 'echarts/core';
+import { CanvasRenderer } from 'echarts/renderers';
+import { LineChart } from 'echarts/charts';
 import {
   TitleComponent,
   TooltipComponent,
   LegendComponent,
   ToolboxComponent,
-  GridComponent
-} from 'echarts/components'
-import VChart, { THEME_KEY } from 'vue-echarts'
+  GridComponent,
+} from 'echarts/components';
+import VChart, { THEME_KEY } from 'vue-echarts';
 
 use([
   CanvasRenderer,
@@ -22,16 +22,16 @@ use([
   TooltipComponent,
   LegendComponent,
   ToolboxComponent,
-  GridComponent
-])
+  GridComponent,
+]);
 
 export default {
   name: 'HelloWorld',
   components: {
-    VChart
+    VChart,
   },
   provide: {
-    [THEME_KEY]: 'dark'
+    [THEME_KEY]: 'dark',
   },
   props: {
     data: [],
@@ -43,44 +43,49 @@ export default {
     right: false,
     showTitle: false,
     formatter: false,
-    xAxisLabel: ''
+    xAxisLabel: '',
   },
-  data () {
+  data() {
     return {
       option: {},
       lines: [],
-      labels: []
-    }
+      labels: [],
+    };
   },
-  mounted () {
+  mounted() {
     window.onresize = () => {
-      this.$refs.chart.resize()
-    }
+      this.$refs.chart.resize();
+    };
   },
   methods: {
-    init (xAxis, data, colorsIn) {
+    init(xAxis, data, colorsIn) {
       this.option = {
         title: {
           text: this.title,
           textStyle: {
             color: this.textColor,
-            fontWeight: 'normal'
+            fontWeight: 'normal',
           },
           show: this.showTitle,
-          left: 'center'
+          left: 'center',
         },
         grid: {
           left: '3%',
           right: '4%',
           bottom: '3%',
-          containLabel: true
+          containLabel: true,
         },
         tooltip: {
           trigger: 'axis',
           axisPointer: {
-            type: 'shadow'
+            type: 'shadow',
           },
-          formatter: this.formatter ? this.formatter : params => `${params[0].name} ${this.title}: ${params[0].value.toLocaleString()}`
+          formatter: this.formatter
+            ? this.formatter
+            : (params) =>
+                `${params[0].name} ${
+                  this.title
+                }: ${params[0].value.toLocaleString()}`,
         },
         xAxis: [
           {
@@ -89,21 +94,21 @@ export default {
             splitLine: {
               show: false,
               lineStyle: {
-                color: '#fff'
-              }
+                color: '#fff',
+              },
             },
             axisLabel: {
-              align: this.right ? 'left' : 'center'
+              align: this.right ? 'left' : 'center',
             },
             axisLine: {
               lineStyle: {
-                color: this.textColor
-              }
+                color: this.textColor,
+              },
             },
             axisTick: {
               lineStyle: {
-                color: this.textColor
-              }
+                color: this.textColor,
+              },
             },
             boundaryGap: ['20%', '20%'],
             name: this.xAxisLabel,
@@ -111,17 +116,17 @@ export default {
             nameTextStyle: {
               color: this.textColor,
               fontWeight: 'normal',
-              fontSize: 12
-            }
-          }
+              fontSize: 12,
+            },
+          },
         ],
         yAxis: [
           {
             type: 'value',
             splitLine: {
-              show: false
-            }
-          }
+              show: false,
+            },
+          },
         ],
         series: [
           {
@@ -129,26 +134,26 @@ export default {
             data,
             barWidth: '99.3%',
             itemStyle: {
-              opacity: 0.5
+              opacity: 0.5,
             },
             axisLabel: {
               interval: 0,
-              rotate: 0
+              rotate: 0,
             },
-            colorBy: 'data'
-          }
+            colorBy: 'data',
+          },
         ],
         color: this.color,
         backgroundColor: this.bgColor,
         textStyle: {
           color: this.textColor,
           fontSize: 36,
-          fontWeight: 'bold'
-        }
-      }
-    }
-  }
-}
+          fontWeight: 'bold',
+        },
+      };
+    },
+  },
+};
 </script>
 
 <style scoped>

@@ -5,16 +5,16 @@
 </template>
 
 <script>
-import * as THREE from 'three'
-import { AsciiEffect } from 'three/examples/jsm/effects/AsciiEffect'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import * as THREE from 'three';
+import { AsciiEffect } from 'three/examples/jsm/effects/AsciiEffect';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 export default {
   props: {
     shouldStopWhenFacingForward: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data: function () {
     return {
@@ -27,29 +27,29 @@ export default {
       view: undefined,
       bigCamera: undefined,
       rAF: undefined,
-      effect: undefined
-    }
+      effect: undefined,
+    };
   },
   mounted() {
-    const canvas = this.$refs.hiddenCanvas
+    const canvas = this.$refs.hiddenCanvas;
     this.renderer = new THREE.WebGLRenderer({
       canvas,
       alpha: true,
       antialias: true,
       context: canvas.getContext('webgl', {
-        willReadFrequently: true
-      })
-    })
+        willReadFrequently: true,
+      }),
+    });
 
-    const fov = 45
-    const aspect = 2 // the canvas default
-    const near = 0.1
-    const far = 20
+    const fov = 45;
+    const aspect = 2; // the canvas default
+    const near = 0.1;
+    const far = 20;
 
-    this.scene = new THREE.Scene()
-    this.clock = new THREE.Clock()
+    this.scene = new THREE.Scene();
+    this.clock = new THREE.Clock();
 
-    const dist = 2
+    const dist = 2;
 
     this.view = {
       left: 0,
@@ -57,109 +57,114 @@ export default {
       width: 1,
       height: 1,
       fov,
-      pos: [dist, 0.4, 0]
-    }
+      pos: [dist, 0.4, 0],
+    };
 
-    const camera = new THREE.PerspectiveCamera(this.view.fov, aspect, near, far)
-    camera.position.fromArray(this.view.pos)
+    const camera = new THREE.PerspectiveCamera(
+      this.view.fov,
+      aspect,
+      near,
+      far,
+    );
+    camera.position.fromArray(this.view.pos);
     // camera.up.fromArray(this.view.up)
-    this.view.camera = camera
-    this.view.camera.lookAt(0, 0.4, 0)
+    this.view.camera = camera;
+    this.view.camera.lookAt(0, 0.4, 0);
 
-    this.scene.add(this.view.camera)
+    this.scene.add(this.view.camera);
 
     {
-      const skyColor = 0xaaaaff
-      const groundColor = 0x222299
-      const intensity = 10
-      const light = new THREE.HemisphereLight(skyColor, groundColor, intensity)
-      this.scene.add(light)
+      const skyColor = 0xaaaaff;
+      const groundColor = 0x222299;
+      const intensity = 10;
+      const light = new THREE.HemisphereLight(skyColor, groundColor, intensity);
+      this.scene.add(light);
     }
 
     {
-      const color = 0xbebefa
-      const intensity = 2
-      const light = new THREE.DirectionalLight(color, intensity)
-      light.position.set(100, 10, 20)
-      light.target.position.set(0, 0, 0)
-      this.scene.add(light)
+      const color = 0xbebefa;
+      const intensity = 2;
+      const light = new THREE.DirectionalLight(color, intensity);
+      light.position.set(100, 10, 20);
+      light.target.position.set(0, 0, 0);
+      this.scene.add(light);
     }
 
     {
-      const color = 0x443322
-      const intensity = 1
-      const light = new THREE.DirectionalLight(color, intensity)
-      light.position.set(-100, -10, -20)
-      light.target.position.set(0, 0, 0)
-      this.scene.add(light)
+      const color = 0x443322;
+      const intensity = 1;
+      const light = new THREE.DirectionalLight(color, intensity);
+      light.position.set(-100, -10, -20);
+      light.target.position.set(0, 0, 0);
+      this.scene.add(light);
     }
 
-    const loader = new GLTFLoader()
+    const loader = new GLTFLoader();
     loader.load('/whyd/2022/3d/whid.glb', (gltf) => {
-      this.model = gltf.scene
-      this.scene.add(this.model)
-      this.model.rotation.y = Math.PI
+      this.model = gltf.scene;
+      this.scene.add(this.model);
+      this.model.rotation.y = Math.PI;
 
-      this.rAF = requestAnimationFrame(this.render)
-    })
+      this.rAF = requestAnimationFrame(this.render);
+    });
 
     this.effect = new AsciiEffect(this.renderer, ' .,:;whID08@', {
-      invert: false
-    })
-    this.effect.setSize(canvas.width, canvas.height)
-    this.effect.domElement.style.color = 'var(--primary)'
-    this.effect.domElement.style.backgroundColor = 'var(--background)'
-    this.effect.class = 'overlay'
-    this.$refs.whidCanvas.appendChild(this.effect.domElement)
+      invert: false,
+    });
+    this.effect.setSize(canvas.width, canvas.height);
+    this.effect.domElement.style.color = 'var(--primary)';
+    this.effect.domElement.style.backgroundColor = 'var(--background)';
+    this.effect.class = 'overlay';
+    this.$refs.whidCanvas.appendChild(this.effect.domElement);
     // document.body.appendChild(this.effect.domElement)
   },
   beforeDestroy() {
-    cancelAnimationFrame(this.rAF)
+    cancelAnimationFrame(this.rAF);
   },
   methods: {
     render() {
-      const updateDelta = this.clock.getDelta()
+      const updateDelta = this.clock.getDelta();
 
-      const newY = this.model.rotation.y - updateDelta * 1
+      const newY = this.model.rotation.y - updateDelta * 1;
 
       if (this.shouldStopWhenFacingForward && newY !== newY % (2 * Math.PI)) {
-        this.model.rotation.y = -0.02
+        this.model.rotation.y = -0.02;
 
-        const camera = this.view.camera
-        camera.updateProjectionMatrix()
-        this.effect.render(this.scene, camera)
+        const camera = this.view.camera;
+        camera.updateProjectionMatrix();
+        this.effect.render(this.scene, camera);
 
-        return
+        return;
       } else {
-        this.model.rotation.y = newY
+        this.model.rotation.y = newY;
       }
 
       if (this.resizeRendererToDisplaySize()) {
-        const canvas = this.renderer.domElement
-        this.view.camera.aspect = canvas.clientWidth / canvas.clientHeight
-        this.view.camera.updateProjectionMatrix()
+        const canvas = this.renderer.domElement;
+        this.view.camera.aspect = canvas.clientWidth / canvas.clientHeight;
+        this.view.camera.updateProjectionMatrix();
       }
 
-      const camera = this.view.camera
+      const camera = this.view.camera;
 
-      camera.updateProjectionMatrix()
+      camera.updateProjectionMatrix();
 
-      this.effect.render(this.scene, camera)
+      this.effect.render(this.scene, camera);
 
-      this.rAF = requestAnimationFrame(this.render)
+      this.rAF = requestAnimationFrame(this.render);
     },
     resizeRendererToDisplaySize() {
-      const canvas = this.renderer.domElement
-      const width = canvas.clientWidth
-      const height = canvas.clientHeight
-      const needResize = canvas.width !== width || canvas.height !== height
+      const canvas = this.renderer.domElement;
+      const width = canvas.clientWidth;
+      const height = canvas.clientHeight;
+      const needResize = canvas.width !== width || canvas.height !== height;
       if (needResize) {
-        this.renderer.setSize(width, height, false)
+        this.renderer.setSize(width, height, false);
       }
-      return needResize
-    }
-  }
-}
+      return needResize;
+    },
+  },
+};
 </script>
 
 <style scoped>

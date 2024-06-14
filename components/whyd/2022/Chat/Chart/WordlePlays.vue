@@ -54,14 +54,14 @@ export default {
     },
   },
   data() {
-    return {}
+    return {};
   },
   computed: {
     userData() {
-      return this.stats.server['Wordle Scores']
+      return this.stats.server['Wordle Scores'];
     },
     userIds() {
-      return Object.keys(this.userData).slice(0, 5)
+      return Object.keys(this.userData).slice(0, 5);
     },
   },
   methods: {
@@ -71,10 +71,10 @@ export default {
           (Math.random() * this.userData[id].images.length) | 0
         ],
         '_blank',
-      )
+      );
     },
   },
-}
+};
 </script>
 
 <style scoped>

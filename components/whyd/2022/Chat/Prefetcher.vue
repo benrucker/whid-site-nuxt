@@ -425,7 +425,7 @@ export default {
       ],
       isPrefetching: true,
       showComponents: true,
-    }
+    };
   },
   computed: {
     resources() {
@@ -434,22 +434,22 @@ export default {
         .concat(this.emojis)
         .concat(this.stickers)
         .concat(this.avatars)
-        .concat(this.attachments)
+        .concat(this.attachments);
     },
   },
   errorCaptured: function (err) {
-    console.log('Caught error', err.message)
-    ++this.count
-    return false
+    console.log('Caught error', err.message);
+    ++this.count;
+    return false;
   },
   mounted() {
     // remove links after 2 min to save DOM space
     setTimeout(() => {
-      this.isPrefetching = false
-    }, 2 * 60 * 1000)
+      this.isPrefetching = false;
+    }, 2 * 60 * 1000);
     setTimeout(() => {
-      this.showComponents = false
-    }, 500)
+      this.showComponents = false;
+    }, 500);
   },
-}
+};
 </script>

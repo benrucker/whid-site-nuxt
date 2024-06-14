@@ -47,12 +47,12 @@ export default {
   props: {
     urlPrefix: {
       type: String,
-      default: ''
+      default: '',
     },
     id: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   data() {
     return {
@@ -61,32 +61,32 @@ export default {
       replyToCount: '',
       repliedToYou: '',
       repliedToYouCount: '',
-      messagedAfter: ''
-    }
+      messagedAfter: '',
+    };
   },
   async mounted() {},
   methods: {
     async init(id, urlPrefix) {
       const youMostRepliedTo = await fetch(
-        `${urlPrefix}/user/${id}/repliedTo.json`
-      ).then((res) => res.json())
+        `${urlPrefix}/user/${id}/repliedTo.json`,
+      ).then((res) => res.json());
       const mostRepliedToYou = await fetch(
-        `${urlPrefix}/user/${id}/repliedToYou.json`
-      ).then((res) => res.json())
+        `${urlPrefix}/user/${id}/repliedToYou.json`,
+      ).then((res) => res.json());
       const sentMessageAfter = await fetch(
-        `${urlPrefix}/user/${id}/sentMessageAfter.json`
-      ).then((res) => res.json())
+        `${urlPrefix}/user/${id}/sentMessageAfter.json`,
+      ).then((res) => res.json());
 
-      this.repliedTo = youMostRepliedTo.mostRepliedTo
-      this.replyToCount = youMostRepliedTo.mostRepliedToCount
+      this.repliedTo = youMostRepliedTo.mostRepliedTo;
+      this.replyToCount = youMostRepliedTo.mostRepliedToCount;
 
-      this.repliedToYou = mostRepliedToYou.repliedToYou
-      this.repliedToYouCount = mostRepliedToYou.repliedToYouCount
+      this.repliedToYou = mostRepliedToYou.repliedToYou;
+      this.repliedToYouCount = mostRepliedToYou.repliedToYouCount;
 
-      this.messagedAfter = sentMessageAfter.mostOftenSentAfter
-    }
-  }
-}
+      this.messagedAfter = sentMessageAfter.mostOftenSentAfter;
+    },
+  },
+};
 </script>
 
 <style scoped>

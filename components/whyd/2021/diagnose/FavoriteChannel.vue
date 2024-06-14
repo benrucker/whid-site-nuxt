@@ -32,38 +32,38 @@ const titleMap = {
   dev: "you're a computer",
   dnd: 'you roll low on initiative',
   japan: "you're a weeb 🤢",
-  dont: "you're a major 🤢"
-}
+  dont: "you're a major 🤢",
+};
 
 export default {
   props: {},
   data() {
     return {
       title: '',
-      favorite: ''
-    }
+      favorite: '',
+    };
   },
   async mounted() {},
   methods: {
     async init(id, urlPrefix) {
       const data = await fetch(`${urlPrefix}/user/${id}/channels.json`).then(
-        (res) => res.json()
-      )
-      this.favorite = data.favChannel
-      this.title = titleMap[this.favorite]
-      delete data.favChannel
-      let sorted = Object.entries(data).sort((a, b) => a[1] - b[1])
-      sorted = sorted.filter(([, count]) => count > 0)
+        (res) => res.json(),
+      );
+      this.favorite = data.favChannel;
+      this.title = titleMap[this.favorite];
+      delete data.favChannel;
+      let sorted = Object.entries(data).sort((a, b) => a[1] - b[1]);
+      sorted = sorted.filter(([, count]) => count > 0);
 
       this.$refs.donut.init(
         sorted.map((x) => {
-          return { name: x[0], value: x[1] }
+          return { name: x[0], value: x[1] };
         }),
-        []
-      )
-    }
-  }
-}
+        [],
+      );
+    },
+  },
+};
 </script>
 
 <style scoped>
