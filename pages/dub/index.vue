@@ -20,7 +20,7 @@
         <section v-if="featured">
           <h3 class="text-center mt-4">Featured Video</h3>
           <div class="container">
-            <FeaturedVideoCard
+            <DubFeaturedVideoCard
               v-if="featured"
               :video-link="watchFeatured()"
               :thumbnail-link="thumbnailFeatured()"
@@ -63,7 +63,7 @@
         <div class="container mt-1">
           <div v-if="seasons[activeSeason]">
             <div class="row">
-              <VideoCard
+              <DubVideoCard
                 v-for="episode in sortEpisodes(
                   seasons[activeSeason].episodes,
                   activeSeason,
@@ -75,7 +75,7 @@
                 :title="title(episode)"
                 :release-date="date(episode)"
               />
-              <NoVideosPlaceholder
+              <DubNoVideosPlaceholder
                 v-if="seasons[activeSeason]['episodes'].length === 0"
                 class="text-center mt-5"
               />

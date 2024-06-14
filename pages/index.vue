@@ -19,7 +19,7 @@
     </div>
 
     <div class="featured mt-5 container">
-      <InlineVideoCard
+      <DubInlineVideoCard
         video-link="https://12b3.pw/whid/videos/extra/context2.mp4"
         video-player-link="/dub/"
         thumbnail-link="https://12b3.pw/whid/thumbnails/extra/context2.png"
