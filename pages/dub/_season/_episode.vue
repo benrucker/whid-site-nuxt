@@ -32,9 +32,10 @@
 </template>
 <script lang="ts">
 import Vue from 'vue';
-import { SeasonName, isSeasonName } from '~/types/SeasonName';
 import { Catalog, Episode, Part } from '~/types/catalogTypes';
+import { isSeasonName, SeasonName } from '~/types/SeasonName';
 import { CATALOG } from '~/utils/catalog';
+import { goToGallery } from '~/utils/goToGallery';
 
 interface State {
   catalog: Catalog;
@@ -61,9 +62,12 @@ export default Vue.extend({
     const season = params.season;
     const episode = params.episode;
 
-    if (!isSeasonName(season)) {
-      goToGallery();
-      throw new VideoIDError(`Unknown season ${season}`);
+    if (
+      !isSeasonName(season) ||
+      CATALOG.seasons[season].episodes.find(({ id }) => id === episode) == null
+    ) {
+      goToGallery(redirect);
+      throw new VideoIDError(`Unknown episode ${season} ${episode}`);
     }
 
     return {
@@ -149,21 +153,14 @@ export default Vue.extend({
   },
   mounted() {
     this.time = Number(this.$nuxt.context.query.t?.toString());
-    try {
-      this.epData = getVideoDataFromID(this.catalog, this.season, this.episode);
+    this.epData = getVideoDataFromID(this.catalog, this.season, this.episode);
 
-      this.thumbnailURL = constructThumbnailURL(this.season, this.episode);
-      this.videoURL = constructVideoURL(this.season, this.episode);
-      this.title = this.epData.title;
-      this.releaseDate = constructDate(this.epData);
-      this.parts = this.epData.parts;
-    } catch (err) {
-      if (err instanceof VideoIDError) {
-        goToGallery();
-      } else {
-        throw err;
-      }
-    }
+    this.thumbnailURL = constructThumbnailURL(this.season, this.episode);
+    this.videoURL = constructVideoURL(this.season, this.episode);
+    this.title = this.epData.title;
+    this.releaseDate = constructDate(this.epData);
+    this.parts = this.epData.parts;
+
     this.loaded = true;
   },
   methods: {
@@ -229,6 +226,4 @@ function getRandomInt(total: number) {
   const newNum = Math.floor(Math.random() * (total - 1));
   return newNum;
 }
-
-function goToGallery() {}
 </script>

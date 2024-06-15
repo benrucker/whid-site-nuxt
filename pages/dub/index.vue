@@ -2,17 +2,8 @@
   <div>
     <div v-cloak id="galleryApp">
       <div v-if="showAlert" class="container">
-        <div
-          class="alert alert-info alert-dismissible fade show m-2"
-          role="alert"
-        >
+        <div class="alert alert-danger fade show m-2" role="alert">
           <strong>Error:</strong> Invalid video ID
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="alert"
-            aria-label="Close"
-          />
         </div>
       </div>
       <section>
