@@ -4,6 +4,7 @@
 
 <script>
 import Vue from 'vue';
+import { MESSAGES } from '~/utils/messages';
 
 export default {
   async asyncData({ params, isDev }) {
@@ -31,21 +32,19 @@ export default {
     };
   },
   data() {
-    return {
-      messages: undefined,
-      stats: undefined,
-      username: undefined,
-      userId: undefined,
-    };
-  },
-  async fetch() {
-    this.messages = (await this.$nuxt.$content('messages').fetch()).messages;
-    this.messages.forEach((v, i) => {
+    const messages = MESSAGES.messages;
+    messages.forEach((v, i) => {
       v.id = i;
       if (v.author == null) {
         v.author = this.messages[i - 1].author;
       }
     });
+    return {
+      messages,
+      stats: undefined,
+      username: undefined,
+      userId: undefined,
+    };
   },
   head() {
     return {

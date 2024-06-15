@@ -15,8 +15,7 @@
           />
         </div>
       </div>
-      <p v-if="$fetchState.pending" />
-      <section v-else>
+      <section>
         <section v-if="featured">
           <h3 class="text-center mt-4">Featured Video</h3>
           <div class="container">
@@ -26,7 +25,7 @@
               :thumbnail-link="thumbnailFeatured()"
               :title="title(featured)"
               :release-date="date(featured)"
-              :description="featuredDesc"
+              :description="featured.description"
             />
           </div>
         </section>
@@ -39,29 +38,29 @@
             role="group"
             aria-label="Change seasons"
           >
-            <template v-for="season in Object.keys(seasons)">
+            <template v-for="[seasonName, season] in Object.entries(seasons)">
               <input
-                :id="season"
-                :key="season.id"
+                :id="seasonName"
+                :key="seasonName + 'input'"
                 v-model="activeSeason"
                 type="radio"
                 class="btn-check"
                 name="btnradio"
-                :value="season"
+                :value="seasonName"
                 autocomplete="off"
               />
               <label
-                :key="season.id"
+                :key="seasonName + 'label'"
                 class="btn btn-outline-primary"
-                :for="season"
-                >{{ seasons[season].name }}</label
+                :for="seasonName"
+                >{{ season.name }}</label
               >
             </template>
           </div>
         </div>
 
         <div class="container mt-1">
-          <div v-if="seasons[activeSeason]">
+          <div v-if="seasons[activeSeason] != null">
             <div class="row">
               <DubVideoCard
                 v-for="episode in sortEpisodes(
@@ -70,8 +69,8 @@
                 )"
                 :key="episode['title']"
                 class="col-md-6 col-lg-3 my-3 mt-1"
-                :video-link="video(episode)"
-                :thumbnail-link="thumbnail(episode)"
+                :video-link="video(episode, activeSeason)"
+                :thumbnail-link="thumbnail(episode, activeSeason)"
                 :title="title(episode)"
                 :release-date="date(episode)"
               />
@@ -87,119 +86,132 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import {
+  Catalog,
+  Episode,
+  FeaturedVideo,
+  SeasonName,
+} from '~/types/catalogTypes';
+import { SeasonById } from '~/types/SeasonById';
+import { CATALOG } from '~/utils/catalog';
+
+interface State {
+  catalog: Catalog;
+  activeSeason: SeasonName;
+  seasons: SeasonById;
+  showAlert: boolean;
+  featured: FeaturedVideo & Episode;
+  scrollPosition: number;
+}
+
 export default {
   layout: 'dub-layout',
-  data() {
+  data(): State {
     return {
-      catalog: null,
-      activeSeason: undefined,
-      seasons: {},
+      catalog: CATALOG,
+      activeSeason: 's1',
+      seasons: CATALOG.seasons,
       showAlert: false,
-      featured: null,
-      featuredDesc: '',
+      featured: getFeaturedVideo(CATALOG),
       scrollPosition: 0,
-    };
+    } as const;
   },
-  async fetch() {
-    this.catalog = await this.$nuxt.$content('catalog').fetch();
-    addSeasonToEpisodes(this.catalog);
-    this.seasons = getSeasons(this.catalog);
-    this.showAlert = this.$nuxt.context.query.error;
-    [this.featured, this.featuredDesc] = getFeaturedVideo(this.catalog);
+  fetch(): void {
+    this.showAlert = this.$nuxt.context.query.error != null;
   },
   watch: {
-    activeSeason(newValue) {
-      localStorage.setItem('activeSeason', newValue);
-    },
-    scrollPosition(newValue) {
-      localStorage.setItem('scrollPosition', newValue);
-    },
-  },
-  mounted() {
-    this.activeSeason = localStorage.getItem('activeSeason') ?? 's1';
+    activeSeason: saveActiveSeason,
+    scrollPosition: saveScrollPosition,
+  } as const,
+  mounted(): void {
+    // TODO: Use runtypes to verify this
+    this.activeSeason = (localStorage.getItem('activeSeason') ??
+      's1') as SeasonName;
     setTimeout(() => {
-      window.scrollTo({ top: localStorage.getItem('scrollPosition') });
+      window.scrollTo({
+        top: Number(localStorage.getItem('scrollPosition')),
+      });
       setInterval(() => {
         this.scrollPosition = window.scrollY;
       }, 50);
     }, 100);
   },
   methods: {
-    title(episode) {
+    title(episode: Episode): string {
       return episode.title;
     },
-    date(episode) {
+    date(episode: Episode): string | undefined {
       return constructDate(episode);
     },
-    thumbnail(episode) {
-      return constructThumbnailURL(episode);
+    thumbnail(episode: Episode, seasonName: SeasonName): string {
+      return constructThumbnailURL(episode, seasonName);
     },
-    video(episode) {
-      return constructWatchURL(episode);
+    video(episode: Episode, seasonName: SeasonName): string {
+      return constructWatchURL(episode, seasonName);
     },
-    thumbnailFeatured() {
-      return constructThumbnailURL(this.featured);
+    thumbnailFeatured(): string {
+      return constructThumbnailURL(this.featured, this.featured.season);
     },
-    watchFeatured() {
-      return constructWatchURL(this.featured);
+    watchFeatured(): string {
+      return constructWatchURL(this.featured, this.featured.season);
     },
-    sortEpisodes(episodes, season) {
+    sortEpisodes(
+      episodes: ReadonlyArray<Episode>,
+      season: SeasonName,
+    ): ReadonlyArray<Episode> {
       return sortEpisodes(episodes, season);
     },
   },
 };
 
 class VideoIDError extends Error {
-  constructor(message) {
+  constructor(message: string) {
     super(message);
     this.name = 'VideoIDError';
   }
 }
 
-function addSeasonToEpisodes(catalog) {
-  for (const seasonID in catalog.seasons) {
-    const season = catalog.seasons[seasonID];
-    season.episodes.map((x) => (x.season = seasonID));
-  }
+function saveActiveSeason(newValue: SeasonName): void {
+  localStorage.setItem('activeSeason', newValue);
+}
+function saveScrollPosition(newValue: number): void {
+  localStorage.setItem('scrollPosition', String(newValue));
 }
 
-function getSeasons(catalog) {
-  return catalog.seasons;
-}
-
-function getFeaturedVideo(catalog) {
-  const [season, id, desc] = getFeaturedVideoData(catalog);
-  const data = getVideoDataFromID(catalog, season, id);
-  return [data, desc];
-}
-
-function getFeaturedVideoData(catalog) {
-  return [
+function getFeaturedVideo(catalog: Catalog): FeaturedVideo & Episode {
+  const data = getVideoDataFromID(
+    catalog,
     catalog.featured.season,
     catalog.featured.id,
-    catalog.featured.description,
-  ];
+  );
+  return {
+    ...catalog.featured,
+    ...data,
+  };
 }
 
-function getVideoDataFromID(catalog, season, id) {
+function getVideoDataFromID(catalog: Catalog, season: SeasonName, id: string) {
   const episodes = getEpisodesFromSeason(catalog, season);
   const episode = getEpisodeFromList(episodes, id);
   return episode;
 }
 
-function getEpisodesFromSeason(catalog, season) {
+function getEpisodesFromSeason(catalog: Catalog, season: SeasonName) {
   return catalog.seasons[season].episodes;
 }
 
-function sortEpisodes(episodes, seasonName) {
+function sortEpisodes(
+  episodes: ReadonlyArray<Episode>,
+  seasonName: SeasonName,
+) {
   if (seasonName === 'extra') {
-    return episodes.toReversed();
+    return [...episodes].reverse();
   }
   return episodes;
 }
 
-function getEpisodeFromList(episodes, epid) {
+function getEpisodeFromList(episodes: ReadonlyArray<Episode>, epid: string) {
   for (const episode of episodes) {
     if (episode.id === epid) {
       return episode;
@@ -208,15 +220,15 @@ function getEpisodeFromList(episodes, epid) {
   throw new VideoIDError('Video ID not found in catalog');
 }
 
-function constructWatchURL(ep) {
-  return '/dub/' + ep.season + '/' + ep.id + '';
+function constructWatchURL(ep: Episode, season: SeasonName) {
+  return '/dub/' + season + '/' + ep.id + '';
 }
 
-function constructThumbnailURL(ep) {
-  return 'https://12b3.pw/whid/thumbnails/' + ep.season + '/' + ep.id + '.png';
+function constructThumbnailURL(ep: Episode, season: SeasonName) {
+  return 'https://12b3.pw/whid/thumbnails/' + season + '/' + ep.id + '.png';
 }
 
-function constructDate(ep) {
+function constructDate(ep: Episode) {
   return ep.releaseDate;
 }
 </script>

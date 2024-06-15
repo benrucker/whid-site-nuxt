@@ -3,15 +3,15 @@ export default {
   head: {
     title: 'what have i done',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'en',
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { name: 'format-detection', content: 'telephone=no' },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
-    script: []
+    script: [],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -27,14 +27,13 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
-    '@nuxtjs/composition-api/module'
+    '@nuxtjs/composition-api/module',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/bootstrap
     // 'bootstrap-vue/nuxt',
-    '@nuxt/content'
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -42,12 +41,12 @@ export default {
     transpile: [/echarts/, /zrender/, /three/, /three-addons/],
     loaders: {
       vue: {
-        compiler: require('vue-template-babel-compiler')
-      }
-    }
+        compiler: require('vue-template-babel-compiler'),
+      },
+    },
   },
 
   router: {
     // trailingSlash: true,
-  }
-}
+  },
+};

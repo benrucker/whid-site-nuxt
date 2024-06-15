@@ -1,7 +1,6 @@
 <template>
   <div>
-    <div v-if="$fetchState.pending" id="playerApp" class="container mt-5" />
-    <div v-else id="playerApp" class="container mt-5">
+    <div id="playerApp" class="container mt-5">
       <div class="text-center ratio ratio-16x9">
         <video
           ref="video"
@@ -32,6 +31,8 @@
   </div>
 </template>
 <script>
+import { CATALOG } from '~/utils/catalog';
+
 export default {
   layout: 'dub-layout',
   // eslint-disable-next-line require-await, @typescript-eslint/no-unused-vars
@@ -56,26 +57,6 @@ export default {
       time: 0,
       loaded: false,
     };
-  },
-  async fetch() {
-    this.time = this.$nuxt.context.query.t;
-    this.catalog = await this.$nuxt.$content('catalog').fetch();
-    try {
-      this.epData = getVideoDataFromID(this.catalog, this.season, this.episode);
-
-      this.thumbnailURL = constructThumbnailURL(this.season, this.episode);
-      this.videoURL = constructVideoURL(this.season, this.episode);
-      this.title = this.epData.title;
-      this.releaseDate = constructDate(this.epData);
-      this.parts = this.epData.parts;
-    } catch (err) {
-      if (err instanceof VideoIDError) {
-        goToGallery();
-      } else {
-        throw err;
-      }
-    }
-    this.loaded = true;
   },
   head() {
     return {
@@ -131,11 +112,27 @@ export default {
       interval();
     },
   },
-  async mounted() {
-    await this.setupPage();
+  mounted() {
+    this.time = this.$nuxt.context.query.t;
+    this.catalog = CATALOG;
+    try {
+      this.epData = getVideoDataFromID(this.catalog, this.season, this.episode);
+
+      this.thumbnailURL = constructThumbnailURL(this.season, this.episode);
+      this.videoURL = constructVideoURL(this.season, this.episode);
+      this.title = this.epData.title;
+      this.releaseDate = constructDate(this.epData);
+      this.parts = this.epData.parts;
+    } catch (err) {
+      if (err instanceof VideoIDError) {
+        goToGallery();
+      } else {
+        throw err;
+      }
+    }
+    this.loaded = true;
   },
   methods: {
-    async setupPage() {},
     goToPart(partIndex) {
       this.goToTime(convertTimestampToSeconds(this.parts[partIndex].timestamp));
     },

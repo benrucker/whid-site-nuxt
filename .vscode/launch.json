@@ -7,6 +7,13 @@
     {
       "type": "chrome",
       "request": "launch",
+      "name": "Open Chrome to dub",
+      "url": "http://localhost:3000/dub",
+      "webRoot": "${workspaceFolder}"
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
       "name": "Open Chrome to whyd22",
       "url": "http://localhost:3000/whyd/bebenebenebeb",
       "webRoot": "${workspaceFolder}"
