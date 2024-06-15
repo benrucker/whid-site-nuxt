@@ -87,13 +87,10 @@
 </template>
 
 <script lang="ts">
-import {
-  Catalog,
-  Episode,
-  FeaturedVideo,
-  SeasonName,
-} from '~/types/catalogTypes';
+import Vue from 'vue';
+import { Catalog, Episode, FeaturedVideo } from '~/types/catalogTypes';
 import { SeasonById } from '~/types/SeasonById';
+import { SeasonName } from '~/types/SeasonName';
 import { CATALOG } from '~/utils/catalog';
 
 interface State {
@@ -105,7 +102,7 @@ interface State {
   scrollPosition: number;
 }
 
-export default {
+export default Vue.extend({
   layout: 'dub-layout',
   data(): State {
     return {
@@ -163,7 +160,7 @@ export default {
       return sortEpisodes(episodes, season);
     },
   },
-};
+});
 
 class VideoIDError extends Error {
   constructor(message: string) {

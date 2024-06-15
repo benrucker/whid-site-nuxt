@@ -1,4 +1,5 @@
 import { SeasonById } from './SeasonById';
+import { SeasonName } from './SeasonName';
 
 export interface Catalog {
   readonly featured: FeaturedVideo;
@@ -10,14 +11,6 @@ export interface FeaturedVideo {
   readonly id: string;
   readonly season: SeasonName;
 }
-
-export const SeasonName = {
-  SEASON_1: 's1',
-  SEASON_2: 's2',
-  SPECIALS: 'special',
-  EXTRAS: 'extra',
-} as const;
-export type SeasonName = (typeof SeasonName)[keyof typeof SeasonName];
 
 export interface Season {
   readonly episodes: ReadonlyArray<Episode>;

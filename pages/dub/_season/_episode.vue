@@ -22,7 +22,7 @@
       <p v-if="releaseDate" class="text-muted">Released {{ releaseDate }}</p>
 
       <p v-for="(part, index) in parts" :key="index" class="mb-0">
-        <a href="javascript:void(0)" @click="goToPart(index)"
+        <a href="javascript:void(0)" @click="goToPart(part)"
           >Part {{ index + 1 }}</a
         >: {{ part.members }}
       </p>
@@ -30,32 +30,60 @@
     </div>
   </div>
 </template>
-<script>
+<script lang="ts">
+import Vue from 'vue';
+import { SeasonName, isSeasonName } from '~/types/SeasonName';
+import { Catalog, Episode, Part } from '~/types/catalogTypes';
 import { CATALOG } from '~/utils/catalog';
 
-export default {
+interface State {
+  catalog: Catalog;
+  epData: Episode | undefined;
+  episode: string;
+  loaded: boolean;
+  parts: ReadonlyArray<Part> | undefined;
+  releaseDate: string | undefined;
+  season: SeasonName;
+  thumbnailURL: string;
+  time: number;
+  title: string;
+  videoURL: string;
+}
+
+export default Vue.extend({
   layout: 'dub-layout',
-  // eslint-disable-next-line require-await, @typescript-eslint/no-unused-vars
-  async asyncData({ params, redirect }) {
+  // eslint-disable-next-line require-await
+  async asyncData({
+    params,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    redirect,
+  }): Promise<{ season: SeasonName; episode: string }> {
     const season = params.season;
     const episode = params.episode;
+
+    if (!isSeasonName(season)) {
+      goToGallery();
+      throw new VideoIDError(`Unknown season ${season}`);
+    }
 
     return {
       season,
       episode,
     };
   },
-  data() {
+  data(): State {
     return {
-      title: '',
-      releaseDate: '',
-      videoURL: '',
-      thumbnailURL: '',
-      parts: [],
-      catalog: null,
-      epData: null,
-      time: 0,
+      catalog: CATALOG,
+      epData: undefined,
+      episode: '',
       loaded: false,
+      parts: [],
+      releaseDate: '',
+      season: 's1',
+      thumbnailURL: '',
+      time: 0,
+      title: '',
+      videoURL: '',
     };
   },
   head() {
@@ -85,13 +113,20 @@ export default {
       }),
     };
   },
+  computed: {
+    video(): HTMLVideoElement | null {
+      return this.$refs.video as HTMLVideoElement | null;
+    },
+  },
   watch: {
     // eslint-disable-next-line require-await
     async loaded() {
       document.title = 'Watching ' + this.title;
       const setInitialState = () => {
         try {
-          this.$refs.video.volume = 0.4;
+          if (this.video != null) {
+            this.video.volume = 0.4;
+          }
           if (this.time) {
             this.goToTime(this.time);
           }
@@ -113,8 +148,7 @@ export default {
     },
   },
   mounted() {
-    this.time = this.$nuxt.context.query.t;
-    this.catalog = CATALOG;
+    this.time = Number(this.$nuxt.context.query.t?.toString());
     try {
       this.epData = getVideoDataFromID(this.catalog, this.season, this.episode);
 
@@ -133,33 +167,34 @@ export default {
     this.loaded = true;
   },
   methods: {
-    goToPart(partIndex) {
-      this.goToTime(convertTimestampToSeconds(this.parts[partIndex].timestamp));
+    goToPart(part: Part) {
+      this.goToTime(convertTimestampToSeconds(part.timestamp));
     },
-    goToTime(time) {
-      this.$refs.video.currentTime = time;
+    goToTime(time: number) {
+      if (this.video != null) {
+        this.video.currentTime = time;
+      }
     },
   },
-};
+});
 
 class VideoIDError extends Error {
-  constructor(message) {
+  constructor(message: string) {
     super(message);
     this.name = 'VideoIDError';
   }
 }
 
-function getVideoDataFromID(catalog, season, id) {
+function getVideoDataFromID(catalog: Catalog, season: SeasonName, id: string) {
   const episodes = getEpisodesFromSeason(catalog, season);
-  const episode = getEpisodeFromList(episodes, id);
-  return episode;
+  return getEpisodeFromList(episodes, id);
 }
 
-function getEpisodesFromSeason(catalog, season) {
+function getEpisodesFromSeason(catalog: Catalog, season: SeasonName) {
   return catalog.seasons[season].episodes;
 }
 
-function getEpisodeFromList(episodes, epid) {
+function getEpisodeFromList(episodes: ReadonlyArray<Episode>, epid: string) {
   for (const episode of episodes) {
     if (episode.id === epid) {
       return episode;
@@ -168,19 +203,19 @@ function getEpisodeFromList(episodes, epid) {
   throw new VideoIDError('Video ID not found in catalog');
 }
 
-function constructVideoURL(season, episode) {
+function constructVideoURL(season: SeasonName, episode: string) {
   return 'https://12b3.pw/whid/videos/' + season + '/' + episode + '.mp4';
 }
 
-function constructThumbnailURL(season, episode) {
+function constructThumbnailURL(season: SeasonName, episode: string) {
   return 'https://12b3.pw/whid/thumbnails/' + season + '/' + episode + '.png';
 }
 
-function constructDate(ep) {
+function constructDate(ep: Episode) {
   return ep.releaseDate;
 }
 
-function convertTimestampToSeconds(timestamp) {
+function convertTimestampToSeconds(timestamp: string) {
   const [min, sec] = timestamp.split(':').map((x) => Number(x));
   return min * 60 + sec;
 }
@@ -190,8 +225,10 @@ function getMajorColor() {
   return cols[getRandomInt(cols.length)];
 }
 
-function getRandomInt(total) {
+function getRandomInt(total: number) {
   const newNum = Math.floor(Math.random() * (total - 1));
   return newNum;
 }
+
+function goToGallery() {}
 </script>

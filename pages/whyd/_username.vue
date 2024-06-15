@@ -36,7 +36,7 @@ export default {
     messages.forEach((v, i) => {
       v.id = i;
       if (v.author == null) {
-        v.author = this.messages[i - 1].author;
+        v.author = messages[i - 1].author;
       }
     });
     return {
