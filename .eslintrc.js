@@ -7,6 +7,7 @@ module.exports = {
   extends: [
     '@nuxtjs/eslint-config-typescript',
     'plugin:nuxt/recommended',
+    'plugin:vue/recommended',
     'prettier',
   ],
   plugins: [],
@@ -22,5 +23,6 @@ module.exports = {
     'no-use-before-define': 'off',
     // I don't want to turn this off, but it's proc'ing on type/value collisions :/
     'no-redeclare': 'off',
+    'no-console': 'off',
   },
 };

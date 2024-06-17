@@ -113,6 +113,7 @@ export default Vue.extend({
     scrollPosition: saveScrollPosition,
   } as const,
   mounted(): void {
+    // TODO: Only load the locally stored state if we navigated "back" to this page
     // TODO: Use runtypes to verify this
     this.activeSeason = (localStorage.getItem('activeSeason') ??
       's1') as SeasonName;
