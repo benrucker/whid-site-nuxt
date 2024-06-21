@@ -9,24 +9,11 @@
       </div>
 
       <div class="welcome mt-5 mb-2 text-center">
-        Welcome to <span id="whid">what have i done</span>
+        Welcome to the
+        <NuxtLink id="whid" class="text-white" to="/whyd"
+          >whyd archival project</NuxtLink
+        >
       </div>
-
-      <div class="description mt-5 text-center fs-5">
-        We are a group of friends who make stupid videos.
-      </div>
-      <div class="description mt-5 text-end fs-5">...like, really stupid.</div>
-    </div>
-
-    <div class="featured mt-5 container">
-      <DubInlineVideoCard
-        video-link="https://12b3.pw/whid/videos/extra/context2.mp4"
-        video-player-link="/dub/"
-        thumbnail-link="https://12b3.pw/whid/thumbnails/extra/context2.png"
-        title="what have i dubbed Out of Context"
-        release-date=""
-        description="Click here to see them all!"
-      />
     </div>
 
     <br />
@@ -50,6 +37,11 @@ h1 {
 #whid {
   position: relative;
   margin: 0.1em;
+  text-decoration: none;
+}
+
+#whid:hover {
+  text-decoration: underline;
 }
 
 #whid:before {
@@ -61,8 +53,5 @@ h1 {
   position: absolute;
   width: 100%;
   height: 25%;
-}
-
-.description {
 }
 </style>

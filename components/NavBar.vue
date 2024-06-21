@@ -12,23 +12,19 @@
       >
         <ul class="navbar-nav my-1">
           <li class="nav-item">
-            <NuxtLink to="/" class="btn btn-text-primary me-2" type="button">
+            <div class="btn btn-text-primary me-2 disabled" type="button">
               Home
-            </NuxtLink>
+            </div>
           </li>
           <li class="nav-item">
-            <NuxtLink to="/dub" class="btn btn-text-primary me-2" type="button">
+            <div class="btn btn-text-primary me-2 disabled" type="button">
               whidubbed
-            </NuxtLink>
+            </div>
           </li>
           <li class="nav-item">
-            <NuxtLink
-              to="/whbd"
-              class="btn btn-text-primary me-2"
-              type="button"
-            >
+            <div class="btn btn-text-primary me-2 disabled" type="button">
               Anniversary
-            </NuxtLink>
+            </div>
           </li>
           <li class="nav-item">
             <NuxtLink
@@ -41,9 +37,9 @@
             </NuxtLink>
           </li>
           <li class="nav-item">
-            <NuxtLink to="/score" class="" type="">
+            <div class="disabled" type="">
               <img src="/camera.png" height="40" class="me-2" />
-            </NuxtLink>
+            </div>
           </li>
         </ul>
       </div>

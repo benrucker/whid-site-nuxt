@@ -50,11 +50,27 @@
         </button>
       </div>
     </div>
+    <div v-if="server" class="hidden-links">
+      <div v-for="username in usernames" :key="username">
+        <NuxtLink :to="`/whyd/${server?.namesToUrlNames[username]}`">{{
+          `/whyd/${server?.namesToUrlNames[username]}`
+        }}</NuxtLink>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
+  async asyncData() {
+    const baseUrl = `http://localhost:3000`;
+    const server = await fetch(`${baseUrl}/whyd/2022/data/server.json`).then(
+      (val) => val.json(),
+    );
+    return {
+      server,
+    };
+  },
   data() {
     return {
       server: undefined,
@@ -70,10 +86,7 @@ export default {
       return Object.values(this.server.urlNamesToNames).reverse();
     },
   },
-  async mounted() {
-    this.server = await fetch('/whyd/2022/data/server.json').then((val) =>
-      val.json(),
-    );
+  mounted() {
     this.shouldShowTerminalButton =
       localStorage.getItem('hasVisitedTerminal') === 'true';
   },
@@ -112,5 +125,10 @@ export default {
     hsl(335, 12%, 50%),
     hsl(256, 12%, 50%)
   );
+}
+
+.hidden-links {
+  height: 0;
+  overflow: clip;
 }
 </style>

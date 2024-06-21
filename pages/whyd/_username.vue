@@ -7,8 +7,8 @@ import Vue from 'vue';
 import { MESSAGES } from '~/utils/messages';
 
 export default {
-  async asyncData({ params, isDev }) {
-    const baseUrl = isDev ? `http://localhost:3000` : 'https://whid.live';
+  async asyncData({ params }) {
+    const baseUrl = `http://localhost:3000`;
 
     const server = await fetch(`${baseUrl}/whyd/2022/data/server.json`).then(
       (r) => r.json(),
@@ -53,12 +53,12 @@ export default {
         ['theme-color', this.stats.server.idsToColors[this.userId]],
         ['og:type', 'website'],
         ['og:site_name', 'what have you done 2022'],
-        ['og:url', 'https://whid.live/whyd'],
+        ['og:url', 'https://whyd.whid.live/'],
         ['og:title', 'Click here to see your personalized whyd22!'],
         ['og:description', `Here's a peek at what ${this.username} did:`],
         [
           'og:image',
-          `https://whid.live/whyd/2022/data/embed_card/${this.userId}.png`,
+          `https://whyd.whid.live/2022/data/embed_card/${this.userId}.png`,
         ],
         [
           'og:image:alt',

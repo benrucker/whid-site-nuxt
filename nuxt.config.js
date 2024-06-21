@@ -50,4 +50,6 @@ export default {
   router: {
     // trailingSlash: true,
   },
+
+  target: 'static',
 };
