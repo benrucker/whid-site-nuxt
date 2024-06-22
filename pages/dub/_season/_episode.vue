@@ -64,7 +64,6 @@ export default Vue.extend({
   // eslint-disable-next-line require-await
   async asyncData({
     params,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     redirect,
   }): Promise<{ season: SeasonName; episode: string }> {
     const season = params.season;
@@ -78,10 +77,27 @@ export default Vue.extend({
       throw new VideoIDError(`Unknown episode ${season} ${episode}`);
     }
 
-    return {
+    const epData = getVideoDataFromID(CATALOG, season, episode);
+
+    const thumbnailURL = constructThumbnailURL(season, episode);
+    const videoURL = constructVideoURL(season, episode);
+    const title = epData.title;
+    const releaseDate = constructDate(epData);
+
+    const parts = 'parts' in epData ? epData.parts : undefined;
+    const chapters = 'chapters' in epData ? epData.chapters : undefined;
+
+    return Promise.resolve({
       season,
       episode,
-    };
+      epData,
+      thumbnailURL,
+      videoURL,
+      title,
+      releaseDate,
+      parts,
+      chapters,
+    });
   },
   data(): State {
     return {
@@ -162,19 +178,6 @@ export default Vue.extend({
   },
   mounted() {
     this.time = Number(this.$nuxt.context.query.t?.toString());
-    this.epData = getVideoDataFromID(this.catalog, this.season, this.episode);
-
-    this.thumbnailURL = constructThumbnailURL(this.season, this.episode);
-    this.videoURL = constructVideoURL(this.season, this.episode);
-    this.title = this.epData.title;
-    this.releaseDate = constructDate(this.epData);
-
-    if ('parts' in this.epData) {
-      this.parts = this.epData.parts;
-    }
-    if ('chapters' in this.epData) {
-      this.chapters = this.epData.chapters;
-    }
 
     this.loaded = true;
   },
