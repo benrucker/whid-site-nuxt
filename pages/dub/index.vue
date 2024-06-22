@@ -108,24 +108,6 @@ export default Vue.extend({
   fetch(): void {
     this.showAlert = this.$nuxt.context.query.error != null;
   },
-  watch: {
-    activeSeason: saveActiveSeason,
-    scrollPosition: saveScrollPosition,
-  } as const,
-  mounted(): void {
-    // TODO: Only load the locally stored state if we navigated "back" to this page
-    // TODO: Use runtypes to verify this
-    this.activeSeason = (localStorage.getItem('activeSeason') ??
-      's1') as SeasonName;
-    setTimeout(() => {
-      window.scrollTo({
-        top: Number(localStorage.getItem('scrollPosition')),
-      });
-      setInterval(() => {
-        this.scrollPosition = window.scrollY;
-      }, 50);
-    }, 100);
-  },
   methods: {
     title(episode: Episode): string {
       return episode.title;
@@ -159,13 +141,6 @@ class VideoIDError extends Error {
     super(message);
     this.name = 'VideoIDError';
   }
-}
-
-function saveActiveSeason(newValue: SeasonName): void {
-  localStorage.setItem('activeSeason', newValue);
-}
-function saveScrollPosition(newValue: number): void {
-  localStorage.setItem('scrollPosition', String(newValue));
 }
 
 function getFeaturedVideo(catalog: Catalog): FeaturedVideo & Episode {
