@@ -423,7 +423,7 @@ export const CATALOG: Catalog = {
                 { label: 'Editing Softwares', timestamp: '00:04:07' },
                 {
                   label: 'Hard Drives + Organizing',
-                  timestamp: '00:09:45',
+                  timestamp: '00:09:46',
                 },
                 {
                   label: 'Screen Capture Devices',
@@ -432,14 +432,14 @@ export const CATALOG: Catalog = {
                 { label: 'Audio Interface', timestamp: '00:14:47' },
                 {
                   label: 'Exporting + Encoding',
-                  timestamp: '00:15:28',
+                  timestamp: '00:15:29',
                 },
-                { label: 'Back Straightener', timestamp: '00:16:48' },
+                { label: 'Back Straightener', timestamp: '00:16:50' },
               ],
             },
             {
               label: 'PRINCIPLES',
-              timestamp: '00:17:10',
+              timestamp: '00:17:13',
               subChapters: [
                 {
                   label: 'Editing Basics',
@@ -447,7 +447,7 @@ export const CATALOG: Catalog = {
                   subChapters: [
                     {
                       label: 'Fucking Around',
-                      timestamp: '00:18:38',
+                      timestamp: '00:18:39',
                     },
                   ],
                 },
@@ -457,52 +457,52 @@ export const CATALOG: Catalog = {
                 },
                 {
                   label: 'Always Keep an Eye on Your Audio',
-                  timestamp: '00:20:45',
+                  timestamp: '00:20:46',
                   subChapters: [
                     {
                       label: "Don't Touch That Volume Button",
-                      timestamp: '00:21:07',
+                      timestamp: '00:21:08',
                     },
                     {
                       label: 'Compressors, Limiters, High Cut',
-                      timestamp: '00:21:34',
+                      timestamp: '00:21:35',
                     },
                     {
                       label: 'Faders Are Your Friend',
-                      timestamp: '00:24:19',
+                      timestamp: '00:24:24',
                     },
                     {
                       label: 'Audio Keyframing',
-                      timestamp: '00:26:13',
+                      timestamp: '00:26:14',
                     },
                   ],
                 },
                 {
                   label: 'Nesting Clips',
-                  timestamp: '00:27:08',
+                  timestamp: '00:27:09',
                   subChapters: [
                     { label: 'EQs', timestamp: '00:28:31' },
                     {
                       label: 'ls Nesting a Necessity?',
-                      timestamp: '00:29:44',
+                      timestamp: '00:29:45',
                     },
                     {
                       label: 'Study Isolated Tracks',
-                      timestamp: '00:32:51',
+                      timestamp: '00:32:53',
                     },
                   ],
                 },
                 {
                   label: 'The "Never Shut Up" Fallacy',
-                  timestamp: '00:34:18',
+                  timestamp: '00:34:20',
                 },
               ],
             },
             {
               label: 'THEORIES & INFLUENCES',
-              timestamp: '00:36:54',
+              timestamp: '00:36:56',
               subChapters: [
-                { label: 'Where to Start', timestamp: '00:37:16' },
+                { label: 'Where to Start', timestamp: '00:37:19' },
                 {
                   label: 'Every Video Has a Rhythm',
                   timestamp: '00:39:05',
@@ -510,17 +510,17 @@ export const CATALOG: Catalog = {
                     { label: 'The Bad Guys', timestamp: '00:42:18' },
                     {
                       label: 'Joke/Shot Ratio',
-                      timestamp: '01:00:36',
+                      timestamp: '01:00:40',
                     },
                   ],
                 },
                 {
                   label: "The Visuals Don't Control You",
-                  timestamp: '01:01:31',
+                  timestamp: '01:01:34',
                   subChapters: [
                     {
                       label: 'Condensing + Rearranging',
-                      timestamp: '01:02:50',
+                      timestamp: '01:02:53',
                     },
                     {
                       label: 'Re-Animating the Source Material',
@@ -528,76 +528,76 @@ export const CATALOG: Catalog = {
                     },
                     {
                       label: 'Cutting by the Blink',
-                      timestamp: '01:11:57',
+                      timestamp: '01:12:01',
                     },
                   ],
                 },
                 {
                   label: 'You Are You',
-                  timestamp: '01:19:18',
+                  timestamp: '01:19:31',
                   subChapters: [
                     {
                       label: 'Keep Track of Your Inspiration',
-                      timestamp: '01:20:04',
+                      timestamp: '01:20:08',
                     },
                     {
                       label: 'Music Selection',
-                      timestamp: '01:22:42',
+                      timestamp: '01:22:46',
                     },
                   ],
                 },
                 {
                   label: 'Controlled Chaos',
-                  timestamp: '01:27:30',
+                  timestamp: '01:27:36',
                   subChapters: [
                     {
                       label: 'Ed, Edd n Eddy',
-                      timestamp: '01:28:53',
+                      timestamp: '01:28:58',
                     },
                     {
                       label: 'Raiders of the Lost Ark',
-                      timestamp: '01:33:17',
+                      timestamp: '01:33:23',
                     },
                   ],
                 },
                 {
                   label: 'The Wall of Sound',
-                  timestamp: '01:46:10',
+                  timestamp: '01:46:16',
                   subChapters: [
                     {
                       label: 'Layering Sounds/Sound Objects',
-                      timestamp: '01:51:42',
+                      timestamp: '01:50:48',
                     },
-                    { label: 'Echo/Reverb', timestamp: '01:57:16' },
+                    { label: 'Echo/Reverb', timestamp: '01:57:27' },
                     {
                       label: 'Mono vs. Stereo',
-                      timestamp: '02:02:33',
+                      timestamp: '02:02:40',
                     },
                   ],
                 },
                 {
                   label: 'Orchestrated Dialogue',
-                  timestamp: '02:04:44',
+                  timestamp: '02:04:51',
                   subChapters: [
                     {
                       label: 'The 3 Paces of Dialogue',
-                      timestamp: '02:05:19',
+                      timestamp: '02:05:26',
                     },
-                    { label: 'Dragnet Style', timestamp: '02:07:56' },
-                    { label: 'Khonjin House', timestamp: '02:13:18' },
+                    { label: 'Dragnet Style', timestamp: '02:08:04' },
+                    { label: 'Khonjin House', timestamp: '02:13:25' },
                   ],
                 },
                 {
                   label: 'The Mel Blanc Effect (Noise Removal)',
-                  timestamp: '02:15:34',
+                  timestamp: '02:15:41',
                 },
                 {
                   label: 'No Theory Is Absolute',
-                  timestamp: '02:18:29',
+                  timestamp: '02:18:31',
                 },
               ],
             },
-            { label: 'CONCLUSION/MOTIVATION', timestamp: '02:21:16' },
+            { label: 'CONCLUSION/MOTIVATION', timestamp: '02:21:24' },
           ],
         },
       ],
