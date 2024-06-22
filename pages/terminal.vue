@@ -4,7 +4,7 @@
     @mouseup="terminalMouseUp"
     @mousemove="terminalMouseMove($event)"
   >
-    <img id="StickyNote" src="../../static/whyd/2022/sticky.png" />
+    <img id="StickyNote" src="../static/whyd/2022/sticky.png" />
     <Whyd2022Terminal id="Terminal" ref="terminal" />
     <Whyd2022TerminalInitialAnimation v-show="shouldShowIntroAnimation" />
   </div>
@@ -12,7 +12,6 @@
 
 <script>
 export default {
-  layout: 'blank',
   data() {
     return {
       shouldShowIntroAnimation: undefined,
