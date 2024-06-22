@@ -408,6 +408,10 @@ export const CATALOG: Catalog = {
           title: 'The Majors F###ing Died [Outtakes]',
           id: 'majors-f---ing-died',
         },
+        {
+          title: 'Edited by Mr. Sloan',
+          id: 'edited',
+        },
       ],
     },
   },
