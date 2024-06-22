@@ -1,5 +1,6 @@
 import { SeasonById } from './SeasonById';
 import { SeasonName } from './SeasonName';
+import { Timestamp } from './timestamp';
 
 export interface Catalog {
   readonly featured: FeaturedVideo;
@@ -17,16 +18,30 @@ export interface Season {
   readonly name: string;
 }
 
-export interface Episode {
-  readonly id: string;
-  readonly title: string;
+export type Episode = BaseEpisode & (WithParts | WithChapters);
 
+interface BaseEpisode {
   readonly description?: string;
-  readonly parts?: ReadonlyArray<Part>;
+  readonly id: string;
   readonly releaseDate?: string;
+  readonly title: string;
+}
+
+interface WithParts {
+  readonly parts?: ReadonlyArray<Part>;
+}
+
+interface WithChapters {
+  readonly chapters?: ReadonlyArray<Chapter>;
 }
 
 export interface Part {
   readonly members: string;
-  readonly timestamp: string;
+  readonly timestamp: Timestamp;
+}
+
+export interface Chapter {
+  readonly label: string;
+  readonly subChapters?: ReadonlyArray<Chapter>;
+  readonly timestamp: Timestamp;
 }

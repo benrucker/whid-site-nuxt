@@ -26,14 +26,21 @@
           >Part {{ index + 1 }}</a
         >: {{ part.members }}
       </p>
+      <DubChapter
+        v-for="(chapter, index) in chapters"
+        :key="index"
+        :chapter="chapter"
+        :on-click="goToPart"
+      />
       <br />
     </div>
   </div>
 </template>
 <script lang="ts">
 import Vue from 'vue';
-import { Catalog, Episode, Part } from '~/types/catalogTypes';
+import { Catalog, Chapter, Episode, Part } from '~/types/catalogTypes';
 import { isSeasonName, SeasonName } from '~/types/SeasonName';
+import { convertTimestampToSeconds } from '~/types/timestamp';
 import { CATALOG } from '~/utils/catalog';
 import { goToGallery } from '~/utils/goToGallery';
 
@@ -43,6 +50,7 @@ interface State {
   episode: string;
   loaded: boolean;
   parts: ReadonlyArray<Part> | undefined;
+  chapters: ReadonlyArray<Chapter> | undefined;
   releaseDate: string | undefined;
   season: SeasonName;
   thumbnailURL: string;
@@ -82,6 +90,7 @@ export default Vue.extend({
       episode: '',
       loaded: false,
       parts: [],
+      chapters: [],
       releaseDate: '',
       season: 's1',
       thumbnailURL: '',
@@ -159,17 +168,24 @@ export default Vue.extend({
     this.videoURL = constructVideoURL(this.season, this.episode);
     this.title = this.epData.title;
     this.releaseDate = constructDate(this.epData);
-    this.parts = this.epData.parts;
+
+    if ('parts' in this.epData) {
+      this.parts = this.epData.parts;
+    }
+    if ('chapters' in this.epData) {
+      this.chapters = this.epData.chapters;
+    }
 
     this.loaded = true;
   },
   methods: {
-    goToPart(part: Part) {
+    goToPart(part: Part | Chapter) {
       this.goToTime(convertTimestampToSeconds(part.timestamp));
     },
     goToTime(time: number) {
       if (this.video != null) {
         this.video.currentTime = time;
+        this.video.scrollIntoView({ block: 'center' });
       }
     },
   },
@@ -210,11 +226,6 @@ function constructThumbnailURL(season: SeasonName, episode: string) {
 
 function constructDate(ep: Episode) {
   return ep.releaseDate;
-}
-
-function convertTimestampToSeconds(timestamp: string) {
-  const [min, sec] = timestamp.split(':').map((x) => Number(x));
-  return min * 60 + sec;
 }
 
 function getMajorColor() {

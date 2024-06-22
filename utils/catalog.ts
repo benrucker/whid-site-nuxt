@@ -411,6 +411,194 @@ export const CATALOG: Catalog = {
         {
           title: 'Edited by Mr. Sloan',
           id: 'edited',
+          chapters: [
+            {
+              label: 'INTRO',
+              timestamp: '00:00:26',
+            },
+            {
+              label: 'WHAT I USE',
+              timestamp: '00:02:54',
+              subChapters: [
+                { label: 'Editing Softwares', timestamp: '00:04:07' },
+                {
+                  label: 'Hard Drives + Organizing',
+                  timestamp: '00:09:45',
+                },
+                {
+                  label: 'Screen Capture Devices',
+                  timestamp: '00:13:21',
+                },
+                { label: 'Audio Interface', timestamp: '00:14:47' },
+                {
+                  label: 'Exporting + Encoding',
+                  timestamp: '00:15:28',
+                },
+                { label: 'Back Straightener', timestamp: '00:16:48' },
+              ],
+            },
+            {
+              label: 'PRINCIPLES',
+              timestamp: '00:17:10',
+              subChapters: [
+                {
+                  label: 'Editing Basics',
+                  timestamp: '00:17:18',
+                  subChapters: [
+                    {
+                      label: 'Fucking Around',
+                      timestamp: '00:18:38',
+                    },
+                  ],
+                },
+                {
+                  label: 'Avoid Video Mistakes',
+                  timestamp: '00:19:25',
+                },
+                {
+                  label: 'Always Keep an Eye on Your Audio',
+                  timestamp: '00:20:45',
+                  subChapters: [
+                    {
+                      label: "Don't Touch That Volume Button",
+                      timestamp: '00:21:07',
+                    },
+                    {
+                      label: 'Compressors, Limiters, High Cut',
+                      timestamp: '00:21:34',
+                    },
+                    {
+                      label: 'Faders Are Your Friend',
+                      timestamp: '00:24:19',
+                    },
+                    {
+                      label: 'Audio Keyframing',
+                      timestamp: '00:26:13',
+                    },
+                  ],
+                },
+                {
+                  label: 'Nesting Clips',
+                  timestamp: '00:27:08',
+                  subChapters: [
+                    { label: 'EQs', timestamp: '00:28:31' },
+                    {
+                      label: 'ls Nesting a Necessity?',
+                      timestamp: '00:29:44',
+                    },
+                    {
+                      label: 'Study Isolated Tracks',
+                      timestamp: '00:32:51',
+                    },
+                  ],
+                },
+                {
+                  label: 'The "Never Shut Up" Fallacy',
+                  timestamp: '00:34:18',
+                },
+              ],
+            },
+            {
+              label: 'THEORIES & INFLUENCES',
+              timestamp: '00:36:54',
+              subChapters: [
+                { label: 'Where to Start', timestamp: '00:37:16' },
+                {
+                  label: 'Every Video Has a Rhythm',
+                  timestamp: '00:39:05',
+                  subChapters: [
+                    { label: 'The Bad Guys', timestamp: '00:42:18' },
+                    {
+                      label: 'Joke/Shot Ratio',
+                      timestamp: '01:00:36',
+                    },
+                  ],
+                },
+                {
+                  label: "The Visuals Don't Control You",
+                  timestamp: '01:01:31',
+                  subChapters: [
+                    {
+                      label: 'Condensing + Rearranging',
+                      timestamp: '01:02:50',
+                    },
+                    {
+                      label: 'Re-Animating the Source Material',
+                      timestamp: '01:05:19',
+                    },
+                    {
+                      label: 'Cutting by the Blink',
+                      timestamp: '01:11:57',
+                    },
+                  ],
+                },
+                {
+                  label: 'You Are You',
+                  timestamp: '01:19:18',
+                  subChapters: [
+                    {
+                      label: 'Keep Track of Your Inspiration',
+                      timestamp: '01:20:04',
+                    },
+                    {
+                      label: 'Music Selection',
+                      timestamp: '01:22:42',
+                    },
+                  ],
+                },
+                {
+                  label: 'Controlled Chaos',
+                  timestamp: '01:27:30',
+                  subChapters: [
+                    {
+                      label: 'Ed, Edd n Eddy',
+                      timestamp: '01:28:53',
+                    },
+                    {
+                      label: 'Raiders of the Lost Ark',
+                      timestamp: '01:33:17',
+                    },
+                  ],
+                },
+                {
+                  label: 'The Wall of Sound',
+                  timestamp: '01:46:10',
+                  subChapters: [
+                    {
+                      label: 'Layering Sounds/Sound Objects',
+                      timestamp: '01:51:42',
+                    },
+                    { label: 'Echo/Reverb', timestamp: '01:57:16' },
+                    {
+                      label: 'Mono vs. Stereo',
+                      timestamp: '02:02:33',
+                    },
+                  ],
+                },
+                {
+                  label: 'Orchestrated Dialogue',
+                  timestamp: '02:04:44',
+                  subChapters: [
+                    {
+                      label: 'The 3 Paces of Dialogue',
+                      timestamp: '02:05:19',
+                    },
+                    { label: 'Dragnet Style', timestamp: '02:07:56' },
+                    { label: 'Khonjin House', timestamp: '02:13:18' },
+                  ],
+                },
+                {
+                  label: 'The Mel Blanc Effect (Noise Removal)',
+                  timestamp: '02:15:34',
+                },
+                {
+                  label: 'No Theory Is Absolute',
+                  timestamp: '02:18:29',
+                },
+              ],
+            },
+            { label: 'CONCLUSION/MOTIVATION', timestamp: '02:21:16' },
+          ],
         },
       ],
     },
