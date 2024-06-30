@@ -95,7 +95,6 @@ interface State {
 }
 
 export default Vue.extend({
-  layout: 'dub-layout',
   data(): State {
     return {
       catalog: CATALOG,
