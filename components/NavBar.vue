@@ -11,26 +11,20 @@
         class="collapse navbar-collapse d-flex justify-content-md-end"
       >
         <ul class="navbar-nav my-1">
-          <li class="nav-item">
+          <li class="nav-item" :active="activePage === ''">
             <NuxtLink to="/" class="btn btn-text-primary me-2" type="button">
-              Home
+              home
             </NuxtLink>
           </li>
-          <li class="nav-item">
+          <li class="nav-item not-root-nav-item" :active="activePage === 'dub'">
             <NuxtLink to="/dub" class="btn btn-text-primary me-2" type="button">
               whidubbed
             </NuxtLink>
           </li>
-          <li class="nav-item">
-            <NuxtLink
-              to="/whbd"
-              class="btn btn-text-primary me-2"
-              type="button"
-            >
-              Anniversary
-            </NuxtLink>
-          </li>
-          <li class="nav-item">
+          <li
+            class="nav-item not-root-nav-item"
+            :active="activePage === 'whyd'"
+          >
             <NuxtLink
               to="/whyd"
               class="btn btn-text-primary me-2"
@@ -40,7 +34,10 @@
               <span id="long-whyd">what have you done</span>
             </NuxtLink>
           </li>
-          <li class="nav-item">
+          <li
+            class="nav-item not-root-nav-item"
+            :active="activePage === 'score'"
+          >
             <NuxtLink to="/score" class="" type="">
               <img src="/camera.png" height="40" class="me-2" />
             </NuxtLink>
@@ -50,6 +47,17 @@
     </div>
   </nav>
 </template>
+<script lang="ts">
+export default {
+  props: {
+    activePage: {
+      type: String,
+      required: false,
+      default: undefined,
+    },
+  },
+};
+</script>
 
 <style scoped>
 #short-whyd {
@@ -67,5 +75,10 @@
 
 .navbar {
   user-select: none;
+}
+
+.nuxt-link-exact-active,
+.not-root-nav-item > .nuxt-link-active {
+  color: var(--bs-primary);
 }
 </style>

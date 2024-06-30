@@ -60,7 +60,6 @@ interface State {
 }
 
 export default Vue.extend({
-  layout: 'dub-layout',
   // eslint-disable-next-line require-await
   async asyncData({
     params,

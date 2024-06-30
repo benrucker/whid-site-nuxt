@@ -10,13 +10,14 @@
         <section v-if="featured">
           <h3 class="text-center mt-4">Featured Video</h3>
           <div class="container">
-            <DubFeaturedVideoCard
+            <FeaturedContentCard
               v-if="featured"
-              :video-link="watchFeatured()"
+              :navigation-url="watchFeatured()"
               :thumbnail-link="thumbnailFeatured()"
               :title="title(featured)"
               :release-date="date(featured)"
               :description="featured.description"
+              :thumbnail-grid-size="6"
             />
           </div>
         </section>
@@ -94,7 +95,6 @@ interface State {
 }
 
 export default Vue.extend({
-  layout: 'dub-layout',
   data(): State {
     return {
       catalog: CATALOG,

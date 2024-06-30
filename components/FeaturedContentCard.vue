@@ -1,55 +1,63 @@
 <template>
-  <a
+  <component
+    :is="navigationUrl.startsWith('http') ? 'a' : 'NuxtLink'"
     class="card mb-4 mx-auto text-reset text-decoration-none"
     style="max-width: 1050px"
-    :href="videoLink"
+    :to="navigationUrl"
+    :href="navigationUrl"
   >
     <div class="row g-0">
-      <div class="col-lg-6">
+      <div :class="`col-lg-${thumbnailGridSize}`">
         <div class="ratio ratio-16x9">
           <img :src="thumbnailLink" alt="..." style="max-width: inherit" />
         </div>
       </div>
-      <div class="col-lg-6">
+      <div :class="`col-lg-${12 - thumbnailGridSize}`">
         <div class="card-body">
-          <h4 class="card-title">{{ title }}</h4>
+          <h4 class="card-title">
+            {{ title }}
+          </h4>
           <h6 class="card-text text-muted">Released {{ releaseDate }}</h6>
-          <p id="featuredDesc" class="mt-4 mb-0">{{ description }}</p>
+          <p class="description mt-4 mb-0">{{ description }}</p>
         </div>
       </div>
     </div>
-  </a>
+  </component>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   props: {
-    videoLink: {
+    navigationUrl: {
       type: String,
-      default: '',
+      required: true,
     },
     thumbnailLink: {
       type: String,
-      default: '',
+      required: true,
     },
     title: {
       type: String,
-      default: '',
+      required: true,
     },
     releaseDate: {
       type: String,
-      default: '',
+      required: true,
     },
     description: {
       type: String,
-      default: '',
+      required: true,
+    },
+    thumbnailGridSize: {
+      type: Number,
+      required: true,
     },
   },
 };
 </script>
 
-<style>
-#featuredDesc {
+<style scoped>
+.description {
   white-space: pre-wrap;
 }
 </style>
