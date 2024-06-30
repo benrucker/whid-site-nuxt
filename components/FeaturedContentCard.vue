@@ -18,9 +18,7 @@
             {{ title }}
           </h4>
           <h6 class="card-text text-muted">Released {{ releaseDate }}</h6>
-          <p class="mt-4 mb-0">
-            {{ description }}
-          </p>
+          <p class="description mt-4 mb-0">{{ description }}</p>
         </div>
       </div>
     </div>
@@ -57,3 +55,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.description {
+  white-space: pre-wrap;
+}
+</style>
