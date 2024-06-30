@@ -13,21 +13,12 @@
         <ul class="navbar-nav my-1">
           <li class="nav-item">
             <NuxtLink to="/" class="btn btn-text-primary me-2" type="button">
-              Home
+              home
             </NuxtLink>
           </li>
           <li class="nav-item">
             <NuxtLink to="/dub" class="btn btn-text-primary me-2" type="button">
               whidubbed
-            </NuxtLink>
-          </li>
-          <li class="nav-item">
-            <NuxtLink
-              to="/whbd"
-              class="btn btn-text-primary me-2"
-              type="button"
-            >
-              Anniversary
             </NuxtLink>
           </li>
           <li class="nav-item">
