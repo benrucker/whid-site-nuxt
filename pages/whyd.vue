@@ -22,7 +22,7 @@
         />
         <FeaturedContentCard
           class="mt-5 mb-5"
-          navigation-url="/whbd"
+          navigation-url="https://whbd.whid.live"
           thumbnail-link="/dub/images/ethan.png"
           title="5-year Anniversary Lookback"
           release-date="4/26/2021"
